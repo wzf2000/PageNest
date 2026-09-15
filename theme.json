@@ -1,0 +1,23 @@
+{
+  "version": 3,
+  "settings": {
+    "layout": { "contentSize": "1192px", "wideSize": "1240px" },
+    "color": {
+      "palette": [
+        { "slug": "ink", "name": "正文", "color": "#18324d" },
+        { "slug": "paper", "name": "背景", "color": "#f4f6f9" },
+        { "slug": "accent", "name": "链接", "color": "#285f8f" }
+      ]
+    },
+    "typography": {
+      "fontFamilies": [
+        {
+          "slug": "system",
+          "name": "系统字体",
+          "fontFamily": "-apple-system,BlinkMacSystemFont,Segoe UI,PingFang SC,Microsoft YaHei,sans-serif"
+        }
+      ]
+    }
+  },
+  "styles": { "typography": { "fontFamily": "var:preset|font-family|system" } }
+}

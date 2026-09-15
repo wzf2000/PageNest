@@ -1,0 +1,17 @@
+{
+  "name": "pagenest",
+  "private": true,
+  "scripts": {
+    "format": "node tools/format.cjs --write",
+    "format:check": "node tools/format.cjs --check",
+    "build": "python3 build-assets.py",
+    "package": "python3 tools/package.py"
+  },
+  "devDependencies": {
+    "@prettier/plugin-php": "0.25.0",
+    "js-beautify": "1.15.4",
+    "prettier": "3.9.6"
+  },
+  "version": "0.4.0",
+  "license": "GPL-2.0-or-later"
+}
