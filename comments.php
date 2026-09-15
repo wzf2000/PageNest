@@ -2,7 +2,7 @@
 if (!defined('ABSPATH') || post_password_required()) {
     return;
 } ?>
-<header class="wzfl-discussion-title">
+<header class="pagenest-discussion-title">
     <h2><?php echo get_comments_number()
         ? '评论（' . esc_html(get_comments_number()) . '）'
         : '交流与评论'; ?></h2><?php if (
@@ -10,8 +10,8 @@ if (!defined('ABSPATH') || post_password_required()) {
 ): ?><a href="#respond">参与讨论 →</a><?php endif; ?>
 </header>
 <?php
-if (have_comments()): ?><ol class="wzfl-comment-list"><?php wp_list_comments([
-    'callback' => 'wzfj_comment',
+if (have_comments()): ?><ol class="pagenest-comment-list"><?php wp_list_comments([
+    'callback' => 'pagenest_comment',
     'style' => 'ol',
     'avatar_size' => 36,
     'short_ping' => true,
@@ -24,7 +24,7 @@ $pages = paginate_comments_links([
     'echo' => false,
 ]);
 if ($pages) {
-    echo '<nav class="wzfl-pagination" aria-label="评论分页">' . $pages . '</nav>';
+    echo '<nav class="pagenest-pagination" aria-label="评论分页">' . $pages . '</nav>';
 }
 endif;
 if (comments_open()) {
@@ -39,8 +39,8 @@ if (comments_open()) {
             '<span>以 ' .
             esc_html(wp_get_current_user()->display_name) .
             ' 的身份发言</span></p>',
-        'class_form' => 'comment-form wzfl-comment-form',
-        'class_submit' => 'wzfl-comment-submit',
+        'class_form' => 'comment-form pagenest-comment-form',
+        'class_submit' => 'pagenest-comment-submit',
         'comment_field' =>
             '<p class="comment-form-comment"><label for="comment">评论内容 <span aria-hidden="true">*</span></label><textarea id="comment" name="comment" rows="5" placeholder="分享你的想法，或描述遇到的问题…" required></textarea></p>',
     ]);

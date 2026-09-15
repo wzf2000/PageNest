@@ -1,17 +1,17 @@
 (() => {
   'use strict';
-  const nav = document.querySelector('#wzfl-nav'),
-    toggle = document.querySelector('.wzfl-menu-toggle');
+  const nav = document.querySelector('#pagenest-nav'),
+    toggle = document.querySelector('.pagenest-menu-toggle');
   if (!nav || !toggle) return;
   function close() {
     nav.querySelectorAll('details[open]').forEach((d) => (d.open = false));
-    nav.classList.remove('wzfl-nav-open');
+    nav.classList.remove('pagenest-nav-open');
     toggle.setAttribute('aria-expanded', 'false');
   }
   toggle.addEventListener('click', () => {
     const open = toggle.getAttribute('aria-expanded') !== 'true';
     toggle.setAttribute('aria-expanded', String(open));
-    nav.classList.toggle('wzfl-nav-open', open);
+    nav.classList.toggle('pagenest-nav-open', open);
   });
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
@@ -30,7 +30,7 @@
         });
     }),
   );
-  document.querySelectorAll('.wzfl-author-card img,.wzfl-logo').forEach((img) => {
+  document.querySelectorAll('.pagenest-author-card img,.pagenest-logo').forEach((img) => {
     const fail = () => (img.hidden = true);
     img.addEventListener('error', fail);
     if (img.complete && !img.naturalWidth) fail();

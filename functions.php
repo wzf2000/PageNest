@@ -3,6 +3,7 @@ if (!defined('ABSPATH')) {
     exit();
 }
 require_once __DIR__ . '/inc.php';
+require_once __DIR__ . '/legacy-migration.php';
 require_once __DIR__ . '/reading.php';
 add_action('after_setup_theme', static function () {
     add_theme_support('title-tag');
@@ -22,11 +23,11 @@ add_action('after_setup_theme', static function () {
         'style',
         'script',
     ]);
-    add_theme_support('wzf-independent-layout');
-    register_nav_menu('wzfl_primary', '全站主导航');
+    add_theme_support('pagenest-independent-layout');
+    register_nav_menu('pagenest_primary', '全站主导航');
 });
 add_filter('body_class', static function ($classes) {
-    $classes[] = 'wzfl-site';
+    $classes[] = 'pagenest-site';
     return $classes;
 });
 add_action('wp_enqueue_scripts', static function () {
@@ -34,19 +35,16 @@ add_action('wp_enqueue_scripts', static function () {
         wp_enqueue_script('comment-reply');
     }
     $manifest = require __DIR__ . '/assets/manifest.php';
-    wp_enqueue_style('wzf-journal', get_theme_file_uri('assets/' . $manifest['css']), [], null);
-    wp_enqueue_script(
-        'wzf-journal',
-        get_theme_file_uri('assets/' . $manifest['js']),
-        [],
-        null,
-        true,
+    wp_enqueue_style('pagenest', get_theme_file_uri('assets/' . $manifest['css']), [], null);
+    wp_enqueue_script('pagenest', get_theme_file_uri('assets/' . $manifest['js']), [], null, true);
+    $image = wp_get_attachment_image_url(
+        (int) get_theme_mod('pagenest_hero_attachment', 0),
+        'full',
     );
-    $image = wp_get_attachment_image_url((int) get_theme_mod('wzfj_hero_attachment', 0), 'full');
     if ($image) {
         wp_add_inline_style(
-            'wzf-journal',
-            ':root{--wzfj-hero-image:url("' . esc_url_raw($image) . '")}',
+            'pagenest',
+            ':root{--pagenest-hero-image:url("' . esc_url_raw($image) . '")}',
         );
     }
 });
@@ -64,7 +62,7 @@ add_action('wp_enqueue_scripts', static function () {
     if (is_singular()) {
         $manifest = require __DIR__ . '/assets/manifest.php';
         wp_enqueue_script(
-            'wzfj-reading',
+            'pagenest-reading',
             get_theme_file_uri('assets/' . $manifest['reading']),
             [],
             null,

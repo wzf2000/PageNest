@@ -1,13 +1,13 @@
 (() => {
   'use strict';
-  document.querySelectorAll('.wzfl-comment-avatar img').forEach((img) => {
+  document.querySelectorAll('.pagenest-comment-avatar img').forEach((img) => {
     const fallback = () => {
       img.hidden = true;
     };
     img.addEventListener('error', fallback);
     if (img.complete && !img.naturalWidth) fallback();
   });
-  const commentArea = document.querySelector('.wzfl-comments');
+  const commentArea = document.querySelector('.pagenest-comments');
   if (commentArea) {
     const labelUploads = () =>
       commentArea.querySelectorAll('.chevereto-pup-button').forEach((b) => {
@@ -21,13 +21,13 @@
 
   function placeNotes() {
     const noteButton = document.querySelector('.llmn-open'),
-      bar = document.querySelector('.wzfl-nav-inner');
-    if (noteButton && bar) bar.insertBefore(noteButton, bar.querySelector('.wzfl-menu-toggle'));
+      bar = document.querySelector('.pagenest-nav-inner');
+    if (noteButton && bar) bar.insertBefore(noteButton, bar.querySelector('.pagenest-menu-toggle'));
   }
   placeNotes();
   document.addEventListener('llmn-ready', placeNotes);
-  const body = document.querySelector('.wzfl-article-body'),
-    toc = document.querySelector('.wzfl-toc');
+  const body = document.querySelector('.pagenest-article-body'),
+    toc = document.querySelector('.pagenest-toc');
   if (body && toc) {
     let headings = [...body.querySelectorAll('h1,h2,h3,h4,h5,h6')].filter((h) =>
       h.textContent.trim(),
@@ -38,7 +38,7 @@
       const baseLevel = Math.min(...headings.map((n) => Number(n.tagName.slice(1)) || 2));
       headings.forEach((h, i) => {
         if (!h.id) {
-          let id = 'wzf-section-' + (i + 1);
+          let id = 'pagenest-section-' + (i + 1);
           while (document.getElementById(id)) id += '-x';
           h.id = id;
         }
@@ -59,11 +59,11 @@
       const place = () => {
         if (mq.matches) {
           body.prepend(toc);
-          toc.classList.add('wzfl-mobile-toc');
+          toc.classList.add('pagenest-mobile-toc');
           toc.open = false;
         } else {
           anchor.after(toc);
-          toc.classList.remove('wzfl-mobile-toc');
+          toc.classList.remove('pagenest-mobile-toc');
           toc.open = true;
         }
       };
@@ -94,9 +94,9 @@
       update();
     }
   }
-  document.querySelectorAll('.wzfl-page .game-container').forEach((game) => {
+  document.querySelectorAll('.pagenest-page .game-container').forEach((game) => {
     const frame = document.createElement('div');
-    frame.className = 'wzfl-game-fit';
+    frame.className = 'pagenest-game-fit';
     game.before(frame);
     frame.append(game);
     const fit = () => {

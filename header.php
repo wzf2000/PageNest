@@ -8,34 +8,34 @@
 </head>
 <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
-    <a class="wzfl-skip" href="#wzfl-main">跳到主要内容</a>
-    <header class="wzfl-header">
-        <div class="wzfl-nav-inner">
-            <a class="wzfl-brand" href="<?php echo esc_url(home_url('/')); ?>"><?php
+    <a class="pagenest-skip" href="#pagenest-main">跳到主要内容</a>
+    <header class="pagenest-header">
+        <div class="pagenest-nav-inner">
+            <a class="pagenest-brand" href="<?php echo esc_url(home_url('/')); ?>"><?php
 $logo = (int) get_theme_mod('custom_logo');
 if ($logo) {
-    echo wp_get_attachment_image($logo, [36, 36], false, ['class' => 'wzfl-logo', 'alt' => '']);
+    echo wp_get_attachment_image($logo, [36, 36], false, ['class' => 'pagenest-logo', 'alt' => '']);
 }
 ?><span><?php
 $brand_parts = explode(' · ', get_bloginfo('name'), 2);
 echo esc_html($brand_parts[0]);
-if (isset($brand_parts[1])) { ?><span class="wzfl-brand-note"><?php echo esc_html(
+if (isset($brand_parts[1])) { ?><span class="pagenest-brand-note"><?php echo esc_html(
     ' · ' . $brand_parts[1],
 ); ?></span><?php }
 ?></span></a>
-            <button class="wzfl-menu-toggle" type="button" aria-expanded="false"
-                aria-controls="wzfl-nav">菜单 <span aria-hidden="true">☰</span></button>
-            <nav id="wzfl-nav" aria-label="主导航"><?php
+            <button class="pagenest-menu-toggle" type="button" aria-expanded="false"
+                aria-controls="pagenest-nav">菜单 <span aria-hidden="true">☰</span></button>
+            <nav id="pagenest-nav" aria-label="主导航"><?php
             $locations = get_nav_menu_locations();
-            $items = wp_get_nav_menu_items($locations['wzfl_primary'] ?? 0) ?: [];
+            $items = wp_get_nav_menu_items($locations['pagenest_primary'] ?? 0) ?: [];
             if ($items) {
-                wzfj_menu_branch($items);
+                pagenest_menu_branch($items);
             } else {
                  ?><a href="<?php echo esc_url(
     home_url('/'),
-); ?>">首页</a><a href="<?php echo esc_url(wzfj_posts_url()); ?>">文章</a><?php
+); ?>">首页</a><a href="<?php echo esc_url(pagenest_posts_url()); ?>">文章</a><?php
             }
-            ?><a class="wzfl-account" href="<?php echo esc_url(
+            ?><a class="pagenest-account" href="<?php echo esc_url(
     is_user_logged_in() ? admin_url() : wp_login_url(),
 ); ?>"><?php echo is_user_logged_in() ? '我的账号' : '登录'; ?></a></nav>
         </div>

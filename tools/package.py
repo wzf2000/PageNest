@@ -4,8 +4,8 @@ import re
 import zipfile
 
 root = Path(__file__).resolve().parent.parent
-slug = "wzf-journal"
-header = root / ("style.css" if slug == "wzf-journal" else "wzf-theme-bridge.php")
+slug = "pagenest"
+header = root / ("style.css" if slug == "pagenest" else "pagenest-compatibility.php")
 version = re.search(r"Version:\s*([0-9.]+)", header.read_text()).group(1)
 output = root / "dist" / f"{slug}-{version}.zip"
 output.parent.mkdir(exist_ok=True)

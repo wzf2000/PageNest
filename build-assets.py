@@ -8,6 +8,7 @@ for key, ext, name in [
     ("js", "js", "navigation.js"),
     ("reading", "js", "reading.js"),
     ("login", "css", "login.css"),
+    ("legacy", "css", "legacy-compatibility.css"),
 ]:
     content = (assets / name).read_bytes()
     target = Path(name).stem + "-" + hashlib.sha256(content).hexdigest()[:12] + "." + ext

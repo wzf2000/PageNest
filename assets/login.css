@@ -1,20 +1,20 @@
-body.login.wzfj-login {
-  background: #e9eef5 var(--wzfj-login-image, none) center top/cover fixed no-repeat;
+body.login.pagenest-login {
+  background: #e9eef5 var(--pagenest-login-image, none) center top/cover fixed no-repeat;
   min-height: 100vh;
 }
-.wzfj-login #login {
+.pagenest-login #login {
   width: min(360px, calc(100% - 24px));
   padding: 4vh 0 32px;
 }
-.wzfj-login #loginform,
-.wzfj-login #registerform,
-.wzfj-login #lostpasswordform {
+.pagenest-login #loginform,
+.pagenest-login #registerform,
+.pagenest-login #lostpasswordform {
   background: rgba(255, 255, 255, 0.94);
   border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 12px;
   box-shadow: 0 12px 35px #16345124;
 }
-.wzfj-login-notice {
+.pagenest-login-notice {
   margin: 0 0 18px;
   padding: 16px 18px;
   background: rgba(255, 255, 255, 0.95);
@@ -24,24 +24,24 @@ body.login.wzfj-login {
   line-height: 1.8;
   box-shadow: 0 8px 24px #16345118;
 }
-.wzfj-login-notice p {
+.pagenest-login-notice p {
   margin: 0 0 10px;
 }
-.wzfj-login-notice p:last-child {
+.pagenest-login-notice p:last-child {
   margin-bottom: 0;
 }
-.wzfj-login-notice a {
+.pagenest-login-notice a {
   color: #175c8d;
   text-decoration: underline;
 }
-.wzfj-login #nav,
-.wzfj-login #backtoblog {
+.pagenest-login #nav,
+.pagenest-login #backtoblog {
   background: rgba(255, 255, 255, 0.94);
   margin: 12px 0 0;
   padding: 10px 14px;
   border-radius: 8px;
 }
-.wzfj-login .language-switcher {
+.pagenest-login .language-switcher {
   background: rgba(255, 255, 255, 0.94);
   padding: 12px;
   border-radius: 8px;
@@ -51,15 +51,15 @@ body.login.wzfj-login {
   box-sizing: border-box;
 }
 @media (max-width: 360px) {
-  .wzfj-login #login {
+  .pagenest-login #login {
     width: calc(100% - 12px);
   }
-  .wzfj-login #loginform,
-  .wzfj-login #registerform,
-  .wzfj-login #lostpasswordform {
+  .pagenest-login #loginform,
+  .pagenest-login #registerform,
+  .pagenest-login #lostpasswordform {
     padding: 16px 2px;
   }
-  .wzfj-login .language-switcher {
+  .pagenest-login .language-switcher {
     padding: 8px;
   }
 }
