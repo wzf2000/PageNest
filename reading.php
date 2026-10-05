@@ -49,64 +49,67 @@ function pagenest_side($single = false)
 {
     ?><aside class="pagenest-sidebar" aria-label="<?php echo $single
     ? '阅读导航'
-    : '文章导航'; ?>"><?php if ($single): ?><details class="pagenest-toc" hidden open>
-        <summary>本文目录</summary>
-        <nav aria-label="本文目录"></nav>
-    </details><?php
-    $id = get_queried_object_id();
-    $related = pagenest_related($id);
-    if ($related) { ?><section class="pagenest-widget">
-        <h2><?php echo get_post_meta($id, '_llm_document_id', true)
-            ? '同系列章节'
-            : '相关阅读'; ?></h2>
-        <ul><?php foreach ($related as $p): ?><li><a href="<?php echo esc_url(
+    : '文章导航'; ?>"><?php if ($single): ?><div class="pagenest-reading-rail">
+        <div class="pagenest-notes-slot" hidden></div>
+        <details class="pagenest-toc" hidden open>
+            <summary>本文目录</summary>
+            <nav aria-label="本文目录"></nav>
+        </details><?php
+        $id = get_queried_object_id();
+        $related = pagenest_related($id);
+        if ($related) { ?><section class="pagenest-widget">
+            <h2><?php echo get_post_meta($id, '_llm_document_id', true)
+                ? '同系列章节'
+                : '相关阅读'; ?></h2>
+            <ul><?php foreach ($related as $p): ?><li><a href="<?php echo esc_url(
     pagenest_url(get_permalink($p)),
 ); ?>"><?php echo esc_html($p->post_title); ?></a></li><?php endforeach; ?></ul>
-    </section><?php }
-    ?>
-    <?php else: ?><section class="pagenest-widget"><?php pagenest_search(); ?></section>
-    <section class="pagenest-widget">
-        <h2>浏览分类</h2>
-        <div class="pagenest-categories"><?php foreach (
-            get_categories([
-                'number' => 8,
-                'orderby' => 'count',
-                'order' => 'DESC',
-                'hide_empty' => true,
-            ])
-            as $cat
-        ): ?><a href="<?php echo esc_url(
+        </section><?php }
+        ?>
+        <?php else: ?><section class="pagenest-widget"><?php pagenest_search(); ?></section>
+        <section class="pagenest-widget">
+            <h2>浏览分类</h2>
+            <div class="pagenest-categories"><?php foreach (
+                get_categories([
+                    'number' => 8,
+                    'orderby' => 'count',
+                    'order' => 'DESC',
+                    'hide_empty' => true,
+                ])
+                as $cat
+            ): ?><a href="<?php echo esc_url(
     pagenest_url(get_category_link($cat)),
 ); ?>"><?php echo esc_html($cat->name); ?></a><?php endforeach; ?></div>
-    </section>
-    <section class="pagenest-widget">
-        <h2>热门文章</h2>
-        <p class="pagenest-hint">按累计浏览量</p>
-        <ol class="pagenest-popular"><?php
-        $popular = new WP_Query([
-            'post_type' => 'post',
-            'post_status' => 'publish',
-            'posts_per_page' => 5,
-            'meta_key' => 'views',
-            'orderby' => 'meta_value_num',
-            'order' => 'DESC',
-            'ignore_sticky_posts' => true,
-            'no_found_rows' => true,
-        ]);
-        foreach ($popular->posts as $p): ?><li><a href="<?php echo esc_url(
+        </section>
+        <section class="pagenest-widget">
+            <h2>热门文章</h2>
+            <p class="pagenest-hint">按累计浏览量</p>
+            <ol class="pagenest-popular"><?php
+            $popular = new WP_Query([
+                'post_type' => 'post',
+                'post_status' => 'publish',
+                'posts_per_page' => 5,
+                'meta_key' => 'views',
+                'orderby' => 'meta_value_num',
+                'order' => 'DESC',
+                'ignore_sticky_posts' => true,
+                'no_found_rows' => true,
+            ]);
+            foreach ($popular->posts as $p): ?><li><a href="<?php echo esc_url(
     pagenest_url(get_permalink($p)),
 ); ?>"><?php echo esc_html($p->post_title); ?></a><span><?php echo esc_html(
     number_format_i18n((int) get_post_meta($p->ID, 'views', true)),
 ); ?> 次浏览</span></li><?php endforeach;
-        ?></ol>
-    </section><?php endif; ?><section class="pagenest-widget pagenest-community">
-        <h2>交流与更多</h2>
-        <p>欢迎在文章评论区交流想法与建议。</p>
-        <p><a href="<?php echo esc_url(
-            pagenest_url(get_permalink(801)),
-        ); ?>">网站更新与想法 →</a></p><a
-            href="<?php echo esc_url(pagenest_url(home_url('/archives/'))); ?>">完整归档 →</a>
-    </section>
+            ?></ol>
+        </section><?php endif; ?><section class="pagenest-widget pagenest-community">
+            <h2>交流与更多</h2>
+            <p>欢迎在文章评论区交流想法与建议。</p>
+            <p><a href="<?php echo esc_url(
+                pagenest_url(get_permalink(801)),
+            ); ?>">网站更新与想法 →</a></p><a
+                href="<?php echo esc_url(pagenest_url(home_url('/archives/'))); ?>">完整归档 →</a>
+        </section><?php if ($single): ?>
+    </div><?php endif; ?>
 </aside><?php
 }
 function pagenest_archives()
