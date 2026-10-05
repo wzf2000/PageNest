@@ -1,6 +1,6 @@
 <?php
 return [
-    'css' => 'layout-967b0cca53c5.css',
+    'css' => 'layout-d0d9959ed885.css',
     'js' => 'navigation-6eb61c787845.js',
     'reading' => 'reading-7a25eba2269e.js',
     'login' => 'login-66d6c13a976e.css',
