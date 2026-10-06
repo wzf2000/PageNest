@@ -7,6 +7,46 @@ function pagenest_image_setting($value)
 }
 add_action('customize_register', static function ($wp_customize) {
     $wp_customize->add_section('pagenest_footer', ['title' => '页脚信息', 'priority' => 33]);
+    $wp_customize->add_section('pagenest_navigation', [
+        'title' => '归档与关于链接',
+        'priority' => 34,
+    ]);
+    $wp_customize->add_section('pagenest_community', [
+        'title' => '交流区',
+        'priority' => 35,
+    ]);
+    $defaults = pagenest_setting_defaults();
+    foreach (
+        [
+            'pagenest_footer_tagline' => ['页脚标语', 'pagenest_footer', 'text'],
+            'pagenest_community_description' => ['交流区说明', 'pagenest_community', 'textarea'],
+            'pagenest_community_link_label' => ['交流链接名称', 'pagenest_community', 'text'],
+            'pagenest_community_link_url' => ['交流链接地址', 'pagenest_community', 'url'],
+            'pagenest_community_archive_label' => ['交流区归档名称', 'pagenest_community', 'text'],
+            'pagenest_archive_link_label' => ['归档链接名称', 'pagenest_navigation', 'text'],
+            'pagenest_archive_link_url' => ['归档链接地址', 'pagenest_navigation', 'url'],
+            'pagenest_about_link_label' => ['关于链接名称', 'pagenest_navigation', 'text'],
+            'pagenest_about_link_url' => ['关于链接地址', 'pagenest_navigation', 'url'],
+        ]
+        as $id => $field
+    ) {
+        $wp_customize->add_setting($id, [
+            'default' => $defaults[$id],
+            'sanitize_callback' =>
+                $field[2] === 'url'
+                    ? 'esc_url_raw'
+                    : ($field[2] === 'textarea'
+                        ? 'sanitize_textarea_field'
+                        : 'sanitize_text_field'),
+            'capability' => 'edit_theme_options',
+        ]);
+        $wp_customize->add_control($id, [
+            'label' => $field[0],
+            'description' => '留空可隐藏对应文案或链接；链接名称和地址均需填写。',
+            'section' => $field[1],
+            'type' => $field[2],
+        ]);
+    }
     foreach (
         [
             'pagenest_footer_owner' => ['版权署名', get_bloginfo('name')],
@@ -54,6 +94,31 @@ add_action('customize_register', static function ($wp_customize) {
         'description' => '调整首页背景、专题与作者展示。保存前可在右侧预览。',
         'priority' => 30,
     ]);
+    $wp_customize->add_section('pagenest_home_copy', [
+        'title' => '首页介绍',
+        'panel' => 'pagenest_home',
+    ]);
+    foreach (
+        [
+            'pagenest_home_eyebrow' => ['首页眉题', 'text'],
+            'pagenest_home_intro' => ['首页介绍', 'textarea'],
+            'pagenest_authors_intro' => ['作者介绍', 'textarea'],
+        ]
+        as $id => $field
+    ) {
+        $wp_customize->add_setting($id, [
+            'default' => $defaults[$id],
+            'sanitize_callback' =>
+                $field[1] === 'textarea' ? 'sanitize_textarea_field' : 'sanitize_text_field',
+            'capability' => 'edit_theme_options',
+        ]);
+        $wp_customize->add_control($id, [
+            'label' => $field[0],
+            'description' => '留空可隐藏；介绍支持换行。',
+            'section' => 'pagenest_home_copy',
+            'type' => $field[1],
+        ]);
+    }
     $wp_customize->add_section('pagenest_home_image', [
         'title' => '首页背景',
         'panel' => 'pagenest_home',

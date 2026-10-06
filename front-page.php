@@ -2,9 +2,13 @@
 <main id="pagenest-main" class="pagenest-main" tabindex="-1">
     <section class="pagenest-hero">
         <div class="pagenest-hero-copy">
-            <p class="pagenest-eyebrow">技术 · 笔记 · 生活</p>
+            <?php if ($eyebrow = pagenest_setting('pagenest_home_eyebrow')): ?>
+            <p class="pagenest-eyebrow"><?php echo esc_html($eyebrow); ?></p>
+            <?php endif; ?>
             <h1><?php bloginfo('name'); ?></h1>
-            <p>记录技术、学习与生活。<br>在这里整理思路，也分享探索的过程。</p>
+            <?php if ($intro = pagenest_setting('pagenest_home_intro')): ?>
+            <p><?php echo nl2br(esc_html($intro)); ?></p>
+            <?php endif; ?>
             <div class="pagenest-hero-actions"><a class="pagenest-button" href="<?php echo esc_url(
                 pagenest_posts_url(),
             ); ?>">浏览文章 <span aria-hidden="true">→</span></a><a href="#topics">探索专题</a></div>
@@ -64,7 +68,9 @@
         <div>
             <p class="pagenest-eyebrow">共同记录</p>
             <h2>作者们</h2>
-            <p>不同的兴趣，共同的记录。<br>这里汇集了大家的学习笔记、技术实践与生活片段。</p>
+            <?php if ($intro = pagenest_setting('pagenest_authors_intro')): ?>
+            <p><?php echo nl2br(esc_html($intro)); ?></p>
+            <?php endif; ?>
         </div>
         <div class="pagenest-authors">
             <?php

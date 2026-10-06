@@ -4,7 +4,32 @@ if (!defined('ABSPATH')) {
 }
 function pagenest_posts_url(): string
 {
-    return get_permalink((int) get_option('page_for_posts')) ?: home_url('/');
+    $page = (int) get_option('page_for_posts');
+    return $page > 0 ? (get_permalink($page) ?: home_url('/')) : home_url('/');
+}
+/** Defaults contain no site-specific content or fixed page IDs. */
+function pagenest_setting_defaults(): array
+{
+    return [
+        'pagenest_home_eyebrow' => '记录 · 分享 · 探索',
+        'pagenest_home_intro' => "记录想法与发现。\n在这里整理思路，分享探索的过程。",
+        'pagenest_authors_intro' => "不同的兴趣，共同的记录。\n认识在这里分享故事与经验的作者。",
+        'pagenest_footer_tagline' => '让知识与思考安放于页间',
+        'pagenest_community_description' => '欢迎在文章评论区交流想法与建议。',
+        'pagenest_community_link_label' => '更多内容',
+        'pagenest_community_link_url' => '',
+        'pagenest_archive_link_label' => '归档',
+        'pagenest_community_archive_label' => '完整归档 →',
+        'pagenest_archive_link_url' => pagenest_posts_url(),
+        'pagenest_about_link_label' => '关于',
+        'pagenest_about_link_url' => home_url('/') . '#authors',
+    ];
+}
+function pagenest_setting(string $key): string
+{
+    $defaults = pagenest_setting_defaults();
+    $value = get_theme_mod($key, $defaults[$key] ?? '');
+    return is_scalar($value) ? (string) $value : '';
 }
 function pagenest_menu_branch(array $items, int $parent = 0, array $ancestors = []): void
 {

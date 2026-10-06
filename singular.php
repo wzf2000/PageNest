@@ -31,7 +31,11 @@
                 <div class="pagenest-article-body"><?php
                 if (
                     !post_password_required() &&
-                    get_page_template_slug() === 'pages/page-archives.php'
+                    in_array(
+                        get_page_template_slug(),
+                        ['page-archives.php', 'pages/page-archives.php'],
+                        true,
+                    )
                 ) {
                     pagenest_archives();
                 } else {
@@ -53,12 +57,7 @@
      the_views();
      echo '</span>';
  }
- if (
-     pagenest_experience_available() &&
-     get_post_status() === 'publish'
- ): ?><button type="button" class="favorite" data-id="<?php the_ID(); ?>">点赞 <span class="count"><?php echo absint(
-    get_post_meta(get_the_ID(), 'bigfa_ding', true),
-); ?></span></button><?php endif;
+ do_action('pagenest_article_actions', get_the_ID());
  edit_post_link('编辑文章');
  ?></footer><?php endif; ?>
             </article>

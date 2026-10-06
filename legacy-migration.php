@@ -13,23 +13,33 @@ function pagenest_migrate_legacy_theme($old_name = '', $old_theme = null)
     if (!is_array($old)) {
         return;
     }
+    $existing = get_theme_mods();
+    $existing = is_array($existing) ? $existing : [];
     foreach ($old as $key => $value) {
+        $key = preg_replace('/^wzfj_/', 'pagenest_', $key);
         if ($key === 'nav_menu_locations' && is_array($value)) {
-            if (isset($value['wzfl_primary'])) {
-                $value['pagenest_primary'] = $value['wzfl_primary'];
+            if (array_key_exists('wzfl_primary', $value)) {
+                if (!array_key_exists('pagenest_primary', $value)) {
+                    $value['pagenest_primary'] = $value['wzfl_primary'];
+                }
                 unset($value['wzfl_primary']);
             }
+            if (array_key_exists($key, $existing)) {
+                if (!is_array($existing[$key])) {
+                    continue;
+                }
+                $value = $existing[$key] + $value;
+            }
+        } elseif (array_key_exists($key, $existing)) {
+            continue;
         }
-        $key = preg_replace('/^wzfj_/', 'pagenest_', $key);
-        set_theme_mod($key, $value);
+        if (!array_key_exists($key, $existing) || $existing[$key] !== $value) {
+            set_theme_mod($key, $value);
+            $existing[$key] = $value;
+        }
     }
 }
 add_action('after_switch_theme', 'pagenest_migrate_legacy_theme', 100, 2);
-
-function pagenest_experience_available()
-{
-    return class_exists('WZF_Experience') && WZF_Experience::ready();
-}
 
 add_action(
     'wp_enqueue_scripts',

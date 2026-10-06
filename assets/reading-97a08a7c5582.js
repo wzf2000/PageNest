@@ -19,15 +19,13 @@
     new MutationObserver(labelUploads).observe(commentArea, { childList: true, subtree: true });
   }
 
-  function placeHeaderActions() {
-    const bar = document.querySelector('.pagenest-nav-inner');
-    if (!bar) return;
-    document.querySelectorAll('[data-pagenest-header-action]').forEach((action) => {
-      bar.insertBefore(action, bar.querySelector('.pagenest-menu-toggle'));
-    });
+  function placeNotes() {
+    const noteButton = document.querySelector('.llmn-open'),
+      bar = document.querySelector('.pagenest-nav-inner');
+    if (noteButton && bar) bar.insertBefore(noteButton, bar.querySelector('.pagenest-menu-toggle'));
   }
-  placeHeaderActions();
-  document.addEventListener('pagenest-integration-ready', placeHeaderActions);
+  placeNotes();
+  document.addEventListener('llmn-ready', placeNotes);
   // Keep only text and explicit math source, never clone heading IDs or controls.
   function appendHeadingLabel(parent, node) {
     if (node.nodeType === Node.TEXT_NODE) {

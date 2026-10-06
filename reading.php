@@ -2,48 +2,47 @@
 if (!defined('ABSPATH')) {
     exit();
 }
+/** Extensions may provide post objects or IDs; visibility is checked after filtering. */
 function pagenest_related($id)
 {
-    if (get_post_meta($id, '_llm_document_id', true)) {
-        $all = get_posts([
-            'post_type' => 'post',
-            'post_status' => ['publish', 'private'],
-            'posts_per_page' => 100,
-            'meta_key' => '_llm_document_id',
-            'orderby' => 'meta_value',
-            'order' => 'ASC',
-        ]);
-        $all = array_values(
-            array_filter(
-                $all,
-                fn($p) => !post_password_required($p) &&
-                    ($p->post_status === 'publish' || current_user_can('read_post', $p->ID)),
-            ),
-        );
-        $index = array_search($id, array_column($all, 'ID'), true);
-        if ($index === false) {
-            return [];
-        }
-        $out = [];
-        foreach ([1, -1, 2, -2] as $offset) {
-            if (isset($all[$index + $offset])) {
-                $out[] = $all[$index + $offset];
-            }
-        }
-        return array_slice($out, 0, 3);
-    }
+    $id = absint($id);
     $cats = wp_get_post_categories($id);
-    if (!$cats) {
-        return [];
+    $related = $cats
+        ? get_posts([
+            'post_type' => 'post',
+            'post_status' => 'publish',
+            'posts_per_page' => 3,
+            'post__not_in' => [$id],
+            'category__in' => $cats,
+            'ignore_sticky_posts' => true,
+        ])
+        : [];
+    $related = apply_filters('pagenest_related_posts', $related, $id);
+    $out = [];
+    foreach (is_array($related) ? $related : [] as $candidate) {
+        $post_id = $candidate instanceof WP_Post ? $candidate->ID : $candidate;
+        if (!is_numeric($post_id)) {
+            continue;
+        }
+        $post_id = absint($post_id);
+        $post = get_post($post_id);
+        if (
+            !$post ||
+            $post_id === $id ||
+            isset($out[$post_id]) ||
+            $post->post_type !== 'post' ||
+            post_password_required($post) ||
+            ($post->post_status !== 'publish' &&
+                !($post->post_status === 'private' && current_user_can('read_post', $post_id)))
+        ) {
+            continue;
+        }
+        $out[$post_id] = $post;
+        if (count($out) === 3) {
+            break;
+        }
     }
-    return get_posts([
-        'post_type' => 'post',
-        'post_status' => 'publish',
-        'posts_per_page' => 3,
-        'post__not_in' => [$id],
-        'category__in' => $cats,
-        'ignore_sticky_posts' => true,
-    ]);
+    return array_values($out);
 }
 function pagenest_side($single = false)
 {
@@ -58,9 +57,9 @@ function pagenest_side($single = false)
         $id = get_queried_object_id();
         $related = pagenest_related($id);
         if ($related) { ?><section class="pagenest-widget">
-            <h2><?php echo get_post_meta($id, '_llm_document_id', true)
-                ? '同系列章节'
-                : '相关阅读'; ?></h2>
+            <h2><?php echo esc_html(
+                apply_filters('pagenest_related_title', '相关阅读', $id, $related),
+            ); ?></h2>
             <ul><?php foreach ($related as $p): ?><li><a href="<?php echo esc_url(
     pagenest_url(get_permalink($p)),
 ); ?>"><?php echo esc_html($p->post_title); ?></a></li><?php endforeach; ?></ul>
@@ -103,11 +102,20 @@ function pagenest_side($single = false)
             ?></ol>
         </section><?php endif; ?><section class="pagenest-widget pagenest-community">
             <h2>交流与更多</h2>
-            <p>欢迎在文章评论区交流想法与建议。</p>
-            <p><a href="<?php echo esc_url(
-                pagenest_url(get_permalink(801)),
-            ); ?>">网站更新与想法 →</a></p><a
-                href="<?php echo esc_url(pagenest_url(home_url('/archives/'))); ?>">完整归档 →</a>
+            <?php if ($description = pagenest_setting('pagenest_community_description')): ?>
+            <p><?php echo nl2br(esc_html($description)); ?></p>
+            <?php endif; ?>
+            <?php foreach (['community', 'archive'] as $link):
+                $label = pagenest_setting(
+                    $link === 'archive'
+                        ? 'pagenest_community_archive_label'
+                        : 'pagenest_community_link_label',
+                );
+                $url = pagenest_setting('pagenest_' . $link . '_link_url');
+                if ($label !== '' && esc_url($url) !== ''): ?>
+            <p><a href="<?php echo esc_url($url); ?>"><?php echo esc_html($label); ?></a></p>
+            <?php endif;
+            endforeach; ?>
         </section><?php if ($single): ?>
     </div><?php endif; ?>
 </aside><?php

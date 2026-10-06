@@ -490,39 +490,26 @@ body.pagenest-site {
   overflow-wrap: anywhere;
 }
 .pagenest-toc-leaf {
-  padding-inline-start: 22px;
-}
-.pagenest-toc-tree:not(.pagenest-toc-has-branches) > li > .pagenest-toc-leaf {
-  padding-inline-start: 0;
+  padding-inline-start: 28px;
 }
 .pagenest-toc-toggle {
-  flex: 0 0 22px;
-  width: 22px;
+  flex: 0 0 28px;
+  width: 28px;
   min-height: 34px;
-  display: grid;
-  place-items: center;
   padding: 0;
   border: 0;
-  border-radius: 4px;
   background: transparent;
   color: #596e82;
   cursor: pointer;
 }
-.pagenest-toc-toggle:hover {
-  background: #edf3f9;
-  color: #397bac;
-}
 .pagenest-toc-toggle::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  border-right: 1.5px solid currentColor;
-  border-bottom: 1.5px solid currentColor;
-  transform: rotate(-45deg);
+  content: '›';
+  display: inline-block;
+  font-size: 18px;
   transition: transform 0.15s;
 }
 .pagenest-toc-toggle[aria-expanded='true']::before {
-  transform: rotate(45deg);
+  transform: rotate(90deg);
 }
 .pagenest-toc-contains-current {
   background: #f2f6fa;
