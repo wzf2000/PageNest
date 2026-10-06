@@ -2,7 +2,7 @@
 
 A reading-focused WordPress theme for technical notes and thoughtful writing.
 
-当前工作副本为 0.5.1，尚未公开发行。
+安装包与发行记录见 [GitHub Releases](https://github.com/wzf2000/PageNest/releases)。
 
 让知识与思考安放于页间。PageNest 是独立经典 WordPress 主题，提供专题首页、文章阅读布局、作者展示、响应式导航与可配置登录外观。
 
@@ -18,7 +18,7 @@ A reading-focused WordPress theme for technical notes and thoughtful writing.
 
 ## 安装与升级
 
-要求 WordPress 6.0+、PHP 8.0+。运行 `npm run package`，然后在 “外观 → 主题 → 安装主题” 上传 `dist/pagenest-0.5.1.zip`。打包只需要 Python 3；GitHub 下载的源码 ZIP 包含开发文件，正式安装优先使用打包命令生成的 ZIP。
+要求 WordPress 6.0+、PHP 8.0+。运行 `npm run package`，然后在 “外观 → 主题 → 安装主题” 上传 `dist/pagenest-0.5.1.zip`。打包需要 Git 工作副本与 Python 3；GitHub 下载的源码 ZIP 包含开发文件，正式安装优先使用打包命令生成的 ZIP。
 
 从 0.4 升级到 0.5 时先备份，再安装并切换至 `pagenest` 目录。首次切换会通过 `legacy-migration.php` 的集中映射复制旧主题菜单、背景和自定义设置；原设置继续保留作回退依据。0.5 之后保持目录名 `pagenest`。
 
@@ -66,12 +66,26 @@ python3 -m venv .venv
 python3 -m pip install -r requirements-dev.txt
 npm run format
 npm run format:check
+npm test
+npx playwright install --only-shell chromium
+npm run test:frontend
 npm run package
+npm run package:check
 ```
 
-PHP 使用 4 空格和 PER-CS 式括号规则，JS/CSS/JSON 使用 2 空格，目标 100 列。仓库中的 Markdown 文档由格式命令补齐中英文/数字间空格，同时保留代码块、行内代码和链接地址。
+PHP 使用 4 空格和 PER-CS 式括号规则，JS/CSS/JSON/YAML 使用 2 空格，目标 100 列。仓库中的 Markdown 文档由格式命令补齐中英文/数字间空格，同时保留代码块、行内代码和链接地址。
 
 修改 `assets/` 中的原始 CSS/JS 后运行 `npm run build`；格式命令也会构建。生成文件名含内容哈希，不要手工修改生成副本。部署时先上传新资源，最后更新 `assets/manifest.php`；旧哈希文件可能仍被缓存页面引用。
+
+## CI 与发行
+
+两个仓库分别运行 push、pull request 和可复用的 CI。固定 Node.js 24.15.0、Python 3.12、Playwright 1.55.1；PHP 8.0 和 8.2 分别检查最低支持版本与当前运行版本。格式检查遵循 MarkBridge 的 Prettier、PHP 插件、Markdown 中英文间距和 Black 规则，Python 文件逐个检查以避免多进程启动。生成的哈希资源只校验，不直接格式化；CI 在构建前校验，避免构建掩盖已提交资源漂移。
+
+PHP 测试使用内存中的 WordPress 替身，浏览器测试覆盖桌面与手机宽度，并禁止外部网络请求。它们验证公共功能和实际前端资源，不能代替完整 WordPress 安装上的插件组合验收。测试依赖、fixture、格式工具与 node_modules 不进入安装 ZIP。
+
+手动运行 GitHub Actions 的 `Manual GitHub Release`，仅支持 main；输入无 `v` 的版本号，须与 PHP/主题头、package.json 和 package-lock.json 一致，并对应 CHANGELOG.md 的首个版本节。发行说明取自该节。默认 `publish=false`，生成可下载的安装 ZIP、SHA-256、外部 manifest 和发行说明。选择 `publish=true` 才创建公开发行：先固定源提交并完成同一套 CI，在独立写权限任务中复核下载附件摘要与源身份，创建带完整附件的草稿后公开。已存在的 tag 或 release 会被拒绝，避免覆盖既有 v0.5.1 或任何历史附件。工作流不会部署 WordPress。
+
+打包使用固定 ZIP 时间戳与安装文件白名单，内外 manifest 保存源提交及逐文件摘要。`npm run package:check` 验证包结构、安装文件、checksum 与 proof；打包需要 Git 工作副本和 Python 3；安装文件必须与 HEAD 提交一致，先提交准备发行的修改再打包。
 
 ## License
 
