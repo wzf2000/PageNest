@@ -19,16 +19,16 @@ class ReleaseGuards(unittest.TestCase):
         shutil.copy(
             Path(__file__).resolve().parent.parent / "tools/release.py", self.root / "tools"
         )
-        package = {"name": "pagenest", "version": "0.6.0-rc.1"}
-        lock = {"version": "0.6.0-rc.1", "packages": {"": package}}
+        package = {"name": "pagenest", "version": "0.6.0"}
+        lock = {"version": "0.6.0", "packages": {"": package}}
         for name, value in [("package.json", package), ("package-lock.json", lock)]:
             (self.root / name).write_text(json.dumps(value))
         for name, value in {
-            "style.css": "Version: 0.6.0-rc.1\n",
+            "style.css": "Version: 0.6.0\n",
             "index.php": "<?php\n",
             "README.md": "Read me\n",
             "LICENSE": "GPL\n",
-            "CHANGELOG.md": "# Changes\n\n## 0.6.0-rc.1\n\n- Current functionality.\n",
+            "CHANGELOG.md": "# Changes\n\n## 0.6.0\n\n- Current functionality.\n",
             "theme.json": "{}\n",
             "screenshot.png": "fixture",
         }.items():
@@ -61,7 +61,7 @@ class ReleaseGuards(unittest.TestCase):
         return result
 
     def test_identity_and_repository_guards(self):
-        for version in ["v0.6.0-rc.1", "0.5.2", "0.6.0-rc.1;evil", "../0.6.0-rc.1"]:
+        for version in ["v0.6.0", "0.5.2", "0.6.0;evil", "../0.6.0"]:
             self.run_tool("--version", version, ok=False)
         for sha in ["bad", "0" * 40]:
             self.run_tool("--sha", sha, ok=False)
@@ -71,7 +71,7 @@ class ReleaseGuards(unittest.TestCase):
 
     def test_determinism_and_installation_allowlist(self):
         self.run_tool()
-        archive = self.root / "dist/pagenest-0.6.0-rc.1.zip"
+        archive = self.root / "dist/pagenest-0.6.0.zip"
         first = hashlib.sha256(archive.read_bytes()).hexdigest()
         self.run_tool()
         self.assertEqual(first, hashlib.sha256(archive.read_bytes()).hexdigest())
@@ -110,7 +110,7 @@ class ReleaseGuards(unittest.TestCase):
         )
         self.run_tool()
         slug = json.loads((self.root / "package.json").read_text())["name"]
-        with zipfile.ZipFile(self.root / f"dist/{slug}-0.6.0-rc.1.zip") as archive:
+        with zipfile.ZipFile(self.root / f"dist/{slug}-0.6.0.zip") as archive:
             self.assertIn(f"{slug}/modules/feature.php", archive.namelist())
             self.assertIn(f"{slug}/assets/feature.js", archive.namelist())
             self.assertIn(f"{slug}/docs/assets/overview.svg", archive.namelist())
@@ -121,9 +121,9 @@ class ReleaseGuards(unittest.TestCase):
 
     def test_tampered_bundle_manifest_and_checksum(self):
         for name in [
-            "pagenest-0.6.0-rc.1.zip",
-            "pagenest-0.6.0-rc.1.manifest.json",
-            "pagenest-0.6.0-rc.1.zip.sha256",
+            "pagenest-0.6.0.zip",
+            "pagenest-0.6.0.manifest.json",
+            "pagenest-0.6.0.zip.sha256",
             "release-notes.md",
         ]:
             with self.subTest(name=name):
@@ -138,8 +138,8 @@ class ReleaseGuards(unittest.TestCase):
 
     def test_current_changelog_required(self):
         for contents in [
-            "## 0.5.2\n\nFuture notes\n\n## 0.6.0-rc.1\n\nOld notes\n",
-            "## 0.6.0-rc.1\n\n",
+            "## 0.5.2\n\nFuture notes\n\n## 0.6.0\n\nOld notes\n",
+            "## 0.6.0\n\n",
         ]:
             with self.subTest(contents=contents):
                 (self.root / "CHANGELOG.md").write_text(contents)
