@@ -75,7 +75,8 @@ async function format() {
     js: 'navigation.js',
     reading: 'reading.js',
     login: 'login.css',
-    legacy: 'legacy-compatibility.css',
+    content: 'content.css',
+    content_js: 'content.js',
   })) {
     const content = fs.readFileSync(path.join(assets, name));
     const hash = crypto.createHash('sha256').update(content).digest('hex').slice(0, 12);

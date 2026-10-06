@@ -3,7 +3,6 @@ if (!defined('ABSPATH')) {
     exit();
 }
 require_once __DIR__ . '/inc.php';
-require_once __DIR__ . '/legacy-migration.php';
 require_once __DIR__ . '/reading.php';
 add_action('after_setup_theme', static function () {
     add_theme_support('title-tag');
@@ -24,6 +23,8 @@ add_action('after_setup_theme', static function () {
         'script',
     ]);
     add_theme_support('pagenest-independent-layout');
+    add_theme_support('pagenest-reading-slots');
+    add_editor_style('assets/content.css');
     register_nav_menu('pagenest_primary', '全站主导航');
 });
 add_filter('body_class', static function ($classes) {
@@ -36,6 +37,19 @@ add_action('wp_enqueue_scripts', static function () {
     }
     $manifest = require __DIR__ . '/assets/manifest.php';
     wp_enqueue_style('pagenest', get_theme_file_uri('assets/' . $manifest['css']), [], null);
+    wp_enqueue_style(
+        'pagenest-content',
+        get_theme_file_uri('assets/' . $manifest['content']),
+        ['pagenest'],
+        null,
+    );
+    wp_enqueue_script(
+        'pagenest-content',
+        get_theme_file_uri('assets/' . $manifest['content_js']),
+        [],
+        null,
+        true,
+    );
     wp_enqueue_script('pagenest', get_theme_file_uri('assets/' . $manifest['js']), [], null, true);
     $image = wp_get_attachment_image_url(
         (int) get_theme_mod('pagenest_hero_attachment', 0),
@@ -90,3 +104,23 @@ add_filter(
 require_once __DIR__ . '/customizer.php';
 
 require_once __DIR__ . '/login.php';
+
+add_action('admin_enqueue_scripts', static function ($screen) {
+    if (!in_array($screen, ['post.php', 'post-new.php'], true)) {
+        return;
+    }
+    $manifest = require __DIR__ . '/assets/manifest.php';
+    wp_enqueue_style(
+        'pagenest-content-preview',
+        get_theme_file_uri('assets/' . $manifest['content']),
+        [],
+        null,
+    );
+    wp_enqueue_script(
+        'pagenest-content-preview',
+        get_theme_file_uri('assets/' . $manifest['content_js']),
+        [],
+        null,
+        true,
+    );
+});

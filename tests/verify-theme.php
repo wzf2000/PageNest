@@ -29,7 +29,7 @@ class WP_Post
         $this->post_type = $type;
         $this->post_title = 'Synthetic article ' . $id;
         $this->post_content =
-            '<a id="legacy-heading"></a>' .
+            '<a id="legacy-heading"></a><table style="min-width:720px"><tr><th>Synthetic table</th><th>Second column</th></tr><tr><td>Example</td><td>Example</td></tr></table><span class="pagenest-exercise-hint">Synthetic answer hint</span>' .
             str_repeat(
                 '<h2>Reading <span class="mbb-math" data-mbb-tex="x^2">x squared</span><button aria-hidden="true">ignore</button> heading</h2><h3>Child heading</h3><h4>Deep heading</h4><p>Public synthetic content for theme layout verification.</p>',
                 6,
@@ -137,7 +137,6 @@ function get_option($key)
     return match ($key) {
         'page_for_posts' => $posts_page_id,
         'stylesheet' => 'pagenest',
-        'theme_mods_wzf-journal' => $legacy_mods ?? [],
         default => null,
     };
 }
@@ -326,12 +325,18 @@ function wp_login_url()
 function wp_head()
 {
     $manifest = require THEME . '/assets/manifest.php';
-    echo '<link rel="stylesheet" href="/assets/' . $manifest['css'] . '">';
+    echo '<link rel="stylesheet" href="/assets/' .
+        $manifest['css'] .
+        '"><link rel="stylesheet" href="/assets/' .
+        $manifest['content'] .
+        '">';
 }
 function wp_footer()
 {
     $manifest = require THEME . '/assets/manifest.php';
     echo '<script src="/assets/' .
+        $manifest['content_js'] .
+        '"></script><script src="/assets/' .
         $manifest['js'] .
         '"></script><script src="/assets/' .
         $manifest['reading'] .
@@ -365,62 +370,7 @@ function check($name, $value)
 require THEME . '/inc.php';
 require THEME . '/reading.php';
 require THEME . '/customizer.php';
-require THEME . '/legacy-migration.php';
-$legacy_mods = [
-    'wzfj_home_intro' => 'old',
-    'wzfj_footer_tagline' => 'old tagline',
-    'wzfj_home_eyebrow' => 'old eyebrow',
-    'wzfj_authors_intro' => 'old authors',
-    'wzfj_footer_owner' => 'legacy owner',
-    'nav_menu_locations' => ['wzfl_primary' => 17, 'legacy_footer' => 18],
-];
-$mods = [
-    'pagenest_home_intro' => '',
-    'pagenest_footer_tagline' => null,
-    'pagenest_home_eyebrow' => false,
-    'pagenest_authors_intro' => 'current',
-    'nav_menu_locations' => ['pagenest_primary' => 99, 'current_footer' => 100],
-];
-$old_theme = new class {
-    public function get_stylesheet()
-    {
-        return 'wzf-journal';
-    }
-};
-pagenest_migrate_legacy_theme('', $old_theme);
-check(
-    'legacy migration preserves empty null false current',
-    $mods['pagenest_home_intro'] === '' &&
-        $mods['pagenest_footer_tagline'] === null &&
-        $mods['pagenest_home_eyebrow'] === false &&
-        $mods['pagenest_authors_intro'] === 'current',
-);
-check('legacy migration fills absent setting', $mods['pagenest_footer_owner'] === 'legacy owner');
-check(
-    'legacy navigation fills only absent location',
-    $mods['nav_menu_locations'] === [
-        'pagenest_primary' => 99,
-        'current_footer' => 100,
-        'legacy_footer' => 18,
-    ],
-);
-$before = $mods;
-pagenest_migrate_legacy_theme('', $old_theme);
-check('switch back from legacy idempotent', $mods === $before);
-$mods = ['nav_menu_locations' => null];
-pagenest_migrate_legacy_theme('', $old_theme);
-check('explicit null navigation retained', $mods['nav_menu_locations'] === null);
 $mods = [];
-pagenest_migrate_legacy_theme('', $old_theme);
-check(
-    'initial legacy navigation mapping',
-    $mods['nav_menu_locations'] === [
-        'legacy_footer' => 18,
-        'pagenest_primary' => 17,
-    ],
-);
-$mods = [];
-$legacy_mods = [];
 $posts_page_id = 0;
 check(
     'posts URL without configured page avoids current permalink',

@@ -36,7 +36,12 @@ for (const width of [1440, 390]) {
           'ignore',
         );
         await expect(page.locator('.pagenest-article-body #legacy-heading')).toHaveCount(1);
-        await expect(page.locator('.pagenest-notes-slot')).toHaveCount(1);
+        await expect(page.locator('.pagenest-reading-panel')).toHaveCount(1);
+        await expect(page.locator('.pagenest-table-scroll > table')).toHaveCount(1);
+        await expect(page.locator('.pagenest-exercise-hint')).toHaveCSS(
+          'color',
+          'rgb(255, 255, 255)',
+        );
         await page
           .locator('.pagenest-toc summary')
           .evaluate((el) => (el.parentElement.open = true));
@@ -66,17 +71,19 @@ for (const width of [1440, 390]) {
           document.dispatchEvent(new Event('pagenest-integration-ready'));
           document.dispatchEvent(new Event('pagenest-integration-ready'));
         });
-        await expect(page.locator('.pagenest-nav-inner > .fixture-action')).toHaveCount(1);
-        await page.locator('.pagenest-notes-slot').evaluate((el) => {
+        await expect(page.locator('[data-pagenest-header-actions] > .fixture-action')).toHaveCount(
+          1,
+        );
+        await page.locator('.pagenest-reading-panel').evaluate((el) => {
           el.dataset.fixtureState = 'preserved';
           el.textContent = 'Extension state';
         });
         await page.setViewportSize({ width: width < 1024 ? 1440 : 390, height: 900 });
-        await expect(page.locator('.pagenest-notes-slot')).toHaveAttribute(
+        await expect(page.locator('.pagenest-reading-panel')).toHaveAttribute(
           'data-fixture-state',
           'preserved',
         );
-        await expect(page.locator('.pagenest-notes-slot')).toHaveText('Extension state');
+        await expect(page.locator('.pagenest-reading-panel')).toHaveText('Extension state');
         await page.setViewportSize({ width, height: 900 });
       }
       if (name === 'home-configured')
