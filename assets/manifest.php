@@ -5,5 +5,5 @@ return [
     'reading' => 'reading-15ad057e0b72.js',
     'login' => 'login-66d6c13a976e.css',
     'content' => 'content-bec328de0955.css',
-    'content_js' => 'content-923377e86128.js',
+    'content_js' => 'content-dba374d7f82b.js',
 ];

@@ -94,3 +94,41 @@ for (const width of [1440, 390]) {
     expect(errors).toEqual([]);
   });
 }
+
+for (const width of [1440, 390]) {
+  test(`configured aliases follow dynamic editor preview at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    const errors = [];
+    page.on('pageerror', (error) => errors.push(error.message));
+    await page.goto('/editor-preview.html');
+    const source = await page.locator('#source').inputValue();
+    await expect(page.locator('.editormd-preview-container .fixture-hint')).toHaveCSS(
+      'color',
+      'rgb(255, 255, 255)',
+    );
+    await expect(page.locator('#outside-preview')).not.toHaveClass(/pagenest-exercise-hint/);
+    await page.locator('.editormd-preview-container').evaluate((node) => {
+      node.innerHTML =
+        '<p><span class="fixture-hint">Dynamic hint</span><span class="fixture-invalid">Invalid mapping</span></p><table><tr><td>Dynamic table</td></tr></table>';
+    });
+    await expect(page.locator('.editormd-preview-container .fixture-hint')).toHaveClass(
+      'fixture-hint pagenest-exercise-hint',
+    );
+    await expect(page.locator('.editormd-preview-container .fixture-hint')).toHaveCSS(
+      'color',
+      'rgb(255, 255, 255)',
+    );
+    await expect(page.locator('.fixture-invalid')).toHaveClass('fixture-invalid');
+    await expect(page.locator('.pagenest-table-scroll > table')).toHaveCount(1);
+    await expect(page.locator('#source')).toHaveValue(source);
+    await page.evaluate(() => {
+      delete window.PageNestContentAliases;
+      document.querySelector('.editormd-preview-container').innerHTML =
+        '<span class="fixture-hint">No configuration</span>';
+    });
+    await expect(page.locator('.editormd-preview-container .fixture-hint')).toHaveClass(
+      'fixture-hint',
+    );
+    expect(errors).toEqual([]);
+  });
+}

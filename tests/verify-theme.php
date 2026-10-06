@@ -536,4 +536,11 @@ foreach ($manifest as $name) {
 foreach ($rendered as $name => $content) {
     file_put_contents($out . '/' . $name, $content);
 }
+$preview =
+    '<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/assets/' .
+    $manifest['content'] .
+    '"><div class="editormd"><textarea id="source">&lt;span class="fixture-hint"&gt;Unchanged source&lt;/span&gt;</textarea><div class="editormd-preview-container"><span class="fixture-hint">Initial hint</span></div></div><span class="fixture-hint" id="outside-preview">Outside preview</span><script>window.PageNestContentAliases={"fixture-hint":"pagenest-exercise-hint","fixture-invalid":"unsafe class"};</script><script src="/assets/' .
+    $manifest['content_js'] .
+    '"></script>';
+file_put_contents($out . '/editor-preview.html', $preview);
 echo count($checks) . " theme PHP checks passed\n";
