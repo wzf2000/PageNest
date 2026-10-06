@@ -6,7 +6,7 @@ A reading-focused WordPress theme for technical notes and thoughtful writing.
 
 ![WordPress 6.0+](https://img.shields.io/badge/WordPress-6.0%2B-21759b?style=flat-square) ![PHP 8.0+](https://img.shields.io/badge/PHP-8.0%2B-777bb4?style=flat-square) ![GPL-2.0-or-later](https://img.shields.io/badge/License-GPL--2.0--or--later-52796f?style=flat-square)
 
-[下载主题](https://github.com/wzf2000/PageNest/releases) · [更新记录](CHANGELOG.md) · [问题反馈](https://github.com/wzf2000/PageNest/issues)
+[下载主题](docs/RELEASING.md) · [更新记录](CHANGELOG.md) · [问题反馈](docs/RELEASING.md)
 
 ![PageNest 首页与专题预览](screenshot.png)
 
@@ -23,31 +23,31 @@ _预览采用合成演示内容；安装主题不会导入示例文章或站点�
 
 需要 **WordPress 6.0+、PHP 8.0+**，无需父主题。
 
-1. 从 [GitHub Releases](https://github.com/wzf2000/PageNest/releases) 下载发行附件中的 `pagenest-版本号.zip`。
+1. 从 [GitHub Releases](docs/RELEASING.md) 下载发行附件中的 `pagenest-版本号.zip`。
 2. 在后台 “外观 → 主题 → 安装主题 → 上传主题” 上传 ZIP，安装并启用。
 3. 分配 “全站主导航”，在 “外观 → 自定义 → 栖页首页设置” 配置背景、专题与作者。
 
 站点标题与 Logo 在 “站点身份” 中设置；下载时选择发行安装包，避免使用 Source code ZIP。
 
-> [完整安装、配置与旧版升级指南](https://github.com/wzf2000/PageNest/blob/main/docs/USAGE.md)
+> [完整安装、配置与旧版升级指南](docs/USAGE.md)
 
 ## 配置与搭配
 
 首页介绍支持换行。自定义器中的 “页脚信息”“交流区”“归档与关于链接” 用于配置站点文案和链接；“登录与注册” 调整登录页外观。图片由使用者自行上传并确认使用权。
 
-需要评论邮件通知、旧 Markdown 编辑器或公式兼容时，可安装独立的 [PageNest Compatibility](https://github.com/wzf2000/PageNest-Compatibility)。私人笔记、积分、点赞和社交登录需另行接入。
+PageNest Companion 提供评论邮件、章节链接、段落评论、点赞和编辑器兼容。主题只负责展示并提供标准扩展位置；经验和社交登录可独立接入。
 
-> [配置说明与阅读行为](https://github.com/wzf2000/PageNest/blob/main/docs/USAGE.md)
+> [配置说明与阅读行为](docs/USAGE.md)
 
 ## 更多文档
 
-> [使用指南](https://github.com/wzf2000/PageNest/blob/main/docs/USAGE.md) — 安装、首页配置、阅读与升级。
+> [使用指南](docs/USAGE.md) — 安装、首页配置、阅读与升级。
 >
-> [扩展接口](https://github.com/wzf2000/PageNest/blob/main/docs/EXTENDING.md) — 设置键、相关文章与阅读布局接入。
+> [扩展接口](docs/EXTENDING.md) — 设置键、相关文章与阅读布局接入。
 >
-> [贡献指南](https://github.com/wzf2000/PageNest/blob/main/CONTRIBUTING.md) — 本地开发、格式和检查。
+> [贡献指南](CONTRIBUTING.md) — 本地开发、格式和检查。
 >
-> [发行指南](https://github.com/wzf2000/PageNest/blob/main/docs/RELEASING.md) — CI、打包与 GitHub Release。
+> [发行指南](docs/RELEASING.md) — CI、打包与 GitHub Release。
 
 ## 许可证
 

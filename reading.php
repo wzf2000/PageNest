@@ -49,7 +49,11 @@ function pagenest_side($single = false)
     ?><aside class="pagenest-sidebar" aria-label="<?php echo $single
     ? '阅读导航'
     : '文章导航'; ?>"><?php if ($single): ?><div class="pagenest-reading-rail">
-        <div class="pagenest-notes-slot" hidden></div>
+        <div class="pagenest-reading-actions" data-pagenest-reading-actions><?php do_action(
+            'pagenest_reading_actions',
+            get_queried_object_id(),
+        ); ?></div>
+        <div class="pagenest-reading-panel" data-pagenest-reading-panel hidden></div>
         <details class="pagenest-toc" hidden open>
             <summary>本文目录</summary>
             <nav aria-label="本文目录"></nav>

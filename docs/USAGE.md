@@ -4,7 +4,7 @@
 
 要求 WordPress 6.0+、PHP 8.0+。
 
-1. 在 [GitHub Releases](https://github.com/wzf2000/PageNest/releases) 下载发行附件中的 `pagenest-版本号.zip`，选择安装包，而非 GitHub 自动生成的 Source code ZIP。
+1. 在 [GitHub Releases](RELEASING.md) 下载发行附件中的 `pagenest-版本号.zip`，选择安装包，而非 GitHub 自动生成的 Source code ZIP。
 2. 在 WordPress 后台打开 “外观 → 主题 → 安装主题 → 上传主题”，上传 ZIP，安装并启用。
 3. 在 “外观 → 菜单” 分配 “全站主导航”。站点标题与 Logo 在 “外观 → 自定义 → 站点身份” 配置。
 4. 在 “外观 → 自定义 → 栖页首页设置” 配置首页内容，发布后检查桌面和手机显示。
@@ -34,14 +34,10 @@
 
 主题支持文章、页面、归档、搜索、404、原生评论和密码保护。默认相关文章来自同分类的公开文章；开发者可通过 [扩展接口](EXTENDING.md) 调整。
 
-评论邮件通知、旧 Markdown 编辑器与公式兼容由独立的 [PageNest Compatibility](https://github.com/wzf2000/PageNest-Compatibility) 提供。私人笔记、积分、点赞、社交登录及其他站点工具需另行接入。
+评论邮件通知、旧 Markdown 编辑器与公式兼容由独立的 PageNest Companion 提供。配套插件提供段落评论、章节顺序和点赞；经验、社交登录及其他工具可独立接入。
 
 ## 升级与旧设置
 
 升级前备份文件和数据库。0.5 之后保持主题目录名 `pagenest`，使用发行安装包升级。
 
-从旧 0.4 主题升级时，自动设置迁移仅适用于由 `wzf-journal` 切换至 `pagenest`：切换钩子通过 `legacy-migration.php` 复制旧主题菜单、背景和自定义设置，补充缺失值，不覆盖已有 PageNest 设置。旧设置保留作为回退依据。其他主题或目录名不会触发这项迁移，应在自定义器中手动核对配置。
-
-旧站锚点与 `.wzf-reading` 样式仍由兼容层保留，供已有正文与永久链接继续使用。升级后检查导航、首页、文章目录、登录外观与已接入扩展。
-
-> [扩展接口](EXTENDING.md) · [贡献指南](../CONTRIBUTING.md) · [发行指南](RELEASING.md) · [返回项目首页](../README.md)
+旧主题的设置、菜单、正文类名与锚点可由 PageNest Companion 的显式外部兼容配置承接。主题自身不猜测旧标识，也不在加载时迁移设置。切换前核对插件的兼容配置；切换后检查导航、首页、目录、登录外观与扩展入口。

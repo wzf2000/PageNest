@@ -490,29 +490,39 @@ body.pagenest-site {
   overflow-wrap: anywhere;
 }
 .pagenest-toc-leaf {
-  padding-inline-start: 28px;
+  padding-inline-start: 22px;
 }
 .pagenest-toc-tree:not(.pagenest-toc-has-branches) > li > .pagenest-toc-leaf {
   padding-inline-start: 0;
 }
 .pagenest-toc-toggle {
-  flex: 0 0 28px;
-  width: 28px;
+  flex: 0 0 22px;
+  width: 22px;
   min-height: 34px;
+  display: grid;
+  place-items: center;
   padding: 0;
   border: 0;
+  border-radius: 4px;
   background: transparent;
   color: #596e82;
   cursor: pointer;
 }
+.pagenest-toc-toggle:hover {
+  background: #edf3f9;
+  color: #397bac;
+}
 .pagenest-toc-toggle::before {
-  content: '›';
-  display: inline-block;
-  font-size: 18px;
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
   transition: transform 0.15s;
 }
 .pagenest-toc-toggle[aria-expanded='true']::before {
-  transform: rotate(90deg);
+  transform: rotate(45deg);
 }
 .pagenest-toc-contains-current {
   background: #f2f6fa;
@@ -572,10 +582,10 @@ body.pagenest-site {
   padding: 28px 36px 36px;
   min-width: 0;
 }
-.pagenest-article-body :is(h1, h2, h3, h4, [data-llm-block]) {
+.pagenest-article-body :is(h1, h2, h3, h4, [data-pagenest-block]) {
   scroll-margin-top: 100px;
 }
-.admin-bar .pagenest-article-body :is(h1, h2, h3, h4, [data-llm-block]) {
+.admin-bar .pagenest-article-body :is(h1, h2, h3, h4, [data-pagenest-block]) {
   scroll-margin-top: 132px;
 }
 .pagenest-article-footer {
@@ -1429,41 +1439,6 @@ body.pagenest-site {
     font-size: 11px !important;
   }
 }
-.llmn-toolbar {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  padding: 12px 14px;
-  margin-bottom: 24px;
-  background: #eef5fa;
-  border: 1px solid #dbe7f0;
-  border-radius: 8px;
-}
-.llmn-toolbar button,
-.llmn-selection-action {
-  font: inherit;
-  font-size: 13px;
-  padding: 8px 12px;
-  border: 0;
-  border-radius: 6px;
-  background: #285f8f;
-  color: white;
-  cursor: pointer;
-}
-.llmn-toolbar span {
-  font-size: 12px;
-  line-height: 1.7;
-  color: #536d82;
-}
-.llmn-selection-action {
-  position: fixed;
-  z-index: 10000;
-  box-shadow: 0 3px 16px #1233;
-}
-.llmn-selection-action[hidden] {
-  display: none !important;
-}
 .pagenest-site .pagenest-page .mycred-rank.vcard {
   display: flex !important;
   align-items: center;
@@ -1640,7 +1615,7 @@ body.pagenest-site {
   .pagenest-site.admin-bar .pagenest-header {
     top: 46px;
   }
-  .pagenest-site.admin-bar .pagenest-article-body :is(h1, h2, h3, h4, [data-llm-block]) {
+  .pagenest-site.admin-bar .pagenest-article-body :is(h1, h2, h3, h4, [data-pagenest-block]) {
     scroll-margin-top: 142px;
   }
 }
@@ -1953,7 +1928,7 @@ summary {
   flex-direction: column;
   gap: 18px;
 }
-.pagenest-reading-rail > :is(.pagenest-toc, .pagenest-widget, .pagenest-notes-slot) {
+.pagenest-reading-rail > :is(.pagenest-toc, .pagenest-widget, .pagenest-reading-panel) {
   flex: none;
 }
 .pagenest-reading-rail .pagenest-toc {
@@ -1966,13 +1941,13 @@ summary {
   max-height: none;
   overflow: visible;
 }
-.pagenest-reading-rail .pagenest-notes-slot[hidden] {
+.pagenest-reading-rail .pagenest-reading-panel[hidden] {
   display: none !important;
 }
-.pagenest-reading-rail.llmn-show-notes > .pagenest-toc {
+.pagenest-reading-rail.pagenest-panel-active > .pagenest-toc {
   display: none !important;
 }
-.pagenest-reading-rail.llmn-show-notes > .pagenest-notes-slot {
+.pagenest-reading-rail.pagenest-panel-active > .pagenest-reading-panel {
   display: block;
 }
 .pagenest-reading-rail.pagenest-reading-short {
@@ -1980,7 +1955,7 @@ summary {
   max-height: none;
   overflow: visible;
 }
-.pagenest-article-body :is(h1, h2, h3, h4, h5, h6, [data-llm-block], a[id]:not([href])) {
+.pagenest-article-body :is(h1, h2, h3, h4, h5, h6, [data-pagenest-block], a[id]:not([href])) {
   scroll-margin-top: var(--pagenest-anchor-top, 100px) !important;
 }
 @media (max-width: 1023px) {
@@ -1990,7 +1965,14 @@ summary {
     overflow: visible;
     display: contents;
   }
-  .pagenest-reading-rail .pagenest-notes-slot {
+  .pagenest-reading-rail .pagenest-reading-panel {
     display: none !important;
   }
+}
+
+.pagenest-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
 }

@@ -20,10 +20,10 @@
   }
 
   function placeHeaderActions() {
-    const bar = document.querySelector('.pagenest-nav-inner');
+    const bar = document.querySelector('[data-pagenest-header-actions]');
     if (!bar) return;
     document.querySelectorAll('[data-pagenest-header-action]').forEach((action) => {
-      bar.insertBefore(action, bar.querySelector('.pagenest-menu-toggle'));
+      bar.append(action);
     });
   }
   placeHeaderActions();

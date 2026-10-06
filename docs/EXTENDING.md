@@ -30,7 +30,7 @@
 `pagenest-integration-ready` 事件后，按 DOM 顺序将它们放在顶栏菜单按钮前。
 属性值由扩展自行定义，事件无需 detail，可反复触发。
 现有 `.pagenest-notes-slot` 和 `pagenest-reading-layout` 事件供阅读扩展复用；主题不读取笔记数据。
-旧站点的锚点与 `.wzf-reading` 样式保留于兼容层，供已有正文与永久链接继续使用。
+主题提供 `pagenest_header_actions`、`pagenest_reading_actions` 动作及 `[data-pagenest-header-actions]`、`[data-pagenest-reading-panel]` DOM 位置。扩展可直接注册入口；没有配套插件时布局和目录正常工作。正文、表格滚动和题目提示分别使用 `pagenest-article-body`、`pagenest-table-scroll`、`pagenest-exercise-hint`；旧标识映射由配套插件的外部配置负责。
 
 `pagenest-reading-layout` 在阅读侧栏初始化与尺寸更新后于 document 上派发，无需 detail。扩展可监听它重新计算自己的布局；`.pagenest-notes-slot` 是默认隐藏的接入槽，扩展自行负责数据、权限和显示状态。
 

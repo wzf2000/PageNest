@@ -23,6 +23,10 @@ if (isset($brand_parts[1])) { ?><span class="pagenest-brand-note"><?php echo esc
     ' · ' . $brand_parts[1],
 ); ?></span><?php }
 ?></span></a>
+            <div class="pagenest-header-actions" data-pagenest-header-actions><?php do_action(
+                'pagenest_header_actions',
+                get_queried_object_id(),
+            ); ?></div>
             <button class="pagenest-menu-toggle" type="button" aria-expanded="false"
                 aria-controls="pagenest-nav">菜单 <span aria-hidden="true">☰</span></button>
             <nav id="pagenest-nav" aria-label="主导航"><?php
