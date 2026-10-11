@@ -4,7 +4,7 @@
 
 要求 WordPress 6.0+、PHP 8.0+。
 
-1. 在 [GitHub Releases](https://github.com/wzf2000/PageNest/releases) 下载发行附件中的 `pagenest-版本号.zip`，选择安装包，而非 GitHub 自动生成的 Source code ZIP。
+1. 在 仓库页面的 **Releases** 下载发行附件中的 `pagenest-版本号.zip`，选择安装包，而非 GitHub 自动生成的 Source code ZIP。
 2. 在 WordPress 后台打开 “外观 → 主题 → 安装主题 → 上传主题”，上传 ZIP，安装并启用。
 3. 在 “外观 → 菜单” 分配 “全站主导航”。站点标题与 Logo 在 “外观 → 自定义 → 站点身份” 配置。
 4. 在 “外观 → 自定义 → 栖页首页设置” 配置首页内容，发布后检查桌面和手机显示。

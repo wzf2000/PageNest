@@ -6,7 +6,7 @@ A reading-focused WordPress theme for technical notes and thoughtful writing.
 
 ![WordPress 6.0+](https://img.shields.io/badge/WordPress-6.0%2B-21759b?style=flat-square) ![PHP 8.0+](https://img.shields.io/badge/PHP-8.0%2B-777bb4?style=flat-square) ![GPL-2.0-or-later](https://img.shields.io/badge/License-GPL--2.0--or--later-52796f?style=flat-square)
 
-[下载主题](https://github.com/wzf2000/PageNest/releases) · [更新记录](CHANGELOG.md) · [问题反馈](https://github.com/wzf2000/PageNest/issues)
+[下载主题](docs/RELEASING.md) · [更新记录](CHANGELOG.md) · [问题反馈](docs/RELEASING.md#问题反馈)
 
 ![PageNest 首页与专题预览](screenshot.png)
 
@@ -23,7 +23,7 @@ _预览采用合成演示内容；安装主题不会导入示例文章或站点�
 
 需要 **WordPress 6.0+、PHP 8.0+**，无需父主题。
 
-1. 从 [GitHub Releases](https://github.com/wzf2000/PageNest/releases) 下载发行附件中的 `pagenest-版本号.zip`。
+1. 从 仓库页面的 **Releases** 下载发行附件中的 `pagenest-版本号.zip`。
 2. 在后台 “外观 → 主题 → 安装主题 → 上传主题” 上传 ZIP，安装并启用。
 3. 分配 “全站主导航”，在 “外观 → 自定义 → 栖页首页设置” 配置背景、专题与作者。
 
@@ -35,7 +35,7 @@ _预览采用合成演示内容；安装主题不会导入示例文章或站点�
 
 首页介绍支持换行。自定义器中的 “页脚信息”“交流区”“归档与关于链接” 用于配置站点文案和链接；“登录与注册” 调整登录页外观。图片由使用者自行上传并确认使用权。
 
-[PageNest Companion](https://github.com/wzf2000/PageNest-Compatibility) 提供段落评论与私人记录保护、章节导航、点赞、评论邮件、可选社交登录、内容导览及画廊／PDF 展示。主题提供顶栏与阅读栏扩展位置；经验与工具可独立接入。
+PageNest Companion 提供段落评论与私人记录保护、章节导航、点赞、评论邮件、可选社交登录、内容导览及画廊／PDF 展示。主题提供顶栏与阅读栏扩展位置；经验与工具可独立接入。
 
 > [配置说明与阅读行为](docs/USAGE.md)
 
