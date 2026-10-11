@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.0
+
+- 完成独立阅读主题的首个稳定主版本；保留原生自定义器、首页专题、响应式导航、目录、公式与正文展示。
+- 改善文章标题与作者分区、右栏目录控件、首页卡片和移动导航的层次、焦点与换行。
+- 与 Companion 的顶栏／阅读栏接口保持兼容；段落评论展开保持正文宽度与阅读位置。
+- 从 0.6.0 原位升级，保留主题目录、设置和内容，不导入演示资料；安装前备份并按实际插件组合验收。
+- Release the stable reading theme with refined article, sidebar, homepage and navigation presentation; retain existing settings and extension contracts.
+
 ## 0.6.0
 
 - 展示由主题负责；章节、段落评论、点赞和显式旧站配置由配套插件负责。
