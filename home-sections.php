@@ -6,8 +6,8 @@ function pagenest_home_topics(): void
 <section id="topics" class="pagenest-home-section" data-pagenest-home-module="topics">
     <div class="pagenest-section-heading">
         <div>
-            <p class="pagenest-eyebrow">探索专题</p>
-            <h2>从感兴趣的专题开始</h2>
+            <p class="pagenest-eyebrow"><?php echo esc_html__('Explore topics', 'pagenest'); ?></p>
+            <h2><?php echo esc_html__('Start with a topic that interests you', 'pagenest'); ?></h2>
         </div>
     </div>
     <div class="pagenest-topic-grid">
@@ -34,11 +34,14 @@ if (!empty($topic['description'])): ?><p class="pagenest-topic-description"><?ph
 if (!empty($topic['status'])): ?><small class="pagenest-topic-status"><?php echo esc_html(
     $topic['status'],
 ); ?></small><?php endif;
-?><span>浏览相关内容 →</span>
+?><span><?php echo esc_html__('Browse related content →', 'pagenest'); ?></span>
         </a>
         <?php
         endforeach;
-        if (!$topics): ?><p>专题正在整理，先浏览最新文章吧。</p><?php endif;?>
+        if (!$topics): ?><p><?php echo esc_html__(
+    'Topics are being organized. Browse the latest articles for now.',
+    'pagenest',
+); ?></p><?php endif;?>
     </div>
 </section>
 <?php
@@ -48,8 +51,8 @@ function pagenest_home_authors(): void
     ?>
 <section id="authors" class="pagenest-home-section pagenest-about" data-pagenest-home-module="authors">
     <div>
-        <p class="pagenest-eyebrow">共同记录</p>
-        <h2>作者们</h2>
+        <p class="pagenest-eyebrow"><?php echo esc_html__('Shared stories', 'pagenest'); ?></p>
+        <h2><?php echo esc_html__('Authors', 'pagenest'); ?></h2>
         <?php if ($intro = pagenest_setting('pagenest_authors_intro')): ?>
         <p><?php echo nl2br(esc_html($intro)); ?></p>
         <?php endif; ?>

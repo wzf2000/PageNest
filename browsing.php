@@ -4,12 +4,28 @@ defined('ABSPATH') || exit();
 function pagenest_home_modules(): array
 {
     return [
-        'topics' => ['title' => '专题', 'enabled' => true, 'order' => 10],
-        'latest' => ['title' => '最新文章', 'enabled' => true, 'order' => 20],
-        'authors' => ['title' => '作者', 'enabled' => true, 'order' => 30],
-        'featured' => ['title' => '精选文章', 'enabled' => false, 'order' => 40],
-        'updated' => ['title' => '最近更新', 'enabled' => false, 'order' => 50],
-        'destinations' => ['title' => '内容导览', 'enabled' => false, 'order' => 60],
+        'topics' => ['title' => __('Topics', 'pagenest'), 'enabled' => true, 'order' => 10],
+        'latest' => [
+            'title' => __('Latest articles', 'pagenest'),
+            'enabled' => true,
+            'order' => 20,
+        ],
+        'authors' => ['title' => __('Author', 'pagenest'), 'enabled' => true, 'order' => 30],
+        'featured' => [
+            'title' => __('Featured articles', 'pagenest'),
+            'enabled' => false,
+            'order' => 40,
+        ],
+        'updated' => [
+            'title' => __('Recently updated', 'pagenest'),
+            'enabled' => false,
+            'order' => 50,
+        ],
+        'destinations' => [
+            'title' => __('Content guide', 'pagenest'),
+            'enabled' => false,
+            'order' => 60,
+        ],
     ];
 }
 function pagenest_browsing_bool($value): bool
@@ -99,10 +115,12 @@ function pagenest_browsing_metadata(int $id): void
     $parts = [];
     if ($updated && get_post_modified_time('U', true, $post) > get_post_time('U', true, $post)) {
         $parts[] =
-            '<span>更新于 <time datetime="' .
+            '<span>' .
+            esc_html__('Updated on ', 'pagenest') .
+            '<time datetime="' .
             esc_attr(get_the_modified_date(DATE_W3C, $post)) .
             '">' .
-            esc_html(get_the_modified_date('Y年n月j日', $post)) .
+            esc_html(get_the_modified_date(__('F j, Y', 'pagenest'), $post)) .
             '</time></span>';
     }
     if ($duration && $post->post_content !== '') {
@@ -112,7 +130,15 @@ function pagenest_browsing_metadata(int $id): void
         $other = preg_replace('/[\p{Han}\p{Hiragana}\p{Katakana}\p{Hangul}]/u', ' ', $text);
         $words = preg_match_all('/[\p{L}\p{N}]+/u', $other ?? '');
         $minutes = max(1, (int) ceil(($cjk ?: 0) / 400 + ($words ?: 0) / 200));
-        $parts[] = '<span>约 ' . esc_html($minutes) . ' 分钟阅读</span>';
+        $parts[] =
+            '<span>' .
+            esc_html(
+                sprintf(
+                    _n('About %s minute to read', 'About %s minutes to read', $minutes, 'pagenest'),
+                    number_format_i18n($minutes),
+                ),
+            ) .
+            '</span>';
     }
     if ($parts) {
         echo '<div class="pagenest-reading-meta">' . implode('', $parts) . '</div>';
@@ -126,10 +152,10 @@ function pagenest_home_post_section(string $module): void
         return;
     }
     $labels = [
-        'latest' => ['最新记录', '最新文章'],
-        'updated' => ['持续整理', '最近更新'],
-        'featured' => ['推荐阅读', '精选文章'],
-        'destinations' => ['按主题探索', '内容导览'],
+        'latest' => [__('Recent entries', 'pagenest'), __('Latest articles', 'pagenest')],
+        'updated' => [__('Continuously updated', 'pagenest'), __('Recently updated', 'pagenest')],
+        'featured' => [__('Recommended reading', 'pagenest'), __('Featured articles', 'pagenest')],
+        'destinations' => [__('Explore by topic', 'pagenest'), __('Content guide', 'pagenest')],
     ];
     ?><section class="pagenest-home-section" data-pagenest-home-module="<?php echo esc_attr($module); ?>">
     <div class="pagenest-section-heading">
@@ -138,7 +164,7 @@ function pagenest_home_post_section(string $module): void
             <h2><?php echo esc_html($labels[$module][1]); ?></h2>
         </div><?php if ($module !== 'destinations'): ?><a href="<?php echo esc_url(
     pagenest_posts_url(),
-); ?>">全部文章 →</a><?php endif; ?>
+); ?>"><?php echo esc_html__('All articles →', 'pagenest'); ?></a><?php endif; ?>
     </div>
     <div class="<?php echo $module === 'destinations'
         ? 'pagenest-topic-grid'
@@ -152,11 +178,11 @@ foreach ($entries as $post) {
     $post->post_excerpt !== ''
 ): ?><p><?php echo esc_html(
     wp_strip_all_tags(strip_shortcodes($post->post_excerpt)),
-); ?></p><?php endif; ?><span>前往浏览 →</span>
+); ?></p><?php endif; ?><span><?php echo esc_html__('Explore →', 'pagenest'); ?></span>
         </a><?php
 }
 if (!$entries) {
-    echo '<p>还没有公开文章。</p>';
+    echo '<p>' . esc_html__('No public articles yet.', 'pagenest') . '</p>';
 }?></div>
 </section><?php
 }
@@ -171,10 +197,12 @@ add_action('wp_enqueue_scripts', static function (): void {
 });
 add_action('customize_register', static function ($customizer): void {
     $customizer->add_section('pagenest_home_composition', [
-        'title' => '模块与内容编排',
+        'title' => __('Modules and content order', 'pagenest'),
         'panel' => 'pagenest_home',
-        'description' =>
-            '站点介绍始终保留。模块顺序数值越小越靠前；相同时使用默认顺序。停用仅隐藏展示，保留配置和内容。',
+        'description' => __(
+            'The site introduction is always shown. Lower order numbers appear first; ties keep the default order. Disabling a module hides it while preserving settings and content.',
+            'pagenest',
+        ),
     ]);
     $register = static function (
         $id,
@@ -198,7 +226,7 @@ add_action('customize_register', static function ($customizer): void {
     foreach (pagenest_home_modules() as $key => $module) {
         $register(
             'pagenest_home_' . $key . '_enabled',
-            '显示' . $module['title'],
+            sprintf(__('Show %s', 'pagenest'), $module['title']),
             'checkbox',
             $module['enabled'],
             'pagenest_browsing_bool',
@@ -206,7 +234,7 @@ add_action('customize_register', static function ($customizer): void {
         );
         $register(
             'pagenest_home_' . $key . '_order',
-            $module['title'] . ' · 顺序',
+            sprintf(__('%s · Order', 'pagenest'), $module['title']),
             'number',
             $module['order'],
             'pagenest_browsing_order',
@@ -215,7 +243,7 @@ add_action('customize_register', static function ($customizer): void {
         );
     }
     foreach (['featured' => 'post', 'destinations' => 'page'] as $module => $type) {
-        $choices = [0 => '不展示'];
+        $choices = [0 => __('Hidden', 'pagenest')];
         $posts = get_posts([
             'post_type' => $type,
             'post_status' => 'publish',
@@ -237,7 +265,11 @@ add_action('customize_register', static function ($customizer): void {
         for ($slot = 0; $slot < 4; $slot++) {
             $register(
                 'pagenest_home_' . $module . '_' . $slot,
-                pagenest_home_modules()[$module]['title'] . ' · 位置 ' . ($slot + 1),
+                sprintf(
+                    __("%1\$s · Slot %2\$d", 'pagenest'),
+                    pagenest_home_modules()[$module]['title'],
+                    $slot + 1,
+                ),
                 'select',
                 0,
                 'pagenest_browsing_id',
@@ -246,37 +278,53 @@ add_action('customize_register', static function ($customizer): void {
                     'choices' => $choices,
                     'description' =>
                         $module === 'featured'
-                            ? '最近更新的 100 篇公开无密码文章及现有选择。'
-                            : '选择公开无密码页面作为系列、专题或工具入口；使用页面标题与手写摘要，不复制内容。',
+                            ? __(
+                                'The 100 most recently updated public, unprotected articles, plus current selections.',
+                                'pagenest',
+                            )
+                            : __(
+                                'Choose a public, unprotected page as a series, topic or tool entry. Its title and manual excerpt are used without copying content.',
+                                'pagenest',
+                            ),
                 ],
             );
             $customizer->add_control('pagenest_home_' . $module . '_' . $slot . '_id', [
                 'settings' => 'pagenest_home_' . $module . '_' . $slot,
                 'section' => 'pagenest_home_composition',
-                'label' => '位置 ' . ($slot + 1) . ' · 内容 ID（可选）',
-                'description' =>
-                    '也可填写编辑页面地址中 post= 后的 ID，以选择更早的内容；0 表示不展示。仅公开无密码且类型正确的内容有效。',
+                'label' => sprintf(__('Slot %d · Content ID (optional)', 'pagenest'), $slot + 1),
+                'description' => __(
+                    'Enter the ID after post= in the edit URL to select older content; 0 hides this slot. Only public, unprotected content of the correct type is eligible.',
+                    'pagenest',
+                ),
                 'type' => 'number',
                 'input_attrs' => ['min' => 0, 'step' => 1],
             ]);
         }
     }
-    $customizer->add_section('pagenest_browsing', ['title' => '列表与文章展示', 'priority' => 31]);
+    $customizer->add_section('pagenest_browsing', [
+        'title' => __('Lists and articles', 'pagenest'),
+        'priority' => 31,
+    ]);
     $register(
         'pagenest_list_style',
-        '列表样式',
+        __('List style', 'pagenest'),
         'select',
         'standard',
         'pagenest_list_style',
         'pagenest_browsing',
-        ['choices' => ['standard' => '标准卡片', 'compact' => '紧凑列表']],
+        [
+            'choices' => [
+                'standard' => __('Standard cards', 'pagenest'),
+                'compact' => __('Compact list', 'pagenest'),
+            ],
+        ],
     );
     foreach (
         [
-            'pagenest_list_covers' => ['显示列表封面', true],
-            'pagenest_article_cover' => ['显示文章大封面', true],
-            'pagenest_show_updated' => ['显示更新日期', false],
-            'pagenest_show_reading_time' => ['显示估算阅读时长', false],
+            'pagenest_list_covers' => [__('Show list covers', 'pagenest'), true],
+            'pagenest_article_cover' => [__('Show article cover', 'pagenest'), true],
+            'pagenest_show_updated' => [__('Show updated date', 'pagenest'), false],
+            'pagenest_show_reading_time' => [__('Show estimated reading time', 'pagenest'), false],
         ]
         as $id => $field
     ) {

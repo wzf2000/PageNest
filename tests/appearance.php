@@ -1,6 +1,7 @@
 <?php
 /** No WordPress database or network: exercise the CSS output trust boundary. */
 define('ABSPATH', __DIR__);
+require __DIR__ . '/i18n-stubs.php';
 $appearance_mods = [];
 $appearance_hooks = [];
 $appearance_styles = [];

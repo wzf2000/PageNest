@@ -51,3 +51,19 @@
 `pagenest_card($id, $context = 'list')` 可传 `home` 保留首页卡片布局；列表预设为 `pagenest_list_style`，其余布尔项为 `pagenest_list_covers`、`pagenest_article_cover`、`pagenest_show_updated`、`pagenest_show_reading_time`。这些选项仅影响展示，不修改原文章／附件关系。
 
 `reader-preferences.php` 在现有 `pagenest_reading_actions` 输出独立控件。脚本只移动自有节点，局部 data 属性和 CSS 变量不改变目录、正文锚点或评论槽协议。`pagenest-reader-preferences-v1` 本地存储只接受版本 1 与字号／宽度／配色白名单，无服务端同步；插件不可将其当作授权、身份或业务设置。
+
+## 配置中心与样板（1.2 开发候选）
+
+`product.php` 注册原生 Appearance 配置页及 `pagenest` 区块样板分类。样板名称为 `pagenest/topic-introduction`、`pagenest/resource-cards` 和 `pagenest/article-outline`，只使用 core 区块；不绑定站点内容 ID。子主题或插件可通过 WordPress 原生样板 API 增加自己的样板。
+
+视觉迁移格式固定为 `{"format":"pagenest-appearance","version":1,"settings":{}}`。白名单由 `pagenest_product_schema()` 从现有视觉定义派生，只含配色、background/text/accent 和六项数值。导入先完整校验，再单次更新当前 stylesheet 的 theme mods option；保留所有未知既有 theme mods，不运行重置或迁移。纯 JSON 校验和写入函数只用于已鉴权后台处理器，不是公开 API；扩展不得跳过权限与 nonce 检查。
+
+资源诊断仅检查包内固定清单键，不接受请求提供的路径；要求哈希文件存在、文件名哈希匹配并与相应资源源文件一致。失败显示诊断状态，不自动修改资源。Companion 接口只通过 `function_exists()` 探测，不读取其私有配置。
+
+主题翻译放在 `languages/`，PHP 与脚本均使用 WordPress 翻译机制；新增界面文案使用 `pagenest` 文本域并在输出处转义。不要翻译持久设置键、API 路径、事件名称或内容锚点。
+
+### 主题翻译
+
+界面使用英文 gettext 原文与 `pagenest` 文本域，`after_setup_theme` 加载 `languages/`，现有站长文案与正文不经过 gettext。小型浏览器脚本通过 `wp_localize_script` 接收翻译，不新增运行依赖。新增 PHP 文案用字面量 `__`／转义变体；计数用 `_n`，可变内容使用完整句子和编号占位符。主题 JSON 名称、归档模板名及主题描述也进入提取清单。
+
+`npm run i18n` 提取 POT 并编译 `zh_CN.po` 为确定性 MO；`npm run i18n:check` 检查覆盖率、复数、占位符和已提交产物，已接入 `npm test`。修改 PHP 后需重新提取引用行号；新增原文需先在 PO 中补齐翻译。工具仅依赖 PHP 与 Python 标准库，不要求站点安装翻译插件。其他语言可使用标准 gettext 工具和 WordPress 语言包位置。

@@ -1,6 +1,7 @@
 <?php
 /** Synthetic WordPress fixture: no database, accounts, cookies, or network writes. */
 define('ABSPATH', __DIR__);
+require __DIR__ . '/i18n-stubs.php';
 const THEME = __DIR__ . '/..';
 $mods = [];
 $filters = [];
@@ -364,7 +365,8 @@ function get_adjacent_post(...$args)
 }
 function language_attributes()
 {
-    echo 'lang="zh-CN"';
+    global $fixture_locale;
+    echo $fixture_locale === 'zh_CN' ? 'lang="zh-CN"' : 'lang="en-US"';
 }
 function body_class()
 {
@@ -462,6 +464,19 @@ function wp_head()
 }
 function wp_footer()
 {
+    $names = [
+        'pagenest-content' => 'pagenestContentL10n',
+        'pagenest-reading' => 'pagenestReadingL10n',
+        'pagenest-discovery' => 'pagenestDiscoveryL10n',
+        'pagenest-reader-preferences' => 'pagenestReaderL10n',
+    ];
+    foreach (pagenest_script_translations() as $handle => $strings) {
+        echo '<script>window.' .
+            $names[$handle] .
+            '=' .
+            json_encode($strings, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) .
+            ';</script>';
+    }
     $manifest = require THEME . '/assets/manifest.php';
     foreach (['content_js', 'js', 'reading', 'discovery_js', 'reader_preferences_js'] as $key) {
         echo '<script src="/assets/' . $manifest[$key] . '"></script>';
@@ -492,6 +507,7 @@ function check($name, $value)
         throw new RuntimeException($name);
     }
 }
+require THEME . '/i18n.php';
 require THEME . '/inc.php';
 require THEME . '/reading.php';
 require THEME . '/appearance.php';
@@ -690,6 +706,34 @@ foreach (
 }
 $_GET = [];
 require __DIR__ . '/browsing-fixtures.php';
+$fixture_locale = 'en_US';
+$mods = [];
+$current = 1001;
+$rendered['article-english.html'] = render('singular.php');
+$rendered['home-english.html'] = render('front-page.php');
+$fixture_search = true;
+$rendered['search-english.html'] = render('index.php');
+$fixture_search = false;
+check(
+    'English native messages',
+    str_contains($rendered['home-english.html'], 'Browse articles') &&
+        !str_contains($rendered['home-english.html'], '探索专题'),
+);
+$mods = ['pagenest_home_intro' => '保留管理员自己的文案', 'pagenest_footer_tagline' => ''];
+check(
+    'Saved copy and intentional blank not translated',
+    pagenest_setting('pagenest_home_intro') === '保留管理员自己的文案' &&
+        pagenest_setting('pagenest_footer_tagline') === '',
+);
+check(
+    'English plurals',
+    pagenest_comment_count(1) === '1 comment' && pagenest_comment_count(2) === '2 comments',
+);
+$fixture_locale = 'zh_CN';
+check(
+    'Chinese catalog plurals',
+    pagenest_comment_count(1) === '1 条评论' && pagenest_comment_count(2) === '2 条评论',
+);
 $out = THEME . '/.runtime/frontend';
 if (!is_dir($out)) {
     mkdir($out, 0777, true);

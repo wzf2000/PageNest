@@ -7,7 +7,8 @@ module.exports = defineConfig({
   testMatch: '*.spec.cjs',
   use: { baseURL: 'http://127.0.0.1:18779', trace: 'retain-on-failure' },
   webServer: {
-    command: 'php tests/verify-theme.php && php -S 127.0.0.1:18779 -t .runtime/frontend',
+    command:
+      'php tests/verify-theme.php && php tests/product.php && php -S 127.0.0.1:18779 -t .runtime/frontend',
     url: 'http://127.0.0.1:18779/home-configured.html',
     reuseExistingServer: false,
   },

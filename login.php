@@ -2,7 +2,10 @@
 defined('ABSPATH') || exit();
 function pagenest_login_notice_default()
 {
-    return '欢迎登录。你可以使用邮箱注册；如需帮助，请联系本站管理员。';
+    return __(
+        'Welcome. You can register with your email address. Contact the site administrator if you need help.',
+        'pagenest',
+    );
 }
 add_filter('login_body_class', static function ($classes) {
     $classes[] = 'pagenest-login';
@@ -30,7 +33,11 @@ add_filter('login_message', static function ($message) {
         return $message;
     }
     $links = get_option('users_can_register')
-        ? '<p><a href="' . esc_url(wp_registration_url()) . '">使用邮箱注册</a></p>'
+        ? '<p><a href="' .
+            esc_url(wp_registration_url()) .
+            '">' .
+            esc_html__('Register with email', 'pagenest') .
+            '</a></p>'
         : '';
     return $message .
         '<div class="pagenest-login-notice">' .

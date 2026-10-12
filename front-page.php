@@ -11,9 +11,15 @@
             <?php endif; ?>
             <div class="pagenest-hero-actions"><a class="pagenest-button" href="<?php echo esc_url(
                 pagenest_posts_url(),
-            ); ?>">浏览文章 <span aria-hidden="true">→</span></a><?php if (
-    in_array('topics', pagenest_home_order(), true)
-): ?><a href="#topics">探索专题</a><?php endif; ?></div>
+            ); ?>"><?php echo esc_html__(
+    'Browse articles',
+    'pagenest',
+); ?> <span aria-hidden="true">→</span></a><?php if (
+     in_array('topics', pagenest_home_order(), true)
+ ): ?><a href="#topics"><?php echo esc_html__(
+    'Explore topics',
+    'pagenest',
+); ?></a><?php endif; ?></div>
         </div>
     </section>
     <?php foreach (pagenest_home_order() as $module) {

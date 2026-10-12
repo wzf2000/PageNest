@@ -1,5 +1,14 @@
 (() => {
   'use strict';
+  const l10n = {
+    uploadImage: 'Upload image',
+    body: 'Article body',
+    toggleHeading: 'Expand or collapse: %s',
+    expandAll: 'Expand all',
+    collapseAll: 'Collapse all',
+    currentPosition: 'Contains the current reading position',
+    ...window.pagenestReadingL10n,
+  };
   document.querySelectorAll('.pagenest-comment-avatar img').forEach((img) => {
     const fallback = () => {
       img.hidden = true;
@@ -13,7 +22,7 @@
       commentArea.querySelectorAll('.chevereto-pup-button').forEach((b) => {
         b.type = 'button';
         const label = b.querySelector('.chevereto-pup-button-text');
-        if (label && label.textContent !== '上传图片') label.textContent = '上传图片';
+        if (label && label.textContent !== l10n.uploadImage) label.textContent = l10n.uploadImage;
       });
     labelUploads();
     new MutationObserver(labelUploads).observe(commentArea, { childList: true, subtree: true });
@@ -80,7 +89,7 @@
         row.className = 'pagenest-toc-row';
         const a = document.createElement('a');
         a.href = '#' + encodeURIComponent(h.id);
-        if (h === body) a.textContent = '正文';
+        if (h === body) a.textContent = l10n.body;
         else appendHeadingLabel(a, h);
         row.append(a);
         item.append(row);
@@ -104,7 +113,10 @@
         const toggle = document.createElement('button');
         toggle.type = 'button';
         toggle.className = 'pagenest-toc-toggle';
-        toggle.setAttribute('aria-label', '展开或收起：' + entry.heading.textContent.trim());
+        toggle.setAttribute(
+          'aria-label',
+          l10n.toggleHeading.replace('%s', () => entry.heading.textContent.trim()),
+        );
         toggle.setAttribute('aria-controls', entry.children.id);
         entry.toggle = toggle;
         entry.row.prepend(toggle);
@@ -120,8 +132,8 @@
         const controls = document.createElement('div');
         controls.className = 'pagenest-toc-controls';
         [
-          ['展开全部', true],
-          ['收起全部', false],
+          [l10n.expandAll, true],
+          [l10n.collapseAll, false],
         ].forEach(([label, expanded]) => {
           const button = document.createElement('button');
           button.type = 'button';
@@ -196,7 +208,7 @@
         }
         if (visible !== entries[active]) {
           visible.row.classList.add('pagenest-toc-contains-current');
-          visible.toggle.title = '包含当前阅读位置';
+          visible.toggle.title = l10n.currentPosition;
         }
       };
       addEventListener(

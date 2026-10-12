@@ -1,4 +1,11 @@
 (() => {
+  const l10n = {
+    reset: 'Site defaults restored.',
+    saved: 'Reading preferences saved.',
+    resetUnsaved: 'Site defaults restored; browser storage is unavailable.',
+    unsaved: 'Applied to this page; browser storage is unavailable.',
+    ...window.pagenestReaderL10n,
+  };
   const controls = document.querySelector('[data-pagenest-reader-preferences]');
   const article = document.querySelector('.pagenest-reading-grid .pagenest-article');
   if (!controls || !article) return;
@@ -37,11 +44,9 @@
     try {
       if (reset) localStorage.removeItem(key);
       else localStorage.setItem(key, JSON.stringify({ version: 1, preferences }));
-      status.textContent = reset ? '已恢复站点默认。' : '阅读偏好已保存。';
+      status.textContent = reset ? l10n.reset : l10n.saved;
     } catch {
-      status.textContent = reset
-        ? '已恢复站点默认；浏览器不允许保存。'
-        : '已应用；浏览器不允许保存，仅本页生效。';
+      status.textContent = reset ? l10n.resetUnsaved : l10n.unsaved;
     }
   };
   controls.addEventListener('change', (event) => {

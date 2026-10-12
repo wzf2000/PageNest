@@ -107,6 +107,10 @@ class ReleaseGuards(unittest.TestCase):
             "modules/feature.php": "<?php // synthetic module\n",
             "assets/feature.js": "void 0;\n",
             "assets/development.txt": "excluded\n",
+            "languages/pagenest.pot": "synthetic catalog\n",
+            "languages/zh_CN.po": "synthetic translation\n",
+            "languages/zh_CN.mo": "synthetic binary catalog\n",
+            "languages/private.json": "excluded\n",
             "docs/USAGE.md": "Synthetic usage\n",
             "docs/assets/overview.svg": "<svg/>\n",
         }.items():
@@ -130,6 +134,9 @@ class ReleaseGuards(unittest.TestCase):
             self.assertIn(f"{slug}/assets/feature.js", archive.namelist())
             self.assertIn(f"{slug}/docs/assets/overview.svg", archive.namelist())
             self.assertNotIn(f"{slug}/assets/development.txt", archive.namelist())
+            for name in ["pagenest.pot", "zh_CN.po", "zh_CN.mo"]:
+                self.assertIn(f"{slug}/languages/{name}", archive.namelist())
+            self.assertNotIn(f"{slug}/languages/private.json", archive.namelist())
         (self.root / "modules/feature.php").write_text("<?php // dirty nested module\n")
         result = self.run_tool(ok=False)
         self.assertIn("Uncommitted installation source", result.stderr)

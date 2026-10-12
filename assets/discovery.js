@@ -1,5 +1,12 @@
 (() => {
   'use strict';
+  const l10n = {
+    loading: 'Searching…',
+    results: 'Suggestions: %s. Submit your search for all results.',
+    empty: 'No suggestions found. Try another keyword or submit your search.',
+    unavailable: 'Suggestions are unavailable. Press Enter to continue searching.',
+    ...window.pagenestDiscoveryL10n,
+  };
   const panel = document.querySelector('.pagenest-header-search');
   panel?.addEventListener('toggle', () => {
     if (panel.open) panel.querySelector('input')?.focus();
@@ -38,7 +45,7 @@
         controller = new AbortController();
         const requestController = controller;
         const timeout = setTimeout(() => requestController.abort(), 8000);
-        status.textContent = '正在查找…';
+        status.textContent = l10n.loading;
         try {
           const url = new URL(form.dataset.pagenestSearchEndpoint, location.href);
           if (url.origin !== location.origin) throw new Error('Invalid search origin');
@@ -68,10 +75,10 @@
           });
           results.hidden = !results.childElementCount;
           status.textContent = results.childElementCount
-            ? `找到 ${results.childElementCount} 条建议，可提交搜索查看完整结果。`
-            : '没有匹配建议，试试其他关键词或提交完整搜索。';
+            ? l10n.results.replace('%s', () => String(results.childElementCount))
+            : l10n.empty;
         } catch (error) {
-          if (turn === generation) status.textContent = '暂时无法获取建议，可按回车继续搜索。';
+          if (turn === generation) status.textContent = l10n.unavailable;
         } finally {
           clearTimeout(timeout);
         }

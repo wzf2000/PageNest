@@ -69,7 +69,7 @@ function pagenest_appearance_numbers()
 {
     return [
         'font-size' => [
-            'label' => '全站基础字号（px）',
+            'label' => __('Base font size (px)', 'pagenest'),
             'default' => 16,
             'min' => 14,
             'max' => 20,
@@ -77,7 +77,7 @@ function pagenest_appearance_numbers()
             'unit' => 'px',
         ],
         'reading-size' => [
-            'label' => '正文字号（px）',
+            'label' => __('Article font size (px)', 'pagenest'),
             'default' => 17,
             'min' => 15,
             'max' => 24,
@@ -85,7 +85,7 @@ function pagenest_appearance_numbers()
             'unit' => 'px',
         ],
         'reading-line-height' => [
-            'label' => '正文行高',
+            'label' => __('Article line height', 'pagenest'),
             'default' => 1.9,
             'min' => 1.5,
             'max' => 2.2,
@@ -93,7 +93,7 @@ function pagenest_appearance_numbers()
             'unit' => '',
         ],
         'spacing' => [
-            'label' => '间距比例',
+            'label' => __('Spacing scale', 'pagenest'),
             'default' => 1,
             'min' => 0.8,
             'max' => 1.2,
@@ -101,7 +101,7 @@ function pagenest_appearance_numbers()
             'unit' => '',
         ],
         'radius' => [
-            'label' => '卡片圆角（px）',
+            'label' => __('Card corner radius (px)', 'pagenest'),
             'default' => 12,
             'min' => 0,
             'max' => 24,
@@ -109,7 +109,7 @@ function pagenest_appearance_numbers()
             'unit' => 'px',
         ],
         'container' => [
-            'label' => '全站最大宽度（px）',
+            'label' => __('Maximum site width (px)', 'pagenest'),
             'default' => 1240,
             'min' => 1040,
             'max' => 1440,
@@ -191,8 +191,11 @@ function pagenest_appearance_css()
 function pagenest_register_appearance_customizer($wp_customize)
 {
     $wp_customize->add_section('pagenest_appearance', [
-        'title' => '全站视觉设置',
-        'description' => '统一全站与正文预览的颜色和阅读尺寸。自定义颜色留空时使用所选配色。',
+        'title' => __('Site appearance', 'pagenest'),
+        'description' => __(
+            'Share colors and reading dimensions across the site and editor preview. Leave custom colors empty to use the selected palette.',
+            'pagenest',
+        ),
         'priority' => 31,
     ]);
     $wp_customize->add_setting('pagenest_appearance_preset', [
@@ -202,13 +205,21 @@ function pagenest_register_appearance_customizer($wp_customize)
         'transport' => 'refresh',
     ]);
     $wp_customize->add_control('pagenest_appearance_preset', [
-        'label' => '协调配色',
+        'label' => __('Color palette', 'pagenest'),
         'section' => 'pagenest_appearance',
         'type' => 'select',
-        'choices' => ['default' => '默认', 'warm' => '暖纸', 'forest' => '森林'],
+        'choices' => [
+            'default' => __('Default', 'pagenest'),
+            'warm' => __('Warm paper', 'pagenest'),
+            'forest' => __('Forest', 'pagenest'),
+        ],
     ]);
     foreach (
-        ['background' => '全站背景', 'text' => '正文颜色', 'accent' => '链接与按钮颜色']
+        [
+            'background' => __('Site background', 'pagenest'),
+            'text' => __('Text color', 'pagenest'),
+            'accent' => __('Link and button color', 'pagenest'),
+        ]
         as $key => $label
     ) {
         $id = 'pagenest_appearance_' . $key;

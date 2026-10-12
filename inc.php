@@ -11,17 +11,26 @@ function pagenest_posts_url(): string
 function pagenest_setting_defaults(): array
 {
     return [
-        'pagenest_home_eyebrow' => '记录 · 分享 · 探索',
-        'pagenest_home_intro' => "记录想法与发现。\n在这里整理思路，分享探索的过程。",
-        'pagenest_authors_intro' => "不同的兴趣，共同的记录。\n认识在这里分享故事与经验的作者。",
-        'pagenest_footer_tagline' => '让知识与思考安放于页间',
-        'pagenest_community_description' => '欢迎在文章评论区交流想法与建议。',
-        'pagenest_community_link_label' => '更多内容',
+        'pagenest_home_eyebrow' => __('Write · Share · Explore', 'pagenest'),
+        'pagenest_home_intro' => __(
+            "Record ideas and discoveries.\nOrganize your thoughts and share your explorations here.",
+            'pagenest',
+        ),
+        'pagenest_authors_intro' => __(
+            "Different interests, shared stories.\nMeet the authors sharing their experiences here.",
+            'pagenest',
+        ),
+        'pagenest_footer_tagline' => __('A home for knowledge and ideas', 'pagenest'),
+        'pagenest_community_description' => __(
+            'Share your thoughts and suggestions in the article comments.',
+            'pagenest',
+        ),
+        'pagenest_community_link_label' => __('More content', 'pagenest'),
         'pagenest_community_link_url' => '',
-        'pagenest_archive_link_label' => '归档',
-        'pagenest_community_archive_label' => '完整归档 →',
+        'pagenest_archive_link_label' => __('Archive', 'pagenest'),
+        'pagenest_community_archive_label' => __('Full archive →', 'pagenest'),
         'pagenest_archive_link_url' => pagenest_posts_url(),
-        'pagenest_about_link_label' => '关于',
+        'pagenest_about_link_label' => __('About', 'pagenest'),
         'pagenest_about_link_url' => home_url('/') . '#authors',
     ];
 }
@@ -100,9 +109,10 @@ function pagenest_card(int $id, string $context = 'list'): void
 ]); ?></a><?php endif; ?>
     <div class="pagenest-entry-body">
         <div class="pagenest-entry-labels"><?php
-        if (
-            $post->post_status === 'private'
-        ): ?><span class="pagenest-badge">私密</span><?php endif;
+        if ($post->post_status === 'private'): ?><span class="pagenest-badge"><?php echo esc_html__(
+    'Private',
+    'pagenest',
+); ?></span><?php endif;
         if ($categories): ?><a href="<?php echo esc_url(
     get_category_link($categories[0]),
 ); ?>"><?php echo esc_html($categories[0]->name); ?></a><?php endif;
@@ -112,7 +122,7 @@ function pagenest_card(int $id, string $context = 'list'): void
         ); ?>"><?php echo esc_html($post->post_title); ?></a></h2>
         <p class="pagenest-excerpt"><?php echo esc_html(
             post_password_required($post)
-                ? '这篇文章需要密码才能阅读。'
+                ? __('This article requires a password.', 'pagenest')
                 : mb_strimwidth(
                     preg_replace(
                         '/\s+/u',
@@ -140,7 +150,7 @@ function pagenest_card(int $id, string $context = 'list'): void
                     ); ?>"><?php echo esc_html(get_the_author_meta('display_name', $post->post_author)); ?></a><time
                     datetime="<?php echo esc_attr(
                         get_the_date(DATE_W3C, $id),
-                    ); ?>"><?php echo esc_html(get_the_date('Y年n月j日', $id)); ?></time>
+                    ); ?>"><?php echo esc_html(get_the_date(__('F j, Y', 'pagenest'), $id)); ?></time>
             </div>
         </div>
     </div>
@@ -162,7 +172,7 @@ function pagenest_author($id = null, $compact = false)
             ); ?>"><?php echo esc_html(get_the_author_meta('display_name', $author)); ?></a><time
             datetime="<?php echo esc_attr(
                 get_the_date(DATE_W3C, $id),
-            ); ?>"><?php echo esc_html(get_the_date('Y年n月j日', $id)); ?></time>
+            ); ?>"><?php echo esc_html(get_the_date(__('F j, Y', 'pagenest'), $id)); ?></time>
     </div>
 </div><?php
 }
