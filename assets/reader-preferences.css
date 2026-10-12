@@ -4,10 +4,10 @@
 .pagenest-reader-preferences {
   width: 100%;
   box-sizing: border-box;
-  border: 1px solid var(--pagenest-border, #e1e7ee);
+  border: 1px solid var(--pagenest-border, #e1e5df);
   border-radius: var(--pagenest-radius, 12px);
   background: var(--pagenest-surface, #fff);
-  color: var(--pagenest-text, #303b4a);
+  color: var(--pagenest-text, #293630);
   font-size: 14px;
 }
 .pagenest-reader-preferences summary {
@@ -31,13 +31,13 @@
   width: 100%;
   min-width: 0;
   padding: 8px;
-  border: 1px solid var(--pagenest-border, #e1e7ee);
+  border: 1px solid var(--pagenest-border, #e1e5df);
   border-radius: 6px;
   color: inherit;
   background: var(--pagenest-surface, #fff);
 }
 .pagenest-reader-preferences :is(summary, select, button):focus-visible {
-  outline: 2px solid var(--pagenest-content-link, #2266a5);
+  outline: 2px solid var(--pagenest-content-link, #426354);
   outline-offset: 2px;
 }
 .pagenest-reader-options p,

@@ -5,6 +5,7 @@ if (!defined('ABSPATH')) {
 require_once __DIR__ . '/i18n.php';
 require_once __DIR__ . '/inc.php';
 require_once __DIR__ . '/product.php';
+require_once __DIR__ . '/design.php';
 require_once __DIR__ . '/reading.php';
 require_once __DIR__ . '/appearance.php';
 require_once __DIR__ . '/discovery.php';

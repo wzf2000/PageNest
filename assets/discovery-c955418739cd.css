@@ -1,0 +1,108 @@
+.pagenest-header-search {
+  position: relative;
+  margin-inline-start: auto;
+}
+.pagenest-header-search > summary {
+  cursor: pointer;
+  color: var(--pagenest-accent, #426354);
+  padding: 8px;
+  white-space: nowrap;
+}
+.pagenest-search-popover {
+  position: absolute;
+  inset-inline-end: 0;
+  top: calc(100% + 12px);
+  width: min(440px, calc(100vw - 32px));
+  padding: 20px;
+  border: 1px solid var(--pagenest-border, #e1e5df);
+  border-radius: var(--pagenest-radius, 12px);
+  background: var(--pagenest-surface, #fff);
+  box-shadow: 0 10px 32px rgb(24 50 77 / 14%);
+  max-height: 75vh;
+  overflow: auto;
+  z-index: 1001;
+}
+.pagenest-site .pagenest-search {
+  display: block;
+}
+.pagenest-site .pagenest-search .pagenest-search-input-row {
+  display: flex;
+  gap: 8px;
+}
+.pagenest-search input {
+  min-width: 0;
+  flex: 1;
+}
+.pagenest-site .pagenest-search .pagenest-search-filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+.pagenest-search-filters select {
+  min-height: 36px;
+  max-width: 100%;
+  border: 1px solid var(--pagenest-border, #e1e5df);
+  border-radius: 4px;
+  padding: 4px 8px;
+  background: var(--pagenest-surface, #fff);
+  color: var(--pagenest-text, #293630);
+  font: inherit;
+}
+.pagenest-search-status {
+  font-size: 13px;
+  color: var(--pagenest-muted, #69736b);
+  margin: 8px 0;
+}
+.pagenest-search-status:empty {
+  display: none;
+}
+.pagenest-search-suggestions {
+  padding: 0;
+  margin: 12px 0 0;
+  list-style: none;
+}
+.pagenest-search-suggestions li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  border-top: 1px solid var(--pagenest-border, #e1e5df);
+  padding: 10px 0;
+}
+.pagenest-search-suggestions a {
+  flex: 1;
+  overflow-wrap: anywhere;
+}
+.pagenest-search-suggestions small {
+  flex: none;
+  color: var(--pagenest-muted, #69736b);
+}
+.pagenest-discovery-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+.pagenest-discovery-links a {
+  padding: 4px 10px;
+  background: var(--pagenest-soft, #eef1eb);
+  border-radius: 4px;
+  font-size: 14px;
+}
+.pagenest-search-page {
+  margin-bottom: 24px;
+  max-width: 720px;
+}
+@media (max-width: 1023px) {
+  .pagenest-header-search {
+    position: static;
+  }
+  .pagenest-search-popover {
+    inset-inline: 16px;
+    top: 100%;
+    width: auto;
+  }
+  .pagenest-nav-inner {
+    position: relative;
+  }
+}

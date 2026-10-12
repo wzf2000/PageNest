@@ -1,32 +1,33 @@
-# Simplified Chinese translation for PageNest.
+# PageNest Simplified Chinese translations.
 msgid ""
 msgstr "Project-Id-Version: PageNest\nPO-Revision-Date: 2026-10-13 00:00+0000\nLast-Translator: PageNest Contributors\nLanguage-Team: PageNest Contributors\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Domain: pagenest\nLanguage: zh_CN\nPlural-Forms: nplurals=1; plural=0;\n"
 
-#, php-format
 msgid "%1$s · Slot %2$d"
 msgstr "%1$s · 位置 %2$d"
 
-#, php-format
 msgid "%s comment"
 msgid_plural "%s comments"
 msgstr[0] "%s 条评论"
 
-#, php-format
 msgid "%s public article, ordered by publication date."
 msgid_plural "%s public articles, ordered by publication date."
 msgstr[0] "共 %s 篇公开文章，按发布时间排列。"
 
-#, php-format
 msgid "%s view"
 msgid_plural "%s views"
 msgstr[0] "%s 次浏览"
 
-#, php-format
 msgid "%s · Order"
 msgstr "%s · 顺序"
 
+msgid "A configurable reading theme with topic navigation, author profiles, responsive layouts and extension slots for notes and site tools."
+msgstr "让知识与思考安放于页间。独立阅读主题，提供专题导航、作者展示和移动端布局，提供扩展接口接入笔记与站点工具；首页可在“外观 → 自定义 → 栖页首页设置”中调整。"
+
 msgid "A home for knowledge and ideas"
 msgstr "让知识与思考安放于页间"
+
+msgid "A place for thoughtful reading"
+msgstr "为思考留一页"
 
 msgid "A setting value is outside the allowed range."
 msgstr "设置值不符合允许范围。"
@@ -34,7 +35,6 @@ msgstr "设置值不符合允许范围。"
 msgid "About"
 msgstr "关于"
 
-#, php-format
 msgid "About %s minute to read"
 msgid_plural "About %s minutes to read"
 msgstr[0] "约 %s 分钟阅读"
@@ -48,14 +48,14 @@ msgstr "关于链接名称"
 msgid "Adjacent articles"
 msgstr "相邻文章"
 
+msgid "Advanced · saved visual values only"
+msgstr "高级设置 · 仅迁移已保存的视觉值"
+
 msgid "All articles →"
 msgstr "全部文章 →"
 
 msgid "All content"
 msgstr "全部内容"
-
-msgid "Appearance and content settings"
-msgstr "外观与内容入口"
 
 msgid "Appearance settings imported."
 msgstr "视觉设置已导入。"
@@ -117,18 +117,15 @@ msgstr "哈希校验通过"
 msgid "Asset missing or hash mismatch"
 msgstr "资源缺失或哈希不匹配"
 
-#, php-format
 msgid "Asset: %s"
 msgstr "资源：%s"
 
 msgid "Author"
 msgstr "作者"
 
-#, php-format
 msgid "Author %d · Avatar"
 msgstr "作者 %d · 头像"
 
-#, php-format
 msgid "Author %d · Name"
 msgstr "作者 %d · 姓名"
 
@@ -177,14 +174,14 @@ msgstr "仅检查版本、资源文件及本地接口可用性；不执行网络
 msgid "Choose a public, unprotected page as a series, topic or tool entry. Its title and manual excerpt are used without copying content."
 msgstr "选择公开无密码页面作为系列、专题或工具入口；使用页面标题与手写摘要，不复制内容。"
 
-msgid "Choose an image from the media library; clear it to use a gradient background."
-msgstr "从媒体库选择图片；清除后使用渐变背景。"
-
 msgid "Choose the authors to display and edit their introduction."
 msgstr "选择要展示的站点作者并调整介绍。"
 
-msgid "Choose your own media; clear it to use a gradient."
-msgstr "选择自有媒体；清除后使用渐变。"
+msgid "Choose your own media; clear it for a text-focused introduction."
+msgstr "选择自己的图片；清空后显示以文字为主的介绍。"
+
+msgid "Clear type. A quieter page."
+msgstr "清晰的文字，安静的页面。"
 
 msgid "Collapse all"
 msgstr "收起全部"
@@ -198,11 +195,9 @@ msgstr "评论内容"
 msgid "Comment pagination"
 msgstr "评论分页"
 
-#, php-format
 msgid "Commenting as %s"
 msgstr "以 %s 的身份发言"
 
-#, php-format
 msgid "Comments (%s)"
 msgstr "评论（%s）"
 
@@ -242,6 +237,9 @@ msgstr "Companion 搜索接口"
 msgid "Companion tools interface"
 msgstr "Companion 工具接口"
 
+msgid "Compose the home page"
+msgstr "编排首页"
+
 msgid "Configure home topic cards, descriptions and status labels."
 msgstr "配置首页专题卡片、简介与状态。"
 
@@ -262,6 +260,9 @@ msgstr "版权署名"
 
 msgid "Current palette:"
 msgstr "当前视觉配色："
+
+msgid "Current reading palette"
+msgstr "当前阅读配色"
 
 msgid "Customize the home background, topics and authors. Preview your changes before saving."
 msgstr "调整首页背景、专题与作者展示。保存前可在右侧预览。"
@@ -314,7 +315,6 @@ msgstr "也可填写编辑页面地址中 post= 后的 ID，以选择更早的�
 msgid "Expand all"
 msgstr "展开全部"
 
-#, php-format
 msgid "Expand or collapse: %s"
 msgstr "展开或收起：%s"
 
@@ -342,6 +342,9 @@ msgstr "精选文章"
 msgid "Find content"
 msgstr "查找内容"
 
+msgid "Finish the site details"
+msgstr "完善站点细节"
+
 msgid "Font size"
 msgstr "字号"
 
@@ -356,6 +359,9 @@ msgstr "森林"
 
 msgid "Full archive →"
 msgstr "完整归档 →"
+
+msgid "Guide readers from an introduction to your topics and latest writing."
+msgstr "从简短介绍开始，引导读者走向专题与最新文章。"
 
 msgid "Hidden"
 msgstr "不展示"
@@ -405,6 +411,9 @@ msgstr "无效的视觉设置文件。"
 msgid "Join the discussion →"
 msgstr "参与讨论 →"
 
+msgid "Keep a copy"
+msgstr "保存一份副本"
+
 msgid "Latest articles"
 msgstr "最新文章"
 
@@ -440,6 +449,9 @@ msgstr "登录后回复"
 
 msgid "Login and registration"
 msgstr "登录与注册"
+
+msgid "Make reading comfortable"
+msgstr "让阅读更舒适"
 
 msgid "Maximum site width (px)"
 msgstr "全站最大宽度（px）"
@@ -492,6 +504,9 @@ msgstr "从这里进入原生自定义器预览并保存设置。安装主题不
 msgid "Page not found"
 msgstr "没有找到这个页面"
 
+msgid "PageNest design"
+msgstr "PageNest 外观设计"
+
 msgid "PageNest home page"
 msgstr "栖页首页设置"
 
@@ -524,6 +539,9 @@ msgstr "私密"
 
 msgid "Problem and background"
 msgstr "问题与背景"
+
+msgid "Reading comes first"
+msgstr "让阅读成为核心"
 
 msgid "Reading navigation"
 msgstr "阅读导航"
@@ -564,7 +582,6 @@ msgstr "相关阅读"
 msgid "Reply"
 msgstr "回复"
 
-#, php-format
 msgid "Reply to %s"
 msgstr "回复 %s"
 
@@ -580,6 +597,9 @@ msgstr "资源二"
 msgid "Restore defaults"
 msgstr "恢复默认"
 
+msgid "Room for your next idea"
+msgstr "为下一次思考留出空间"
+
 msgid "Search"
 msgstr "搜索"
 
@@ -589,7 +609,6 @@ msgstr "搜索建议"
 msgid "Search this site"
 msgstr "搜索本站内容"
 
-#, php-format
 msgid "Search: %s"
 msgstr "搜索：%s"
 
@@ -605,6 +624,9 @@ msgstr "配置交流说明与链接。"
 msgid "Settings could not be saved. Please try again."
 msgstr "设置保存失败，请重试。"
 
+msgid "Shape your site, one detail at a time."
+msgstr "从阅读开始，逐步完善站点外观。"
+
 msgid "Share colors and reading dimensions across the site and editor preview. Leave custom colors empty to use the selected palette."
 msgstr "统一全站与正文预览的颜色和阅读尺寸。自定义颜色留空时使用所选配色。"
 
@@ -617,7 +639,6 @@ msgstr "分享你的想法，或描述遇到的问题…"
 msgid "Shared stories"
 msgstr "共同记录"
 
-#, php-format
 msgid "Show %s"
 msgstr "显示%s"
 
@@ -654,7 +675,6 @@ msgstr "全站主导航"
 msgid "Skip to main content"
 msgstr "跳到主要内容"
 
-#, php-format
 msgid "Slot %d · Content ID (optional)"
 msgstr "位置 %d · 内容 ID（可选）"
 
@@ -667,6 +687,9 @@ msgstr "标准卡片"
 msgid "Start with a topic that interests you"
 msgstr "从感兴趣的专题开始"
 
+msgid "Start with the reading appearance, arrange your home page, then finish the site details. Preview changes before publishing."
+msgstr "先调整阅读外观，再编排首页，最后完善站点细节。发布前请查看预览。"
+
 msgid "Status (optional)"
 msgstr "状态说明（可选）"
 
@@ -676,7 +699,6 @@ msgstr "请通过配置页面提交表单。"
 msgid "Suggestions are unavailable. Press Enter to continue searching."
 msgstr "暂时无法获取建议，可按回车继续搜索。"
 
-#, php-format
 msgid "Suggestions: %s. Submit your search for all results."
 msgstr "找到 %s 条建议，可提交搜索查看完整结果。"
 
@@ -719,7 +741,6 @@ msgstr "这篇文章需要密码才能阅读。"
 msgid "Title, keywords…"
 msgstr "标题、关键词…"
 
-#, php-format
 msgid "Topic %1$d · %2$s"
 msgstr "专题 %1$d · %2$s"
 
@@ -750,6 +771,9 @@ msgstr "更新于 "
 msgid "Upload image"
 msgstr "上传图片"
 
+msgid "Versions, interfaces and asset integrity"
+msgstr "版本、接口与资源完整性"
+
 msgid "Warm paper"
 msgstr "暖纸"
 
@@ -773,6 +797,3 @@ msgstr "你的评论正在等待审核。"
 
 msgid "← Previous page"
 msgstr "← 上一页"
-
-msgid "A configurable reading theme with topic navigation, author profiles, responsive layouts and extension slots for notes and site tools."
-msgstr "让知识与思考安放于页间。独立阅读主题，提供专题导航、作者展示和移动端布局，提供扩展接口接入笔记与站点工具；首页可在“外观 → 自定义 → 栖页首页设置”中调整。"

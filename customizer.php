@@ -189,7 +189,7 @@ add_action('customize_register', static function ($wp_customize) {
         new WP_Customize_Media_Control($wp_customize, 'pagenest_hero_attachment', [
             'label' => __('Background image', 'pagenest'),
             'description' => __(
-                'Choose an image from the media library; clear it to use a gradient background.',
+                'Choose your own media; clear it for a text-focused introduction.',
                 'pagenest',
             ),
             'section' => 'pagenest_home_image',

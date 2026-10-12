@@ -1,5 +1,5 @@
 body.login.pagenest-login {
-  background: #e9eef5 var(--pagenest-login-image, none) center top/cover fixed no-repeat;
+  background: #f7f6f2 var(--pagenest-login-image, none) center top/cover fixed no-repeat;
   min-height: 100vh;
 }
 .pagenest-login #login {
@@ -12,17 +12,17 @@ body.login.pagenest-login {
   background: rgba(255, 255, 255, 0.94);
   border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 12px;
-  box-shadow: 0 12px 35px #16345124;
+  box-shadow: 0 8px 28px rgb(35 53 44 / 8%);
 }
 .pagenest-login-notice {
   margin: 0 0 18px;
   padding: 16px 18px;
   background: rgba(255, 255, 255, 0.95);
   border-radius: 10px;
-  color: #34465c;
+  color: #293630;
   font-size: 13px;
   line-height: 1.8;
-  box-shadow: 0 8px 24px #16345118;
+  box-shadow: none;
 }
 .pagenest-login-notice p {
   margin: 0 0 10px;
@@ -31,7 +31,7 @@ body.login.pagenest-login {
   margin-bottom: 0;
 }
 .pagenest-login-notice a {
-  color: #175c8d;
+  color: #426354;
   text-decoration: underline;
 }
 .pagenest-login #nav,
@@ -62,4 +62,18 @@ body.login.pagenest-login {
   .pagenest-login .language-switcher {
     padding: 8px;
   }
+}
+
+.pagenest-login .button-primary {
+  background: #426354;
+  border-color: #426354;
+  box-shadow: none;
+}
+.pagenest-login .button-primary:hover {
+  background: #2b493a;
+  border-color: #2b493a;
+}
+.pagenest-login :is(input, button):focus-visible {
+  outline: 2px solid #426354;
+  outline-offset: 3px;
 }

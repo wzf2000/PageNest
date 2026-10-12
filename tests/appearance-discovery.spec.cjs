@@ -4,7 +4,7 @@ for (const width of [1440, 390]) {
   test(`appearance defaults and configured reader/editor agree at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/article-public.html');
-    await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(244, 246, 249)');
+    await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(247, 246, 242)');
     await expect(page.locator('.pagenest-article-body')).toHaveCSS('font-size', '17px');
     await expect(page.locator('.pagenest-article')).toHaveCSS('border-radius', '12px');
     await page.goto('/article-appearance.html');

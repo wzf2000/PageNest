@@ -59,6 +59,9 @@ test('English home and configuration labels come from the native domain', async 
     page.getByRole('heading', { name: 'Start with a topic that interests you' }),
   ).toBeVisible();
   await page.goto('/product-english.html');
-  await expect(page.getByRole('heading', { name: 'Local read-only diagnostics' })).toBeVisible();
+  await expect(
+    page.locator('summary').filter({ hasText: 'Local read-only diagnostics' }),
+  ).toBeVisible();
+  await page.locator('summary').filter({ hasText: 'Transfer appearance settings' }).click();
   await expect(page.getByRole('button', { name: 'Import and save appearance' })).toBeVisible();
 });

@@ -4,9 +4,9 @@
     "layout": { "contentSize": "1192px", "wideSize": "1240px" },
     "color": {
       "palette": [
-        { "slug": "ink", "name": "Article body", "color": "#18324d" },
-        { "slug": "paper", "name": "Background", "color": "#f4f6f9" },
-        { "slug": "accent", "name": "Links", "color": "#285f8f" }
+        { "slug": "ink", "name": "Article body", "color": "#23352c" },
+        { "slug": "paper", "name": "Background", "color": "#f7f6f2" },
+        { "slug": "accent", "name": "Links", "color": "#426354" }
       ]
     },
     "typography": {

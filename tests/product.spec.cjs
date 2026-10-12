@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 test('configuration hub exposes explicit forms and Customizer sections', async ({ page }) => {
   await page.goto('/product.html');
-  await expect(page.locator('h1')).toContainText('PageNest');
+  await expect(page.locator('.pagenest-settings-header')).toContainText('PageNest');
   await expect(page.locator('a[href*="autofocus%5Bsection%5D"]')).toHaveCount(11);
   const forms = page.locator('form');
   await expect(forms).toHaveCount(2);

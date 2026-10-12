@@ -164,6 +164,10 @@ function pagenest_product_diagnostics($root = null)
     $assets = [];
     $sources = [
         'css' => 'layout.css',
+        'editorial' => 'editorial.css',
+        'admin_design' => 'admin-design.css',
+        'customizer_design' => 'customizer-design.css',
+        'customizer_design_js' => 'customizer-design.js',
         'js' => 'navigation.js',
         'reading' => 'reading.js',
         'login' => 'login.css',
@@ -220,135 +224,215 @@ function pagenest_product_page()
             'response' => 403,
         ]);
     }
-    echo '<div class="wrap"><h1>PageNest · ' . esc_html__('Theme settings', 'pagenest') . '</h1>';
-    echo '<p>' .
-        esc_html__(
-            'Open the WordPress Customizer to preview and save settings. Installing the theme does not create articles, pages or media.',
-            'pagenest',
-        ) .
-        '</p>';
+    $link = static function ($section, $title, $description) {
+        $url = add_query_arg('autofocus[section]', $section, admin_url('customize.php'));
+        echo '<a class="pagenest-config-link" href="' .
+            esc_url($url) .
+            '"><span><strong>' .
+            esc_html($title) .
+            '</strong><span>' .
+            esc_html($description) .
+            '</span></span><span aria-hidden="true">↗</span></a>';
+    };
+    echo '<div class="wrap pagenest-settings"><header class="pagenest-settings-header"><p class="pagenest-admin-eyebrow">PageNest · ' .
+        esc_html__('A place for thoughtful reading', 'pagenest') .
+        '</p><h1>' .
+        esc_html__('Theme settings', 'pagenest') .
+        '</h1><p>' .
+        esc_html__('Shape your site, one detail at a time.', 'pagenest') .
+        '</p></header>';
     if (isset($_GET['imported']) && $_GET['imported'] === '1') {
         echo '<div class="notice notice-success"><p>' .
             esc_html__('Appearance settings imported.', 'pagenest') .
             '</p></div>';
     }
-    echo '<h2>' .
-        esc_html__('Appearance and content settings', 'pagenest') .
-        '</h2><table class="widefat striped"><tbody>';
-    $groups = [
-        [
-            'pagenest_appearance',
-            __('Site appearance', 'pagenest'),
-            __(
-                'Palettes, colors and reading dimensions shared with the editor preview.',
-                'pagenest',
-            ),
-        ],
-        [
-            'pagenest_home_composition',
-            __('Home modules', 'pagenest'),
-            __('Arrange and enable modules using existing public articles and pages.', 'pagenest'),
-        ],
-        [
-            'pagenest_home_copy',
-            __('Home introduction', 'pagenest'),
-            __('Edit the home page introduction; leave empty to hide.', 'pagenest'),
-        ],
-        [
-            'pagenest_home_image',
-            __('Home background', 'pagenest'),
-            __('Choose your own media; clear it to use a gradient.', 'pagenest'),
-        ],
-        [
-            'pagenest_home_topics',
-            __('Home topics', 'pagenest'),
-            __('Configure home topic cards, descriptions and status labels.', 'pagenest'),
-        ],
-        [
-            'pagenest_home_authors',
-            __('Home authors', 'pagenest'),
-            __('Choose the authors to display and edit their introduction.', 'pagenest'),
-        ],
-        [
-            'pagenest_browsing',
-            __('Lists and articles', 'pagenest'),
-            __('List density, covers, updated dates and estimated reading time.', 'pagenest'),
-        ],
-        [
-            'pagenest_login',
-            __('Login and registration', 'pagenest'),
-            __(
-                'Background and notice. Authentication is handled by WordPress and optional plugins.',
-                'pagenest',
-            ),
-        ],
-        [
-            'pagenest_footer',
-            __('Footer information', 'pagenest'),
-            __('Tagline, copyright owner and optional registration number.', 'pagenest'),
-        ],
-        [
-            'pagenest_navigation',
-            __('Archive and about links', 'pagenest'),
-            __('Set archive and about links.', 'pagenest'),
-        ],
-        [
-            'pagenest_community',
-            __('Community', 'pagenest'),
-            __('Set the community description and links.', 'pagenest'),
-        ],
-    ];
-    foreach ($groups as [$section, $title, $description]) {
-        $url = add_query_arg('autofocus[section]', $section, admin_url('customize.php'));
-        echo '<tr><th scope="row"><a href="' .
-            esc_url($url) .
-            '">' .
-            esc_html($title) .
-            '</a></th><td>' .
-            esc_html($description) .
-            '</td></tr>';
-    }
-    echo '</tbody></table><p>' .
-        esc_html__('Current palette:', 'pagenest') .
-        ' <code>' .
-        esc_html(
-            pagenest_sanitize_appearance_preset(
-                get_theme_mod('pagenest_appearance_preset', 'default'),
-            ),
-        ) .
-        '</code></p>';
-    echo '<h2>' .
-        esc_html__('Transfer appearance settings', 'pagenest') .
+    echo '<div class="pagenest-settings-overview"><div><h2>' .
+        esc_html__('Reading comes first', 'pagenest') .
         '</h2><p>' .
         esc_html__(
-            'Export only saved palettes, colors and dimensions. Articles, media IDs, links, accounts and plugin settings are excluded. Import replaces only the listed values; omitted settings and empty values retain their meaning.',
+            'Open the WordPress Customizer to preview and save settings. Installing the theme does not create articles, pages or media.',
             'pagenest',
         ) .
         '</p>';
-    echo '<form method="post" action="' .
-        esc_url(admin_url('admin-post.php')) .
-        '"><input type="hidden" name="action" value="pagenest_appearance_export">';
-    wp_nonce_field('pagenest_appearance_transfer');
-    submit_button(__('Download appearance JSON', 'pagenest'), 'secondary');
-    echo '</form><form method="post" action="' .
-        esc_url(admin_url('admin-post.php')) .
-        '"><input type="hidden" name="action" value="pagenest_appearance_import">';
-    wp_nonce_field('pagenest_appearance_transfer');
-    echo '<p><label for="pagenest-json">' .
-        esc_html__('Paste appearance JSON', 'pagenest') .
-        '</label></p><textarea id="pagenest-json" name="pagenest_json" rows="8" class="large-text code" required maxlength="16384"></textarea>';
-    submit_button(__('Import and save appearance', 'pagenest'));
-    echo '</form><h2>' .
+    $link(
+        'pagenest_appearance',
+        __('Site appearance', 'pagenest'),
+        __('Palettes, colors and reading dimensions shared with the editor preview.', 'pagenest'),
+    );
+    echo '</div><div class="pagenest-palette-preview" aria-label="' .
+        esc_html__('Current reading palette', 'pagenest') .
+        '" style="';
+    foreach (pagenest_appearance_variables() as $key => $value) {
+        echo esc_html($key . ':' . $value . ';');
+    }
+    echo '"><div class="pagenest-palette-swatches"><span></span><span></span><span></span></div><p class="pagenest-admin-eyebrow">PageNest</p><h3>' .
+        esc_html__('Room for your next idea', 'pagenest') .
+        '</h3><p>' .
+        esc_html__('Clear type. A quieter page.', 'pagenest') .
+        '</p><small>' .
+        esc_html__('Current palette:', 'pagenest') .
+        ' ' .
+        esc_html(
+            pagenest_appearance_preset_labels()[
+                pagenest_sanitize_appearance_preset(
+                    get_theme_mod('pagenest_appearance_preset', 'default'),
+                )
+            ],
+        ) .
+        '</small></div></div>';
+    echo '<div class="pagenest-settings-columns"><section class="pagenest-settings-group"><p class="pagenest-admin-eyebrow">01</p><h2>' .
+        esc_html__('Compose the home page', 'pagenest') .
+        '</h2><p class="pagenest-group-intro">' .
+        esc_html__(
+            'Guide readers from an introduction to your topics and latest writing.',
+            'pagenest',
+        ) .
+        '</p>';
+    foreach (
+        [
+            [
+                'pagenest_home_composition',
+                __('Home modules', 'pagenest'),
+                __(
+                    'Arrange and enable modules using existing public articles and pages.',
+                    'pagenest',
+                ),
+            ],
+            [
+                'pagenest_home_copy',
+                __('Home introduction', 'pagenest'),
+                __('Edit the home page introduction; leave empty to hide.', 'pagenest'),
+            ],
+            [
+                'pagenest_home_image',
+                __('Home background', 'pagenest'),
+                __('Choose your own media; clear it for a text-focused introduction.', 'pagenest'),
+            ],
+            [
+                'pagenest_home_topics',
+                __('Home topics', 'pagenest'),
+                __('Configure home topic cards, descriptions and status labels.', 'pagenest'),
+            ],
+            [
+                'pagenest_home_authors',
+                __('Home authors', 'pagenest'),
+                __('Choose the authors to display and edit their introduction.', 'pagenest'),
+            ],
+        ]
+        as $item
+    ) {
+        $link(...$item);
+    }
+    echo '</section><div><section class="pagenest-settings-group"><p class="pagenest-admin-eyebrow">02</p><h2>' .
+        esc_html__('Make reading comfortable', 'pagenest') .
+        '</h2>';
+    $link(
+        'pagenest_browsing',
+        __('Lists and articles', 'pagenest'),
+        __('List density, covers, updated dates and estimated reading time.', 'pagenest'),
+    );
+    echo '</section><section class="pagenest-settings-group"><p class="pagenest-admin-eyebrow">03</p><h2>' .
+        esc_html__('Finish the site details', 'pagenest') .
+        '</h2>';
+    foreach (
+        [
+            [
+                'pagenest_navigation',
+                __('Archive and about links', 'pagenest'),
+                __('Set archive and about links.', 'pagenest'),
+            ],
+            [
+                'pagenest_footer',
+                __('Footer information', 'pagenest'),
+                __('Tagline, copyright owner and optional registration number.', 'pagenest'),
+            ],
+            [
+                'pagenest_community',
+                __('Community', 'pagenest'),
+                __('Set the community description and links.', 'pagenest'),
+            ],
+            [
+                'pagenest_login',
+                __('Login and registration', 'pagenest'),
+                __(
+                    'Background and notice. Authentication is handled by WordPress and optional plugins.',
+                    'pagenest',
+                ),
+            ],
+        ]
+        as $item
+    ) {
+        $link(...$item);
+    }
+    echo '</section></div></div><section class="pagenest-pattern-section"><h2>' .
         esc_html__('Editable block examples', 'pagenest') .
         '</h2><p>' .
         esc_html__(
             'In the block editor, open Patterns → PageNest and choose a topic introduction, resource cards or article outline. Replace the placeholders; content is created only when you insert and save it.',
             'pagenest',
         ) .
-        '</p>';
-    echo '<h2>' .
+        '</p><div class="pagenest-pattern-previews">';
+    echo '<figure><div class="pagenest-pattern-illustration"><small>' .
+        esc_html__('Topic introduction', 'pagenest') .
+        '</small><h3>' .
+        esc_html__('Enter a topic title', 'pagenest') .
+        '</h3><p>' .
+        esc_html__(
+            'Introduce the topic, intended audience and suggested reading order. Replace this text with your own content.',
+            'pagenest',
+        ) .
+        '</p></div><figcaption>' .
+        esc_html__('Topic introduction', 'pagenest') .
+        '</figcaption></figure>';
+    echo '<figure><div class="pagenest-pattern-illustration pagenest-pattern-resources"><div><h3>' .
+        esc_html__('Resource one', 'pagenest') .
+        '</h3><p>' .
+        esc_html__('Describe this resource and add your own link using the editor.', 'pagenest') .
+        '</p></div><div><h3>' .
+        esc_html__('Resource two', 'pagenest') .
+        '</h3><p>' .
+        esc_html__('Describe this resource and add your own link using the editor.', 'pagenest') .
+        '</p></div></div><figcaption>' .
+        esc_html__('Resource cards', 'pagenest') .
+        '</figcaption></figure>';
+    echo '<figure><div class="pagenest-pattern-illustration pagenest-pattern-outline"><h3>' .
+        esc_html__('Problem and background', 'pagenest') .
+        '</h3><h3>' .
+        esc_html__('Method and examples', 'pagenest') .
+        '</h3><h3>' .
+        esc_html__('Summary and next steps', 'pagenest') .
+        '</h3></div><figcaption>' .
+        esc_html__('Article outline', 'pagenest') .
+        '</figcaption></figure></div></section>';
+    echo '<details class="pagenest-settings-details"><summary>' .
+        esc_html__('Transfer appearance settings', 'pagenest') .
+        '<span>' .
+        esc_html__('Advanced · saved visual values only', 'pagenest') .
+        '</span></summary><div class="pagenest-settings-details-body"><p>' .
+        esc_html__(
+            'Export only saved palettes, colors and dimensions. Articles, media IDs, links, accounts and plugin settings are excluded. Import replaces only the listed values; omitted settings and empty values retain their meaning.',
+            'pagenest',
+        ) .
+        '</p><div class="pagenest-transfer-columns"><form method="post" action="' .
+        esc_url(admin_url('admin-post.php')) .
+        '"><input type="hidden" name="action" value="pagenest_appearance_export"><h3>' .
+        esc_html__('Keep a copy', 'pagenest') .
+        '</h3>';
+    wp_nonce_field('pagenest_appearance_transfer');
+    submit_button(__('Download appearance JSON', 'pagenest'), 'secondary');
+    echo '</form><form method="post" action="' .
+        esc_url(admin_url('admin-post.php')) .
+        '"><input type="hidden" name="action" value="pagenest_appearance_import">';
+    wp_nonce_field('pagenest_appearance_transfer');
+    echo '<h3><label for="pagenest-json">' .
+        esc_html__('Paste appearance JSON', 'pagenest') .
+        '</label></h3><textarea id="pagenest-json" name="pagenest_json" rows="6" class="large-text code" required maxlength="16384"></textarea>';
+    submit_button(__('Import and save appearance', 'pagenest'));
+    echo '</form></div></div></details><details class="pagenest-settings-details"><summary>' .
         esc_html__('Local read-only diagnostics', 'pagenest') .
-        '</h2><p>' .
+        '<span>' .
+        esc_html__('Versions, interfaces and asset integrity', 'pagenest') .
+        '</span></summary><div class="pagenest-settings-details-body"><p>' .
         esc_html__(
             'Check versions, asset files and local interfaces only, without network requests or repairs. An available interface does not mean its module is enabled.',
             'pagenest',
@@ -394,7 +478,7 @@ function pagenest_product_page()
             esc_html__('Open Companion settings', 'pagenest') .
             '</a></p>';
     }
-    echo '</div>';
+    echo '</div></details></div>';
 }
 add_action('admin_menu', static function () {
     add_theme_page(

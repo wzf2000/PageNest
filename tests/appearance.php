@@ -62,7 +62,10 @@ function appearance_check($passed, $message)
 require __DIR__ . '/../appearance.php';
 $default = pagenest_appearance_variables();
 appearance_check($default['--pagenest-reading-size'] === '17px', 'Existing reading size preserved');
-appearance_check($default['--pagenest-background'] === '#f4f6f9', 'Existing background preserved');
+appearance_check(
+    $default['--pagenest-background'] === '#f7f6f2',
+    'Editorial default background; saved overrides preserved',
+);
 $stylesheet = file_get_contents(__DIR__ . '/../assets/appearance.css');
 foreach ($default as $key => $value) {
     appearance_check(

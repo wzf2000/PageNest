@@ -72,6 +72,10 @@ async function format() {
   );
   for (const [key, name] of Object.entries({
     css: 'layout.css',
+    editorial: 'editorial.css',
+    admin_design: 'admin-design.css',
+    customizer_design: 'customizer-design.css',
+    customizer_design_js: 'customizer-design.js',
     js: 'navigation.js',
     reading: 'reading.js',
     login: 'login.css',

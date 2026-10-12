@@ -4,7 +4,7 @@
 }
 .pagenest-header-search > summary {
   cursor: pointer;
-  color: var(--pagenest-accent, #285f8f);
+  color: var(--pagenest-accent, #426354);
   padding: 8px;
   white-space: nowrap;
 }
@@ -14,7 +14,7 @@
   top: calc(100% + 12px);
   width: min(440px, calc(100vw - 32px));
   padding: 20px;
-  border: 1px solid var(--pagenest-border, #e1e7ee);
+  border: 1px solid var(--pagenest-border, #e1e5df);
   border-radius: var(--pagenest-radius, 12px);
   background: var(--pagenest-surface, #fff);
   box-shadow: 0 10px 32px rgb(24 50 77 / 14%);
@@ -42,16 +42,16 @@
 .pagenest-search-filters select {
   min-height: 36px;
   max-width: 100%;
-  border: 1px solid var(--pagenest-border, #e1e7ee);
+  border: 1px solid var(--pagenest-border, #e1e5df);
   border-radius: 4px;
   padding: 4px 8px;
   background: var(--pagenest-surface, #fff);
-  color: var(--pagenest-text, #303b4a);
+  color: var(--pagenest-text, #293630);
   font: inherit;
 }
 .pagenest-search-status {
   font-size: 13px;
-  color: var(--pagenest-muted, #637387);
+  color: var(--pagenest-muted, #69736b);
   margin: 8px 0;
 }
 .pagenest-search-status:empty {
@@ -66,7 +66,7 @@
   display: flex;
   align-items: baseline;
   gap: 10px;
-  border-top: 1px solid var(--pagenest-border, #e1e7ee);
+  border-top: 1px solid var(--pagenest-border, #e1e5df);
   padding: 10px 0;
 }
 .pagenest-search-suggestions a {
@@ -75,7 +75,7 @@
 }
 .pagenest-search-suggestions small {
   flex: none;
-  color: var(--pagenest-muted, #637387);
+  color: var(--pagenest-muted, #69736b);
 }
 .pagenest-discovery-links {
   display: flex;
@@ -85,7 +85,7 @@
 }
 .pagenest-discovery-links a {
   padding: 4px 10px;
-  background: var(--pagenest-soft, #edf3f9);
+  background: var(--pagenest-soft, #eef1eb);
   border-radius: 4px;
   font-size: 14px;
 }

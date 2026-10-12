@@ -1,6 +1,8 @@
 <?php get_header(); ?>
 <main id="pagenest-main" class="pagenest-main" tabindex="-1">
-    <section class="pagenest-hero">
+    <section class="pagenest-hero<?php echo (int) get_theme_mod('pagenest_hero_attachment', 0)
+        ? ' pagenest-hero-with-image'
+        : ''; ?>">
         <div class="pagenest-hero-copy">
             <?php if ($eyebrow = pagenest_setting('pagenest_home_eyebrow')): ?>
             <p class="pagenest-eyebrow"><?php echo esc_html($eyebrow); ?></p>
@@ -21,6 +23,9 @@
     'pagenest',
 ); ?></a><?php endif; ?></div>
         </div>
+        <?php if ((int) get_theme_mod('pagenest_hero_attachment', 0)): ?>
+        <div class="pagenest-hero-art" aria-hidden="true"></div>
+        <?php endif; ?>
     </section>
     <?php foreach (pagenest_home_order() as $module) {
         if ($module === 'topics') {

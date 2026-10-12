@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   gap: 6px 16px;
   margin-block: 12px;
-  color: var(--pagenest-muted, #637387);
+  color: var(--pagenest-muted, #69736b);
   font-size: 13px;
 }
 .pagenest-site .pagenest-entry-compact {
@@ -31,13 +31,13 @@
 }
 .pagenest-topic-description,
 .pagenest-archive-description {
-  color: var(--pagenest-muted, #637387);
+  color: var(--pagenest-muted, #69736b);
   overflow-wrap: anywhere;
 }
 .pagenest-topic-status {
   display: block;
   margin-block: 8px;
-  color: var(--pagenest-accent, #285f8f);
+  color: var(--pagenest-accent, #426354);
 }
 .pagenest-archive-description {
   max-width: 75ch;

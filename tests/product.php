@@ -114,14 +114,18 @@ function wp_nonce_field($action)
 }
 function submit_button($label, $type = '')
 {
-    echo '<button type="submit">' . esc_html($label) . '</button>';
+    echo '<p class="submit"><button class="button ' .
+        ($type === 'secondary' ? 'button-secondary' : 'button-primary') .
+        '" type="submit">' .
+        esc_html($label) .
+        '</button></p>';
 }
 function wp_get_theme($template)
 {
     return new class {
         public function get($key)
         {
-            return '1.2.0-rc.2';
+            return '1.2.0-rc.3';
         }
     };
 }
@@ -293,14 +297,30 @@ product_check(
     'guarded POST forms and deep links',
 );
 $runtime = __DIR__ . '/../.runtime/frontend';
+$manifest = require __DIR__ . '/../assets/manifest.php';
+$native = getenv('PAGENEST_TEST_WP_ROOT') ?: '';
+$adminHead = '<meta name="viewport" content="width=device-width, initial-scale=1">';
+if ($native !== '' && is_dir($native . '/wp-admin/css')) {
+    @mkdir($runtime . '/admin-core', 0777, true);
+    foreach (['common', 'forms', 'themes'] as $asset) {
+        copy(
+            $native . '/wp-admin/css/' . $asset . '.css',
+            $runtime . '/admin-core/' . $asset . '.css',
+        );
+        $adminHead .= '<link rel="stylesheet" href="/admin-core/' . $asset . '.css">';
+    }
+}
+$adminHead .= '<link rel="stylesheet" href="/assets/' . $manifest['admin_design'] . '">';
 if (!is_dir($runtime)) {
     mkdir($runtime, 0777, true);
 }
 file_put_contents(
     $runtime . '/product.html',
-    '<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>PageNest configuration</title><body>' .
+    '<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>PageNest configuration</title>' .
+        $adminHead .
+        '<body class="wp-admin wp-core-ui"><div id="wpwrap"><div id="wpbody-content">' .
         $html .
-        '</body></html>',
+        '</div></div></body></html>',
 );
 $fixture_locale = 'en_US';
 ob_start();
@@ -313,8 +333,10 @@ product_check(
 );
 file_put_contents(
     $runtime . '/product-english.html',
-    '<!doctype html><html lang="en-US"><meta charset="utf-8"><title>PageNest configuration</title><body>' .
+    '<!doctype html><html lang="en-US"><meta charset="utf-8"><title>PageNest configuration</title>' .
+        $adminHead .
+        '<body class="wp-admin wp-core-ui"><div id="wpwrap"><div id="wpbody-content">' .
         $english .
-        '</body></html>',
+        '</div></div></body></html>',
 );
 echo "Product hub / transfer / patterns / diagnostics contracts passed.\n";

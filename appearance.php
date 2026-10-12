@@ -6,23 +6,23 @@ function pagenest_appearance_presets()
 {
     return [
         'default' => [
-            'background' => '#f4f6f9',
-            'surface' => '#ffffff',
-            'text' => '#303b4a',
-            'heading' => '#18324d',
-            'content-heading' => '#172b43',
-            'muted' => '#637387',
-            'accent' => '#285f8f',
-            'accent-hover' => '#123f66',
-            'content-link' => '#2266a5',
-            'content-link-hover' => '#164777',
-            'focus' => '#2b78b8',
-            'border' => '#e1e7ee',
-            'soft' => '#edf3f9',
-            'code-background' => '#f6f8fb',
-            'code-text' => '#325578',
-            'quote-background' => '#f3f7fb',
-            'quote-border' => '#82a6c7',
+            'background' => '#f7f6f2',
+            'surface' => '#fffefb',
+            'text' => '#293630',
+            'heading' => '#23352c',
+            'content-heading' => '#23352c',
+            'muted' => '#69736b',
+            'accent' => '#426354',
+            'accent-hover' => '#2b493a',
+            'content-link' => '#426354',
+            'content-link-hover' => '#2b493a',
+            'focus' => '#426354',
+            'border' => '#e1e5df',
+            'soft' => '#eef1eb',
+            'code-background' => '#f2f3ed',
+            'code-text' => '#426354',
+            'quote-background' => '#f2f3ed',
+            'quote-border' => '#93a58f',
         ],
         'warm' => [
             'background' => '#f5f1e9',
@@ -62,6 +62,15 @@ function pagenest_appearance_presets()
             'quote-background' => '#f0f5f1',
             'quote-border' => '#7ba58a',
         ],
+    ];
+}
+
+function pagenest_appearance_preset_labels()
+{
+    return [
+        'default' => __('Default', 'pagenest'),
+        'warm' => __('Warm paper', 'pagenest'),
+        'forest' => __('Forest', 'pagenest'),
     ];
 }
 
@@ -208,11 +217,7 @@ function pagenest_register_appearance_customizer($wp_customize)
         'label' => __('Color palette', 'pagenest'),
         'section' => 'pagenest_appearance',
         'type' => 'select',
-        'choices' => [
-            'default' => __('Default', 'pagenest'),
-            'warm' => __('Warm paper', 'pagenest'),
-            'forest' => __('Forest', 'pagenest'),
-        ],
+        'choices' => pagenest_appearance_preset_labels(),
     ]);
     foreach (
         [
