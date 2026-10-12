@@ -20,10 +20,13 @@
                         get_post_field('post_title', get_the_ID()),
                     ); ?></h1><?php if ($article) {
     pagenest_author();
+    pagenest_browsing_metadata(get_the_ID());
 } ?>
                 </header>
                 <?php if (
                     has_post_thumbnail() &&
+                    (!$article ||
+                        pagenest_browsing_bool(get_theme_mod('pagenest_article_cover', true))) &&
                     !post_password_required()
                 ): ?><figure class="pagenest-cover"><?php the_post_thumbnail('large', [
     'loading' => 'eager',

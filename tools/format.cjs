@@ -78,6 +78,9 @@ async function format() {
     content: 'content.css',
     content_js: 'content.js',
     appearance: 'appearance.css',
+    browsing: 'browsing.css',
+    reader_preferences_css: 'reader-preferences.css',
+    reader_preferences_js: 'reader-preferences.js',
     discovery_css: 'discovery.css',
     discovery_js: 'discovery.js',
   })) {

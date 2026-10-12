@@ -11,6 +11,12 @@
         } else {
             echo esc_html(wp_strip_all_tags(get_the_archive_title()));
         } ?></h1>
+        <?php if (is_category() || is_tag()):
+            $description = get_the_archive_description();
+            if ($description): ?><div class="pagenest-archive-description"><?php echo wp_kses_post(
+    $description,
+); ?></div><?php endif;
+        endif; ?>
     </header>
     <?php if (
         is_search() ||

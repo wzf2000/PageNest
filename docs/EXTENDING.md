@@ -43,3 +43,11 @@
 `pagenest_appearance_*` theme mods 由自定义器校验；`appearance.php` 是变量与默认值唯一入口，`assets/appearance.css` 提供无内联值时的默认值。不要编辑带哈希的资源。
 
 `pagenest_search_endpoint` 可返回同源公开 GET 接口，参数 `q`、`kind`，响应为 `items` 数组（`id`、`title`、`url`、`kind_label`）；主题不发送身份凭据，拒绝跨源结果 URL。`pagenest_search_kinds` 扩展筛选名称，服务端必须自行执行相同的访问与范围检查。默认原生搜索不要求 Companion。
+
+## 浏览编排与本地阅读偏好（1.2 开发候选）
+
+`browsing.php` 与 `home-sections.php` 负责首页模块和列表选项，不注册业务数据。模块键为 `topics/latest/authors/featured/updated/destinations`，开关和顺序分别为 `pagenest_home_{key}_enabled` / `pagenest_home_{key}_order`；精选／导览用 `pagenest_home_{key}_{0..3}` 引用原 post ID。每次渲染重新核对公开无密码、类型和去重，不以登录权限扩大推荐可见性。
+
+`pagenest_card($id, $context = 'list')` 可传 `home` 保留首页卡片布局；列表预设为 `pagenest_list_style`，其余布尔项为 `pagenest_list_covers`、`pagenest_article_cover`、`pagenest_show_updated`、`pagenest_show_reading_time`。这些选项仅影响展示，不修改原文章／附件关系。
+
+`reader-preferences.php` 在现有 `pagenest_reading_actions` 输出独立控件。脚本只移动自有节点，局部 data 属性和 CSS 变量不改变目录、正文锚点或评论槽协议。`pagenest-reader-preferences-v1` 本地存储只接受版本 1 与字号／宽度／配色白名单，无服务端同步；插件不可将其当作授权、身份或业务设置。

@@ -70,7 +70,7 @@ function pagenest_menu_branch(array $items, int $parent = 0, array $ancestors = 
 ); ?></a><?php }
     }
 }
-function pagenest_card(int $id): void
+function pagenest_card(int $id, string $context = 'list'): void
 {
     $post = get_post($id);
     if (
@@ -81,9 +81,18 @@ function pagenest_card(int $id): void
         return;
     }
     $categories = get_the_category($id);
+    $cover =
+        has_post_thumbnail($id) &&
+        !post_password_required($post) &&
+        ($context === 'home' ||
+            pagenest_browsing_bool(get_theme_mod('pagenest_list_covers', true)));
+    $compact =
+        $context === 'list' &&
+        pagenest_list_style(get_theme_mod('pagenest_list_style', 'standard')) === 'compact';
     ?>
-<article class="pagenest-entry <?php echo has_post_thumbnail($id) ? '' : 'pagenest-no-image'; ?>">
-    <?php if (has_post_thumbnail($id)): ?><a class="pagenest-entry-image" href="<?php echo esc_url(
+<article class="pagenest-entry <?php echo ($cover ? '' : 'pagenest-no-image') .
+    ($compact ? ' pagenest-entry-compact' : ''); ?>">
+    <?php if ($cover): ?><a class="pagenest-entry-image" href="<?php echo esc_url(
     get_permalink($id),
 ); ?>" tabindex="-1" aria-hidden="true"><?php echo get_the_post_thumbnail($id, 'medium_large', [
     'loading' => 'lazy',
@@ -118,6 +127,7 @@ function pagenest_card(int $id): void
                     'UTF-8',
                 ),
         ); ?></p>
+        <?php pagenest_browsing_metadata($id); ?>
         <div class="pagenest-author pagenest-author-compact"><?php echo get_avatar(
             $post->post_author,
             28,

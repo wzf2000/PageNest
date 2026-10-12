@@ -13,6 +13,8 @@ $slug = '';
 $loop = 0;
 $checks = [];
 $fixture_search = false;
+$fixture_browsing = false;
+$fixture_queries = [];
 class WP_Post
 {
     public $ID,
@@ -63,7 +65,9 @@ class WP_Query
     }
     public function __construct($args)
     {
-        $this->posts = [];
+        global $fixture_browsing, $fixture_queries, $posts;
+        $fixture_queries[] = $args;
+        $this->posts = $fixture_browsing ? array_values($posts) : [];
     }
 }
 class WP_Customize_Color_Control
@@ -204,6 +208,9 @@ function wp_get_post_categories($id)
 function get_posts($args)
 {
     global $posts, $meta;
+    if (($args['numberposts'] ?? 0) === 100) {
+        return array_values($posts);
+    }
     if (($args['numberposts'] ?? 0) === -1) {
         return array_values(
             array_filter(
@@ -294,6 +301,46 @@ function the_content()
     echo get_post(get_the_ID())->post_content;
 }
 function has_post_thumbnail(...$args)
+{
+    return !empty($GLOBALS['fixture_thumbnails']);
+}
+function get_the_post_thumbnail(...$args)
+{
+    return '<img src="/assets/fixture-cover.svg" alt="">';
+}
+function the_post_thumbnail(...$args)
+{
+    echo get_the_post_thumbnail();
+}
+function strip_shortcodes($text)
+{
+    return preg_replace('/\[.*?\]/s', '', $text);
+}
+function number_format_i18n($value)
+{
+    return number_format($value);
+}
+function get_the_category($id)
+{
+    return [];
+}
+function get_the_modified_date($format, $post)
+{
+    return '2026-10-13';
+}
+function get_post_modified_time(...$args)
+{
+    return 1791849600;
+}
+function get_post_time(...$args)
+{
+    return 1791763200;
+}
+function is_category()
+{
+    return false;
+}
+function is_tag()
 {
     return false;
 }
@@ -405,7 +452,10 @@ function get_categories($args = [])
 function wp_head()
 {
     $manifest = require THEME . '/assets/manifest.php';
-    foreach (['css', 'content', 'appearance', 'discovery_css'] as $key) {
+    foreach (
+        ['css', 'content', 'appearance', 'discovery_css', 'browsing', 'reader_preferences_css']
+        as $key
+    ) {
         echo '<link rel="stylesheet" href="/assets/' . $manifest[$key] . '">';
     }
     echo '<style>' . pagenest_appearance_css() . '</style>';
@@ -413,7 +463,7 @@ function wp_head()
 function wp_footer()
 {
     $manifest = require THEME . '/assets/manifest.php';
-    foreach (['content_js', 'js', 'reading', 'discovery_js'] as $key) {
+    foreach (['content_js', 'js', 'reading', 'discovery_js', 'reader_preferences_js'] as $key) {
         echo '<script src="/assets/' . $manifest[$key] . '"></script>';
     }
 }
@@ -446,6 +496,9 @@ require THEME . '/inc.php';
 require THEME . '/reading.php';
 require THEME . '/appearance.php';
 require THEME . '/discovery.php';
+require THEME . '/browsing.php';
+require THEME . '/home-sections.php';
+require THEME . '/reader-preferences.php';
 require THEME . '/customizer.php';
 $mods = [];
 $posts_page_id = 0;
@@ -580,6 +633,7 @@ foreach (['page-archives.php', 'pages/page-archives.php'] as $slug) {
     $posts[1001]->post_password = '';
 }
 $slug = 'page-archives.php';
+$rendered['page-archives.html'] = render('page-archives.php');
 check(
     'registered root template renders archive',
     str_contains(render('page-archives.php'), 'pagenest-archive-month'),
@@ -635,6 +689,7 @@ foreach (
     check('native search scope ' . $input, $query->query_vars['post_type'] === $expected);
 }
 $_GET = [];
+require __DIR__ . '/browsing-fixtures.php';
 $out = THEME . '/.runtime/frontend';
 if (!is_dir($out)) {
     mkdir($out, 0777, true);
@@ -646,6 +701,10 @@ $manifest = require THEME . '/assets/manifest.php';
 foreach ($manifest as $name) {
     copy(THEME . '/assets/' . $name, $out . '/assets/' . $name);
 }
+file_put_contents(
+    $out . '/assets/fixture-cover.svg',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360"><rect width="640" height="360" fill="#c7dfec"/><circle cx="490" cy="90" r="55" fill="#f9e5b4"/><path d="M0 360L200 120 350 300 450 200 640 360" fill="#789eb4"/></svg>',
+);
 foreach ($rendered as $name => $content) {
     file_put_contents($out . '/' . $name, $content);
 }

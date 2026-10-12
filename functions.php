@@ -6,6 +6,9 @@ require_once __DIR__ . '/inc.php';
 require_once __DIR__ . '/reading.php';
 require_once __DIR__ . '/appearance.php';
 require_once __DIR__ . '/discovery.php';
+require_once __DIR__ . '/browsing.php';
+require_once __DIR__ . '/home-sections.php';
+require_once __DIR__ . '/reader-preferences.php';
 add_action('after_setup_theme', static function () {
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');

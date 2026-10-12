@@ -6,6 +6,9 @@ mapping = {}
 for key, ext, name in [
     ("css", "css", "layout.css"),
     ("appearance", "css", "appearance.css"),
+    ("browsing", "css", "browsing.css"),
+    ("reader_preferences_css", "css", "reader-preferences.css"),
+    ("reader_preferences_js", "js", "reader-preferences.js"),
     ("discovery_css", "css", "discovery.css"),
     ("discovery_js", "js", "discovery.js"),
     ("js", "js", "navigation.js"),

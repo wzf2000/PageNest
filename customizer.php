@@ -149,6 +149,8 @@ add_action('customize_register', static function ($wp_customize) {
             [
                 'title' => ['名称', 'text', 'sanitize_text_field'],
                 'url' => ['链接', 'url', 'esc_url_raw'],
+                'description' => ['简介（可选）', 'textarea', 'sanitize_textarea_field'],
+                'status' => ['状态说明（可选）', 'text', 'sanitize_text_field'],
             ]
             as $key => $field
         ) {
