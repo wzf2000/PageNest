@@ -47,7 +47,7 @@
 .pagenest-site .pagenest-hero h1 {
   font-family: var(--pagenest-display-font);
   font-weight: 500;
-  font-size: clamp(2.25rem, 4.5vw, 4rem);
+  font-size: calc(clamp(2.25rem, 4.5vw, 4rem) * var(--pagenest-font-scale));
   line-height: 1.2;
   letter-spacing: -0.04em;
   margin: 12px 0 22px;
@@ -274,7 +274,7 @@
 }
 .pagenest-site .pagenest-article-header h1 {
   font-family: var(--pagenest-display-font);
-  font-size: clamp(1.875rem, 3.1vw, 2.75rem);
+  font-size: calc(clamp(1.875rem, 3.1vw, 2.75rem) * var(--pagenest-font-scale));
   font-weight: 500;
   line-height: 1.35;
   letter-spacing: -0.025em;
@@ -352,7 +352,7 @@
 .pagenest-site .pagenest-list-header h1 {
   font-family: var(--pagenest-display-font);
   font-weight: 500;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: calc(clamp(2rem, 4vw, 3rem) * var(--pagenest-font-scale));
 }
 .pagenest-footer {
   padding-block: 36px 48px;

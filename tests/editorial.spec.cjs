@@ -143,3 +143,33 @@ test('editorial article actions honor the local dark palette', async ({ page }) 
   await expect(like).toHaveCSS('background-color', 'rgb(44, 55, 69)');
   await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(247, 246, 242)');
 });
+
+for (const width of [320, 390, 1440]) {
+  test(`saved base font settings scale all editorial titles at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 1000 });
+    for (const template of ['home', 'article', 'list']) {
+      const sizes = [];
+      for (const baseSize of [14, 20]) {
+        await page.goto(`/editorial-${template}-font-${baseSize}.html`);
+        const metrics = await page
+          .locator('h1')
+          .first()
+          .evaluate((title) => ({
+            title: parseFloat(getComputedStyle(title).fontSize),
+            scale: parseFloat(
+              getComputedStyle(document.documentElement).getPropertyValue('--pagenest-font-scale'),
+            ),
+            root: getComputedStyle(document.documentElement).fontSize,
+          }));
+        expect(metrics.scale).toBe(baseSize / 16);
+        expect(metrics.root).toBe('16px');
+        sizes.push(metrics.title);
+        await expect(page.locator('h1').first()).toBeVisible();
+        expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+          true,
+        );
+      }
+      expect(sizes[1] / sizes[0]).toBeCloseTo(20 / 14, 4);
+    }
+  });
+}

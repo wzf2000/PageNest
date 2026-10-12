@@ -774,7 +774,7 @@ msgstr ""
 msgid "Record ideas and discoveries.\nOrganize your thoughts and share your explorations here."
 msgstr ""
 
-#: login.php:39
+#: login.php:42
 msgid "Register with email"
 msgstr ""
 
@@ -1056,7 +1056,11 @@ msgstr ""
 msgid "Warm paper"
 msgstr ""
 
-#: login.php:5
+#: login.php:6
+msgid "Welcome. Contact the site administrator if you need help."
+msgstr ""
+
+#: login.php:8
 msgid "Welcome. You can register with your email address. Contact the site administrator if you need help."
 msgstr ""
 

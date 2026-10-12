@@ -829,6 +829,13 @@ $posts[1001]->post_title = '让知识沉淀下来：建立可持续的阅读习�
 $rendered['editorial-article.html'] = render('singular.php');
 $posts[1001]->post_title = str_repeat('一个需要完整呈现的长标题：从问题出发理解设计，', 8);
 $rendered['editorial-long-title.html'] = render('singular.php');
+foreach ([14, 20] as $base_size) {
+    $mods['pagenest_appearance_font-size'] = $base_size;
+    $rendered['editorial-home-font-' . $base_size . '.html'] = render('front-page.php');
+    $rendered['editorial-article-font-' . $base_size . '.html'] = render('singular.php');
+    $rendered['editorial-list-font-' . $base_size . '.html'] = render('index.php');
+}
+
 $out = THEME . '/.runtime/frontend';
 if (!is_dir($out)) {
     mkdir($out, 0777, true);

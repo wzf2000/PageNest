@@ -125,7 +125,7 @@ function wp_get_theme($template)
     return new class {
         public function get($key)
         {
-            return '1.2.0-rc.3';
+            return '1.2.0-rc.4';
         }
     };
 }

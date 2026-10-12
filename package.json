@@ -6,7 +6,7 @@
     "format:check": "node tools/format.cjs --check",
     "build": "python3 build-assets.py",
     "package": "python3 tools/package.py",
-    "test": "php tests/i18n.php && php tests/product.php && php tests/appearance.php && php tests/verify-theme.php && python3 -m unittest discover -s tests -p \"test_release.py\" && npm run i18n:check",
+    "test": "php tests/i18n.php && php tests/login.php && php tests/product.php && php tests/appearance.php && php tests/verify-theme.php && python3 -m unittest discover -s tests -p \"test_release.py\" && npm run i18n:check",
     "test:frontend": "playwright test",
     "package:check": "python3 tools/release.py --check-package",
     "identity:check": "python3 tools/identity_scan.py",
@@ -21,6 +21,6 @@
     "prettier": "3.9.6",
     "@playwright/test": "1.55.1"
   },
-  "version": "1.2.0-rc.3",
+  "version": "1.2.0-rc.4",
   "license": "GPL-2.0-or-later"
 }

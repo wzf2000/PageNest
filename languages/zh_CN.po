@@ -797,3 +797,6 @@ msgstr "你的评论正在等待审核。"
 
 msgid "← Previous page"
 msgstr "← 上一页"
+
+msgid "Welcome. Contact the site administrator if you need help."
+msgstr "欢迎登录。如需帮助，请联系本站管理员。"

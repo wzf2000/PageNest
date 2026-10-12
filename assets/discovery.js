@@ -11,17 +11,21 @@
   panel?.addEventListener('toggle', () => {
     if (panel.open) panel.querySelector('input')?.focus();
   });
-  document.addEventListener(
-    'keydown',
-    (event) => {
-      if (event.key === 'Escape' && panel?.open) {
-        event.stopImmediatePropagation();
-        panel.open = false;
-        panel.querySelector('summary').focus();
-      }
-    },
-    true,
-  );
+  panel?.addEventListener('keydown', (event) => {
+    if (
+      event.key !== 'Escape' ||
+      !(event.target instanceof Element) ||
+      !panel.open ||
+      event.defaultPrevented ||
+      event.isComposing ||
+      event.keyCode === 229 ||
+      event.target.closest('dialog, [role="dialog"], [aria-modal="true"]')
+    )
+      return;
+    event.preventDefault();
+    panel.open = false;
+    panel.querySelector('summary').focus();
+  });
   document.addEventListener('click', (event) => {
     if (panel?.open && !panel.contains(event.target)) panel.open = false;
   });

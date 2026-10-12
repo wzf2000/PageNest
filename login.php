@@ -2,6 +2,9 @@
 defined('ABSPATH') || exit();
 function pagenest_login_notice_default()
 {
+    if (!get_option('users_can_register')) {
+        return __('Welcome. Contact the site administrator if you need help.', 'pagenest');
+    }
     return __(
         'Welcome. You can register with your email address. Contact the site administrator if you need help.',
         'pagenest',
