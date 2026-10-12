@@ -6,6 +6,9 @@ function pagenest_image_setting($value)
     return !$id || wp_attachment_is_image($id) ? $id : 0;
 }
 add_action('customize_register', static function ($wp_customize) {
+    if (function_exists('pagenest_register_appearance_customizer')) {
+        pagenest_register_appearance_customizer($wp_customize);
+    }
     $wp_customize->add_section('pagenest_footer', ['title' => '页脚信息', 'priority' => 33]);
     $wp_customize->add_section('pagenest_navigation', [
         'title' => '归档与关于链接',

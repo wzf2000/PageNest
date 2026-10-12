@@ -27,6 +27,13 @@ if (isset($brand_parts[1])) { ?><span class="pagenest-brand-note"><?php echo esc
                 'pagenest_header_actions',
                 get_queried_object_id(),
             ); ?></div>
+            <details class="pagenest-header-search">
+                <summary>搜索</summary>
+                <div class="pagenest-search-popover"><?php
+                get_search_form();
+                pagenest_discovery_links();
+                ?></div>
+            </details>
             <button class="pagenest-menu-toggle" type="button" aria-expanded="false"
                 aria-controls="pagenest-nav">菜单 <span aria-hidden="true">☰</span></button>
             <nav id="pagenest-nav" aria-label="主导航"><?php

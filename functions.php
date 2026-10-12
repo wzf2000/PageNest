@@ -4,6 +4,8 @@ if (!defined('ABSPATH')) {
 }
 require_once __DIR__ . '/inc.php';
 require_once __DIR__ . '/reading.php';
+require_once __DIR__ . '/appearance.php';
+require_once __DIR__ . '/discovery.php';
 add_action('after_setup_theme', static function () {
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
@@ -25,6 +27,7 @@ add_action('after_setup_theme', static function () {
     add_theme_support('pagenest-independent-layout');
     add_theme_support('pagenest-reading-slots');
     add_editor_style('assets/content.css');
+    add_editor_style('assets/appearance.css');
     register_nav_menu('pagenest_primary', '全站主导航');
 });
 add_filter('body_class', static function ($classes) {

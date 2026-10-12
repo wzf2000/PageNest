@@ -37,3 +37,9 @@
 主题声明 `pagenest-independent-layout` 特性，兼容插件据此启用相应前端适配。
 
 > [使用指南](USAGE.md) · [贡献指南](../CONTRIBUTING.md) · [返回项目首页](../README.md)
+
+## 视觉与搜索接口
+
+`pagenest_appearance_*` theme mods 由自定义器校验；`appearance.php` 是变量与默认值唯一入口，`assets/appearance.css` 提供无内联值时的默认值。不要编辑带哈希的资源。
+
+`pagenest_search_endpoint` 可返回同源公开 GET 接口，参数 `q`、`kind`，响应为 `items` 数组（`id`、`title`、`url`、`kind_label`）；主题不发送身份凭据，拒绝跨源结果 URL。`pagenest_search_kinds` 扩展筛选名称，服务端必须自行执行相同的访问与范围检查。默认原生搜索不要求 Companion。

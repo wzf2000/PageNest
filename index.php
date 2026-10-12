@@ -12,6 +12,13 @@
             echo esc_html(wp_strip_all_tags(get_the_archive_title()));
         } ?></h1>
     </header>
+    <?php if (
+        is_search() ||
+        is_404()
+    ): ?><section class="pagenest-search-page" aria-label="查找内容"><?php
+get_search_form();
+pagenest_discovery_links();
+?></section><?php endif; ?>
     <div class="pagenest-list-grid">
         <div>
             <div class="pagenest-post-list"><?php if (have_posts() && !is_404()):

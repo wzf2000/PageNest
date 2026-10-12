@@ -12,6 +12,7 @@ $posts_page_id = 2000;
 $slug = '';
 $loop = 0;
 $checks = [];
+$fixture_search = false;
 class WP_Post
 {
     public $ID,
@@ -47,10 +48,27 @@ $posts[1006]->post_type = 'page';
 class WP_Query
 {
     public $posts = [];
+    public $query_vars = [];
+    public function is_main_query()
+    {
+        return true;
+    }
+    public function is_search()
+    {
+        return true;
+    }
+    public function set($key, $value)
+    {
+        $this->query_vars[$key] = $value;
+    }
     public function __construct($args)
     {
         $this->posts = [];
     }
+}
+class WP_Customize_Color_Control
+{
+    public function __construct(...$args) {}
 }
 class WP_Customize_Image_Control
 {
@@ -263,8 +281,8 @@ function get_page_template_slug()
 }
 function have_posts()
 {
-    global $loop;
-    return $loop === 0;
+    global $loop, $fixture_search;
+    return !$fixture_search && $loop === 0;
 }
 function the_post()
 {
@@ -322,25 +340,82 @@ function wp_login_url()
 {
     return home_url('/login');
 }
+function get_search_form()
+{
+    require THEME . '/searchform.php';
+}
+function wp_unique_id($prefix = '')
+{
+    static $id = 0;
+    return $prefix . ++$id;
+}
+function get_search_query()
+{
+    return 'Synthetic';
+}
+function sanitize_key($value)
+{
+    return preg_replace('/[^a-z0-9_-]/', '', strtolower($value));
+}
+function wp_unslash($value)
+{
+    return stripslashes($value);
+}
+function selected($value, $expected, $echo = true)
+{
+    $selected = $value === $expected ? 'selected="selected"' : '';
+    if ($echo) {
+        echo $selected;
+    }
+    return $selected;
+}
+function is_admin()
+{
+    return false;
+}
+function is_search()
+{
+    global $fixture_search;
+    return $fixture_search;
+}
+function is_404()
+{
+    return false;
+}
+function is_home()
+{
+    return !is_search();
+}
+function paginate_links($args = [])
+{
+    return '<a href="/?s=Synthetic&amp;pn_kind=page&amp;paged=2">2</a>';
+}
+function wp_strip_all_tags($value)
+{
+    return strip_tags($value);
+}
+function get_the_archive_title()
+{
+    return 'Synthetic archive';
+}
+function get_categories($args = [])
+{
+    return [];
+}
 function wp_head()
 {
     $manifest = require THEME . '/assets/manifest.php';
-    echo '<link rel="stylesheet" href="/assets/' .
-        $manifest['css'] .
-        '"><link rel="stylesheet" href="/assets/' .
-        $manifest['content'] .
-        '">';
+    foreach (['css', 'content', 'appearance', 'discovery_css'] as $key) {
+        echo '<link rel="stylesheet" href="/assets/' . $manifest[$key] . '">';
+    }
+    echo '<style>' . pagenest_appearance_css() . '</style>';
 }
 function wp_footer()
 {
     $manifest = require THEME . '/assets/manifest.php';
-    echo '<script src="/assets/' .
-        $manifest['content_js'] .
-        '"></script><script src="/assets/' .
-        $manifest['js'] .
-        '"></script><script src="/assets/' .
-        $manifest['reading'] .
-        '"></script>';
+    foreach (['content_js', 'js', 'reading', 'discovery_js'] as $key) {
+        echo '<script src="/assets/' . $manifest[$key] . '"></script>';
+    }
 }
 function get_header()
 {
@@ -369,6 +444,8 @@ function check($name, $value)
 }
 require THEME . '/inc.php';
 require THEME . '/reading.php';
+require THEME . '/appearance.php';
+require THEME . '/discovery.php';
 require THEME . '/customizer.php';
 $mods = [];
 $posts_page_id = 0;
@@ -522,6 +599,42 @@ check(
 );
 $posts[1001]->post_password = '';
 $rendered['article-integrated.html'] = $integrated;
+$mods = [
+    'pagenest_appearance_preset' => 'warm',
+    'pagenest_appearance_reading-size' => 22,
+    'pagenest_appearance_font-size' => 18,
+    'pagenest_appearance_container' => 1320,
+    'pagenest_appearance_spacing' => 1.1,
+    'pagenest_appearance_radius' => 18,
+];
+$rendered['article-appearance.html'] = render('singular.php');
+check(
+    'appearance rendered from shared server values',
+    str_contains($rendered['article-appearance.html'], '--pagenest-reading-size:22px') &&
+        str_contains($rendered['article-appearance.html'], '--pagenest-container:1320px'),
+);
+$appearance_css = pagenest_appearance_css();
+$mods = ['pagenest_topics' => [['title' => 'Synthetic topic', 'url' => home_url('/topic')]]];
+add_filter('pagenest_search_endpoint', fn() => home_url('/wp-json/pagenest/v1/discovery'));
+$fixture_search = true;
+$rendered['search-discovery.html'] = render('index.php');
+$fixture_search = false;
+check(
+    'search form unique IDs',
+    preg_match_all('/id="(pagenest-search-\d+)"/', $rendered['search-discovery.html'], $ids) &&
+        count($ids[1]) === count(array_unique($ids[1])),
+);
+check('search selected scope and invalid scope fallback', pagenest_search_kind() === 'all');
+foreach (
+    ['post' => 'post', 'page' => 'page', 'invalid' => ['post', 'page']]
+    as $input => $expected
+) {
+    $_GET['pn_kind'] = $input;
+    $query = new WP_Query([]);
+    do_action('pre_get_posts', $query);
+    check('native search scope ' . $input, $query->query_vars['post_type'] === $expected);
+}
+$_GET = [];
 $out = THEME . '/.runtime/frontend';
 if (!is_dir($out)) {
     mkdir($out, 0777, true);
@@ -543,4 +656,14 @@ $preview =
     $manifest['content_js'] .
     '"></script>';
 file_put_contents($out . '/editor-preview.html', $preview);
+file_put_contents(
+    $out . '/editor-appearance.html',
+    '<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/assets/' .
+        $manifest['appearance'] .
+        '"><link rel="stylesheet" href="/assets/' .
+        $manifest['content'] .
+        '"><style>' .
+        $appearance_css .
+        '</style><div class="editor-styles-wrapper"><p>Editor appearance consistency</p><h2>Heading</h2></div>',
+);
 echo count($checks) . " theme PHP checks passed\n";

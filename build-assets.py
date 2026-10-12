@@ -5,6 +5,9 @@ assets = Path(__file__).resolve().parent / "assets"
 mapping = {}
 for key, ext, name in [
     ("css", "css", "layout.css"),
+    ("appearance", "css", "appearance.css"),
+    ("discovery_css", "css", "discovery.css"),
+    ("discovery_js", "js", "discovery.js"),
     ("js", "js", "navigation.js"),
     ("reading", "js", "reading.js"),
     ("login", "css", "login.css"),
