@@ -4,9 +4,9 @@ defined('ABSPATH') || exit();
 function pagenest_search_kinds(): array
 {
     return apply_filters('pagenest_search_kinds', [
-        'all' => '全部内容',
-        'post' => '文章',
-        'page' => '页面',
+        'all' => __('All content', 'pagenest'),
+        'post' => __('Articles', 'pagenest'),
+        'page' => __('Pages', 'pagenest'),
     ]);
 }
 function pagenest_search_kind(): string
@@ -23,7 +23,9 @@ function pagenest_discovery_links(): void
     if (!is_array($topics)) {
         return;
     }
-    echo '<nav class="pagenest-discovery-links" aria-label="探索专题">';
+    echo '<nav class="pagenest-discovery-links" aria-label="' .
+        esc_attr__('Explore topics', 'pagenest') .
+        '">';
     foreach (array_slice($topics, 0, 6) as $topic) {
         if (
             !is_array($topic) ||

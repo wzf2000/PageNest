@@ -6,23 +6,23 @@ function pagenest_appearance_presets()
 {
     return [
         'default' => [
-            'background' => '#f4f6f9',
-            'surface' => '#ffffff',
-            'text' => '#303b4a',
-            'heading' => '#18324d',
-            'content-heading' => '#172b43',
-            'muted' => '#637387',
-            'accent' => '#285f8f',
-            'accent-hover' => '#123f66',
-            'content-link' => '#2266a5',
-            'content-link-hover' => '#164777',
-            'focus' => '#2b78b8',
-            'border' => '#e1e7ee',
-            'soft' => '#edf3f9',
-            'code-background' => '#f6f8fb',
-            'code-text' => '#325578',
-            'quote-background' => '#f3f7fb',
-            'quote-border' => '#82a6c7',
+            'background' => '#f7f6f2',
+            'surface' => '#fffefb',
+            'text' => '#293630',
+            'heading' => '#23352c',
+            'content-heading' => '#23352c',
+            'muted' => '#69736b',
+            'accent' => '#426354',
+            'accent-hover' => '#2b493a',
+            'content-link' => '#426354',
+            'content-link-hover' => '#2b493a',
+            'focus' => '#426354',
+            'border' => '#e1e5df',
+            'soft' => '#eef1eb',
+            'code-background' => '#f2f3ed',
+            'code-text' => '#426354',
+            'quote-background' => '#f2f3ed',
+            'quote-border' => '#93a58f',
         ],
         'warm' => [
             'background' => '#f5f1e9',
@@ -65,11 +65,20 @@ function pagenest_appearance_presets()
     ];
 }
 
+function pagenest_appearance_preset_labels()
+{
+    return [
+        'default' => __('Default', 'pagenest'),
+        'warm' => __('Warm paper', 'pagenest'),
+        'forest' => __('Forest', 'pagenest'),
+    ];
+}
+
 function pagenest_appearance_numbers()
 {
     return [
         'font-size' => [
-            'label' => '全站基础字号（px）',
+            'label' => __('Base font size (px)', 'pagenest'),
             'default' => 16,
             'min' => 14,
             'max' => 20,
@@ -77,7 +86,7 @@ function pagenest_appearance_numbers()
             'unit' => 'px',
         ],
         'reading-size' => [
-            'label' => '正文字号（px）',
+            'label' => __('Article font size (px)', 'pagenest'),
             'default' => 17,
             'min' => 15,
             'max' => 24,
@@ -85,7 +94,7 @@ function pagenest_appearance_numbers()
             'unit' => 'px',
         ],
         'reading-line-height' => [
-            'label' => '正文行高',
+            'label' => __('Article line height', 'pagenest'),
             'default' => 1.9,
             'min' => 1.5,
             'max' => 2.2,
@@ -93,7 +102,7 @@ function pagenest_appearance_numbers()
             'unit' => '',
         ],
         'spacing' => [
-            'label' => '间距比例',
+            'label' => __('Spacing scale', 'pagenest'),
             'default' => 1,
             'min' => 0.8,
             'max' => 1.2,
@@ -101,7 +110,7 @@ function pagenest_appearance_numbers()
             'unit' => '',
         ],
         'radius' => [
-            'label' => '卡片圆角（px）',
+            'label' => __('Card corner radius (px)', 'pagenest'),
             'default' => 12,
             'min' => 0,
             'max' => 24,
@@ -109,7 +118,7 @@ function pagenest_appearance_numbers()
             'unit' => 'px',
         ],
         'container' => [
-            'label' => '全站最大宽度（px）',
+            'label' => __('Maximum site width (px)', 'pagenest'),
             'default' => 1240,
             'min' => 1040,
             'max' => 1440,
@@ -191,8 +200,11 @@ function pagenest_appearance_css()
 function pagenest_register_appearance_customizer($wp_customize)
 {
     $wp_customize->add_section('pagenest_appearance', [
-        'title' => '全站视觉设置',
-        'description' => '统一全站与正文预览的颜色和阅读尺寸。自定义颜色留空时使用所选配色。',
+        'title' => __('Site appearance', 'pagenest'),
+        'description' => __(
+            'Share colors and reading dimensions across the site and editor preview. Leave custom colors empty to use the selected palette.',
+            'pagenest',
+        ),
         'priority' => 31,
     ]);
     $wp_customize->add_setting('pagenest_appearance_preset', [
@@ -202,13 +214,17 @@ function pagenest_register_appearance_customizer($wp_customize)
         'transport' => 'refresh',
     ]);
     $wp_customize->add_control('pagenest_appearance_preset', [
-        'label' => '协调配色',
+        'label' => __('Color palette', 'pagenest'),
         'section' => 'pagenest_appearance',
         'type' => 'select',
-        'choices' => ['default' => '默认', 'warm' => '暖纸', 'forest' => '森林'],
+        'choices' => pagenest_appearance_preset_labels(),
     ]);
     foreach (
-        ['background' => '全站背景', 'text' => '正文颜色', 'accent' => '链接与按钮颜色']
+        [
+            'background' => __('Site background', 'pagenest'),
+            'text' => __('Text color', 'pagenest'),
+            'accent' => __('Link and button color', 'pagenest'),
+        ]
         as $key => $label
     ) {
         $id = 'pagenest_appearance_' . $key;

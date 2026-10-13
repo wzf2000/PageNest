@@ -13,17 +13,23 @@
                 <header class="pagenest-article-header">
                     <div class="pagenest-entry-labels"><a href="<?php echo esc_url(
                         pagenest_posts_url(),
-                    ); ?>">文章与笔记</a><?php if (
+                    ); ?>"><?php echo esc_html__('Articles and notes', 'pagenest'); ?></a><?php if (
     get_post_status() === 'private'
-): ?><span class="pagenest-badge">私密</span><?php endif; ?></div>
+): ?><span class="pagenest-badge"><?php echo esc_html__(
+    'Private',
+    'pagenest',
+); ?></span><?php endif; ?></div>
                     <h1><?php echo esc_html(
                         get_post_field('post_title', get_the_ID()),
                     ); ?></h1><?php if ($article) {
     pagenest_author();
+    pagenest_browsing_metadata(get_the_ID());
 } ?>
                 </header>
                 <?php if (
                     has_post_thumbnail() &&
+                    (!$article ||
+                        pagenest_browsing_bool(get_theme_mod('pagenest_article_cover', true))) &&
                     !post_password_required()
                 ): ?><figure class="pagenest-cover"><?php the_post_thumbnail('large', [
     'loading' => 'eager',
@@ -42,7 +48,10 @@
                     the_content();
                 }
                 wp_link_pages([
-                    'before' => '<nav class="pagenest-pagination" aria-label="正文分页">',
+                    'before' =>
+                        '<nav class="pagenest-pagination" aria-label="' .
+                        esc_attr__('Article pagination', 'pagenest') .
+                        '">',
                     'after' => '</nav>',
                 ]);
                 ?></div>
@@ -50,22 +59,25 @@
                     $article &&
                     !post_password_required()
                 ): ?><footer class="pagenest-article-footer"><a href="#comments"><?php echo esc_html(
-    get_comments_number(),
-); ?> 条评论</a><?php
- if (function_exists('the_views')) {
-     echo '<span>';
-     the_views();
-     echo '</span>';
- }
- do_action('pagenest_article_actions', get_the_ID());
- edit_post_link('编辑文章');
- ?></footer><?php endif; ?>
+    pagenest_comment_count(get_comments_number()),
+); ?></a><?php
+if (function_exists('the_views')) {
+    echo '<span>';
+    the_views();
+    echo '</span>';
+}
+do_action('pagenest_article_actions', get_the_ID());
+edit_post_link(__('Edit article', 'pagenest'));
+?></footer><?php endif; ?>
             </article>
             <?php if (
                 $article &&
                 !post_password_required()
-            ): ?><nav class="pagenest-adjacent" aria-label="相邻文章"><?php foreach (
-    [true => '上一篇', false => '下一篇']
+            ): ?><nav class="pagenest-adjacent" aria-label="<?php echo esc_attr__(
+    'Adjacent articles',
+    'pagenest',
+); ?>"><?php foreach (
+    [true => __('Previous article', 'pagenest'), false => __('Next article', 'pagenest')]
     as $previous => $label
 ) {
     $adjacent = get_adjacent_post(false, '', (bool) $previous);

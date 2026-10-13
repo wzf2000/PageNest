@@ -1,6 +1,7 @@
 <?php
 /** Synthetic WordPress fixture: no database, accounts, cookies, or network writes. */
 define('ABSPATH', __DIR__);
+require __DIR__ . '/i18n-stubs.php';
 const THEME = __DIR__ . '/..';
 $mods = [];
 $filters = [];
@@ -13,6 +14,8 @@ $slug = '';
 $loop = 0;
 $checks = [];
 $fixture_search = false;
+$fixture_browsing = false;
+$fixture_queries = [];
 class WP_Post
 {
     public $ID,
@@ -28,13 +31,37 @@ class WP_Post
         $this->ID = $id;
         $this->post_status = $status;
         $this->post_type = $type;
-        $this->post_title = 'Synthetic article ' . $id;
+        $titles = [
+            '让知识沉淀下来：建立可持续的阅读习惯',
+            '从问题出发，设计清晰的技术笔记',
+            '认识数据结构中的时间与空间',
+            '在复杂系统里找到稳定的边界',
+            '一次小规模实验的记录',
+            '专题与系列导览',
+            '理解概率：从直觉走向推导',
+            '把抽象概念写成可运行的代码',
+            '做一个长期维护的个人知识库',
+            '用简单的工具组织日常工作',
+        ];
+        $this->post_title = $titles[$id - 1001] ?? '阅读笔记';
         $this->post_content =
-            '<a id="legacy-heading"></a><table style="min-width:720px"><tr><th>Synthetic table</th><th>Second column</th></tr><tr><td>Example</td><td>Example</td></tr></table><span class="pagenest-exercise-hint">Synthetic answer hint</span>' .
-            str_repeat(
-                '<h2>Reading <span class="mbb-math" data-mbb-tex="x^2">x squared</span><button aria-hidden="true">ignore</button> heading</h2><h3>Child heading</h3><h4>Deep heading</h4><p>Public synthetic content for theme layout verification.</p>',
-                6,
-            );
+            '<a id="legacy-heading"></a><p>阅读不是把所有信息存下来，而是为下一次思考留下可以重新进入的线索。先提出一个问题，再用例子检验自己的理解，最后写下仍然没有解决的部分。</p><table style="min-width:720px"><tr><th>阅读阶段</th><th>值得留下的问题</th></tr><tr><td>建立直觉</td><td>它解决了什么问题？</td></tr></table><span class="pagenest-exercise-hint">先独立思考，再查看提示。</span>';
+        foreach (
+            [
+                '从一个具体问题开始',
+                '让例子帮助理解',
+                '区分事实与假设',
+                '建立知识之间的联系',
+                '回到实践中检验',
+                '给后续阅读留下线索',
+            ]
+            as $heading
+        ) {
+            $this->post_content .=
+                '<h2>' .
+                $heading .
+                ' <span class="mbb-math" data-mbb-tex="x^2">x squared</span><button aria-hidden="true">ignore</button></h2><p>一个好问题能够连接分散的材料。把术语放回它原本的使用场景，比孤立地记住定义更容易形成稳定的理解。</p><h3>观察与记录</h3><p>记录一次尝试的条件和结果，也记录没有奏效的方向。简洁的笔记应当让未来的自己快速找回推理过程。</p><h4>下一步可以尝试什么</h4><p>选择一个足够小的例子，把理解转化成可以检查的步骤，然后回看最初的问题。</p>';
+        }
     }
 }
 $posts = [];
@@ -63,7 +90,9 @@ class WP_Query
     }
     public function __construct($args)
     {
-        $this->posts = [];
+        global $fixture_browsing, $fixture_queries, $posts;
+        $fixture_queries[] = $args;
+        $this->posts = $fixture_browsing ? array_values($posts) : [];
     }
 }
 class WP_Customize_Color_Control
@@ -82,8 +111,20 @@ class CustomizeFixture
 {
     public $settings = [],
         $controls = [];
-    public function add_section(...$args) {}
-    public function add_panel(...$args) {}
+    public $sections = [],
+        $panels = [];
+    public function add_section($id, $args)
+    {
+        $this->sections[$id] = (object) $args;
+    }
+    public function get_section($id)
+    {
+        return $this->sections[$id] ?? null;
+    }
+    public function add_panel($id, $args)
+    {
+        $this->panels[$id] = $args;
+    }
     public function add_setting($id, $args)
     {
         $this->settings[$id] = $args;
@@ -182,7 +223,7 @@ function get_permalink($id = null)
 }
 function get_bloginfo($key)
 {
-    return $key === 'charset' ? 'UTF-8' : 'Synthetic Site';
+    return $key === 'charset' ? 'UTF-8' : '栖页 · 阅读与思考';
 }
 function bloginfo($key)
 {
@@ -204,6 +245,9 @@ function wp_get_post_categories($id)
 function get_posts($args)
 {
     global $posts, $meta;
+    if (($args['numberposts'] ?? 0) === 100) {
+        return array_values($posts);
+    }
     if (($args['numberposts'] ?? 0) === -1) {
         return array_values(
             array_filter(
@@ -256,7 +300,7 @@ function get_the_date($format, $post = null)
 }
 function get_the_author_meta($field, $id)
 {
-    return 'Synthetic Author';
+    return '编辑团队';
 }
 function get_author_posts_url($id)
 {
@@ -264,7 +308,7 @@ function get_author_posts_url($id)
 }
 function get_avatar(...$args)
 {
-    return '<span class="avatar">S</span>';
+    return '<span class="avatar">页</span>';
 }
 function get_post_status()
 {
@@ -295,6 +339,46 @@ function the_content()
 }
 function has_post_thumbnail(...$args)
 {
+    return !empty($GLOBALS['fixture_thumbnails']);
+}
+function get_the_post_thumbnail(...$args)
+{
+    return '<img src="/assets/fixture-cover.svg" alt="">';
+}
+function the_post_thumbnail(...$args)
+{
+    echo get_the_post_thumbnail();
+}
+function strip_shortcodes($text)
+{
+    return preg_replace('/\[.*?\]/s', '', $text);
+}
+function number_format_i18n($value)
+{
+    return number_format($value);
+}
+function get_the_category($id)
+{
+    return [];
+}
+function get_the_modified_date($format, $post)
+{
+    return '2026-10-13';
+}
+function get_post_modified_time(...$args)
+{
+    return 1791849600;
+}
+function get_post_time(...$args)
+{
+    return 1791763200;
+}
+function is_category()
+{
+    return false;
+}
+function is_tag()
+{
     return false;
 }
 function post_class($class)
@@ -317,7 +401,8 @@ function get_adjacent_post(...$args)
 }
 function language_attributes()
 {
-    echo 'lang="zh-CN"';
+    global $fixture_locale;
+    echo $fixture_locale === 'zh_CN' ? 'lang="zh-CN"' : 'lang="en-US"';
 }
 function body_class()
 {
@@ -405,15 +490,42 @@ function get_categories($args = [])
 function wp_head()
 {
     $manifest = require THEME . '/assets/manifest.php';
-    foreach (['css', 'content', 'appearance', 'discovery_css'] as $key) {
+    foreach (
+        [
+            'css',
+            'content',
+            'appearance',
+            'discovery_css',
+            'browsing',
+            'reader_preferences_css',
+            'editorial',
+        ]
+        as $key
+    ) {
         echo '<link rel="stylesheet" href="/assets/' . $manifest[$key] . '">';
     }
     echo '<style>' . pagenest_appearance_css() . '</style>';
+    if (get_theme_mod('pagenest_hero_attachment', 0)) {
+        echo '<style>:root{--pagenest-hero-image:url("/assets/fixture-cover.svg")}</style>';
+    }
 }
 function wp_footer()
 {
+    $names = [
+        'pagenest-content' => 'pagenestContentL10n',
+        'pagenest-reading' => 'pagenestReadingL10n',
+        'pagenest-discovery' => 'pagenestDiscoveryL10n',
+        'pagenest-reader-preferences' => 'pagenestReaderL10n',
+    ];
+    foreach (pagenest_script_translations() as $handle => $strings) {
+        echo '<script>window.' .
+            $names[$handle] .
+            '=' .
+            json_encode($strings, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) .
+            ';</script>';
+    }
     $manifest = require THEME . '/assets/manifest.php';
-    foreach (['content_js', 'js', 'reading', 'discovery_js'] as $key) {
+    foreach (['content_js', 'js', 'reading', 'discovery_js', 'reader_preferences_js'] as $key) {
         echo '<script src="/assets/' . $manifest[$key] . '"></script>';
     }
 }
@@ -442,11 +554,16 @@ function check($name, $value)
         throw new RuntimeException($name);
     }
 }
+require THEME . '/i18n.php';
 require THEME . '/inc.php';
 require THEME . '/reading.php';
 require THEME . '/appearance.php';
 require THEME . '/discovery.php';
+require THEME . '/browsing.php';
+require THEME . '/home-sections.php';
+require THEME . '/reader-preferences.php';
 require THEME . '/customizer.php';
+require THEME . '/design.php';
 $mods = [];
 $posts_page_id = 0;
 check(
@@ -460,6 +577,11 @@ check(
 $posts_page_id = 2000;
 $customizer = new CustomizeFixture();
 do_action('customize_register', $customizer);
+check(
+    'native design panel groups own sections',
+    count($customizer->panels) >= 1 &&
+        $customizer->sections['pagenest_appearance']->panel === 'pagenest_design',
+);
 $defaults = pagenest_setting_defaults();
 check(
     'all twelve settings registered',
@@ -525,7 +647,7 @@ check('home eyebrow escaped', str_contains($home, '&lt;img src=x onerror=alert(1
 check(
     'footer brand tagline escaped and two columns',
     str_contains($home, '&lt;script&gt;Tagline&lt;/script&gt;') &&
-        substr_count($home, 'Synthetic Site') >= 4,
+        substr_count($home, '栖页 · 阅读与思考') >= 3,
 );
 $article = render('singular.php');
 check(
@@ -580,6 +702,7 @@ foreach (['page-archives.php', 'pages/page-archives.php'] as $slug) {
     $posts[1001]->post_password = '';
 }
 $slug = 'page-archives.php';
+$rendered['page-archives.html'] = render('page-archives.php');
 check(
     'registered root template renders archive',
     str_contains(render('page-archives.php'), 'pagenest-archive-month'),
@@ -635,6 +758,84 @@ foreach (
     check('native search scope ' . $input, $query->query_vars['post_type'] === $expected);
 }
 $_GET = [];
+require __DIR__ . '/browsing-fixtures.php';
+$fixture_locale = 'en_US';
+$mods = [];
+$current = 1001;
+$rendered['article-english.html'] = render('singular.php');
+$rendered['home-english.html'] = render('front-page.php');
+$fixture_search = true;
+$rendered['search-english.html'] = render('index.php');
+$fixture_search = false;
+check(
+    'English native messages',
+    str_contains($rendered['home-english.html'], 'Browse articles') &&
+        !str_contains($rendered['home-english.html'], '探索专题'),
+);
+$mods = ['pagenest_home_intro' => '保留管理员自己的文案', 'pagenest_footer_tagline' => ''];
+check(
+    'Saved copy and intentional blank not translated',
+    pagenest_setting('pagenest_home_intro') === '保留管理员自己的文案' &&
+        pagenest_setting('pagenest_footer_tagline') === '',
+);
+check(
+    'English plurals',
+    pagenest_comment_count(1) === '1 comment' && pagenest_comment_count(2) === '2 comments',
+);
+$fixture_locale = 'zh_CN';
+check(
+    'Chinese catalog plurals',
+    pagenest_comment_count(1) === '1 条评论' && pagenest_comment_count(2) === '2 条评论',
+);
+$mods = [
+    'pagenest_home_intro' => '围绕真实的问题阅读、实践与记录。
+让每一页成为下一次思考的起点。',
+    'pagenest_home_eyebrow' => '合成演示 · 知识与思考',
+    'pagenest_topics' => [
+        [
+            'title' => '技术与实践',
+            'url' => home_url('/topic'),
+            'description' => '从基本概念出发，把理解写进实践。',
+            'status' => '持续更新',
+        ],
+        [
+            'title' => '阅读与笔记',
+            'url' => home_url('/notes'),
+            'description' => '留下问题、线索与值得重读的片段。',
+        ],
+        [
+            'title' => '工具与方法',
+            'url' => home_url('/tools'),
+            'description' => '用简单的方法组织长期工作。',
+        ],
+    ],
+];
+$mods['pagenest_authors'] = [
+    ['name' => '编辑团队'],
+    ['name' => '读者来稿'],
+    ['name' => '方法记录'],
+];
+$fixture_browsing = true;
+$fixture_thumbnails = true;
+$rendered['editorial-home.html'] = render('front-page.php');
+$mods['pagenest_hero_attachment'] = 321;
+$rendered['editorial-home-image.html'] = render('front-page.php');
+$mods['pagenest_hero_attachment'] = 0;
+$mods['pagenest_home_featured_enabled'] = true;
+$mods['pagenest_home_featured_0'] = 1001;
+$mods['pagenest_home_featured_1'] = 1002;
+$rendered['editorial-home-featured.html'] = render('front-page.php');
+$posts[1001]->post_title = '让知识沉淀下来：建立可持续的阅读习惯';
+$rendered['editorial-article.html'] = render('singular.php');
+$posts[1001]->post_title = str_repeat('一个需要完整呈现的长标题：从问题出发理解设计，', 8);
+$rendered['editorial-long-title.html'] = render('singular.php');
+foreach ([14, 20] as $base_size) {
+    $mods['pagenest_appearance_font-size'] = $base_size;
+    $rendered['editorial-home-font-' . $base_size . '.html'] = render('front-page.php');
+    $rendered['editorial-article-font-' . $base_size . '.html'] = render('singular.php');
+    $rendered['editorial-list-font-' . $base_size . '.html'] = render('index.php');
+}
+
 $out = THEME . '/.runtime/frontend';
 if (!is_dir($out)) {
     mkdir($out, 0777, true);
@@ -646,6 +847,10 @@ $manifest = require THEME . '/assets/manifest.php';
 foreach ($manifest as $name) {
     copy(THEME . '/assets/' . $name, $out . '/assets/' . $name);
 }
+file_put_contents(
+    $out . '/assets/fixture-cover.svg',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360"><rect width="640" height="360" fill="#e4e7de"/><circle cx="490" cy="90" r="55" fill="#d2b78d"/><path d="M0 360L200 120 350 300 450 200 640 360" fill="#7f9586"/></svg>',
+);
 foreach ($rendered as $name => $content) {
     file_put_contents($out . '/' . $name, $content);
 }

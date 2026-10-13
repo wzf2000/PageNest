@@ -1,5 +1,9 @@
 (() => {
   'use strict';
+  const l10n = {
+    tableLabel: 'Horizontally scrollable table',
+    ...window.pagenestContentL10n,
+  };
   const wrap = () => {
     const aliases = window.PageNestContentAliases;
     if (aliases && typeof aliases === 'object' && !Array.isArray(aliases)) {
@@ -21,7 +25,7 @@
         wrapper.className = 'pagenest-table-scroll';
         wrapper.tabIndex = 0;
         wrapper.setAttribute('role', 'region');
-        wrapper.setAttribute('aria-label', '可横向滚动的表格');
+        wrapper.setAttribute('aria-label', l10n.tableLabel);
         table.before(wrapper);
         wrapper.append(table);
       });

@@ -14,9 +14,27 @@
     nav.classList.toggle('pagenest-nav-open', open);
   });
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
+    if (
+      e.key !== 'Escape' ||
+      !(e.target instanceof Element) ||
+      e.defaultPrevented ||
+      e.isComposing ||
+      e.keyCode === 229 ||
+      e.target.closest('dialog, [role="dialog"], [aria-modal="true"]') ||
+      (!nav.contains(e.target) && !toggle.contains(e.target))
+    )
+      return;
+    if (toggle.getAttribute('aria-expanded') === 'true' && toggle.getClientRects().length) {
+      e.preventDefault();
       close();
       toggle.focus();
+      return;
+    }
+    const dropdown = e.target.closest('.pagenest-dropdown[open]');
+    if (dropdown && nav.contains(dropdown)) {
+      e.preventDefault();
+      dropdown.open = false;
+      dropdown.querySelector('summary')?.focus();
     }
   });
   document.addEventListener('click', (e) => {

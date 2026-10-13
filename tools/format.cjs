@@ -72,12 +72,19 @@ async function format() {
   );
   for (const [key, name] of Object.entries({
     css: 'layout.css',
+    editorial: 'editorial.css',
+    admin_design: 'admin-design.css',
+    customizer_design: 'customizer-design.css',
+    customizer_design_js: 'customizer-design.js',
     js: 'navigation.js',
     reading: 'reading.js',
     login: 'login.css',
     content: 'content.css',
     content_js: 'content.js',
     appearance: 'appearance.css',
+    browsing: 'browsing.css',
+    reader_preferences_css: 'reader-preferences.css',
+    reader_preferences_js: 'reader-preferences.js',
     discovery_css: 'discovery.css',
     discovery_js: 'discovery.js',
   })) {

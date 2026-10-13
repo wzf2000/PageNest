@@ -18,8 +18,7 @@
         if ($record !== ''): ?>
         <a href="https://beian.miit.gov.cn/" rel="external"><?php echo esc_html($record); ?></a>
         <?php endif;
-        ?><small>由
-            WordPress 支持</small>
+        ?><small><?php echo esc_html__('Powered by WordPress', 'pagenest'); ?></small>
     </div>
 </footer>
 <?php wp_footer(); ?>

@@ -1,21 +1,30 @@
 <?php get_header(); ?>
 <main id="pagenest-main" class="pagenest-main" tabindex="-1">
     <header class="pagenest-list-header">
-        <p class="pagenest-eyebrow">记录与分享</p>
+        <p class="pagenest-eyebrow"><?php echo esc_html__('Write and share', 'pagenest'); ?></p>
         <h1><?php if (is_404()) {
-            echo '没有找到这个页面';
+            echo esc_html__('Page not found', 'pagenest');
         } elseif (is_home()) {
-            echo '文章与笔记';
+            echo esc_html__('Articles and notes', 'pagenest');
         } elseif (is_search()) {
-            echo '搜索：' . esc_html(get_search_query());
+            echo esc_html(sprintf(__('Search: %s', 'pagenest'), get_search_query()));
         } else {
             echo esc_html(wp_strip_all_tags(get_the_archive_title()));
         } ?></h1>
+        <?php if (is_category() || is_tag()):
+            $description = get_the_archive_description();
+            if ($description): ?><div class="pagenest-archive-description"><?php echo wp_kses_post(
+    $description,
+); ?></div><?php endif;
+        endif; ?>
     </header>
     <?php if (
         is_search() ||
         is_404()
-    ): ?><section class="pagenest-search-page" aria-label="查找内容"><?php
+    ): ?><section class="pagenest-search-page" aria-label="<?php echo esc_attr__(
+    'Find content',
+    'pagenest',
+); ?>"><?php
 get_search_form();
 pagenest_discovery_links();
 ?></section><?php endif; ?>
@@ -28,16 +37,23 @@ pagenest_discovery_links();
                 endwhile;
             else:
                  ?><section class="pagenest-empty">
-                    <h2>暂时没有找到内容</h2>
-                    <p>试试其他关键词，或者返回首页继续浏览。</p><a href="<?php echo esc_url(
-                        home_url('/'),
-                    ); ?>">返回首页</a>
+                    <h2><?php echo esc_html__('No content found', 'pagenest'); ?></h2>
+                    <p><?php echo esc_html__(
+                        'Try another keyword or return to the home page to keep browsing.',
+                        'pagenest',
+                    ); ?></p><a href="<?php echo esc_url(home_url('/')); ?>"><?php echo esc_html__(
+    'Back to home',
+    'pagenest',
+); ?></a>
                 </section><?php
             endif; ?></div>
-            <nav class="pagenest-pagination" aria-label="文章列表分页"><?php echo paginate_links([
-                'prev_text' => '← 上一页',
-                'next_text' => '下一页 →',
-            ]); ?></nav>
+            <nav class="pagenest-pagination" aria-label="<?php echo esc_attr__(
+                'Article list pagination',
+                'pagenest',
+            ); ?>"><?php echo paginate_links([
+    'prev_text' => __('← Previous page', 'pagenest'),
+    'next_text' => __('Next page →', 'pagenest'),
+]); ?></nav>
         </div><?php pagenest_side(); ?>
     </div>
 </main>

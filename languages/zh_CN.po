@@ -1,0 +1,802 @@
+# PageNest Simplified Chinese translations.
+msgid ""
+msgstr "Project-Id-Version: PageNest\nPO-Revision-Date: 2026-10-13 00:00+0000\nLast-Translator: PageNest Contributors\nLanguage-Team: PageNest Contributors\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Domain: pagenest\nLanguage: zh_CN\nPlural-Forms: nplurals=1; plural=0;\n"
+
+msgid "%1$s · Slot %2$d"
+msgstr "%1$s · 位置 %2$d"
+
+msgid "%s comment"
+msgid_plural "%s comments"
+msgstr[0] "%s 条评论"
+
+msgid "%s public article, ordered by publication date."
+msgid_plural "%s public articles, ordered by publication date."
+msgstr[0] "共 %s 篇公开文章，按发布时间排列。"
+
+msgid "%s view"
+msgid_plural "%s views"
+msgstr[0] "%s 次浏览"
+
+msgid "%s · Order"
+msgstr "%s · 顺序"
+
+msgid "A configurable reading theme with topic navigation, author profiles, responsive layouts and extension slots for notes and site tools."
+msgstr "让知识与思考安放于页间。独立阅读主题，提供专题导航、作者展示和移动端布局，提供扩展接口接入笔记与站点工具；首页可从“外观 → PageNest”进入自定义器调整。"
+
+msgid "A home for knowledge and ideas"
+msgstr "让知识与思考安放于页间"
+
+msgid "A place for thoughtful reading"
+msgstr "为思考留一页"
+
+msgid "A setting value is outside the allowed range."
+msgstr "设置值不符合允许范围。"
+
+msgid "About"
+msgstr "关于"
+
+msgid "About %s minute to read"
+msgid_plural "About %s minutes to read"
+msgstr[0] "约 %s 分钟阅读"
+
+msgid "About link URL"
+msgstr "关于链接地址"
+
+msgid "About link label"
+msgstr "关于链接名称"
+
+msgid "Adjacent articles"
+msgstr "相邻文章"
+
+msgid "Advanced · saved visual values only"
+msgstr "高级设置 · 仅迁移已保存的视觉值"
+
+msgid "All articles →"
+msgstr "全部文章 →"
+
+msgid "All content"
+msgstr "全部内容"
+
+msgid "Appearance settings imported."
+msgstr "视觉设置已导入。"
+
+msgid "Applied to this page; browser storage is unavailable."
+msgstr "已应用；浏览器不允许保存，仅本页生效。"
+
+msgid "Archive"
+msgstr "归档"
+
+msgid "Archive and about links"
+msgstr "归档与关于链接"
+
+msgid "Archive link URL"
+msgstr "归档链接地址"
+
+msgid "Archive link label"
+msgstr "归档链接名称"
+
+msgid "Arrange and enable modules using existing public articles and pages."
+msgstr "调整模块顺序与开关，引用现有公开文章和页面。"
+
+msgid "Article archive"
+msgstr "文章归档"
+
+msgid "Article body"
+msgstr "正文"
+
+msgid "Article font size (px)"
+msgstr "正文字号（px）"
+
+msgid "Article line height"
+msgstr "正文行高"
+
+msgid "Article list pagination"
+msgstr "文章列表分页"
+
+msgid "Article navigation"
+msgstr "文章导航"
+
+msgid "Article outline"
+msgstr "文章提纲"
+
+msgid "Article pagination"
+msgstr "正文分页"
+
+msgid "Article width"
+msgstr "正文宽度"
+
+msgid "Articles"
+msgstr "文章"
+
+msgid "Articles and notes"
+msgstr "文章与笔记"
+
+msgid "Asset hash verified"
+msgstr "哈希校验通过"
+
+msgid "Asset missing or hash mismatch"
+msgstr "资源缺失或哈希不匹配"
+
+msgid "Asset: %s"
+msgstr "资源：%s"
+
+msgid "Author"
+msgstr "作者"
+
+msgid "Author %d · Avatar"
+msgstr "作者 %d · 头像"
+
+msgid "Author %d · Name"
+msgstr "作者 %d · 姓名"
+
+msgid "Author introduction"
+msgstr "作者介绍"
+
+msgid "Authors"
+msgstr "作者们"
+
+msgid "Back to home"
+msgstr "返回首页"
+
+msgid "Background"
+msgstr "背景"
+
+msgid "Background and notice. Authentication is handled by WordPress and optional plugins."
+msgstr "背景与提示语；认证由 WordPress 和可选插件负责。"
+
+msgid "Background image"
+msgstr "背景图片"
+
+msgid "Base font size (px)"
+msgstr "全站基础字号（px）"
+
+msgid "Browse articles"
+msgstr "浏览文章"
+
+msgid "Browse categories"
+msgstr "浏览分类"
+
+msgid "Browse related content →"
+msgstr "浏览相关内容 →"
+
+msgid "By total views"
+msgstr "按累计浏览量"
+
+msgid "Cancel reply"
+msgstr "取消回复"
+
+msgid "Card corner radius (px)"
+msgstr "卡片圆角（px）"
+
+msgid "Check versions, asset files and local interfaces only, without network requests or repairs. An available interface does not mean its module is enabled."
+msgstr "仅检查版本、资源文件及本地接口可用性；不执行网络请求或修复。接口存在不表示模块已启用。"
+
+msgid "Choose a public, unprotected page as a series, topic or tool entry. Its title and manual excerpt are used without copying content."
+msgstr "选择公开无密码页面作为系列、专题或工具入口；使用页面标题与手写摘要，不复制内容。"
+
+msgid "Choose the authors to display and edit their introduction."
+msgstr "选择要展示的站点作者并调整介绍。"
+
+msgid "Choose your own media; clear it for a text-focused introduction."
+msgstr "选择自己的图片；清空后显示以文字为主的介绍。"
+
+msgid "Clear type. A quieter page."
+msgstr "清晰的文字，安静的页面。"
+
+msgid "Collapse all"
+msgstr "收起全部"
+
+msgid "Color palette"
+msgstr "协调配色"
+
+msgid "Comment"
+msgstr "评论内容"
+
+msgid "Comment pagination"
+msgstr "评论分页"
+
+msgid "Commenting as %s"
+msgstr "以 %s 的身份发言"
+
+msgid "Comments (%s)"
+msgstr "评论（%s）"
+
+msgid "Community"
+msgstr "交流区"
+
+msgid "Community and more"
+msgstr "交流与更多"
+
+msgid "Community archive label"
+msgstr "交流区归档名称"
+
+msgid "Community description"
+msgstr "交流区说明"
+
+msgid "Community link URL"
+msgstr "交流链接地址"
+
+msgid "Community link label"
+msgstr "交流链接名称"
+
+msgid "Compact"
+msgstr "紧凑"
+
+msgid "Compact list"
+msgstr "紧凑列表"
+
+msgid "Companion comments interface"
+msgstr "Companion 评论接口"
+
+msgid "Companion content interface"
+msgstr "Companion 内容接口"
+
+msgid "Companion search interface"
+msgstr "Companion 搜索接口"
+
+msgid "Companion tools interface"
+msgstr "Companion 工具接口"
+
+msgid "Compose the home page"
+msgstr "编排首页"
+
+msgid "Configure home topic cards, descriptions and status labels."
+msgstr "配置首页专题卡片、简介与状态。"
+
+msgid "Contains the current reading position"
+msgstr "包含当前阅读位置"
+
+msgid "Content guide"
+msgstr "内容导览"
+
+msgid "Content type"
+msgstr "内容类型"
+
+msgid "Continuously updated"
+msgstr "持续整理"
+
+msgid "Copyright owner"
+msgstr "版权署名"
+
+msgid "Current palette:"
+msgstr "当前视觉配色："
+
+msgid "Current reading palette"
+msgstr "当前阅读配色"
+
+msgid "Customize the home background, topics and authors. Preview your changes before saving."
+msgstr "调整首页背景、专题与作者展示。保存前可在右侧预览。"
+
+msgid "Dark"
+msgstr "暗色"
+
+msgid "Default"
+msgstr "默认"
+
+msgid "Describe the problem, assumptions and background readers will need."
+msgstr "描述问题、前提与读者需要的背景。"
+
+msgid "Describe this resource and add your own link using the editor."
+msgstr "填写资源说明，并使用编辑器添加自己的链接。"
+
+msgid "Describe your method and add your own examples."
+msgstr "写下方法，并加入自己的示例。"
+
+msgid "Description (optional)"
+msgstr "简介（可选）"
+
+msgid "Different interests, shared stories.\nMeet the authors sharing their experiences here."
+msgstr "不同的兴趣，共同的记录。\n认识在这里分享故事与经验的作者。"
+
+msgid "Discussion and comments"
+msgstr "交流与评论"
+
+msgid "Download appearance JSON"
+msgstr "下载视觉设置 JSON"
+
+msgid "Edit"
+msgstr "编辑"
+
+msgid "Edit article"
+msgstr "编辑文章"
+
+msgid "Edit the home page introduction; leave empty to hide."
+msgstr "编辑首页文案；留空可隐藏。"
+
+msgid "Editable block examples"
+msgstr "可编辑区块示例"
+
+msgid "Enter a topic title"
+msgstr "填写专题标题"
+
+msgid "Enter the ID after post= in the edit URL to select older content; 0 hides this slot. Only public, unprotected content of the correct type is eligible."
+msgstr "也可填写编辑页面地址中 post= 后的 ID，以选择更早的内容；0 表示不展示。仅公开无密码且类型正确的内容有效。"
+
+msgid "Expand all"
+msgstr "展开全部"
+
+msgid "Expand or collapse: %s"
+msgstr "展开或收起：%s"
+
+msgid "Explore by topic"
+msgstr "按主题探索"
+
+msgid "Explore topics"
+msgstr "探索专题"
+
+msgid "Explore →"
+msgstr "前往浏览 →"
+
+msgid "Export only saved palettes, colors and dimensions. Articles, media IDs, links, accounts and plugin settings are excluded. Import replaces only the listed values; omitted settings and empty values retain their meaning."
+msgstr "仅导出已保存的配色、颜色和尺寸。不会包含文章、媒体 ID、链接、账户或插件设置。导入只替换文件列出的值；遗漏设置和空白值保留原有含义。"
+
+msgid "F Y"
+msgstr "Y年n月"
+
+msgid "F j, Y"
+msgstr "Y年n月j日"
+
+msgid "Featured articles"
+msgstr "精选文章"
+
+msgid "Find content"
+msgstr "查找内容"
+
+msgid "Finish the site details"
+msgstr "完善站点细节"
+
+msgid "Font size"
+msgstr "字号"
+
+msgid "Footer information"
+msgstr "页脚信息"
+
+msgid "Footer tagline"
+msgstr "页脚标语"
+
+msgid "Forest"
+msgstr "森林"
+
+msgid "Full archive →"
+msgstr "完整归档 →"
+
+msgid "Guide readers from an introduction to your topics and latest writing."
+msgstr "从简短介绍开始，引导读者走向专题与最新文章。"
+
+msgid "Hidden"
+msgstr "不展示"
+
+msgid "Home"
+msgstr "首页"
+
+msgid "Home authors"
+msgstr "首页作者"
+
+msgid "Home background"
+msgstr "首页背景"
+
+msgid "Home eyebrow"
+msgstr "首页眉题"
+
+msgid "Home introduction"
+msgstr "首页介绍"
+
+msgid "Home modules"
+msgstr "首页模块"
+
+msgid "Home topics"
+msgstr "首页专题"
+
+msgid "Horizontally scrollable table"
+msgstr "可横向滚动的表格"
+
+msgid "Import and save appearance"
+msgstr "导入并保存视觉设置"
+
+msgid "In the block editor, open Patterns → PageNest and choose a topic introduction, resource cards or article outline. Replace the placeholders; content is created only when you insert and save it."
+msgstr "在区块编辑器的「区块样板 → PageNest」中选择专题介绍、资源卡片或文章提纲，再替换占位文案。只有手动插入并保存时才创建内容。"
+
+msgid "Interface available"
+msgstr "接口可用"
+
+msgid "Interface unavailable"
+msgstr "接口不可用"
+
+msgid "Introduce the topic, intended audience and suggested reading order. Replace this text with your own content."
+msgstr "在这里介绍专题目标、适合读者和学习顺序。替换为你自己的内容。"
+
+msgid "Invalid appearance settings file."
+msgstr "无效的视觉设置文件。"
+
+msgid "Join the discussion →"
+msgstr "参与讨论 →"
+
+msgid "Keep a copy"
+msgstr "保存一份副本"
+
+msgid "Latest articles"
+msgstr "最新文章"
+
+msgid "Leave empty to hide the text or link. Links need both a label and a URL."
+msgstr "留空可隐藏对应文案或链接；链接名称和地址均需填写。"
+
+msgid "Leave empty to hide. Introductions support line breaks."
+msgstr "留空可隐藏；介绍支持换行。"
+
+msgid "Link and button color"
+msgstr "链接与按钮颜色"
+
+msgid "Links"
+msgstr "链接"
+
+msgid "List density, covers, updated dates and estimated reading time."
+msgstr "列表密度、封面、更新日期与估算阅读时长。"
+
+msgid "List style"
+msgstr "列表样式"
+
+msgid "Lists and articles"
+msgstr "列表与文章展示"
+
+msgid "Local read-only diagnostics"
+msgstr "本地只读诊断"
+
+msgid "Log in"
+msgstr "登录"
+
+msgid "Log in to reply"
+msgstr "登录后回复"
+
+msgid "Login and registration"
+msgstr "登录与注册"
+
+msgid "Make reading comfortable"
+msgstr "让阅读更舒适"
+
+msgid "Maximum site width (px)"
+msgstr "全站最大宽度（px）"
+
+msgid "Menu"
+msgstr "菜单"
+
+msgid "Method and examples"
+msgstr "方法与示例"
+
+msgid "Modules and content order"
+msgstr "模块与内容编排"
+
+msgid "More content"
+msgstr "更多内容"
+
+msgid "My account"
+msgstr "我的账号"
+
+msgid "Name"
+msgstr "名称"
+
+msgid "New comments are closed for this article."
+msgstr "这篇文章已关闭新评论。"
+
+msgid "Next article"
+msgstr "下一篇"
+
+msgid "Next page →"
+msgstr "下一页 →"
+
+msgid "No content found"
+msgstr "暂时没有找到内容"
+
+msgid "No public articles yet."
+msgstr "还没有公开文章。"
+
+msgid "No suggestions found. Try another keyword or submit your search."
+msgstr "没有匹配建议，试试其他关键词或提交完整搜索。"
+
+msgid "Notice"
+msgstr "提示语"
+
+msgid "Open Companion settings"
+msgstr "打开 Companion 设置"
+
+msgid "Open the WordPress Customizer to preview and save settings. Installing the theme does not create articles, pages or media."
+msgstr "从这里进入原生自定义器预览并保存设置。安装主题不会创建文章、页面或媒体。"
+
+msgid "Page not found"
+msgstr "没有找到这个页面"
+
+msgid "PageNest design"
+msgstr "PageNest 外观设计"
+
+msgid "PageNest home page"
+msgstr "栖页首页设置"
+
+msgid "Pages"
+msgstr "页面"
+
+msgid "Palettes, colors and reading dimensions shared with the editor preview."
+msgstr "协调配色、颜色与阅读尺寸；与编辑器预览共用。"
+
+msgid "Paste appearance JSON"
+msgstr "粘贴视觉设置 JSON"
+
+msgid "Popular articles"
+msgstr "热门文章"
+
+msgid "Post a comment"
+msgstr "发表评论"
+
+msgid "Powered by WordPress"
+msgstr "由 WordPress 支持"
+
+msgid "Previous article"
+msgstr "上一篇"
+
+msgid "Primary navigation"
+msgstr "主导航"
+
+msgid "Private"
+msgstr "私密"
+
+msgid "Problem and background"
+msgstr "问题与背景"
+
+msgid "Reading comes first"
+msgstr "让阅读成为核心"
+
+msgid "Reading navigation"
+msgstr "阅读导航"
+
+msgid "Reading palette"
+msgstr "阅读配色"
+
+msgid "Reading preferences are saved only in this browser."
+msgstr "仅在此浏览器保存阅读偏好。"
+
+msgid "Reading preferences saved."
+msgstr "阅读偏好已保存。"
+
+msgid "Reading settings"
+msgstr "阅读设置"
+
+msgid "Recent entries"
+msgstr "最新记录"
+
+msgid "Recently updated"
+msgstr "最近更新"
+
+msgid "Recommended reading"
+msgstr "推荐阅读"
+
+msgid "Record ideas and discoveries.\nOrganize your thoughts and share your explorations here."
+msgstr "记录想法与发现。\n在这里整理思路，分享探索的过程。"
+
+msgid "Register with email"
+msgstr "使用邮箱注册"
+
+msgid "Registration number (optional)"
+msgstr "备案号（可选）"
+
+msgid "Related reading"
+msgstr "相关阅读"
+
+msgid "Reply"
+msgstr "回复"
+
+msgid "Reply to %s"
+msgstr "回复 %s"
+
+msgid "Resource cards"
+msgstr "资源卡片"
+
+msgid "Resource one"
+msgstr "资源一"
+
+msgid "Resource two"
+msgstr "资源二"
+
+msgid "Restore defaults"
+msgstr "恢复默认"
+
+msgid "Room for your next idea"
+msgstr "为下一次思考留出空间"
+
+msgid "Search"
+msgstr "搜索"
+
+msgid "Search suggestions"
+msgstr "搜索建议"
+
+msgid "Search this site"
+msgstr "搜索本站内容"
+
+msgid "Search: %s"
+msgstr "搜索：%s"
+
+msgid "Searching…"
+msgstr "正在查找…"
+
+msgid "Set archive and about links."
+msgstr "配置归档与关于入口。"
+
+msgid "Set the community description and links."
+msgstr "配置交流说明与链接。"
+
+msgid "Settings could not be saved. Please try again."
+msgstr "设置保存失败，请重试。"
+
+msgid "Shape your site, one detail at a time."
+msgstr "从阅读开始，逐步完善站点外观。"
+
+msgid "Share colors and reading dimensions across the site and editor preview. Leave custom colors empty to use the selected palette."
+msgstr "统一全站与正文预览的颜色和阅读尺寸。自定义颜色留空时使用所选配色。"
+
+msgid "Share your thoughts and suggestions in the article comments."
+msgstr "欢迎在文章评论区交流想法与建议。"
+
+msgid "Share your thoughts or describe a problem…"
+msgstr "分享你的想法，或描述遇到的问题…"
+
+msgid "Shared stories"
+msgstr "共同记录"
+
+msgid "Show %s"
+msgstr "显示%s"
+
+msgid "Show article cover"
+msgstr "显示文章大封面"
+
+msgid "Show estimated reading time"
+msgstr "显示估算阅读时长"
+
+msgid "Show list covers"
+msgstr "显示列表封面"
+
+msgid "Show updated date"
+msgstr "显示更新日期"
+
+msgid "Shown above login, registration and password reset forms; leave empty to hide."
+msgstr "显示在登录、注册和找回密码表单上方；留空即可隐藏。"
+
+msgid "Site appearance"
+msgstr "全站视觉设置"
+
+msgid "Site background"
+msgstr "全站背景"
+
+msgid "Site defaults restored."
+msgstr "已恢复站点默认。"
+
+msgid "Site defaults restored; browser storage is unavailable."
+msgstr "已恢复站点默认；浏览器不允许保存。"
+
+msgid "Site navigation"
+msgstr "全站主导航"
+
+msgid "Skip to main content"
+msgstr "跳到主要内容"
+
+msgid "Slot %d · Content ID (optional)"
+msgstr "位置 %d · 内容 ID（可选）"
+
+msgid "Spacing scale"
+msgstr "间距比例"
+
+msgid "Standard cards"
+msgstr "标准卡片"
+
+msgid "Start with a topic that interests you"
+msgstr "从感兴趣的专题开始"
+
+msgid "Start with the reading appearance, arrange your home page, then finish the site details. Preview changes before publishing."
+msgstr "先调整阅读外观，再编排首页，最后完善站点细节。发布前请查看预览。"
+
+msgid "Status (optional)"
+msgstr "状态说明（可选）"
+
+msgid "Submit the form from the settings page."
+msgstr "请通过配置页面提交表单。"
+
+msgid "Suggestions are unavailable. Press Enter to continue searching."
+msgstr "暂时无法获取建议，可按回车继续搜索。"
+
+msgid "Suggestions: %s. Submit your search for all results."
+msgstr "找到 %s 条建议，可提交搜索查看完整结果。"
+
+msgid "Summarize the conclusions, limitations and suggested further reading."
+msgstr "整理结论、限制与后续阅读方向。"
+
+msgid "Summary and next steps"
+msgstr "总结与下一步"
+
+msgid "System font"
+msgstr "系统字体"
+
+msgid "Table of contents"
+msgstr "本文目录"
+
+msgid "Tagline, copyright owner and optional registration number."
+msgstr "标语、版权署名和可选备案号。"
+
+msgid "Text color"
+msgstr "正文颜色"
+
+msgid "The 100 most recently updated public, unprotected articles, plus current selections."
+msgstr "最近更新的 100 篇公开无密码文章及现有选择。"
+
+msgid "The file contains unsupported settings."
+msgstr "文件包含不支持的设置。"
+
+msgid "The settings file is too large or invalid."
+msgstr "设置文件过大或格式无效。"
+
+msgid "The site introduction is always shown. Lower order numbers appear first; ties keep the default order. Disabling a module hides it while preserving settings and content."
+msgstr "站点介绍始终保留。模块顺序数值越小越靠前；相同时使用默认顺序。停用仅隐藏展示，保留配置和内容。"
+
+msgid "Theme settings"
+msgstr "栖页配置"
+
+msgid "This article requires a password."
+msgstr "这篇文章需要密码才能阅读。"
+
+msgid "Title, keywords…"
+msgstr "标题、关键词…"
+
+msgid "Topic %1$d · %2$s"
+msgstr "专题 %1$d · %2$s"
+
+msgid "Topic introduction"
+msgstr "专题介绍"
+
+msgid "Topics"
+msgstr "专题"
+
+msgid "Topics are being organized. Browse the latest articles for now."
+msgstr "专题正在整理，先浏览最新文章吧。"
+
+msgid "Transfer appearance settings"
+msgstr "迁移视觉设置"
+
+msgid "Try another keyword or return to the home page to keep browsing."
+msgstr "试试其他关键词，或者返回首页继续浏览。"
+
+msgid "Up to seven authors. Clear a name to hide its entry without changing the site account."
+msgstr "最多七位；清空姓名即可隐藏该项，不影响网站账号。"
+
+msgid "Up to six topics. Leave a name or link empty to hide the entry."
+msgstr "最多六项；名称或链接留空时不显示该项。"
+
+msgid "Updated on "
+msgstr "更新于 "
+
+msgid "Upload image"
+msgstr "上传图片"
+
+msgid "Versions, interfaces and asset integrity"
+msgstr "版本、接口与资源完整性"
+
+msgid "Warm paper"
+msgstr "暖纸"
+
+msgid "Welcome. You can register with your email address. Contact the site administrator if you need help."
+msgstr "欢迎登录。你可以使用邮箱注册；如需帮助，请联系本站管理员。"
+
+msgid "Wide"
+msgstr "舒展"
+
+msgid "Write and share"
+msgstr "记录与分享"
+
+msgid "Write · Share · Explore"
+msgstr "记录 · 分享 · 探索"
+
+msgid "You do not have permission to manage theme settings."
+msgstr "你没有权限管理主题设置。"
+
+msgid "Your comment is awaiting moderation."
+msgstr "你的评论正在等待审核。"
+
+msgid "← Previous page"
+msgstr "← 上一页"
+
+msgid "Welcome. Contact the site administrator if you need help."
+msgstr "欢迎登录。如需帮助，请联系本站管理员。"

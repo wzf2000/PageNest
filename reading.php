@@ -46,23 +46,28 @@ function pagenest_related($id)
 }
 function pagenest_side($single = false)
 {
-    ?><aside class="pagenest-sidebar" aria-label="<?php echo $single
-    ? '阅读导航'
-    : '文章导航'; ?>"><?php if ($single): ?><div class="pagenest-reading-rail">
+    ?><aside class="pagenest-sidebar" aria-label="<?php echo esc_attr(
+    $single ? __('Reading navigation', 'pagenest') : __('Article navigation', 'pagenest'),
+); ?>"><?php if ($single): ?><div class="pagenest-reading-rail">
         <div class="pagenest-reading-actions" data-pagenest-reading-actions><?php do_action(
             'pagenest_reading_actions',
             get_queried_object_id(),
         ); ?></div>
         <div class="pagenest-reading-panel" data-pagenest-reading-panel hidden></div>
         <details class="pagenest-toc" hidden open>
-            <summary>本文目录</summary>
-            <nav aria-label="本文目录"></nav>
+            <summary><?php echo esc_html__('Table of contents', 'pagenest'); ?></summary>
+            <nav aria-label="<?php echo esc_attr__('Table of contents', 'pagenest'); ?>"></nav>
         </details><?php
         $id = get_queried_object_id();
         $related = pagenest_related($id);
         if ($related) { ?><section class="pagenest-widget">
             <h2><?php echo esc_html(
-                apply_filters('pagenest_related_title', '相关阅读', $id, $related),
+                apply_filters(
+                    'pagenest_related_title',
+                    __('Related reading', 'pagenest'),
+                    $id,
+                    $related,
+                ),
             ); ?></h2>
             <ul><?php foreach ($related as $p): ?><li><a href="<?php echo esc_url(
     pagenest_url(get_permalink($p)),
@@ -71,7 +76,7 @@ function pagenest_side($single = false)
         ?>
         <?php else: ?><section class="pagenest-widget"><?php pagenest_search(); ?></section>
         <section class="pagenest-widget">
-            <h2>浏览分类</h2>
+            <h2><?php echo esc_html__('Browse categories', 'pagenest'); ?></h2>
             <div class="pagenest-categories"><?php foreach (
                 get_categories([
                     'number' => 8,
@@ -85,8 +90,8 @@ function pagenest_side($single = false)
 ); ?>"><?php echo esc_html($cat->name); ?></a><?php endforeach; ?></div>
         </section>
         <section class="pagenest-widget">
-            <h2>热门文章</h2>
-            <p class="pagenest-hint">按累计浏览量</p>
+            <h2><?php echo esc_html__('Popular articles', 'pagenest'); ?></h2>
+            <p class="pagenest-hint"><?php echo esc_html__('By total views', 'pagenest'); ?></p>
             <ol class="pagenest-popular"><?php
             $popular = new WP_Query([
                 'post_type' => 'post',
@@ -101,11 +106,14 @@ function pagenest_side($single = false)
             foreach ($popular->posts as $p): ?><li><a href="<?php echo esc_url(
     pagenest_url(get_permalink($p)),
 ); ?>"><?php echo esc_html($p->post_title); ?></a><span><?php echo esc_html(
-    number_format_i18n((int) get_post_meta($p->ID, 'views', true)),
-); ?> 次浏览</span></li><?php endforeach;
+    sprintf(
+        _n('%s view', '%s views', (int) get_post_meta($p->ID, 'views', true), 'pagenest'),
+        number_format_i18n((int) get_post_meta($p->ID, 'views', true)),
+    ),
+); ?></span></li><?php endforeach;
             ?></ol>
         </section><?php endif; ?><section class="pagenest-widget pagenest-community">
-            <h2>交流与更多</h2>
+            <h2><?php echo esc_html__('Community and more', 'pagenest'); ?></h2>
             <?php if ($description = pagenest_setting('pagenest_community_description')): ?>
             <p><?php echo nl2br(esc_html($description)); ?></p>
             <?php endif; ?>
@@ -134,9 +142,19 @@ function pagenest_archives()
         'order' => 'DESC',
         'suppress_filters' => false,
     ]);
-    echo '<p>共 ' .
-        esc_html(count($posts)) .
-        ' 篇公开文章，按发布时间排列。</p><div class="pagenest-archive-tags">';
+    echo '<p>' .
+        esc_html(
+            sprintf(
+                _n(
+                    '%s public article, ordered by publication date.',
+                    '%s public articles, ordered by publication date.',
+                    count($posts),
+                    'pagenest',
+                ),
+                number_format_i18n(count($posts)),
+            ),
+        ) .
+        '</p><div class="pagenest-archive-tags">';
     wp_tag_cloud([
         'number' => 18,
         'orderby' => 'count',
@@ -148,7 +166,7 @@ function pagenest_archives()
     echo '</div>';
     $month = '';
     foreach ($posts as $p) {
-        $m = get_the_date('Y年n月', $p);
+        $m = get_the_date(__('F Y', 'pagenest'), $p);
         if ($m !== $month) {
             if ($month) {
                 echo '</ul></section>';
@@ -192,23 +210,29 @@ function pagenest_comment($comment, $args, $depth)
                 echo get_comment_author_link($comment);
                 if (
                     $is_author
-                ): ?><span class="pagenest-comment-author-badge">作者</span><?php endif;
+                ): ?><span class="pagenest-comment-author-badge"><?php echo esc_html__(
+    'Author',
+    'pagenest',
+); ?></span><?php endif;
                 ?></div><a class="pagenest-comment-time"
                     href="<?php echo esc_url(get_comment_link($comment)); ?>"><time
                         datetime="<?php echo esc_attr(
                             get_comment_date(DATE_W3C, $comment),
-                        ); ?>"><?php echo esc_html(get_comment_date('Y年n月j日', $comment) . ' ' . get_comment_time('H:i')); ?></time></a>
+                        ); ?>"><?php echo esc_html(get_comment_date(__('F j, Y', 'pagenest'), $comment) . ' ' . get_comment_time('H:i')); ?></time></a>
             </div>
         </header>
         <?php if (
             $comment->comment_parent &&
             ($parent = get_comment($comment->comment_parent))
-        ): ?><p class="pagenest-comment-context">回复 <?php echo esc_html(
-    get_comment_author($parent),
+        ): ?><p class="pagenest-comment-context"><?php echo esc_html(
+    sprintf(__('Reply to %s', 'pagenest'), get_comment_author($parent)),
 ); ?></p><?php endif; ?>
         <?php if (
             '0' === $comment->comment_approved
-        ): ?><p class="pagenest-comment-pending">你的评论正在等待审核。</p><?php endif; ?>
+        ): ?><p class="pagenest-comment-pending"><?php echo esc_html__(
+    'Your comment is awaiting moderation.',
+    'pagenest',
+); ?></p><?php endif; ?>
         <div class="pagenest-comment-text"><?php comment_text($comment); ?></div>
         <div class="pagenest-comment-actions"><?php
         comment_reply_link(
@@ -216,12 +240,12 @@ function pagenest_comment($comment, $args, $depth)
                 'add_below' => 'div-comment',
                 'depth' => $depth,
                 'max_depth' => $args['max_depth'],
-                'reply_text' => '回复',
-                'login_text' => '登录后回复',
+                'reply_text' => __('Reply', 'pagenest'),
+                'login_text' => __('Log in to reply', 'pagenest'),
             ]),
             $comment,
         );
-        edit_comment_link('编辑', '<span>', '</span>');?></div>
+        edit_comment_link(__('Edit', 'pagenest'), '<span>', '</span>');?></div>
     </article>
     <?php
 }

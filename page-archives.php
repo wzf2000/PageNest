@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: 文章归档
+ * Template Name: Article archive
  * Template Post Type: page
  */
 defined('ABSPATH') || exit();
