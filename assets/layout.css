@@ -2048,3 +2048,45 @@ summary {
   gap: 8px;
   margin-left: auto;
 }
+
+/* Registered tool pages put the task before the article framing. */
+.pagenest-tool-page .pagenest-article-header {
+  padding-top: 24px;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.pagenest-site .pagenest-tool-page .pagenest-article-header h1 {
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+  margin: 0;
+}
+.pagenest-tool-page .pagenest-tool-host > :first-child {
+  margin-top: 0;
+}
+.pagenest-tool-guide {
+  margin-top: 1.25rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--pagenest-line, #d5d9df);
+  border-radius: 8px;
+}
+.pagenest-tool-guide > summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+@media (max-width: 540px) {
+  .pagenest-tool-page .pagenest-article-header {
+    padding: 18px 12px 8px;
+  }
+  .pagenest-tool-page.pagenest-page .pagenest-article-body {
+    padding: 4px 10px 16px;
+  }
+}
+
+.pagenest-tool-page [data-tool-heading],
+.pagenest-tool-page [data-tool-preface] {
+  display: none;
+}
+.pagenest-tool-page .pnpt-heading {
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+}

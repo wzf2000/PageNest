@@ -34,3 +34,28 @@
   if (document.querySelector('.editormd'))
     new MutationObserver(wrap).observe(document.body, { childList: true, subtree: true });
 })();
+
+// Move trusted host roots, preserving the existing nodes and their listeners.
+document.querySelectorAll('.pagenest-tool-page .pagenest-article-body').forEach((body) => {
+  const hosts = [...body.querySelectorAll('.pagenest-tool-host')];
+  if (!hosts.length) return;
+  const fragment = document.createDocumentFragment();
+  hosts.forEach((host) => fragment.append(host));
+  const details = document.createElement('details');
+  details.className = 'pagenest-tool-guide';
+  const summary = document.createElement('summary');
+  summary.textContent = '使用说明与规则';
+  details.append(summary);
+  [...body.childNodes].forEach((node) => {
+    // Shortcode resources belong to the tool, even when there is no guide text.
+    if (node.nodeType === Node.ELEMENT_NODE && ['LINK', 'STYLE', 'SCRIPT'].includes(node.tagName))
+      fragment.append(node);
+    else details.append(node);
+  });
+  body.append(fragment);
+  if (
+    details.textContent.replace(summary.textContent, '').trim() ||
+    details.querySelector('img,video,iframe')
+  )
+    body.append(details);
+});
