@@ -57,9 +57,12 @@
   }
   const body = document.querySelector('.pagenest-article-body'),
     toc = document.querySelector('.pagenest-toc');
+  const revealTeachingTarget = (target) => {
+    if (target) window.MarkBridgeTeaching?.revealTarget(target);
+  };
   if (body && toc) {
-    let headings = [...body.querySelectorAll('h1,h2,h3,h4,h5,h6')].filter((h) =>
-      h.textContent.trim(),
+    let headings = [...body.querySelectorAll('h1,h2,h3,h4,h5,h6')].filter(
+      (h) => h.textContent.trim() && !h.closest('[data-mbb-generated],[data-pagenest-generated]'),
     );
     if (!headings.length) headings = [body];
     if (headings.length) {
@@ -154,6 +157,9 @@
           return;
         }
         const target = document.getElementById(id);
+        // Back/forward restores an explicit teaching view, including a closed fold at this hash.
+        // A user clicking a directory link still explicitly reveals its target below.
+        if (!window.MarkBridgeTeaching?.hasCurrentHistoryView?.()) revealTeachingTarget(target);
         // Legacy empty anchors immediately preceding a heading share its directory branch.
         const entry = entries.find(
           (e) =>
@@ -166,6 +172,15 @@
         update();
       };
       addEventListener('hashchange', revealHash);
+      toc.addEventListener('click', (event) => {
+        const link = event.target.closest('a[href^="#"]');
+        if (!link) return;
+        try {
+          revealTeachingTarget(document.getElementById(decodeURIComponent(link.hash.slice(1))));
+        } catch {
+          // Malformed fragment links remain subject to normal browser handling.
+        }
+      });
       const renderMath = () => window.MBB_MATH?.typeset(toc);
       renderMath();
       // Also cover a renderer script loaded after the directory script.
@@ -190,9 +205,11 @@
       let queued = false;
       const update = () => {
         queued = false;
-        let active = 0;
+        let active = headings.findIndex((h) => h.getClientRects().length > 0);
+        if (active < 0) active = 0;
         headings.forEach((h, i) => {
-          if (h.getBoundingClientRect().top <= getReadingTop() + 120) active = i;
+          if (h.getClientRects().length && h.getBoundingClientRect().top <= getReadingTop() + 120)
+            active = i;
         });
         links.forEach((a, i) => {
           if (i === active) a.setAttribute('aria-current', 'location');
@@ -221,6 +238,7 @@
         },
         { passive: true },
       );
+      document.addEventListener('mbb:teaching-change', update);
       update();
       revealHash();
     }
@@ -247,7 +265,10 @@
         return;
       }
       const target = document.getElementById(id);
-      if (target) target.scrollIntoView();
+      if (target) {
+        revealTeachingTarget(target);
+        target.scrollIntoView();
+      }
     };
     if (window.MathJax?.Hub) MathJax.Hub.Queue(reveal);
     else addEventListener('load', reveal, { once: true });

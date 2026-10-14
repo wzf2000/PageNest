@@ -36,6 +36,8 @@
 
 主题声明 `pagenest-independent-layout` 特性，兼容插件据此启用相应前端适配。
 
+教学内容的目录保留隐藏阶段与折叠内部的作者标题；点击目录或打开深链接时，若存在 `window.MarkBridgeTeaching.revealTarget(target)`，先同步展开目标所属内容，再滚动定位。扩展完成阶段或折叠切换后可派发 document 事件 `mbb:teaching-change`，目录据此重新计算当前可见标题。主题不克隆或删除作者正文，也不记录学习进度。标记 `data-mbb-generated` 或 `data-pagenest-generated` 的展示控件不进入目录。
+
 > [使用指南](USAGE.md) · [贡献指南](../CONTRIBUTING.md) · [返回项目首页](../README.md)
 
 ## 视觉与搜索接口

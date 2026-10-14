@@ -33,6 +33,10 @@ function wp_add_inline_style($handle, $css)
     global $appearance_styles;
     $appearance_styles[$handle] = $css;
 }
+function wp_json_encode($value, $flags = 0)
+{
+    return json_encode($value, $flags);
+}
 class WP_Customize_Color_Control
 {
     public function __construct(...$args) {}
@@ -60,6 +64,19 @@ function appearance_check($passed, $message)
     }
 }
 require __DIR__ . '/../appearance.php';
+if (in_array('--tinymce-fixture', $argv, true)) {
+    $css =
+        "body{font-family:\"Quoted\",'single';content:'\\path';}\n" .
+        "/* \u{2028}\u{2029} </script><script>window.injected=true</script> & */";
+    $existing = 'existing{content:"already escaped";}';
+    echo json_encode([
+        'original' => $existing . ' ' . $css,
+        'encoded' => pagenest_tinymce_css($existing) . ' ' . pagenest_tinymce_css($css),
+        'theme' => $appearance_hooks['tiny_mce_before_init'][0]([])['content_style'],
+        'themeOriginal' => ' ' . pagenest_appearance_css(),
+    ]);
+    exit();
+}
 $default = pagenest_appearance_variables();
 appearance_check($default['--pagenest-reading-size'] === '17px', 'Existing reading size preserved');
 appearance_check(
@@ -137,8 +154,14 @@ appearance_check(
 );
 $settings = $appearance_hooks['tiny_mce_before_init'][0](['content_style' => 'existing{}']);
 appearance_check(
-    $settings['content_style'] === "existing{}\n" . $css,
-    'Classic editor uses valid CSS and frontend values',
+    json_decode('"' . $settings['content_style'] . '"') === 'existing{} ' . $css,
+    'Classic editor JavaScript string restores frontend CSS without literal newlines',
+);
+$existing = pagenest_tinymce_css('existing{content:"preserved";}');
+$settings = $appearance_hooks['tiny_mce_before_init'][0](['content_style' => $existing]);
+appearance_check(
+    str_starts_with($settings['content_style'], $existing . ' '),
+    'Classic editor preserves previously escaped styles without double escaping',
 );
 $customizer = new AppearanceCustomizer();
 pagenest_register_appearance_customizer($customizer);
