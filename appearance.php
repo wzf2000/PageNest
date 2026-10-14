@@ -288,8 +288,18 @@ add_filter('block_editor_settings_all', static function ($settings) {
     $settings['styles'][] = ['css' => pagenest_appearance_css()];
     return $settings;
 });
+// WordPress wraps TinyMCE strings in double quotes without escaping their contents.
+function pagenest_tinymce_css($css)
+{
+    return substr(
+        wp_json_encode($css, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT),
+        1,
+        -1,
+    );
+}
 add_filter('tiny_mce_before_init', static function ($settings) {
+    // Existing content_style already follows TinyMCE's JavaScript-string protocol.
     $settings['content_style'] =
-        ($settings['content_style'] ?? '') . "\n" . pagenest_appearance_css();
+        ($settings['content_style'] ?? '') . ' ' . pagenest_tinymce_css(pagenest_appearance_css());
     return $settings;
 });
