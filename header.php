@@ -12,7 +12,7 @@
         'Skip to main content',
         'pagenest',
     ); ?></a>
-    <header class="pagenest-header">
+    <header class="pagenest-header" data-mbb-teaching-sticky-obstruction>
         <div class="pagenest-nav-inner">
             <a class="pagenest-brand" href="<?php echo esc_url(home_url('/')); ?>"><?php
 $logo = (int) get_theme_mod('custom_logo');

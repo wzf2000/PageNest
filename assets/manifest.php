@@ -1,6 +1,6 @@
 <?php
 return [
-    'css' => 'layout-f9de83fe27d1.css',
+    'css' => 'layout-1a43fa80481e.css',
     'editorial' => 'editorial-3f6a8fb192b3.css',
     'admin_design' => 'admin-design-4d7c94948a5b.css',
     'customizer_design' => 'customizer-design-52c35d894f84.css',

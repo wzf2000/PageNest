@@ -585,7 +585,7 @@ body.pagenest-site {
   background: var(--pagenest-surface, #fff);
   border: 1px solid var(--pagenest-border);
   border-radius: var(--pagenest-radius, 12px);
-  overflow: hidden;
+  overflow: clip;
 }
 .pagenest-article-header {
   padding: calc(32px * var(--pagenest-spacing, 1)) calc(36px * var(--pagenest-spacing, 1))
@@ -615,6 +615,22 @@ body.pagenest-site {
   padding: calc(28px * var(--pagenest-spacing, 1)) calc(36px * var(--pagenest-spacing, 1))
     calc(36px * var(--pagenest-spacing, 1));
   min-width: 0;
+  --mbb-teaching-sticky-background: var(--pagenest-surface, #fff);
+}
+.pagenest-article-body blockquote {
+  margin: 1.5em 0;
+  padding: 1em 1.3em;
+  border: 0;
+  border-inline-start: 3px solid var(--pagenest-quote-border, #93a58f);
+  background: var(--pagenest-quote-background, #f2f3ed);
+  color: inherit;
+  font-size: inherit;
+  border-radius: 0;
+  border-start-end-radius: calc(var(--pagenest-radius, 12px) / 2);
+  border-end-end-radius: calc(var(--pagenest-radius, 12px) / 2);
+}
+.pagenest-article-body blockquote > :last-child {
+  margin-block-end: 0;
 }
 .pagenest-article .pagenest-article-body > :is(h1, h2, h3, h4):first-child,
 .pagenest-article .pagenest-article-body > .pagenest-mobile-toc + :is(h1, h2, h3, h4) {
@@ -2029,6 +2045,20 @@ summary {
 }
 .pagenest-article-body :is(h1, h2, h3, h4, h5, h6, [data-pagenest-block], a[id]:not([href])) {
   scroll-margin-top: var(--pagenest-anchor-top, 100px) !important;
+}
+.pagenest-article-body .wp-block-mbb-steps[data-mbb-enhanced] [id] {
+  scroll-margin-top: max(
+    var(--pagenest-anchor-top, 100px),
+    calc(
+      var(--mbb-teaching-effective-offset, 0px) + var(--mbb-teaching-controls-height, 0px) + 0.75rem
+    )
+  ) !important;
+}
+.pagenest-article-body .wp-block-mbb-steps[data-mbb-enhanced] {
+  scroll-margin-top: max(
+    var(--pagenest-anchor-top, 100px),
+    calc(var(--mbb-teaching-effective-offset, 0px) + 0.75rem)
+  ) !important;
 }
 @media (max-width: 1023px) {
   .pagenest-reading-rail {
