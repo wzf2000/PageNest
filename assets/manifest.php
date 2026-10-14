@@ -12,7 +12,7 @@ return [
     'discovery_css' => 'discovery-c955418739cd.css',
     'discovery_js' => 'discovery-bf25cb70de4f.js',
     'js' => 'navigation-9ca7de42e791.js',
-    'reading' => 'reading-3ee75b31ea9c.js',
+    'reading' => 'reading-d9cf37f85c64.js',
     'login' => 'login-d20c2cddc953.css',
     'content' => 'content-c00b10690732.css',
     'content_js' => 'content-cd7adb62f3ec.js',
