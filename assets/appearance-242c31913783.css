@@ -1,0 +1,27 @@
+/* Shared defaults. Settings use the same tokens in the reader and editor canvas. */
+:root {
+  --pagenest-background: #f7f6f2;
+  --pagenest-surface: #fffefb;
+  --pagenest-text: #293630;
+  --pagenest-heading: #23352c;
+  --pagenest-content-heading: #23352c;
+  --pagenest-muted: #69736b;
+  --pagenest-accent: #426354;
+  --pagenest-accent-hover: #2b493a;
+  --pagenest-content-link: #426354;
+  --pagenest-content-link-hover: #2b493a;
+  --pagenest-focus: #426354;
+  --pagenest-border: #e1e5df;
+  --pagenest-soft: #eef1eb;
+  --pagenest-code-background: #f5f6f8;
+  --pagenest-code-text: #34495b;
+  --pagenest-quote-background: #f4f6f5;
+  --pagenest-quote-border: #9cad9f;
+  --pagenest-font-size: 16px;
+  --pagenest-font-scale: 1;
+  --pagenest-reading-size: 17px;
+  --pagenest-reading-line-height: 1.9;
+  --pagenest-spacing: 1;
+  --pagenest-radius: 12px;
+  --pagenest-container: 1240px;
+}

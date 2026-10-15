@@ -13,10 +13,10 @@
   --pagenest-focus: #426354;
   --pagenest-border: #e1e5df;
   --pagenest-soft: #eef1eb;
-  --pagenest-code-background: #f2f3ed;
-  --pagenest-code-text: #426354;
-  --pagenest-quote-background: #f2f3ed;
-  --pagenest-quote-border: #93a58f;
+  --pagenest-code-background: #f5f6f8;
+  --pagenest-code-text: #34495b;
+  --pagenest-quote-background: #f4f6f5;
+  --pagenest-quote-border: #9cad9f;
   --pagenest-font-size: 16px;
   --pagenest-font-scale: 1;
   --pagenest-reading-size: 17px;

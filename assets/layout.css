@@ -616,10 +616,12 @@ body.pagenest-site {
     calc(36px * var(--pagenest-spacing, 1));
   min-width: 0;
   --mbb-teaching-sticky-background: var(--pagenest-surface, #fff);
+  --mbb-code-surface: var(--pagenest-code-background, #f5f6f8);
+  --mbb-code-muted: var(--pagenest-muted, #65717c);
 }
 .pagenest-article-body blockquote {
   margin: 1.5em 0;
-  padding: 1em 1.3em;
+  padding: 0.55em 1em;
   border: 0;
   border-inline-start: 3px solid var(--pagenest-quote-border, #93a58f);
   background: var(--pagenest-quote-background, #f2f3ed);
@@ -631,6 +633,26 @@ body.pagenest-site {
 }
 .pagenest-article-body blockquote > :last-child {
   margin-block-end: 0;
+}
+.pagenest-article-body blockquote > :first-child {
+  margin-block-start: 0;
+}
+.pagenest-article-body blockquote > :nth-last-child(2):has(+ .pagenest-paragraph-bubble) {
+  margin-block-end: 0;
+}
+.pagenest-article-body pre.mbb-code-display {
+  background: var(--pagenest-code-background, #f5f6f8) !important;
+  color: var(--pagenest-code-text, #34495b);
+  text-shadow: none;
+}
+.pagenest-article-body :not(pre) > code {
+  padding: 0.12em 0.3em;
+  border-radius: 4px;
+  background: var(--pagenest-code-background, #f5f6f8);
+  color: var(--pagenest-code-text, #34495b);
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  font-size: 0.9em;
+  white-space: break-spaces;
 }
 .pagenest-article .pagenest-article-body > :is(h1, h2, h3, h4):first-child,
 .pagenest-article .pagenest-article-body > .pagenest-mobile-toc + :is(h1, h2, h3, h4) {

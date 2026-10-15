@@ -69,7 +69,7 @@
 :is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
   blockquote {
   margin: 1.5em 0;
-  padding: 1em 1.3em;
+  padding: 0.55em 1em;
   border: 0;
   border-left: 3px solid var(--pagenest-quote-border, #93a58f);
   background: var(--pagenest-quote-background, #f2f3ed);
@@ -167,9 +167,9 @@
 :is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
   :not(pre)
   > code {
-  padding: 0.15em 0.35em;
+  padding: 0.12em 0.3em;
   border-radius: calc(var(--pagenest-radius, 12px) * 4 / 12);
-  background: var(--pagenest-soft);
+  background: var(--pagenest-code-background, #f5f6f8);
   color: var(--pagenest-code-text, #426354);
   white-space: break-spaces;
 }
