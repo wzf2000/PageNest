@@ -153,12 +153,15 @@
   pre:not(.wp-block-mbb-math) {
   max-width: 100%;
   overflow: auto;
-  padding: 20px !important;
   border: 1px solid var(--pagenest-border);
   border-radius: calc(var(--pagenest-radius, 12px) * 8 / 12);
   background: var(--pagenest-code-background, #f2f3ed);
   line-height: 1.65 !important;
   font-size: calc(14px * var(--pagenest-font-scale, 1)) !important;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
+  pre:not(.wp-block-mbb-math):not(.mbb-code-display) {
+  padding: 20px !important;
 }
 :is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container) code {
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
