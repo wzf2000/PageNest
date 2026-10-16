@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.2.6-rc.1 (candidate)
+## 1.2.6-rc.1
 
 - Map MarkBridge presentation tokens to the theme and preserve plugin-owned code geometry when content styles load late.
 
