@@ -18,6 +18,7 @@ for (const width of [1440, 390]) {
       </main>`);
     for (const file of [
       'vendor/prism/plugins/line-numbers/prism-line-numbers.css',
+      'math.css',
       'teaching.css',
       'code-display.css',
     ]) {
@@ -30,6 +31,15 @@ for (const width of [1440, 390]) {
       await expect(pre).toHaveCSS('padding-inline-end', '0px');
     }
     await expect(page.locator('#ordinary')).toHaveCSS('padding-left', '20px');
+    // Palette values are inherited through the public adapter even when loaded late.
+    await page.addStyleTag({
+      content:
+        '.pagenest-article-body { --pagenest-code-background: #243142; --pagenest-code-text: #e1e7ef; --pagenest-content-link: #a5cdf8; --pagenest-text: #e1e7ef; --pagenest-muted: #b1bdcc; }',
+    });
+    await expect(page.locator('#numbered')).toHaveCSS('background-color', 'rgb(36, 49, 66)');
+    await expect(page.locator('#numbered')).toHaveCSS('color', 'rgb(225, 231, 239)');
+    await expect(page.locator('#numbered')).toHaveCSS('line-height', '23.1px');
+    await expect(page.locator('#numbered')).toHaveCSS('border-top-width', '0px');
     const gutter = await page.locator('#numbered').evaluate((pre) => {
       const bounds = pre.getBoundingClientRect();
       const rows = pre.querySelector('.line-numbers-rows').getBoundingClientRect();

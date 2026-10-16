@@ -615,9 +615,6 @@ body.pagenest-site {
   padding: calc(28px * var(--pagenest-spacing, 1)) calc(36px * var(--pagenest-spacing, 1))
     calc(36px * var(--pagenest-spacing, 1));
   min-width: 0;
-  --mbb-teaching-sticky-background: var(--pagenest-surface, #fff);
-  --mbb-code-surface: var(--pagenest-code-background, #f5f6f8);
-  --mbb-code-muted: var(--pagenest-muted, #65717c);
 }
 .pagenest-article-body blockquote {
   margin: 1.5em 0;
@@ -639,11 +636,6 @@ body.pagenest-site {
 }
 .pagenest-article-body blockquote > :nth-last-child(2):has(+ .pagenest-paragraph-bubble) {
   margin-block-end: 0;
-}
-.pagenest-article-body pre.mbb-code-display {
-  background: var(--pagenest-code-background, #f5f6f8) !important;
-  color: var(--pagenest-code-text, #34495b);
-  text-shadow: none;
 }
 .pagenest-article-body :not(pre) > code {
   padding: 0.12em 0.3em;

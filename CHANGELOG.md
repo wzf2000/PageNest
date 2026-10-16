@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.6-rc.1 (candidate)
+
+- Map MarkBridge presentation tokens to the theme and preserve plugin-owned code geometry when content styles load late.
+
 ## 1.2.5
 
 - 通用代码内边距避开 MarkBridge 专用代码显示，防止主题样式延迟加载时挤压代码对照与裁切行号。
