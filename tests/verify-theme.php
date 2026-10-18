@@ -765,7 +765,26 @@ $rendered['search-discovery.html'] = render('index.php');
 add_filter('pagenest_search_series', fn() => ['阅读方法', '知识整理']);
 $rendered['search-series.html'] = render('index.php');
 unset($filters['pagenest_search_series']);
+ob_start();
+pagenest_side();
+$search_sidebar = ob_get_clean();
+check(
+    'search sidebar omits only its duplicate search form',
+    !str_contains($search_sidebar, 'role="search"') &&
+        str_contains($search_sidebar, __('Browse categories', 'pagenest')) &&
+        str_contains($search_sidebar, __('Popular articles', 'pagenest')),
+);
+check(
+    'search page retains main and header search forms',
+    substr_count($rendered['search-discovery.html'], 'role="search"') === 2,
+);
 $fixture_search = false;
+ob_start();
+pagenest_side();
+check(
+    'ordinary listing sidebar retains its search form',
+    str_contains(ob_get_clean(), 'role="search"'),
+);
 check(
     'search form unique IDs',
     preg_match_all('/id="(pagenest-search-\d+)"/', $rendered['search-discovery.html'], $ids) &&

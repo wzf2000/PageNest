@@ -74,7 +74,9 @@ function pagenest_side($single = false)
 ); ?>"><?php echo esc_html($p->post_title); ?></a></li><?php endforeach; ?></ul>
         </section><?php }
         ?>
-        <?php else: ?><section class="pagenest-widget"><?php pagenest_search(); ?></section>
+        <?php else:if (
+        !is_search()
+    ): ?><section class="pagenest-widget"><?php pagenest_search(); ?></section><?php endif; ?>
         <section class="pagenest-widget">
             <h2><?php echo esc_html__('Browse categories', 'pagenest'); ?></h2>
             <div class="pagenest-categories"><?php foreach (
