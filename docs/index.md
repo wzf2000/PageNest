@@ -1,6 +1,6 @@
 # PageNest 文档
 
-本分支文档对应 **1.3.0-rc.1 候选**，尚未正式发行。稳定安装请从 [Releases](https://github.com/wzf2000/PageNest/releases) 选择发行包，并使用该版本附带的文档。
+本分支文档对应 **1.3.0-rc.1 候选**，尚未正式发行。稳定安装请从 仓库页面的 **Releases** 选择发行包，并使用该版本附带的文档。
 
 ## 使用与配置
 
@@ -18,6 +18,6 @@
 - [扩展接口](EXTENDING.md)：外观设置、CSS 变量、相关文章与布局契约。
 - [参与开发](../CONTRIBUTING.md)：依赖、格式、构建与检查入口。
 - [发行指南](RELEASING.md)：CI、安装与可读源码包、版本绑定与 GitHub Release。
-- [PageNest Companion](https://github.com/wzf2000/PageNest-Compatibility)：可选互动、内容发现、账号与媒体功能。
+- PageNest Companion：可选互动、内容发现、账号与媒体功能。
 
 效果图采用合成内容，不包含站点配置或生产内容。仓库的展示图片不进入主题安装 ZIP；主题根目录的 `screenshot.png` 仍作为 WordPress 标准主题预览随包提供。
