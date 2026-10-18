@@ -11,6 +11,8 @@ for key, ext, name in [
     ("customizer_design_js", "js", "customizer-design.js"),
     ("appearance", "css", "appearance.css"),
     ("browsing", "css", "browsing.css"),
+    ("presentation_css", "css", "presentation.css"),
+    ("presentation_js", "js", "presentation.js"),
     ("reader_preferences_css", "css", "reader-preferences.css"),
     ("reader_preferences_js", "js", "reader-preferences.js"),
     ("discovery_css", "css", "discovery.css"),

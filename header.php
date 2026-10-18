@@ -1,5 +1,7 @@
 <!doctype html>
-<html <?php language_attributes(); ?> class="no-js">
+<html <?php language_attributes(); ?> class="no-js" data-pagenest-color-scheme="<?php echo esc_attr(
+     pagenest_color_scheme(get_theme_mod('pagenest_color_scheme', 'light')),
+ ); ?>">
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">

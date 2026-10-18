@@ -69,3 +69,17 @@
 界面使用英文 gettext 原文与 `pagenest` 文本域，`after_setup_theme` 加载 `languages/`，现有站长文案与正文不经过 gettext。小型浏览器脚本通过 `wp_localize_script` 接收翻译，不新增运行依赖。新增 PHP 文案用字面量 `__`／转义变体；计数用 `_n`，可变内容使用完整句子和编号占位符。主题 JSON 名称、归档模板名及主题描述也进入提取清单。
 
 `npm run i18n` 提取 POT 并编译 `zh_CN.po` 为确定性 MO；`npm run i18n:check` 检查覆盖率、复数、占位符和已提交产物，已接入 `npm test`。修改 PHP 后需重新提取引用行号；新增原文需先在 PO 中补齐翻译。工具仅依赖 PHP 与 Python 标准库，不要求站点安装翻译插件。其他语言可使用标准 gettext 工具和 WordPress 语言包位置。
+
+## Site presentation contract
+
+`pagenest_color_scheme` accepts `light` (default), `dark`, or `system`. The HTML root exposes
+`data-pagenest-color-scheme`; semantic `--pagenest-*` colors include `--pagenest-on-accent` for text on
+accent backgrounds. CSS handles system media changes; `pagenest-color-scheme-change` also reports
+`{mode,effective}` for optional consumers. The browser override uses `pagenest-site-appearance-v1`
+and is independent of paragraph records and article reader preferences. No account data is stored.
+
+`pagenest_layout_article`, `pagenest_layout_topic`, and `pagenest_layout_tool` default to `standard`.
+Per-object `_pagenest_layout` metadata can override the display context/preset through an authorized
+nonce-protected save. Invalid combinations fall back to standard. Body classes identify the effective
+context and preset; they confer no tool registration or content access. Companion remains usable with
+other themes through its own shortcode UI and CSS fallbacks.

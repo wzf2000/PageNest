@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.0-rc.1
+
+- Add safe search match excerpts, category and series scopes, relevance/update sorting and reliable author heading links.
+- Add native RSS, site-wide light/dark/system appearance and article/topic/tool layout presets with per-object overrides.
+- Preserve existing palette values and independent reading controls; new Companion reading features require opt-in.
+
 ## 1.2.6-rc.1
 
 - Map MarkBridge presentation tokens to the theme and preserve plugin-owned code geometry when content styles load late.

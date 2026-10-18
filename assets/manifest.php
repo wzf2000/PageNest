@@ -7,6 +7,8 @@ return [
     'customizer_design_js' => 'customizer-design-b3f628e0b834.js',
     'appearance' => 'appearance-242c31913783.css',
     'browsing' => 'browsing-0fcf2b5c5a4a.css',
+    'presentation_css' => 'presentation-10bad1233ea0.css',
+    'presentation_js' => 'presentation-cfe5398cdcbc.js',
     'reader_preferences_css' => 'reader-preferences-806d8c771217.css',
     'reader_preferences_js' => 'reader-preferences-4f2c1bcb0ddb.js',
     'discovery_css' => 'discovery-4c178f4b670c.css',

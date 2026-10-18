@@ -491,8 +491,13 @@ function get_categories($args = [])
 {
     return [];
 }
+function wp_json_encode($value)
+{
+    return json_encode($value);
+}
 function wp_head()
 {
+    pagenest_initialize_color_scheme();
     $manifest = require THEME . '/assets/manifest.php';
     foreach (
         [
@@ -502,6 +507,7 @@ function wp_head()
             'discovery_css',
             'browsing',
             'reader_preferences_css',
+            'presentation_css',
             'editorial',
         ]
         as $key
@@ -529,7 +535,17 @@ function wp_footer()
             ';</script>';
     }
     $manifest = require THEME . '/assets/manifest.php';
-    foreach (['content_js', 'js', 'reading', 'discovery_js', 'reader_preferences_js'] as $key) {
+    echo '<script>window.PageNestPresentation=' .
+        json_encode([
+            'defaultScheme' => 'light',
+            'saved' => 'Saved',
+            'unsaved' => 'Applied to this page',
+        ]) .
+        ';</script>';
+    foreach (
+        ['content_js', 'js', 'reading', 'discovery_js', 'reader_preferences_js', 'presentation_js']
+        as $key
+    ) {
         echo '<script src="/assets/' . $manifest[$key] . '"></script>';
     }
 }
@@ -562,6 +578,7 @@ require THEME . '/i18n.php';
 require THEME . '/inc.php';
 require THEME . '/reading.php';
 require THEME . '/appearance.php';
+require THEME . '/presentation.php';
 require THEME . '/discovery.php';
 require THEME . '/browsing.php';
 require THEME . '/home-sections.php';
