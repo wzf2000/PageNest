@@ -80,7 +80,7 @@ msgstr ""
 msgid "All articles →"
 msgstr ""
 
-#: searchform.php:43
+#: searchform.php:45
 msgid "All categories"
 msgstr ""
 
@@ -259,7 +259,7 @@ msgstr ""
 msgid "Card corner radius (px)"
 msgstr ""
 
-#: searchform.php:38
+#: searchform.php:40
 msgid "Category"
 msgstr ""
 
@@ -377,7 +377,7 @@ msgstr ""
 msgid "Content guide"
 msgstr ""
 
-#: searchform.php:27
+#: searchform.php:29
 msgid "Content type"
 msgstr ""
 
@@ -834,7 +834,7 @@ msgstr ""
 msgid "Recent entries"
 msgstr ""
 
-#: browsing.php:156 browsing.php:20 searchform.php:63
+#: browsing.php:156 browsing.php:20 searchform.php:70
 msgid "Recently updated"
 msgstr ""
 
@@ -858,7 +858,7 @@ msgstr ""
 msgid "Related reading"
 msgstr ""
 
-#: searchform.php:59
+#: searchform.php:63
 msgid "Relevance"
 msgstr ""
 
@@ -895,11 +895,11 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: searchform.php:84
+#: searchform.php:89
 msgid "Search suggestions"
 msgstr ""
 
-#: searchform.php:10
+#: searchform.php:13
 msgid "Search this site"
 msgstr ""
 
@@ -912,7 +912,7 @@ msgstr ""
 msgid "Searching…"
 msgstr ""
 
-#: searchform.php:70
+#: searchform.php:75
 msgid "Series"
 msgstr ""
 
@@ -1010,7 +1010,7 @@ msgstr ""
 msgid "Slot %d · Content ID (optional)"
 msgstr ""
 
-#: searchform.php:54
+#: searchform.php:58
 msgid "Sort"
 msgstr ""
 

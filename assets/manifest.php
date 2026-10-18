@@ -11,7 +11,7 @@ return [
     'presentation_js' => 'presentation-cfe5398cdcbc.js',
     'reader_preferences_css' => 'reader-preferences-806d8c771217.css',
     'reader_preferences_js' => 'reader-preferences-4f2c1bcb0ddb.js',
-    'discovery_css' => 'discovery-4c178f4b670c.css',
+    'discovery_css' => 'discovery-b0ecbd05e347.css',
     'discovery_js' => 'discovery-dc8e3af3470c.js',
     'js' => 'navigation-9ca7de42e791.js',
     'reading' => 'reading-d9cf37f85c64.js',

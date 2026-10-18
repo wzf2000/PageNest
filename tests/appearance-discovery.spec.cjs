@@ -137,16 +137,93 @@ test('suggestion timeout keeps full search available', async ({ page }) => {
 test('native GET search preserves query and kind without JavaScript', async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
-  await page.goto('http://127.0.0.1:18779/search-discovery.html');
+  await page.goto('http://127.0.0.1:18779/search-series.html');
   await page.route('http://127.0.0.1:18779/?*', (route) =>
     route.fulfill({ body: '<p>Native search received</p>' }),
   );
   const form = page.locator('.pagenest-search-page form');
   await form.locator('[name="s"]').fill('中文 query');
   await form.locator('[name="pn_kind"]').selectOption('page');
+  await form.locator('[name="pn_sort"]').selectOption('modified');
+  await form.locator('[name="pn_series"]').fill('阅读方法');
   await form.locator('button[type="submit"]').click();
   const url = new URL(page.url());
   expect(url.searchParams.get('s')).toBe('中文 query');
   expect(url.searchParams.get('pn_kind')).toBe('page');
+  expect(url.searchParams.get('pn_sort')).toBe('modified');
+  expect(url.searchParams.get('pn_series')).toBe('阅读方法');
+  expect(url.searchParams.get('pn_category')).toBe('0');
   await context.close();
+});
+
+for (const width of [1440, 390, 320]) {
+  test(`search fields align in full and popover forms at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    for (const series of [false, true]) {
+      await page.goto(series ? '/search-series.html' : '/search-discovery.html');
+      await page.evaluate(() => {
+        document.documentElement.dataset.pagenestColorScheme = 'dark';
+      });
+      const form = page.locator('.pagenest-search-page form');
+      const check = async (target, columns) => {
+        const sizes = await target.evaluate((form) => {
+          const filters = form.querySelector('.pagenest-search-filters');
+          return {
+            columns: getComputedStyle(filters).gridTemplateColumns.split(' ').length,
+            fields: [...filters.querySelectorAll('.pagenest-search-field')].map((field) => {
+              const label = field.querySelector('label').getBoundingClientRect();
+              const control = field.querySelector('input,select').getBoundingClientRect();
+              return {
+                labelBottom: label.bottom,
+                top: control.top,
+                height: control.height,
+                left: control.left,
+                right: control.right,
+              };
+            }),
+          };
+        });
+        expect(sizes.columns).toBe(columns);
+        for (const field of sizes.fields) {
+          expect(field.top).toBeGreaterThanOrEqual(field.labelBottom);
+          expect(field.height).toBe(44);
+          expect(field.left).toBeGreaterThanOrEqual(0);
+          expect(field.right).toBeLessThanOrEqual(width);
+        }
+      };
+      await check(form, width === 1440 ? (series ? 4 : 3) : 2);
+      if (width !== 320 && series)
+        await page.screenshot({
+          path: `.runtime/ui-refinement-search-page-${width}.png`,
+          fullPage: true,
+        });
+      await page.locator('.pagenest-header-search > summary').click();
+      await check(page.locator('.pagenest-search-popover form'), 2);
+      if (width !== 320 && series)
+        await page.screenshot({
+          path: `.runtime/ui-refinement-search-popover-${width}.png`,
+          fullPage: true,
+        });
+      expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)).toBe(
+        false,
+      );
+    }
+  });
+}
+
+test('filter changes refresh suggestions with all selected fields', async ({ page }) => {
+  let params;
+  await page.route('**/wp-json/pagenest/v1/discovery?*', (route) => {
+    params = Object.fromEntries(new URL(route.request().url()).searchParams);
+    return route.fulfill({ json: { items: [] } });
+  });
+  await page.goto('/search-series.html');
+  const form = page.locator('.pagenest-search-page form');
+  await form.locator('[name=s]').fill('阅读');
+  await form.locator('[name=pn_kind]').selectOption('post');
+  await form.locator('[name=pn_sort]').selectOption('modified');
+  await form.locator('[name=pn_series]').fill('阅读方法');
+  await form.locator('[name=pn_series]').dispatchEvent('change');
+  await expect.poll(() => params?.series).toBe('阅读方法');
+  expect(params).toMatchObject({ q: '阅读', kind: 'post', sort: 'modified', category: '0' });
 });

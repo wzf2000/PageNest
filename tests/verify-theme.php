@@ -762,6 +762,9 @@ $mods = ['pagenest_topics' => [['title' => 'Synthetic topic', 'url' => home_url(
 add_filter('pagenest_search_endpoint', fn() => home_url('/wp-json/pagenest/v1/discovery'));
 $fixture_search = true;
 $rendered['search-discovery.html'] = render('index.php');
+add_filter('pagenest_search_series', fn() => ['阅读方法', '知识整理']);
+$rendered['search-series.html'] = render('index.php');
+unset($filters['pagenest_search_series']);
 $fixture_search = false;
 check(
     'search form unique IDs',
