@@ -4,21 +4,31 @@
 
         the_post();
         $article = is_singular('post');
+        $tool = !$article ? apply_filters('pagenest_tool_page', false, (int) get_the_ID()) : false;
         ?>
     <div class="<?php echo $article ? 'pagenest-reading-grid' : 'pagenest-page-column'; ?>">
         <div class="pagenest-article-column">
             <article id="post-<?php the_ID(); ?>" <?php post_class(
-    'pagenest-article' . ($article ? '' : ' pagenest-page'),
+    'pagenest-article' . ($article ? '' : ' pagenest-page') . ($tool ? ' pagenest-tool-page' : ''),
 ); ?>>
                 <header class="pagenest-article-header">
-                    <div class="pagenest-entry-labels"><a href="<?php echo esc_url(
-                        pagenest_posts_url(),
-                    ); ?>"><?php echo esc_html__('Articles and notes', 'pagenest'); ?></a><?php if (
+                    <?php if (
+                        !$tool
+                    ): ?><div class="pagenest-entry-labels"><a href="<?php echo esc_url(
+    pagenest_posts_url(),
+); ?>"><?php echo esc_html__('Articles and notes', 'pagenest'); ?></a><?php if (
     get_post_status() === 'private'
 ): ?><span class="pagenest-badge"><?php echo esc_html__(
     'Private',
     'pagenest',
-); ?></span><?php endif; ?></div>
+); ?></span><?php endif; ?></div><?php endif; ?>
+                    <?php if (
+                        $tool &&
+                        get_post_status() === 'private'
+                    ): ?><span class="pagenest-badge"><?php echo esc_html__(
+    'Private',
+    'pagenest',
+); ?></span><?php endif; ?>
                     <h1><?php echo esc_html(
                         get_post_field('post_title', get_the_ID()),
                     ); ?></h1><?php if ($article) {
@@ -27,6 +37,7 @@
 } ?>
                 </header>
                 <?php if (
+                    !$tool &&
                     has_post_thumbnail() &&
                     (!$article ||
                         pagenest_browsing_bool(get_theme_mod('pagenest_article_cover', true))) &&

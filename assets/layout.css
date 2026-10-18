@@ -585,7 +585,7 @@ body.pagenest-site {
   background: var(--pagenest-surface, #fff);
   border: 1px solid var(--pagenest-border);
   border-radius: var(--pagenest-radius, 12px);
-  overflow: hidden;
+  overflow: clip;
 }
 .pagenest-article-header {
   padding: calc(32px * var(--pagenest-spacing, 1)) calc(36px * var(--pagenest-spacing, 1))
@@ -615,6 +615,44 @@ body.pagenest-site {
   padding: calc(28px * var(--pagenest-spacing, 1)) calc(36px * var(--pagenest-spacing, 1))
     calc(36px * var(--pagenest-spacing, 1));
   min-width: 0;
+  --mbb-teaching-sticky-background: var(--pagenest-surface, #fff);
+  --mbb-code-surface: var(--pagenest-code-background, #f5f6f8);
+  --mbb-code-muted: var(--pagenest-muted, #65717c);
+}
+.pagenest-article-body blockquote {
+  margin: 1.5em 0;
+  padding: 0.55em 1em;
+  border: 0;
+  border-inline-start: 3px solid var(--pagenest-quote-border, #93a58f);
+  background: var(--pagenest-quote-background, #f2f3ed);
+  color: inherit;
+  font-size: inherit;
+  border-radius: 0;
+  border-start-end-radius: calc(var(--pagenest-radius, 12px) / 2);
+  border-end-end-radius: calc(var(--pagenest-radius, 12px) / 2);
+}
+.pagenest-article-body blockquote > :last-child {
+  margin-block-end: 0;
+}
+.pagenest-article-body blockquote > :first-child {
+  margin-block-start: 0;
+}
+.pagenest-article-body blockquote > :nth-last-child(2):has(+ .pagenest-paragraph-bubble) {
+  margin-block-end: 0;
+}
+.pagenest-article-body pre.mbb-code-display {
+  background: var(--pagenest-code-background, #f5f6f8) !important;
+  color: var(--pagenest-code-text, #34495b);
+  text-shadow: none;
+}
+.pagenest-article-body :not(pre) > code {
+  padding: 0.12em 0.3em;
+  border-radius: 4px;
+  background: var(--pagenest-code-background, #f5f6f8);
+  color: var(--pagenest-code-text, #34495b);
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  font-size: 0.9em;
+  white-space: break-spaces;
 }
 .pagenest-article .pagenest-article-body > :is(h1, h2, h3, h4):first-child,
 .pagenest-article .pagenest-article-body > .pagenest-mobile-toc + :is(h1, h2, h3, h4) {
@@ -2030,6 +2068,20 @@ summary {
 .pagenest-article-body :is(h1, h2, h3, h4, h5, h6, [data-pagenest-block], a[id]:not([href])) {
   scroll-margin-top: var(--pagenest-anchor-top, 100px) !important;
 }
+.pagenest-article-body .wp-block-mbb-steps[data-mbb-enhanced] [id] {
+  scroll-margin-top: max(
+    var(--pagenest-anchor-top, 100px),
+    calc(
+      var(--mbb-teaching-effective-offset, 0px) + var(--mbb-teaching-controls-height, 0px) + 0.75rem
+    )
+  ) !important;
+}
+.pagenest-article-body .wp-block-mbb-steps[data-mbb-enhanced] {
+  scroll-margin-top: max(
+    var(--pagenest-anchor-top, 100px),
+    calc(var(--mbb-teaching-effective-offset, 0px) + 0.75rem)
+  ) !important;
+}
 @media (max-width: 1023px) {
   .pagenest-reading-rail {
     position: static;
@@ -2047,4 +2099,46 @@ summary {
   align-items: center;
   gap: 8px;
   margin-left: auto;
+}
+
+/* Registered tool pages put the task before the article framing. */
+.pagenest-tool-page .pagenest-article-header {
+  padding-top: 24px;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.pagenest-site .pagenest-tool-page .pagenest-article-header h1 {
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+  margin: 0;
+}
+.pagenest-tool-page .pagenest-tool-host > :first-child {
+  margin-top: 0;
+}
+.pagenest-tool-guide {
+  margin-top: 1.25rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--pagenest-line, #d5d9df);
+  border-radius: 8px;
+}
+.pagenest-tool-guide > summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+@media (max-width: 540px) {
+  .pagenest-tool-page .pagenest-article-header {
+    padding: 18px 12px 8px;
+  }
+  .pagenest-tool-page.pagenest-page .pagenest-article-body {
+    padding: 4px 10px 16px;
+  }
+}
+
+.pagenest-tool-page [data-tool-heading],
+.pagenest-tool-page [data-tool-preface] {
+  display: none;
+}
+.pagenest-tool-page .pnpt-heading {
+  margin-bottom: 12px;
+  padding-bottom: 8px;
 }

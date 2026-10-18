@@ -69,7 +69,7 @@
 :is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
   blockquote {
   margin: 1.5em 0;
-  padding: 1em 1.3em;
+  padding: 0.55em 1em;
   border: 0;
   border-left: 3px solid var(--pagenest-quote-border, #93a58f);
   background: var(--pagenest-quote-background, #f2f3ed);
@@ -153,12 +153,15 @@
   pre:not(.wp-block-mbb-math) {
   max-width: 100%;
   overflow: auto;
-  padding: 20px !important;
   border: 1px solid var(--pagenest-border);
   border-radius: calc(var(--pagenest-radius, 12px) * 8 / 12);
   background: var(--pagenest-code-background, #f2f3ed);
   line-height: 1.65 !important;
   font-size: calc(14px * var(--pagenest-font-scale, 1)) !important;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
+  pre:not(.wp-block-mbb-math):not(.mbb-code-display) {
+  padding: 20px !important;
 }
 :is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container) code {
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
@@ -167,9 +170,9 @@
 :is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
   :not(pre)
   > code {
-  padding: 0.15em 0.35em;
+  padding: 0.12em 0.3em;
   border-radius: calc(var(--pagenest-radius, 12px) * 4 / 12);
-  background: var(--pagenest-soft);
+  background: var(--pagenest-code-background, #f5f6f8);
   color: var(--pagenest-code-text, #426354);
   white-space: break-spaces;
 }

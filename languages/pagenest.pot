@@ -68,7 +68,7 @@ msgstr ""
 msgid "About link label"
 msgstr ""
 
-#: singular.php:76
+#: singular.php:87
 msgid "Adjacent articles"
 msgstr ""
 
@@ -140,7 +140,7 @@ msgstr ""
 msgid "Article outline"
 msgstr ""
 
-#: singular.php:53
+#: singular.php:64
 msgid "Article pagination"
 msgstr ""
 
@@ -152,7 +152,7 @@ msgstr ""
 msgid "Articles"
 msgstr ""
 
-#: index.php:8 singular.php:16
+#: index.php:8 singular.php:19
 msgid "Articles and notes"
 msgstr ""
 
@@ -409,7 +409,7 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: singular.php:70
+#: singular.php:81
 msgid "Edit article"
 msgstr ""
 
@@ -650,7 +650,7 @@ msgstr ""
 msgid "New comments are closed for this article."
 msgstr ""
 
-#: singular.php:80
+#: singular.php:91
 msgid "Next article"
 msgstr ""
 
@@ -718,7 +718,7 @@ msgstr ""
 msgid "Powered by WordPress"
 msgstr ""
 
-#: singular.php:80
+#: singular.php:91
 msgid "Previous article"
 msgstr ""
 
@@ -726,7 +726,7 @@ msgstr ""
 msgid "Primary navigation"
 msgstr ""
 
-#: inc.php:112 singular.php:18
+#: inc.php:112 singular.php:21 singular.php:28
 msgid "Private"
 msgstr ""
 
