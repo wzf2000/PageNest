@@ -34,6 +34,52 @@ $endpoint = apply_filters('pagenest_search_endpoint', '');
     pagenest_search_kind(),
     $value,
 ); ?>><?php echo esc_html($label); ?></option><?php endforeach; ?></select></div>
+    <div class="pagenest-search-filters">
+        <label for="<?php echo esc_attr($id); ?>-category"><?php echo esc_html__(
+    'Category',
+    'pagenest',
+); ?></label>
+        <select id="<?php echo esc_attr($id); ?>-category" name="pn_category">
+            <option value="0"><?php echo esc_html__(
+                'All categories',
+                'pagenest',
+            ); ?></option><?php foreach (
+    get_categories(['hide_empty' => true])
+    as $category
+): ?><option value="<?php echo esc_attr($category->term_id); ?>" <?php selected(
+    pagenest_search_param('pn_category'),
+    $category->term_id,
+); ?>><?php echo esc_html($category->name); ?></option><?php endforeach; ?>
+        </select>
+        <label for="<?php echo esc_attr($id); ?>-sort"><?php echo esc_html__(
+    'Sort',
+    'pagenest',
+); ?></label>
+        <select id="<?php echo esc_attr($id); ?>-sort" name="pn_sort">
+            <option value="relevance"><?php echo esc_html__('Relevance', 'pagenest'); ?></option>
+            <option value="modified" <?php selected(
+                pagenest_search_param('pn_sort'),
+                'modified',
+            ); ?>><?php echo esc_html__('Recently updated', 'pagenest'); ?></option>
+        </select>
+    </div>
+    <?php
+    $series = apply_filters('pagenest_search_series', []);
+    if ($series): ?><div class="pagenest-search-filters"><label for="<?php echo esc_attr(
+    $id,
+); ?>-series"><?php echo esc_html__('Series', 'pagenest'); ?></label><input id="<?php echo esc_attr(
+    $id,
+); ?>-series" name="pn_series" value="<?php echo esc_attr(
+    pagenest_search_param('pn_series'),
+); ?>" maxlength="100" list="<?php echo esc_attr(
+    $id,
+); ?>-series-list"><datalist id="<?php echo esc_attr($id); ?>-series-list"><?php foreach (
+    $series
+    as $value
+): ?><option value="<?php echo esc_attr(
+    $value,
+); ?>"><?php endforeach; ?></datalist></div><?php endif;
+    ?>
     <p class="pagenest-search-status" role="status" aria-live="polite"></p>
     <ul class="pagenest-search-suggestions" aria-label="<?php echo esc_attr__(
         'Search suggestions',

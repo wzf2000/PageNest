@@ -106,3 +106,33 @@
     position: relative;
   }
 }
+
+.pagenest-site .pagenest-search .pagenest-search-filters {
+  flex-wrap: wrap;
+}
+.pagenest-search-filters input {
+  width: 140px;
+}
+.pagenest-search-suggestions li > div {
+  min-width: 0;
+  flex: 1;
+}
+.pagenest-search-suggestions p {
+  font-size: 13px;
+  margin: 4px 0;
+  color: var(--pagenest-muted, #69736b);
+}
+.pagenest-search-section {
+  display: block;
+  font-size: 13px;
+  margin-block: 4px;
+}
+.pagenest-search-sections {
+  padding-inline-start: 20px;
+}
+.pagenest-search mark,
+.pagenest-entry mark {
+  color: inherit;
+  background: var(--pagenest-soft, #eef1eb);
+  font-weight: 700;
+}

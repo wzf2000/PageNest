@@ -80,6 +80,10 @@ msgstr ""
 msgid "All articles →"
 msgstr ""
 
+#: searchform.php:43
+msgid "All categories"
+msgstr ""
+
 #: discovery.php:7
 msgid "All content"
 msgstr ""
@@ -233,6 +237,10 @@ msgstr ""
 
 #: appearance.php:113
 msgid "Card corner radius (px)"
+msgstr ""
+
+#: searchform.php:38
+msgid "Category"
 msgstr ""
 
 #: product.php:436
@@ -458,7 +466,7 @@ msgstr ""
 msgid "F Y"
 msgstr ""
 
-#: browsing.php:123 inc.php:153 inc.php:175 reading.php:221
+#: browsing.php:123 inc.php:167 inc.php:189 reading.php:221
 msgid "F j, Y"
 msgstr ""
 
@@ -762,7 +770,7 @@ msgstr ""
 msgid "Recent entries"
 msgstr ""
 
-#: browsing.php:156 browsing.php:20
+#: browsing.php:156 browsing.php:20 searchform.php:63
 msgid "Recently updated"
 msgstr ""
 
@@ -784,6 +792,10 @@ msgstr ""
 
 #: reading.php:67
 msgid "Related reading"
+msgstr ""
+
+#: searchform.php:59
+msgid "Relevance"
 msgstr ""
 
 #: comments.php:23 reading.php:243
@@ -819,7 +831,7 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: searchform.php:38
+#: searchform.php:84
 msgid "Search suggestions"
 msgstr ""
 
@@ -834,6 +846,10 @@ msgstr ""
 
 #: i18n.php:27
 msgid "Searching…"
+msgstr ""
+
+#: searchform.php:70
+msgid "Series"
 msgstr ""
 
 #: product.php:342
@@ -922,6 +938,10 @@ msgstr ""
 msgid "Slot %d · Content ID (optional)"
 msgstr ""
 
+#: searchform.php:54
+msgid "Sort"
+msgstr ""
+
 #: appearance.php:105
 msgid "Spacing scale"
 msgstr ""
@@ -999,7 +1019,7 @@ msgstr ""
 msgid "Theme settings"
 msgstr ""
 
-#: inc.php:125
+#: inc.php:139
 msgid "This article requires a password."
 msgstr ""
 

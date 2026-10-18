@@ -1,4 +1,3 @@
-# PageNest Simplified Chinese translations.
 msgid ""
 msgstr "Project-Id-Version: PageNest\nPO-Revision-Date: 2026-10-13 00:00+0000\nLast-Translator: PageNest Contributors\nLanguage-Team: PageNest Contributors\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Domain: pagenest\nLanguage: zh_CN\nPlural-Forms: nplurals=1; plural=0;\n"
 
@@ -800,3 +799,18 @@ msgstr "← 上一页"
 
 msgid "Welcome. Contact the site administrator if you need help."
 msgstr "欢迎登录。如需帮助，请联系本站管理员。"
+
+msgid "All categories"
+msgstr "全部分类"
+
+msgid "Category"
+msgstr "分类"
+
+msgid "Relevance"
+msgstr "相关度"
+
+msgid "Series"
+msgstr "系列"
+
+msgid "Sort"
+msgstr "排序"
