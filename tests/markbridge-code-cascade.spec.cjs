@@ -31,6 +31,11 @@ for (const width of [1440, 390]) {
       await expect(pre).toHaveCSS('padding-inline-end', '0px');
     }
     await expect(page.locator('#ordinary')).toHaveCSS('padding-left', '20px');
+    const geometry = await page.locator('#numbered').evaluate((node) => {
+      const style = getComputedStyle(node);
+      return { lineHeight: style.lineHeight, padding: style.padding, border: style.borderTopWidth };
+    });
+    // The selected installed version owns typography and gutters; palettes only change colors.
     // Palette values are inherited through the public adapter even when loaded late.
     await page.addStyleTag({
       content:
@@ -38,7 +43,8 @@ for (const width of [1440, 390]) {
     });
     await expect(page.locator('#numbered')).toHaveCSS('background-color', 'rgb(36, 49, 66)');
     await expect(page.locator('#numbered')).toHaveCSS('color', 'rgb(225, 231, 239)');
-    await expect(page.locator('#numbered')).toHaveCSS('line-height', '23.1px');
+    await expect(page.locator('#numbered')).toHaveCSS('line-height', geometry.lineHeight);
+    await expect(page.locator('#numbered')).toHaveCSS('padding', geometry.padding);
     await expect(page.locator('#numbered')).toHaveCSS('border-top-width', '0px');
     const gutter = await page.locator('#numbered').evaluate((pre) => {
       const bounds = pre.getBoundingClientRect();

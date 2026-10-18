@@ -194,6 +194,16 @@
   color: var(--pagenest-code-text, #426354);
   white-space: break-spaces;
 }
+/* Older MarkBridge versions use literal surfaces and local token defaults.
+   Adapt colors locally while leaving plugin-owned gutters, padding and wrapping intact. */
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
+  pre.mbb-code-display {
+  --mbb-code-surface: var(--pagenest-code-background, #f2f3ed);
+  --mbb-code-text: var(--pagenest-code-text, #34495b);
+  --mbb-code-muted: var(--pagenest-muted, #65717c);
+  background: var(--mbb-code-surface);
+  color: var(--mbb-code-text);
+}
 :is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container) hr {
   border: 0;
   border-top: 1px solid var(--pagenest-border);

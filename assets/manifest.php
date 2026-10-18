@@ -16,6 +16,6 @@ return [
     'js' => 'navigation-9ca7de42e791.js',
     'reading' => 'reading-d9cf37f85c64.js',
     'login' => 'login-d20c2cddc953.css',
-    'content' => 'content-71198ba7b334.css',
+    'content' => 'content-3ab639b63fce.css',
     'content_js' => 'content-cd7adb62f3ec.js',
 ];
