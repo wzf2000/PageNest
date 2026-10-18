@@ -1,62 +1,69 @@
-# PageNest · 栖页
+<p align="center"><img src="docs/assets/hero.svg" alt="PageNest · 栖页 — 为长文留出阅读的空间" width="100%"></p>
 
-让知识与思考安放于页间。面向技术笔记与长文阅读的独立经典 WordPress 主题。
+<p align="center"><strong>面向技术笔记、专题与长文阅读的独立 WordPress 主题。</strong><br>A reading-focused WordPress theme for technical notes and thoughtful writing.</p>
 
-A reading-focused WordPress theme for technical notes and thoughtful writing.
+<p align="center">
+  <img alt="WordPress 6.0+" src="https://img.shields.io/badge/WordPress-6.0%2B-21759b">
+  <img alt="PHP 8.0+" src="https://img.shields.io/badge/PHP-8.0%2B-777bb4">
+  <a href="LICENSE"><img alt="GPL-2.0-or-later" src="https://img.shields.io/badge/license-GPL--2.0--or--later-52796f"></a>
+</p>
 
-![WordPress 6.0+](https://img.shields.io/badge/WordPress-6.0%2B-21759b?style=flat-square) ![PHP 8.0+](https://img.shields.io/badge/PHP-8.0%2B-777bb4?style=flat-square) ![GPL-2.0-or-later](https://img.shields.io/badge/License-GPL--2.0--or--later-52796f?style=flat-square)
+<p align="center"><a href="#开始使用">开始使用</a> · <a href="docs/SHOWCASE.md">效果与设计</a> · <a href="docs/index.md">文档</a> · <a href="https://github.com/wzf2000/PageNest/releases">下载发行包</a> · <a href="CHANGELOG.md">更新记录</a></p>
 
-[下载主题](docs/RELEASING.md) · [更新记录](CHANGELOG.md) · [问题反馈](docs/RELEASING.md#问题反馈)
+> 本分支为 **1.3.0-rc.1 候选**，尚未正式发行。全站明暗与布局预设属于候选能力；正式安装请使用 [Releases](https://github.com/wzf2000/PageNest/releases) 中的稳定发行包及其对应文档。
 
-![PageNest 首页与专题预览](screenshot.png)
+## 为内容组织，也为持续阅读
 
-_预览采用合成演示内容；安装主题不会导入示例文章或站点图片。_
+PageNest 把首页专题、文章目录和阅读设置放在同一套克制的界面中。站长用 WordPress 原生自定义器组织内容；读者按自己的节奏浏览专题、定位章节、调整正文的字号与宽度。
 
-当前候选版本：**1.3.0-rc.1**，尚未作为正式版本发布。
+主题无需父主题，也不要求安装 Companion。已有文章、菜单和媒体仍由 WordPress 管理，启用主题不会导入演示内容。
 
-## 功能
+## 实际效果
 
-- **专注阅读**：分层文章目录支持分支折叠、展开全部和当前位置提示；手机目录默认收起，没有小标题时仍可跳至正文。
-- **定制首页**：通过 WordPress 原生自定义器设置背景、介绍、最多六个专题与七位作者展示。
-- **响应式布局**：暖白编辑式层次、桌面两列文章、适度横向封面，手机单列；提供文章、页面、归档、搜索与 404 模板。
-- **统一视觉设置**：三套协调配色，自定义颜色、字号、阅读行高、间距、圆角和宽度；编辑器正文预览使用相同设置。
-- **搜索与发现**：命中摘要与安全高亮、分类及相关度／更新时间排序；可搭配 Companion 获取系列筛选、公开工具建议与可靠的作者标题定位。
-- **浏览与阅读偏好（1.2）**：可配置首页模块、精选与导览、紧凑列表；访客可在本机调整文章字号、宽度与阅读配色。
-- **配置与示例（1.2）**：「外观 → PageNest」集中进入自定义器，迁移视觉设置，查看本地诊断；原生区块样板需手动插入。
-- **明暗与布局（1.3）**：全站浅色、深色与跟随系统，访客偏好仅保存在本机；文章、专题和工具有独立布局预设，逐篇选择仅改变展示。
-- **原生订阅**：页脚提供 WordPress RSS 入口，无需邮件或账户同步。
-- **完整站点外观**：原生评论与密码保护、导航、登录/注册背景及提示语、页脚署名和可选备案号。
+![PageNest 合成演示首页](docs/assets/home-light.png)
+
+_合成内容的首页预览。更多候选阅读界面、明暗模式与设计说明见[效果与设计](docs/SHOWCASE.md)；演示图片不随安装自动导入。_
+
+## 你能用它做什么
+
+- **组织一个有入口的首页。** 设置介绍、专题、作者与精选内容，选择卡片或紧凑列表；未配置的模块自然留空。
+- **读长文时知道自己在哪里。** 分层目录显示当前位置，分支可折叠，手机目录默认收起；没有小标题时仍能跳至正文。
+- **让阅读适合当前设备。** 响应式页面、本机字号与正文宽度设置、暖纸和深色正文配色；偏好保存在当前浏览器。
+- **建立自己的视觉。** 配色、字体尺寸、行高、间距和宽度集中配置；区块编辑器正文预览沿用相同视觉设置。
+- **帮助读者发现下一篇。** 分类归档、搜索摘要与排序、相关文章和 WordPress RSS；搭配 Companion 可获得系列筛选与公开工具建议。
+- **保留完整的站点外观。** 文章、页面、搜索、404、原生评论、密码文章、登录背景、导航与页脚都有对应模板或设置。
+
+**候选新增：** 全站浅色／深色／跟随系统，以及文章、专题、工具的独立布局预设；逐篇覆盖只改变展示。相关操作见[使用指南](docs/USAGE.md#全站明暗与页面布局)。
 
 ## 开始使用
 
-需要 **WordPress 6.0+、PHP 8.0+**，无需父主题。
+需要 **WordPress 6.0+、PHP 8.0+**。
 
-1. 从 仓库页面的 **Releases** 下载发行附件中的 `pagenest-版本号.zip`。
-2. 在后台 “外观 → 主题 → 安装主题 → 上传主题” 上传 ZIP，安装并启用。
-3. 分配 “全站主导航”，从 “外观 → PageNest” 进入自定义器配置背景、专题与作者。
+1. 从 [Releases](https://github.com/wzf2000/PageNest/releases) 下载 `pagenest-版本号.zip` 安装附件。
+2. 在后台 **外观 → 主题 → 安装主题 → 上传主题** 安装并启用。
+3. 在 **外观 → 菜单** 分配 “全站主导航”，在 “站点身份” 设置标题与 Logo。
+4. 打开 **外观 → PageNest**，进入自定义器配置首页、专题、作者与视觉，预览后发布设置。
 
-站点标题与 Logo 在 “站点身份” 中设置；下载时选择发行安装包，避免使用 Source code ZIP。
+请选择发行安装包；GitHub 的 Source code ZIP 用于查看源码。图片由使用者自行上传并确认使用权。完整设置、升级和阅读行为见[使用指南](docs/USAGE.md)。
 
-> [完整安装、配置与旧版升级指南](docs/USAGE.md)
+## PageNest 与 Companion 如何搭配
 
-## 配置与搭配
+| 组件                                                                        | 主要职责                                                             | 是否必需               |
+| --------------------------------------------------------------------------- | -------------------------------------------------------------------- | ---------------------- |
+| **PageNest**                                                                | 首页、模板、目录、视觉、阅读偏好与布局                               | 可独立使用             |
+| [**PageNest Companion**](https://github.com/wzf2000/PageNest-Compatibility) | 段落评论、章节导航、点赞，以及可选的搜索、分享、账号、导览与媒体功能 | 按需安装和启用         |
+| **独立扩展**                                                                | 经验政策、具体工具或其他业务实现                                     | 按需接入，不随主题提供 |
 
-首页介绍支持换行。自定义器中的 “页脚信息”“交流区”“归档与关于链接” 用于配置站点文案和链接；“登录与注册” 调整登录页外观。图片由使用者自行上传并确认使用权。
+主题提供外观与扩展位置；Companion 管理功能、数据和权限。更换主题时，互动数据仍由插件维护。
 
-PageNest Companion 提供段落评论与私人记录保护、章节导航、点赞、评论邮件、可选社交登录、内容导览及画廊／PDF 展示。主题提供顶栏与阅读栏扩展位置；经验与工具可独立接入。
+## 文档与参与
 
-> [配置说明与阅读行为](docs/USAGE.md)
+从[文档导航](docs/index.md)按目标查找：
 
-## 更多文档
+- [使用指南](docs/USAGE.md)：安装、首页编排、阅读设置、明暗、布局与升级。
+- [效果与设计](docs/SHOWCASE.md)：真实合成站截图、设计取舍及候选范围。
+- [扩展接口](docs/EXTENDING.md)：设置键、视觉变量与阅读布局接入。
+- [贡献指南](CONTRIBUTING.md)：本地开发、格式和检查。
+- [发行指南与问题反馈](docs/RELEASING.md)：CI、安装包、Release 和反馈所需信息。
 
-> [使用指南](docs/USAGE.md) — 安装、首页配置、阅读与升级。
->
-> [扩展接口](docs/EXTENDING.md) — 设置键、相关文章与阅读布局接入。
->
-> [贡献指南](CONTRIBUTING.md) — 本地开发、格式和检查。
->
-> [发行指南](docs/RELEASING.md) — CI、打包与 GitHub Release。
-
-## 许可证
-
-代码与随附演示截图采用 **GPL-2.0-or-later**，详见 [LICENSE](LICENSE)。版权归 PageNest Contributors（2026）所有；站点上传的图片与媒体不随主题分发。
+采用 **[GPL-2.0-or-later](LICENSE)**。代码与随附合成演示图版权归 PageNest Contributors（2026）所有；使用者上传的站点图片与媒体不随主题分发。
