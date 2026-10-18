@@ -814,3 +814,6 @@ msgstr "系列"
 
 msgid "Sort"
 msgstr "排序"
+
+msgid "Subscribe via RSS"
+msgstr "通过 RSS 订阅"

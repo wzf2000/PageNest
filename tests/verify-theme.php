@@ -434,6 +434,10 @@ function wp_unique_id($prefix = '')
     static $id = 0;
     return $prefix . ++$id;
 }
+function get_feed_link()
+{
+    return 'https://example.invalid/feed/';
+}
 function get_search_query()
 {
     return 'Synthetic';

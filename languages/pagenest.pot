@@ -966,6 +966,10 @@ msgstr ""
 msgid "Submit the form from the settings page."
 msgstr ""
 
+#: footer.php:25
+msgid "Subscribe via RSS"
+msgstr ""
+
 #: i18n.php:34
 msgid "Suggestions are unavailable. Press Enter to continue searching."
 msgstr ""
