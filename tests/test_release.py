@@ -113,6 +113,7 @@ class ReleaseGuards(unittest.TestCase):
             "languages/private.json": "excluded\n",
             "docs/USAGE.md": "Synthetic usage\n",
             "docs/assets/overview.svg": "<svg/>\n",
+            "docs/assets/reading.png": "synthetic image\n",
         }.items():
             path = self.root / name
             path.parent.mkdir(parents=True, exist_ok=True)
@@ -132,7 +133,9 @@ class ReleaseGuards(unittest.TestCase):
         with zipfile.ZipFile(self.root / f"dist/{slug}-0.6.0.zip") as archive:
             self.assertIn(f"{slug}/modules/feature.php", archive.namelist())
             self.assertIn(f"{slug}/assets/feature.js", archive.namelist())
-            self.assertIn(f"{slug}/docs/assets/overview.svg", archive.namelist())
+            self.assertNotIn(f"{slug}/docs/assets/overview.svg", archive.namelist())
+            self.assertNotIn(f"{slug}/docs/assets/reading.png", archive.namelist())
+            self.assertIn(f"{slug}/docs/USAGE.md", archive.namelist())
             self.assertNotIn(f"{slug}/assets/development.txt", archive.namelist())
             for name in ["pagenest.pot", "zh_CN.po", "zh_CN.mo"]:
                 self.assertIn(f"{slug}/languages/{name}", archive.namelist())

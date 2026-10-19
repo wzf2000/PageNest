@@ -41,15 +41,21 @@ function pagenest_discovery_links(): void
 }
 // Native WordPress search remains usable without JavaScript or Companion.
 add_action('pre_get_posts', static function ($query): void {
-    if (
-        is_admin() ||
-        !$query->is_main_query() ||
-        !$query->is_search() ||
-        !isset($_GET['pn_kind'])
-    ) {
+    if (is_admin() || !$query->is_main_query() || !$query->is_search()) {
         return;
     }
     $kind = pagenest_search_kind();
+    $query->set('post_status', 'publish');
+    $query->set('has_password', false);
+    $query->set(
+        'orderby',
+        pagenest_search_param('pn_sort') === 'modified'
+            ? ['modified' => 'DESC', 'ID' => 'DESC']
+            : 'relevance',
+    );
+    if (absint(pagenest_search_param('pn_category'))) {
+        $query->set('category__in', [absint(pagenest_search_param('pn_category'))]);
+    }
     $query->set('post_type', in_array($kind, ['post', 'page'], true) ? $kind : ['post', 'page']);
 });
 add_action('wp_enqueue_scripts', static function (): void {
@@ -68,3 +74,42 @@ add_action('wp_enqueue_scripts', static function (): void {
         true,
     );
 });
+
+function pagenest_search_param(string $key): string
+{
+    return isset($_GET[$key]) && is_string($_GET[$key])
+        ? mb_substr(sanitize_text_field(wp_unslash($_GET[$key])), 0, 100)
+        : '';
+}
+/** Escaping happens before adding the one supported highlight element. */
+function pagenest_search_highlight(string $text): string
+{
+    $query = get_search_query(false);
+    if ($query === '') {
+        return esc_html($text);
+    }
+    $parts = preg_split(
+        '/(' . preg_quote($query, '/') . ')/iu',
+        $text,
+        -1,
+        PREG_SPLIT_DELIM_CAPTURE,
+    );
+    if ($parts === false) {
+        return esc_html($text);
+    }
+    $out = '';
+    foreach ($parts as $i => $part) {
+        $out .= $i % 2 ? '<mark>' . esc_html($part) . '</mark>' : esc_html($part);
+    }
+    return $out;
+}
+function pagenest_search_result_details($post): string
+{
+    $query = get_search_query(false);
+    $saved = $post->post_content ?: $post->post_excerpt;
+    $text = preg_match('/\[\/?[a-zA-Z][^\]]*\]/', $saved) ? '' : wp_strip_all_tags($saved);
+    $position = mb_stripos($text, $query);
+    $start = $position === false ? 0 : max(0, $position - 50);
+    $excerpt = ($start ? '…' : '') . mb_substr($text, $start, 180);
+    return (string) apply_filters('pagenest_search_excerpt', $excerpt, $post, $query);
+}

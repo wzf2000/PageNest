@@ -434,6 +434,10 @@ function wp_unique_id($prefix = '')
     static $id = 0;
     return $prefix . ++$id;
 }
+function get_feed_link()
+{
+    return 'https://example.invalid/feed/';
+}
 function get_search_query()
 {
     return 'Synthetic';
@@ -487,8 +491,13 @@ function get_categories($args = [])
 {
     return [];
 }
+function wp_json_encode($value)
+{
+    return json_encode($value);
+}
 function wp_head()
 {
+    pagenest_initialize_color_scheme();
     $manifest = require THEME . '/assets/manifest.php';
     foreach (
         [
@@ -498,6 +507,7 @@ function wp_head()
             'discovery_css',
             'browsing',
             'reader_preferences_css',
+            'presentation_css',
             'editorial',
         ]
         as $key
@@ -525,7 +535,17 @@ function wp_footer()
             ';</script>';
     }
     $manifest = require THEME . '/assets/manifest.php';
-    foreach (['content_js', 'js', 'reading', 'discovery_js', 'reader_preferences_js'] as $key) {
+    echo '<script>window.PageNestPresentation=' .
+        json_encode([
+            'defaultScheme' => 'light',
+            'saved' => 'Saved',
+            'unsaved' => 'Applied to this page',
+        ]) .
+        ';</script>';
+    foreach (
+        ['content_js', 'js', 'reading', 'discovery_js', 'reader_preferences_js', 'presentation_js']
+        as $key
+    ) {
         echo '<script src="/assets/' . $manifest[$key] . '"></script>';
     }
 }
@@ -558,6 +578,7 @@ require THEME . '/i18n.php';
 require THEME . '/inc.php';
 require THEME . '/reading.php';
 require THEME . '/appearance.php';
+require THEME . '/presentation.php';
 require THEME . '/discovery.php';
 require THEME . '/browsing.php';
 require THEME . '/home-sections.php';
@@ -741,7 +762,29 @@ $mods = ['pagenest_topics' => [['title' => 'Synthetic topic', 'url' => home_url(
 add_filter('pagenest_search_endpoint', fn() => home_url('/wp-json/pagenest/v1/discovery'));
 $fixture_search = true;
 $rendered['search-discovery.html'] = render('index.php');
+add_filter('pagenest_search_series', fn() => ['阅读方法', '知识整理']);
+$rendered['search-series.html'] = render('index.php');
+unset($filters['pagenest_search_series']);
+ob_start();
+pagenest_side();
+$search_sidebar = ob_get_clean();
+check(
+    'search sidebar omits only its duplicate search form',
+    !str_contains($search_sidebar, 'role="search"') &&
+        str_contains($search_sidebar, __('Browse categories', 'pagenest')) &&
+        str_contains($search_sidebar, __('Popular articles', 'pagenest')),
+);
+check(
+    'search page retains main and header search forms',
+    substr_count($rendered['search-discovery.html'], 'role="search"') === 2,
+);
 $fixture_search = false;
+ob_start();
+pagenest_side();
+check(
+    'ordinary listing sidebar retains its search form',
+    str_contains(ob_get_clean(), 'role="search"'),
+);
 check(
     'search form unique IDs',
     preg_match_all('/id="(pagenest-search-\d+)"/', $rendered['search-discovery.html'], $ids) &&

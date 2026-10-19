@@ -1,0 +1,271 @@
+/* Shared presentation for published posts and Editor.md's built-in preview. */
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container) {
+  /* MarkBridge adapter: palette and typography only; plugin owns code geometry. */
+  --mbb-font-body: inherit;
+  --mbb-font-ui: system-ui, sans-serif;
+  --mbb-font-code: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  --mbb-code-size: calc(14px * var(--pagenest-font-scale, 1));
+  --mbb-code-line-height: 1.65;
+  --mbb-code-surface: var(--pagenest-code-background, #f2f3ed);
+  --mbb-code-text: var(--pagenest-code-text, #34495b);
+  --mbb-code-muted: var(--pagenest-muted, #65717c);
+  --mbb-quote-surface: var(--pagenest-quote-background, #f2f3ed);
+  --mbb-quote-text: var(--pagenest-text, #293630);
+  --mbb-quote-border: var(--pagenest-quote-border, #93a58f);
+  --mbb-block-space: 1.25rem;
+  --mbb-panel-padding: 1rem;
+  --mbb-border-color: var(--pagenest-border, #e1e5df);
+  --mbb-border-radius: calc(var(--pagenest-radius, 12px) * 8 / 12);
+  --mbb-focus-color: var(--pagenest-content-link, #426354);
+  --mbb-teaching-sticky-background: var(--pagenest-surface, #fff);
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif !important;
+  font-size: var(--pagenest-reading-size, 17px) !important;
+  line-height: var(--pagenest-reading-line-height, 1.9) !important;
+  color: var(--pagenest-text, #293630) !important;
+  text-align: left !important;
+  overflow-wrap: anywhere;
+  letter-spacing: 0.01em;
+  background: var(--pagenest-surface, #fff);
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container) p {
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0 0 1.25em;
+  color: inherit;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
+  :is(h1, h2, h3, h4, h5, h6) {
+  font-family: inherit !important;
+  font-weight: 650 !important;
+  line-height: 1.45 !important;
+  color: var(--pagenest-content-heading, #23352c) !important;
+  letter-spacing: 0;
+  margin: 1.8em 0 0.75em;
+  scroll-margin-top: 120px;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container) h1 {
+  font-size: 2em !important;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container) h2 {
+  font-size: 1.55em !important;
+  border-bottom: 1px solid var(--pagenest-border);
+  padding-bottom: 0.5em;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container) h3 {
+  font-size: 1.25em !important;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
+  :is(h4, h5, h6) {
+  font-size: 1.08em !important;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container) a {
+  color: var(--pagenest-content-link, #426354);
+  text-decoration: underline;
+  text-decoration-color: var(--pagenest-quote-border);
+  text-underline-offset: 3px;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container) a:hover {
+  color: var(--pagenest-content-link-hover, #2b493a);
+  text-decoration-color: currentColor;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
+  :is(a, table):focus-visible {
+  outline: 2px solid var(--pagenest-content-link, #426354);
+  outline-offset: 3px;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
+  :is(ul, ol) {
+  padding-left: 1.7em;
+  margin: 0 0 1.3em;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container) li {
+  line-height: 1.85;
+  margin: 0.35em 0;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
+  blockquote {
+  margin: 1.5em 0;
+  padding: 0.55em 1em;
+  border: 0;
+  border-left: 3px solid var(--pagenest-quote-border, #93a58f);
+  background: var(--pagenest-quote-background, #f2f3ed);
+  color: var(--pagenest-text);
+  font-size: inherit;
+  border-radius: 0 calc(var(--pagenest-radius, 12px) * 6 / 12)
+    calc(var(--pagenest-radius, 12px) * 6 / 12) 0;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
+  blockquote
+  p:last-child {
+  margin-bottom: 0;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container) table {
+  display: table !important;
+  width: 100% !important;
+  max-width: none !important;
+  overflow: visible !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  border: 1px solid var(--pagenest-border) !important;
+  border-radius: calc(var(--pagenest-radius, 12px) * 8 / 12);
+  background: var(--pagenest-surface, #fff) !important;
+  font-size: calc(15px * var(--pagenest-font-scale, 1)) !important;
+  line-height: 1.75 !important;
+  margin: 1.6em 0 !important;
+  box-sizing: border-box;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
+  :is(thead, tbody, tfoot) {
+  width: auto !important;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container) tr {
+  background: transparent !important;
+  border: 0 !important;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
+  :is(th, td) {
+  width: auto !important;
+  min-width: 0;
+  max-width: none !important;
+  padding: 13px 17px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--pagenest-border) !important;
+  text-align: left;
+  vertical-align: top !important;
+  color: var(--pagenest-text) !important;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  box-sizing: border-box;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container) th {
+  background: var(--pagenest-soft, #eef1eb) !important;
+  color: var(--pagenest-heading) !important;
+  font-weight: 650 !important;
+  white-space: nowrap !important;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
+  tbody
+  tr:nth-child(even) {
+  background: var(--pagenest-code-background) !important;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
+  tbody
+  tr:hover {
+  background: var(--pagenest-soft) !important;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
+  tbody
+  tr:last-child
+  td {
+  border-bottom: 0 !important;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
+  :is(td, th)
+  p {
+  margin: 0;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
+  pre:not(.wp-block-mbb-math):not(.mbb-code-display) {
+  max-width: 100%;
+  overflow: auto;
+  border: 1px solid var(--pagenest-border);
+  border-radius: calc(var(--pagenest-radius, 12px) * 8 / 12);
+  background: var(--pagenest-code-background, #f2f3ed);
+  line-height: 1.65 !important;
+  font-size: calc(14px * var(--pagenest-font-scale, 1)) !important;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
+  pre:not(.wp-block-mbb-math):not(.mbb-code-display) {
+  padding: 20px !important;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container) code {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  font-size: 0.88em;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
+  :not(pre)
+  > code {
+  padding: 0.12em 0.3em;
+  border-radius: calc(var(--pagenest-radius, 12px) * 4 / 12);
+  background: var(--pagenest-code-background, #f5f6f8);
+  color: var(--pagenest-code-text, #426354);
+  white-space: break-spaces;
+}
+/* Older MarkBridge versions use literal surfaces and local token defaults.
+   Adapt colors locally while leaving plugin-owned gutters, padding and wrapping intact. */
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
+  pre.mbb-code-display {
+  --mbb-code-surface: var(--pagenest-code-background, #f2f3ed);
+  --mbb-code-text: var(--pagenest-code-text, #34495b);
+  --mbb-code-muted: var(--pagenest-muted, #65717c);
+  background: var(--mbb-code-surface);
+  color: var(--mbb-code-text);
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container) hr {
+  border: 0;
+  border-top: 1px solid var(--pagenest-border);
+  margin: 2.2em 0;
+  height: 0;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container) img {
+  max-width: 100%;
+  height: auto;
+  border-radius: calc(var(--pagenest-radius, 12px) * 6 / 12);
+}
+.pagenest-article-body .MathJax_Display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 8px 0;
+}
+/* Scroll the container, not the table: rows retain their native full width. */
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
+  .pagenest-table-scroll {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  margin: 1.6em 0;
+  min-width: 0;
+  scrollbar-width: thin;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
+  .pagenest-table-scroll
+  > table {
+  margin: 0 !important;
+  table-layout: auto;
+}
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
+  .pagenest-table-scroll:before,
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
+  .pagenest-table-scroll:after {
+  content: none !important;
+  display: none !important;
+}
+.pagenest-table-scroll:focus-visible {
+  outline: 2px solid var(--pagenest-content-link, #426354);
+  outline-offset: 3px;
+}
+/* Reader-requested optional hints: select white text on its explicit white background. */
+.pagenest-article-body .pagenest-exercise-hint,
+.editormd-preview-container .pagenest-exercise-hint {
+  color: #fff !important;
+  background: #fff !important;
+  text-shadow: none !important;
+  -webkit-user-select: text;
+  user-select: text;
+}
+.pagenest-article-body .pagenest-exercise-hint::selection,
+.editormd-preview-container .pagenest-exercise-hint::selection {
+  color: #14314f !important;
+  background: #b8dcff !important;
+}
+
+.editor-styles-wrapper .wp-block-table {
+  max-width: 100%;
+  overflow-x: auto;
+}

@@ -119,25 +119,39 @@ function pagenest_card(int $id, string $context = 'list'): void
         ?></div>
         <h2><a href="<?php echo esc_url(
             get_permalink($id),
-        ); ?>"><?php echo esc_html($post->post_title); ?></a></h2>
-        <p class="pagenest-excerpt"><?php echo esc_html(
-            post_password_required($post)
-                ? __('This article requires a password.', 'pagenest')
-                : mb_strimwidth(
-                    preg_replace(
-                        '/\s+/u',
-                        ' ',
-                        wp_strip_all_tags(
-                            strip_shortcodes($post->post_excerpt ?: $post->post_content),
-                        ),
-                    ),
-                    0,
-                    170,
-                    '…',
-                    'UTF-8',
-                ),
+        ); ?>"><?php echo is_search() ? pagenest_search_highlight($post->post_title) : esc_html($post->post_title); ?></a></h2>
+        <?php
+        if (is_search() && !post_password_required($post)): ?>
+        <p class="pagenest-excerpt"><?php echo pagenest_search_highlight(
+            pagenest_search_result_details($post),
         ); ?></p>
-        <?php pagenest_browsing_metadata($id); ?>
+        <?php
+        $sections = apply_filters('pagenest_search_sections', [], $post, get_search_query(false));
+        if ($sections): ?><ul class="pagenest-search-sections"><?php foreach (
+    array_slice($sections, 0, 3)
+    as $section
+): ?><li><a href="<?php echo esc_url($section['url']); ?>"><?php echo pagenest_search_highlight(
+    $section['title'],
+); ?></a></li><?php endforeach; ?></ul><?php endif;
+        ?>
+        <?php else: ?><p class="pagenest-excerpt"><?php echo esc_html(
+    post_password_required($post)
+        ? __('This article requires a password.', 'pagenest')
+        : mb_strimwidth(
+            preg_replace(
+                '/\s+/u',
+                ' ',
+                wp_strip_all_tags(strip_shortcodes($post->post_excerpt ?: $post->post_content)),
+            ),
+            0,
+            170,
+            '…',
+            'UTF-8',
+        ),
+); ?></p>
+        <?php endif;
+        pagenest_browsing_metadata($id);
+        ?>
         <div class="pagenest-author pagenest-author-compact"><?php echo get_avatar(
             $post->post_author,
             28,

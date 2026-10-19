@@ -55,6 +55,12 @@
           if (url.origin !== location.origin) throw new Error('Invalid search origin');
           url.searchParams.set('q', input.value.trim().slice(0, 100));
           url.searchParams.set('kind', kind.value);
+          for (const name of ['category', 'series', 'sort'])
+            url.searchParams.set(
+              name,
+              form.querySelector(`[name="pn_${name}"]`)?.value ||
+                (name === 'category' ? '0' : name === 'sort' ? 'relevance' : ''),
+            );
           const response = await fetch(url, {
             signal: controller.signal,
             credentials: 'omit',
@@ -74,7 +80,40 @@
             link.textContent = item.title;
             const label = document.createElement('small');
             label.textContent = item.kind_label;
-            li.append(link, label);
+            const detail = document.createElement('div');
+            detail.append(link);
+            const excerpt = document.createElement('p');
+            const highlight = (target, text) => {
+              const query = input.value.trim();
+              const position = text.toLocaleLowerCase().indexOf(query.toLocaleLowerCase());
+              if (position < 0) {
+                target.textContent = text;
+                return;
+              }
+              const mark = document.createElement('mark');
+              mark.textContent = text.slice(position, position + query.length);
+              target.append(
+                document.createTextNode(text.slice(0, position)),
+                mark,
+                document.createTextNode(text.slice(position + query.length)),
+              );
+            };
+            highlight(excerpt, String(item.excerpt || ''));
+            detail.append(excerpt);
+            for (const section of (item.sections || []).slice(0, 2)) {
+              const sectionUrl = new URL(section.url, location.href);
+              if (
+                sectionUrl.origin !== location.origin ||
+                !['http:', 'https:'].includes(sectionUrl.protocol)
+              )
+                continue;
+              const a = document.createElement('a');
+              a.href = sectionUrl.href;
+              a.className = 'pagenest-search-section';
+              highlight(a, String(section.title || ''));
+              detail.append(a);
+            }
+            li.append(detail, label);
             results.append(li);
           });
           results.hidden = !results.childElementCount;
@@ -92,7 +131,9 @@
       if (!event.isComposing) update();
     });
     input.addEventListener('compositionend', update);
-    kind.addEventListener('change', update);
+    form
+      .querySelectorAll('select, [name="pn_series"]')
+      .forEach((control) => control.addEventListener('change', update));
     form.addEventListener('submit', () => {
       clearTimeout(timer);
       generation++;

@@ -11,6 +11,13 @@ function pagenest_product_schema()
     foreach (pagenest_appearance_numbers() as $key => $definition) {
         $schema['pagenest_appearance_' . $key] = ['type' => 'number', 'definition' => $definition];
     }
+    $schema['pagenest_color_scheme'] = ['type' => 'enum', 'choices' => ['light', 'dark', 'system']];
+    foreach (['article', 'topic', 'tool'] as $context) {
+        $schema['pagenest_layout_' . $context] = [
+            'type' => 'enum',
+            'choices' => array_keys(pagenest_layout_choices($context)),
+        ];
+    }
     return $schema;
 }
 
@@ -44,6 +51,14 @@ function pagenest_product_validate($data)
                 );
             }
             $settings[$key] = pagenest_sanitize_appearance_preset($value);
+        } elseif ($rule['type'] === 'enum') {
+            if (!is_string($value) || !in_array($value, $rule['choices'], true)) {
+                return new WP_Error(
+                    'value',
+                    __('A setting value is outside the allowed range.', 'pagenest'),
+                );
+            }
+            $settings[$key] = $value;
         } elseif ($rule['type'] === 'color') {
             if (
                 !is_string($value) ||
@@ -258,6 +273,14 @@ function pagenest_product_page()
         'pagenest_appearance',
         __('Site appearance', 'pagenest'),
         __('Palettes, colors and reading dimensions shared with the editor preview.', 'pagenest'),
+    );
+    $link(
+        'pagenest_layouts',
+        __('Page layouts', 'pagenest'),
+        __(
+            'Presets change presentation only. Existing content, tool permissions and reading controls are preserved.',
+            'pagenest',
+        ),
     );
     echo '</div><div class="pagenest-palette-preview" aria-label="' .
         esc_html__('Current reading palette', 'pagenest') .

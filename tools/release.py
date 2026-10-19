@@ -69,6 +69,9 @@ def source_files():
 
 def installation_name(name):
     path = Path(name)
+    # Repository presentation images are not runtime assets.
+    if path.parts[:2] == ("docs", "assets"):
+        return False
     if len(path.parts) == 1:
         return (
             path.suffix == ".php"

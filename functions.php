@@ -12,6 +12,7 @@ require_once __DIR__ . '/discovery.php';
 require_once __DIR__ . '/browsing.php';
 require_once __DIR__ . '/home-sections.php';
 require_once __DIR__ . '/reader-preferences.php';
+require_once __DIR__ . '/presentation.php';
 add_action('after_setup_theme', static function () {
     load_theme_textdomain('pagenest', get_template_directory() . '/languages');
     add_theme_support('title-tag');

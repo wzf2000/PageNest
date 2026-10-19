@@ -1,5 +1,23 @@
 /* Shared presentation for published posts and Editor.md's built-in preview. */
 :is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container) {
+  /* MarkBridge adapter: palette and typography only; plugin owns code geometry. */
+  --mbb-font-body: inherit;
+  --mbb-font-ui: system-ui, sans-serif;
+  --mbb-font-code: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  --mbb-code-size: calc(14px * var(--pagenest-font-scale, 1));
+  --mbb-code-line-height: 1.65;
+  --mbb-code-surface: var(--pagenest-code-background, #f2f3ed);
+  --mbb-code-text: var(--pagenest-code-text, #34495b);
+  --mbb-code-muted: var(--pagenest-muted, #65717c);
+  --mbb-quote-surface: var(--pagenest-quote-background, #f2f3ed);
+  --mbb-quote-text: var(--pagenest-text, #293630);
+  --mbb-quote-border: var(--pagenest-quote-border, #93a58f);
+  --mbb-block-space: 1.25rem;
+  --mbb-panel-padding: 1rem;
+  --mbb-border-color: var(--pagenest-border, #e1e5df);
+  --mbb-border-radius: calc(var(--pagenest-radius, 12px) * 8 / 12);
+  --mbb-focus-color: var(--pagenest-content-link, #426354);
+  --mbb-teaching-sticky-background: var(--pagenest-surface, #fff);
   font-family:
     -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
     'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif !important;
@@ -150,7 +168,7 @@
   margin: 0;
 }
 :is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
-  pre:not(.wp-block-mbb-math) {
+  pre:not(.wp-block-mbb-math):not(.mbb-code-display) {
   max-width: 100%;
   overflow: auto;
   border: 1px solid var(--pagenest-border);
@@ -175,6 +193,16 @@
   background: var(--pagenest-code-background, #f5f6f8);
   color: var(--pagenest-code-text, #426354);
   white-space: break-spaces;
+}
+/* Older MarkBridge versions use literal surfaces and local token defaults.
+   Adapt colors locally while leaving plugin-owned gutters, padding and wrapping intact. */
+:is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
+  pre.mbb-code-display {
+  --mbb-code-surface: var(--pagenest-code-background, #f2f3ed);
+  --mbb-code-text: var(--pagenest-code-text, #34495b);
+  --mbb-code-muted: var(--pagenest-muted, #65717c);
+  background: var(--mbb-code-surface);
+  color: var(--mbb-code-text);
 }
 :is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container) hr {
   border: 0;

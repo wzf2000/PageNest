@@ -83,6 +83,8 @@ async function format() {
     content_js: 'content.js',
     appearance: 'appearance.css',
     browsing: 'browsing.css',
+    presentation_css: 'presentation.css',
+    presentation_js: 'presentation.js',
     reader_preferences_css: 'reader-preferences.css',
     reader_preferences_js: 'reader-preferences.js',
     discovery_css: 'discovery.css',

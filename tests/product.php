@@ -159,6 +159,7 @@ function product_rejected($callback, $expected)
     throw new RuntimeException('Expected rejection: ' . $expected);
 }
 require __DIR__ . '/../appearance.php';
+require __DIR__ . '/../presentation.php';
 require __DIR__ . '/../product.php';
 $before = $mods;
 $export = pagenest_product_export();

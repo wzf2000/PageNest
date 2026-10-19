@@ -20,6 +20,9 @@
         <?php endif;
         ?><small><?php echo esc_html__('Powered by WordPress', 'pagenest'); ?></small>
     </div>
+    <p class="pagenest-feed"><a href="<?php echo esc_url(
+        get_feed_link(),
+    ); ?>"><?php echo esc_html__('Subscribe via RSS', 'pagenest'); ?></a></p>
 </footer>
 <?php wp_footer(); ?>
 </body>

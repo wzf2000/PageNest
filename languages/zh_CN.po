@@ -1,4 +1,3 @@
-# PageNest Simplified Chinese translations.
 msgid ""
 msgstr "Project-Id-Version: PageNest\nPO-Revision-Date: 2026-10-13 00:00+0000\nLast-Translator: PageNest Contributors\nLanguage-Team: PageNest Contributors\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Domain: pagenest\nLanguage: zh_CN\nPlural-Forms: nplurals=1; plural=0;\n"
 
@@ -800,3 +799,102 @@ msgstr "← 上一页"
 
 msgid "Welcome. Contact the site administrator if you need help."
 msgstr "欢迎登录。如需帮助，请联系本站管理员。"
+
+msgid "All categories"
+msgstr "全部分类"
+
+msgid "Category"
+msgstr "分类"
+
+msgid "Relevance"
+msgstr "相关度"
+
+msgid "Series"
+msgstr "系列"
+
+msgid "Sort"
+msgstr "排序"
+
+msgid "Subscribe via RSS"
+msgstr "通过 RSS 订阅"
+
+msgid "Appearance"
+msgstr "外观"
+
+msgid "Appearance preference saved in this browser."
+msgstr "外观偏好已保存在此浏览器。"
+
+msgid "Applies across this site in this browser. Article reading settings remain available separately."
+msgstr "应用于此浏览器中的全站页面，文章阅读设置仍可单独调整。"
+
+msgid "Article layout"
+msgstr "文章布局"
+
+msgid "Automatic"
+msgstr "自动识别"
+
+msgid "Compact tool"
+msgstr "紧凑工具"
+
+msgid "Default site color mode"
+msgstr "全站默认明暗模式"
+
+msgid "Focused reading"
+msgstr "专注阅读"
+
+msgid "Follow system"
+msgstr "跟随系统"
+
+msgid "Layout affects presentation only and never enables a tool or changes access. Invalid combinations use the standard layout."
+msgstr "布局仅影响展示，不会启用工具或改变访问权限。不适用的组合使用标准布局。"
+
+msgid "Layout preset"
+msgstr "布局预设"
+
+msgid "Light"
+msgstr "浅色"
+
+msgid "Page layouts"
+msgstr "页面布局"
+
+msgid "Page purpose"
+msgstr "页面用途"
+
+msgid "PageNest layout"
+msgstr "PageNest 布局"
+
+msgid "Presets change presentation only. Existing content, tool permissions and reading controls are preserved."
+msgstr "预设仅改变展示，保留已有正文、工具权限与阅读控件。"
+
+msgid "Site color mode"
+msgstr "全站明暗模式"
+
+msgid "Site default"
+msgstr "站点默认"
+
+msgid "Standard"
+msgstr "标准"
+
+msgid "Tool page layout"
+msgstr "工具页面布局"
+
+msgid "Tool workspace"
+msgstr "工具工作区"
+
+msgid "Topic or information page"
+msgstr "专题或信息页面"
+
+msgid "Topic overview"
+msgstr "专题概览"
+
+msgid "Topic page layout"
+msgstr "专题页面布局"
+
+msgid "Use site layout default"
+msgstr "使用站点布局默认值"
+
+msgid "Wide article"
+msgstr "宽版文章"
+
+msgid "Wide page"
+msgstr "宽版页面"

@@ -24,30 +24,63 @@
 }
 .pagenest-site .pagenest-search {
   display: block;
+  container-type: inline-size;
+}
+.pagenest-site .pagenest-search .pagenest-search-query {
+  display: block;
+}
+.pagenest-site .pagenest-search label {
+  margin: 0 0 6px;
+  font-size: 14px;
+  line-height: 1.5;
 }
 .pagenest-site .pagenest-search .pagenest-search-input-row {
   display: flex;
   gap: 8px;
 }
-.pagenest-search input {
+.pagenest-site .pagenest-search :is(input, select, button) {
+  box-sizing: border-box;
+  min-height: 44px;
+  height: 44px;
+  margin: 0;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 14px;
+}
+.pagenest-search-input-row input {
   min-width: 0;
   flex: 1;
 }
-.pagenest-site .pagenest-search .pagenest-search-filters {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 10px;
+.pagenest-site .pagenest-search button {
+  padding-inline: 18px;
 }
-.pagenest-search-filters select {
-  min-height: 36px;
+.pagenest-site .pagenest-search .pagenest-search-filters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: end;
+  gap: 12px;
+  margin-top: 14px;
+}
+.pagenest-search-field {
+  min-width: 0;
+}
+.pagenest-site .pagenest-search-field :is(input, select) {
+  display: block;
+  width: 100%;
+  min-width: 0;
   max-width: 100%;
   border: 1px solid var(--pagenest-border, #e1e5df);
-  border-radius: 4px;
-  padding: 4px 8px;
+  padding: 8px 10px;
   background: var(--pagenest-surface, #fff);
   color: var(--pagenest-text, #293630);
-  font: inherit;
+}
+@container (min-width: 560px) {
+  .pagenest-site .pagenest-search .pagenest-search-filters {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .pagenest-site .pagenest-search-has-series .pagenest-search-filters {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 .pagenest-search-status {
   font-size: 13px;
@@ -105,4 +138,28 @@
   .pagenest-nav-inner {
     position: relative;
   }
+}
+
+.pagenest-search-suggestions li > div {
+  min-width: 0;
+  flex: 1;
+}
+.pagenest-search-suggestions p {
+  font-size: 13px;
+  margin: 4px 0;
+  color: var(--pagenest-muted, #69736b);
+}
+.pagenest-search-section {
+  display: block;
+  font-size: 13px;
+  margin-block: 4px;
+}
+.pagenest-search-sections {
+  padding-inline-start: 20px;
+}
+.pagenest-search mark,
+.pagenest-entry mark {
+  color: inherit;
+  background: var(--pagenest-soft, #eef1eb);
+  font-weight: 700;
 }
