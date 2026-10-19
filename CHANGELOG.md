@@ -1,10 +1,12 @@
 # Changelog
 
-## 1.3.0-rc.1
+## 1.3.0
 
-- Add safe search match excerpts, category and series scopes, relevance/update sorting and reliable author heading links.
-- Add native RSS, site-wide light/dark/system appearance and article/topic/tool layout presets with per-object overrides.
-- Preserve existing palette values and independent reading controls; new Companion reading features require opt-in.
+- 搜索增加安全匹配摘要、分类与系列筛选、相关性／更新时间排序，统一页面与顶栏搜索样式，并移除结果页重复的侧栏搜索；作者分区标题链接可直接访问。
+- 提供原生 WordPress RSS 订阅入口、全站浅色／深色／跟随系统外观，以及文章、专题和工具布局预设；支持逐篇覆盖并保留既有配色与独立阅读偏好。
+- 适配 MarkBridge 展示变量及既有代码颜色，在主题样式延迟加载时保留插件负责的代码布局、对照与行号；包含 1.2.6-rc.1 的兼容补丁。
+- 改善手机顶栏的可读性与原生登录提示配色，补齐布局设置入口说明和合成站产品截图。
+- 保留既有文章、设置与扩展接口；Companion 新阅读功能仍需明确启用。
 
 ## 1.2.6-rc.1
 
