@@ -1,6 +1,6 @@
 <?php
 return [
-    'css' => 'layout-ee141da6f08b.css',
+    'css' => 'layout-1f349b769d5c.css',
     'editorial' => 'editorial-3f6a8fb192b3.css',
     'admin_design' => 'admin-design-4d7c94948a5b.css',
     'customizer_design' => 'customizer-design-52c35d894f84.css',
@@ -17,5 +17,5 @@ return [
     'reading' => 'reading-d9cf37f85c64.js',
     'login' => 'login-d20c2cddc953.css',
     'content' => 'content-3ab639b63fce.css',
-    'content_js' => 'content-cd7adb62f3ec.js',
+    'content_js' => 'content-b938eaa694aa.js',
 ];

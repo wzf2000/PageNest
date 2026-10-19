@@ -1292,7 +1292,9 @@ body.pagenest-site {
   content: none !important;
   display: none !important;
 }
-.pagenest-site :is(.pagenest-main, .pagenest-header, .pagenest-footer) :is(h1, h2, h3, h4, p) {
+.pagenest-site
+  :is(.pagenest-main:where(:not(.pagenest-studio-main)), .pagenest-header, .pagenest-footer)
+  :is(h1, h2, h3, h4, p) {
   text-align: left;
 }
 .pagenest-site .pagenest-entry-body,
@@ -2133,4 +2135,47 @@ summary {
 .pagenest-tool-page .pnpt-heading {
   margin-bottom: 12px;
   padding-bottom: 8px;
+}
+
+/* Studio tools opt in from their registered renderer, never from a page slug.
+   Give the application one outer surface without inheriting article prose. */
+.pagenest-site .pagenest-main.pagenest-studio-main {
+  max-width: 1368px;
+  padding: 24px 24px 56px;
+}
+.pagenest-studio-column {
+  max-width: 1320px;
+}
+.pagenest-tool-studio > .pagenest-article-header {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.pagenest-tool-body {
+  min-width: 0;
+  padding: 28px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+.pagenest-tool-page.pagenest-tool-studio [data-tool-heading],
+.pagenest-tool-page.pagenest-tool-studio [data-tool-preface] {
+  display: revert;
+}
+.pagenest-tool-body > .pagenest-tool-guide {
+  font-size: 13px;
+  color: var(--pagenest-muted, #65746c);
+}
+@media (max-width: 600px) {
+  .pagenest-site .pagenest-main.pagenest-studio-main {
+    padding: 16px 12px 36px;
+  }
+  .pagenest-tool-body {
+    padding: 14px;
+  }
 }
