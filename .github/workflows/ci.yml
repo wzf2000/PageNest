@@ -18,7 +18,8 @@ permissions:
   contents: read
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    # Playwright 1.55.1 ships browser dependencies for this fixed runner.
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:

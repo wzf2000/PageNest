@@ -10,7 +10,7 @@
 
 <p align="center"><a href="#开始使用">开始使用</a> · <a href="docs/SHOWCASE.md">效果与设计</a> · <a href="docs/index.md">文档</a> · <a href="docs/USAGE.md">安装指南</a> · <a href="CHANGELOG.md">更新记录</a></p>
 
-> 本文档对应 **1.4.0-rc.1 源码候选**，尚未公开发行或部署。正式安装请使用仓库 **Releases** 中已发行版本及其随包文档。
+> 本文档对应 **1.4.0**。安装包与发行状态以仓库 **Releases** 为准，请使用对应版本附带的文档。
 
 ## 为内容组织，也为持续阅读
 
