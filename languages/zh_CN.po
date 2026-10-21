@@ -898,3 +898,6 @@ msgstr "宽版文章"
 
 msgid "Wide page"
 msgstr "宽版页面"
+
+msgid "Subscribe to this category via RSS"
+msgstr "通过 RSS 订阅此分类"

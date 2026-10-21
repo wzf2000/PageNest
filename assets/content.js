@@ -58,4 +58,12 @@ document.querySelectorAll('.pagenest-tool-page .pagenest-article-body').forEach(
     details.querySelector('img,video,iframe')
   )
     body.append(details);
+  // An explicitly opted-in, registered tool owns its UI typography. Keep
+  // ordinary articles and older tool renderers on their existing layout.
+  if (hosts.length === 1 && hosts[0].querySelector(':scope > [data-tool-layout="studio"]')) {
+    body.classList.replace('pagenest-article-body', 'pagenest-tool-body');
+    body.closest('article')?.classList.add('pagenest-tool-studio');
+    body.closest('.pagenest-page-column')?.classList.add('pagenest-studio-column');
+    body.closest('.pagenest-main')?.classList.add('pagenest-studio-main');
+  }
 });
