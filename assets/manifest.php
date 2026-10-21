@@ -6,7 +6,7 @@ return [
     'customizer_design' => 'customizer-design-52c35d894f84.css',
     'customizer_design_js' => 'customizer-design-b3f628e0b834.js',
     'appearance' => 'appearance-242c31913783.css',
-    'browsing' => 'browsing-0fcf2b5c5a4a.css',
+    'browsing' => 'browsing-d3a0a6e7bfef.css',
     'presentation_css' => 'presentation-44c32ce10b6b.css',
     'presentation_js' => 'presentation-cfe5398cdcbc.js',
     'reader_preferences_css' => 'reader-preferences-806d8c771217.css',

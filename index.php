@@ -17,6 +17,15 @@
     $description,
 ); ?></div><?php endif;
         endif; ?>
+        <?php if (is_category()):
+            $feed = get_category_feed_link(get_queried_object_id());
+            if ($feed): ?><p class="pagenest-category-feed"><a href="<?php echo esc_url(
+    $feed,
+); ?>"><?php echo esc_html__(
+    'Subscribe to this category via RSS',
+    'pagenest',
+); ?></a></p><?php endif;
+        endif; ?>
     </header>
     <?php if (
         is_search() ||
