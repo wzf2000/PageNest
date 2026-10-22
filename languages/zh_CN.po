@@ -901,3 +901,9 @@ msgstr "宽版页面"
 
 msgid "Subscribe to this category via RSS"
 msgstr "通过 RSS 订阅此分类"
+
+msgid "Series contents"
+msgstr "系列目录"
+
+msgid "Return to contents"
+msgstr "返回目录"

@@ -83,3 +83,5 @@ Per-object `_pagenest_layout` metadata can override the display context/preset t
 nonce-protected save. Invalid combinations fall back to standard. Body classes identify the effective
 context and preset; they confer no tool registration or content access. Companion remains usable with
 other themes through its own shortcode UI and CSS fallbacks.
+
+- `pagenest_series_directory($directory, $post_id)` filter：阅读侧栏的系列目录入口，默认空数组。扩展可返回 `url`、`title`；主题转义后展示。关系、权限及祖先验证由提供者负责，主题不读取 Companion 的元数据或配置。Companion 的章节顶部已有返回目录入口时不重复显示侧栏入口。

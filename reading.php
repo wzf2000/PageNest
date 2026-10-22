@@ -60,6 +60,16 @@ function pagenest_side($single = false)
         </details><?php
         $id = get_queried_object_id();
         $related = pagenest_related($id);
+        $directory = apply_filters('pagenest_series_directory', [], $id);
+        if (is_array($directory) && !empty($directory['url']) && is_string($directory['url'])) { ?>
+        <section class="pagenest-widget" data-pagenest-series-directory>
+            <h2><?php echo esc_html__('Series contents', 'pagenest'); ?></h2>
+            <a href="<?php echo esc_url(pagenest_url($directory['url'])); ?>"><?php echo esc_html(
+    is_string($directory['title'] ?? null)
+        ? $directory['title']
+        : __('Return to contents', 'pagenest'),
+); ?></a>
+        </section><?php }
         if ($related) { ?><section class="pagenest-widget">
             <h2><?php echo esc_html(
                 apply_filters(

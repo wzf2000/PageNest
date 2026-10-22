@@ -61,6 +61,12 @@ jobs:
         run: npx playwright install --with-deps --only-shell chromium
       - name: Run frontend regressions
         run: npm run test:frontend
+      - name: Install focused Firefox and WebKit engines
+        if: matrix.php == '8.2'
+        run: npx playwright install --with-deps firefox webkit
+      - name: Run focused series directory engine matrix
+        if: matrix.php == '8.2'
+        run: npm run test:series-browser
       - name: Upload browser failure evidence
         if: failure()
         uses: actions/upload-artifact@v4
@@ -68,7 +74,9 @@ jobs:
           name: pagenest-browser-failures-${{ matrix.php }}-${{ inputs.source_sha || github.sha }}
           path: |
             test-results/
+            .runtime/series-browser-results/
             playwright-report/
+          include-hidden-files: true
           if-no-files-found: ignore
       - name: Build and verify immutable installation bundle
         env:
