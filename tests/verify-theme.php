@@ -879,6 +879,26 @@ foreach ([14, 20] as $base_size) {
     $rendered['editorial-list-font-' . $base_size . '.html'] = render('index.php');
 }
 
+$mods['pagenest_appearance_font-size'] = 16;
+$posts[1001]->post_title = '建立可持续的阅读习惯';
+$filters['pagenest_series_directory'] = [
+    10 => [
+        [
+            fn() => [
+                'url' => 'https://example.test/contents/',
+                'title' => '系列目录：从概念到实践',
+            ],
+            2,
+        ],
+    ],
+];
+$rendered['article-series.html'] = render('singular.php');
+check(
+    'mapped series directory displayed',
+    str_contains($rendered['article-series.html'], 'data-pagenest-series-directory'),
+);
+unset($filters['pagenest_series_directory']);
+
 $out = THEME . '/.runtime/frontend';
 if (!is_dir($out)) {
     mkdir($out, 0777, true);

@@ -14,14 +14,14 @@ msgid_plural "%s comments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: reading.php:150
+#: reading.php:160
 #, php-format
 msgid "%s public article, ordered by publication date."
 msgid_plural "%s public articles, ordered by publication date."
 msgstr[0] ""
 msgstr[1] ""
 
-#: reading.php:112
+#: reading.php:122
 #, php-format
 msgid "%s view"
 msgid_plural "%s views"
@@ -189,7 +189,7 @@ msgstr ""
 msgid "Asset: %s"
 msgstr ""
 
-#: browsing.php:13 reading.php:215
+#: browsing.php:13 reading.php:225
 msgid "Author"
 msgstr ""
 
@@ -239,7 +239,7 @@ msgstr ""
 msgid "Browse articles"
 msgstr ""
 
-#: reading.php:81
+#: reading.php:91
 msgid "Browse categories"
 msgstr ""
 
@@ -247,7 +247,7 @@ msgstr ""
 msgid "Browse related content →"
 msgstr ""
 
-#: reading.php:96
+#: reading.php:106
 msgid "By total views"
 msgstr ""
 
@@ -313,7 +313,7 @@ msgstr ""
 msgid "Community"
 msgstr ""
 
-#: reading.php:118
+#: reading.php:128
 msgid "Community and more"
 msgstr ""
 
@@ -441,7 +441,7 @@ msgstr ""
 msgid "Download appearance JSON"
 msgstr ""
 
-#: reading.php:250
+#: reading.php:260
 msgid "Edit"
 msgstr ""
 
@@ -490,11 +490,11 @@ msgstr ""
 msgid "Export only saved palettes, colors and dimensions. Articles, media IDs, links, accounts and plugin settings are excluded. Import replaces only the listed values; omitted settings and empty values retain their meaning."
 msgstr ""
 
-#: reading.php:171
+#: reading.php:181
 msgid "F Y"
 msgstr ""
 
-#: browsing.php:123 inc.php:167 inc.php:189 reading.php:223
+#: browsing.php:123 inc.php:167 inc.php:189 reading.php:233
 msgid "F j, Y"
 msgstr ""
 
@@ -662,7 +662,7 @@ msgstr ""
 msgid "Log in"
 msgstr ""
 
-#: reading.php:246
+#: reading.php:256
 msgid "Log in to reply"
 msgstr ""
 
@@ -774,7 +774,7 @@ msgstr ""
 msgid "Paste appearance JSON"
 msgstr ""
 
-#: reading.php:95
+#: reading.php:105
 msgid "Popular articles"
 msgstr ""
 
@@ -854,7 +854,7 @@ msgstr ""
 msgid "Registration number (optional)"
 msgstr ""
 
-#: reading.php:67
+#: reading.php:77
 msgid "Related reading"
 msgstr ""
 
@@ -862,11 +862,11 @@ msgstr ""
 msgid "Relevance"
 msgstr ""
 
-#: comments.php:23 reading.php:245
+#: comments.php:23 reading.php:255
 msgid "Reply"
 msgstr ""
 
-#: comments.php:42 reading.php:230
+#: comments.php:42 reading.php:240
 #, php-format
 msgid "Reply to %s"
 msgstr ""
@@ -885,6 +885,10 @@ msgstr ""
 
 #: reader-preferences.php:48
 msgid "Restore defaults"
+msgstr ""
+
+#: reading.php:70
+msgid "Return to contents"
 msgstr ""
 
 #: product.php:292
@@ -914,6 +918,10 @@ msgstr ""
 
 #: searchform.php:75
 msgid "Series"
+msgstr ""
+
+#: reading.php:66
+msgid "Series contents"
 msgstr ""
 
 #: product.php:365
@@ -1216,7 +1224,7 @@ msgstr ""
 msgid "You do not have permission to manage theme settings."
 msgstr ""
 
-#: reading.php:234
+#: reading.php:244
 msgid "Your comment is awaiting moderation."
 msgstr ""
 
