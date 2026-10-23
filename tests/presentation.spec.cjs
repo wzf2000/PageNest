@@ -11,7 +11,7 @@ for (const width of [1440, 390]) {
     const controls = page.locator('[data-pagenest-site-preferences]');
     await expect(controls).toBeVisible();
     await controls.locator('summary').click();
-    await controls.locator('select').selectOption('dark');
+    await controls.locator('[data-pagenest-color-mode][value="dark"]').check();
     await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(23, 30, 38)');
     await expect(page.locator('.pagenest-article')).toHaveCSS(
       'background-color',
@@ -21,11 +21,11 @@ for (const width of [1440, 390]) {
     await expect(page.locator('html')).toHaveAttribute('data-pagenest-color-scheme', 'dark');
     await page.screenshot({ path: `.runtime/site-dark-home-${width}.png`, fullPage: true });
     await controls.locator('summary').click();
-    await controls.locator('select').selectOption('system');
+    await controls.locator('[data-pagenest-color-mode][value="system"]').check();
     await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(247, 246, 242)');
     await page.emulateMedia({ colorScheme: 'dark' });
     await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(23, 30, 38)');
-    await controls.locator('select').selectOption('default');
+    await controls.locator('[data-pagenest-color-mode][value="default"]').check();
     await expect(page.locator('html')).toHaveAttribute('data-pagenest-color-scheme', 'light');
     expect(
       await page.evaluate(() => localStorage.getItem('pagenest-site-appearance-v1')),
@@ -66,7 +66,7 @@ test('denied storage still supports current-page appearance', async ({ page }) =
   await page.goto('/article-public.html');
   const controls = page.locator('[data-pagenest-site-preferences]');
   await controls.locator('summary').click();
-  await controls.locator('select').selectOption('dark');
+  await controls.locator('[data-pagenest-color-mode][value="dark"]').check();
   await expect(page.locator('html')).toHaveAttribute('data-pagenest-color-scheme', 'dark');
   await expect(controls.locator('[role=status]')).toHaveText('Applied to this page');
 });
@@ -135,3 +135,27 @@ test('native login notices and internal links retain dark contrast', async ({ pa
   }
   await page.screenshot({ path: '.runtime/native-login-notices-dark.png' });
 });
+
+for (const height of [390, 320]) {
+  test(`appearance stays reachable after feedback in a short ${height}px viewport`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 844, height });
+    await page.goto('/article-public.html');
+    const controls = page.locator('[data-pagenest-site-preferences]');
+    await controls.locator('summary').click();
+    await controls.locator('[data-pagenest-color-mode][value="dark"]').check();
+    const panel = controls.locator(':scope > div');
+    const bounds = await panel.boundingBox();
+    expect(bounds.y).toBeGreaterThanOrEqual(0);
+    expect(bounds.y + bounds.height).toBeLessThanOrEqual(height - 15);
+    await panel.evaluate((node) => {
+      node.scrollTop = node.scrollHeight;
+    });
+    const status = await controls.getByRole('status').boundingBox();
+    expect(status.y + status.height).toBeLessThanOrEqual(height - 15);
+    await page.keyboard.press('Escape');
+    await expect(controls).not.toHaveAttribute('open');
+    await expect(controls.locator('summary')).toBeFocused();
+  });
+}

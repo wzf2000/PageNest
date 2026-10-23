@@ -79,6 +79,7 @@ async function format() {
     js: 'navigation.js',
     reading: 'reading.js',
     login: 'login.css',
+    login_js: 'login.js',
     content: 'content.css',
     content_js: 'content.js',
     appearance: 'appearance.css',

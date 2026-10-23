@@ -28,7 +28,7 @@ async function open(page, fixture = 'article-public') {
   await page.locator(`${controls} summary`).click();
 }
 async function select(page, name, value) {
-  await page.locator(`[data-reader-preference="${name}"]`).selectOption(value);
+  await page.locator(`[data-reader-preference="${name}"][value="${value}"]`).check();
 }
 for (const width of [1440, 390]) {
   test(`reader preferences persist and reset at ${width}px`, async ({ page }) => {
@@ -169,8 +169,10 @@ test('keyboard controls and responsive placement preserve selection and anchors'
   await page.keyboard.press('Enter');
   await expect(page.locator(controls)).toHaveAttribute('open', '');
   await page.keyboard.press('Tab');
-  await expect(page.locator('[data-reader-preference="size"]')).toBeFocused();
-  await page.keyboard.press('End');
+  await expect(page.locator('[data-reader-preference="size"][value="default"]')).toBeFocused();
+  await page.keyboard.press('ArrowRight');
+  await page.keyboard.press('ArrowRight');
+  await page.keyboard.press('ArrowRight');
   await page.keyboard.press('Tab');
   await expect(page.locator(body)).toHaveCSS('font-size', '22px');
   await page.setViewportSize({ width: 390, height: 900 });
@@ -209,7 +211,9 @@ for (const stored of [
     });
     await open(page);
     for (const name of ['size', 'width', 'palette']) {
-      await expect(page.locator(`[data-reader-preference="${name}"]`)).toHaveValue('default');
+      await expect(
+        page.locator(`[data-reader-preference="${name}"][value="default"]`),
+      ).toBeChecked();
       await expect(page.locator(article)).not.toHaveAttribute(`data-reader-${name}`);
     }
     await select(page, 'size', '20');
@@ -289,5 +293,46 @@ test('dark reading keeps code, math, metadata and concealed hints legible', asyn
       return { color: css.color, background: css.backgroundColor };
     });
     expect(hint.color).toBe(hint.background);
+  }
+});
+
+test('larger option labels stay readable and compact in both languages on a narrow screen', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 320, height: 844 });
+  for (const fixture of ['article-public', 'article-english']) {
+    await open(page, fixture);
+    const panel = page.locator(controls);
+    const normalHeight = (await panel.boundingBox()).height;
+    await select(page, 'palette', 'paper');
+    await expect(panel.locator('[role=status]')).toHaveCSS('font-size', '13px');
+    for (const choice of await panel.locator('.pagenest-reader-choice').all()) {
+      await expect(choice).toHaveCSS('font-size', '14px');
+      const geometry = await choice.evaluate((node) => {
+        const bounds = node.getBoundingClientRect();
+        const label = node.querySelector('span:last-child');
+        const range = document.createRange();
+        range.selectNodeContents(label);
+        return {
+          label: label.textContent,
+          bounds: bounds.toJSON(),
+          rectangles: [...range.getClientRects()].map((rect) => rect.toJSON()),
+          height: bounds.height,
+          fits: [...range.getClientRects()].every(
+            (rect) =>
+              rect.left >= bounds.left &&
+              rect.right <= bounds.right &&
+              rect.top >= bounds.top &&
+              rect.bottom <= bounds.bottom,
+          ),
+        };
+      });
+      expect(geometry.height).toBeGreaterThanOrEqual(44);
+      expect(geometry.fits, JSON.stringify({ fixture, ...geometry })).toBe(true);
+    }
+    expect((await panel.boundingBox()).height).toBeLessThanOrEqual(normalHeight);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
   }
 });

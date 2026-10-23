@@ -51,7 +51,7 @@ for (const width of [390, 1440]) {
       await expect(dropdown).not.toHaveAttribute('open');
       await expect(dropdown.locator('summary')).toBeFocused();
     }
-    await search.locator('summary').click();
+    await search.locator(':scope > summary').click();
     await expect(search.locator('input')).toBeFocused();
     await comment.focus();
     await page.keyboard.press('Escape');
@@ -60,7 +60,7 @@ for (const width of [390, 1440]) {
     await search.locator('input').focus();
     await page.keyboard.press('Escape');
     await expect(search).not.toHaveAttribute('open');
-    await expect(search.locator('summary')).toBeFocused();
+    await expect(search.locator(':scope > summary')).toBeFocused();
   });
 
   test(`navigation and search defer Escape to composition and nested controls at ${width}px`, async ({
@@ -71,7 +71,7 @@ for (const width of [390, 1440]) {
     const dropdown = page.locator('.pagenest-dropdown');
     const search = page.locator('.pagenest-header-search');
     for (const owner of ['navigation', 'search']) {
-      if (owner === 'search') await search.locator('summary').click();
+      if (owner === 'search') await search.locator(':scope > summary').click();
       else {
         if (width === 390) await toggle.click();
         await dropdown.locator('summary').click();

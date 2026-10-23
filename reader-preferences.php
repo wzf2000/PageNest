@@ -8,6 +8,8 @@ function pagenest_reader_preferences_controls()
     if (!is_singular('post') || post_password_required()) {
         return;
     }
+    static $instance = 0;
+    $instance++;
     $groups = [
         'size' => [
             __('Font size', 'pagenest'),
@@ -34,21 +36,35 @@ function pagenest_reader_preferences_controls()
         esc_html__('Reading settings', 'pagenest') .
         '</summary><div class="pagenest-reader-options">';
     foreach ($groups as $key => [$label, $options]) {
-        echo '<label>' .
+        echo '<fieldset class="pagenest-reader-group"><legend>' .
             esc_html($label) .
-            '<select data-reader-preference="' .
+            '</legend><div class="pagenest-reader-choices pagenest-reader-choices-' .
             esc_attr($key) .
             '">';
         foreach ($options as $value => $text) {
-            echo '<option value="' . esc_attr($value) . '">' . esc_html($text) . '</option>';
+            echo '<label class="pagenest-reader-choice"><input type="radio" name="pagenest-reader-' .
+                esc_attr($key . '-' . $instance) .
+                '" data-reader-preference="' .
+                esc_attr($key) .
+                '" value="' .
+                esc_attr($value) .
+                '"' .
+                ($value === 'default' ? ' checked' : '') .
+                '>';
+            if ($key === 'palette') {
+                echo '<span aria-hidden="true" class="pagenest-palette-preview" data-preview="' .
+                    esc_attr($value) .
+                    '"></span>';
+            }
+            echo '<span>' . esc_html($text) . '</span></label>';
         }
-        echo '</select></label>';
+        echo '</div></fieldset>';
     }
-    echo '<button type="button" data-reader-reset>' .
+    echo '<div class="pagenest-reader-footer"><button type="button" data-reader-reset>' .
         esc_html__('Restore defaults', 'pagenest') .
-        '</button><p>' .
+        '</button><p><span class="pagenest-reader-hint">' .
         esc_html__('Reading preferences are saved only in this browser.', 'pagenest') .
-        '</p><span class="pagenest-reader-status" role="status" aria-live="polite"></span></div></details>';
+        '</span><span class="pagenest-reader-status" role="status" aria-live="polite"></span></p></div></div></details>';
 }
 add_action('pagenest_reading_actions', 'pagenest_reader_preferences_controls', 20);
 add_action('wp_enqueue_scripts', static function () {

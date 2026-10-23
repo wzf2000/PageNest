@@ -14,6 +14,7 @@ $slug = '';
 $loop = 0;
 $checks = [];
 $fixture_search = false;
+$fixture_search_results = false;
 $fixture_browsing = false;
 $fixture_queries = [];
 class WP_Post
@@ -325,8 +326,8 @@ function get_page_template_slug()
 }
 function have_posts()
 {
-    global $loop, $fixture_search;
-    return !$fixture_search && $loop === 0;
+    global $loop, $fixture_search, $fixture_search_results;
+    return (!$fixture_search || $fixture_search_results) && $loop === 0;
 }
 function the_post()
 {
@@ -441,6 +442,10 @@ function get_feed_link()
 function get_search_query()
 {
     return 'Synthetic';
+}
+function sanitize_text_field($value)
+{
+    return strip_tags($value);
 }
 function sanitize_key($value)
 {
@@ -764,6 +769,39 @@ $fixture_search = true;
 $rendered['search-discovery.html'] = render('index.php');
 add_filter('pagenest_search_series', fn() => ['阅读方法', '知识整理']);
 $rendered['search-series.html'] = render('index.php');
+$fixture_search_results = true;
+$searchPost = get_post(get_the_ID());
+$oldExcerpt = $searchPost->post_excerpt;
+$oldContent = $searchPost->post_content;
+$searchPost->post_excerpt = 'Synthetic public summary: tensor shapes [B,T,D] and [a,b].';
+$rendered['search-results.html'] = render('index.php');
+$_GET['pn_sort'] = 'modified';
+$rendered['search-results-filtered.html'] = render('index.php');
+unset($_GET['pn_sort']);
+check(
+    'search fixture renders real result cards and explicit excerpt',
+    str_contains(
+        strip_tags($rendered['search-results.html']),
+        'Synthetic public summary: tensor shapes [B,T,D] and [a,b].',
+    ),
+);
+$searchPost->post_excerpt = '[unknown:private secret="PRIVATE"]';
+$searchPost->post_content =
+    '<!-- hidden metadata --><p>Public tensor [B,T,D]</p><script>SECRET</script>';
+check(
+    'search skips unsafe excerpt and metadata',
+    pagenest_search_result_details($searchPost) === 'Public tensor [B,T,D]',
+);
+$searchPost->post_excerpt = '';
+$searchPost->post_content = '[unknown.private secret="PRIVATE"]';
+check(
+    'search rejects unknown punctuation shortcode tags',
+    pagenest_search_result_details($searchPost) === '',
+);
+$searchPost->post_excerpt = $oldExcerpt;
+$searchPost->post_content = $oldContent;
+$fixture_search_results = false;
+
 unset($filters['pagenest_search_series']);
 ob_start();
 pagenest_side();

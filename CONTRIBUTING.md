@@ -14,6 +14,8 @@ npm run format:check
 npm test
 npx playwright install --only-shell chromium
 npm run test:frontend
+npx playwright install --with-deps webkit
+npm run test:reader-ux-webkit
 npm run package
 npm run package:check
 ```

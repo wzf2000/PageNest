@@ -9,8 +9,11 @@ for (const width of [1440, 390]) {
     const controls = page.locator('[data-pagenest-reader-preferences]');
     await expect(controls).toBeVisible();
     await controls.locator('summary').click();
-    await expect(controls.getByLabel('Font size')).toBeVisible();
-    await controls.getByLabel('Reading palette').selectOption('dark');
+    await expect(controls.getByRole('group', { name: 'Font size' })).toBeVisible();
+    await controls
+      .getByRole('group', { name: 'Reading palette' })
+      .getByRole('radio', { name: 'Dark', exact: true })
+      .check();
     await expect(controls.getByRole('status')).toHaveText('Reading preferences saved.');
     await controls.getByRole('button', { name: 'Restore defaults' }).click();
     await expect(controls.getByRole('status')).toHaveText('Site defaults restored.');

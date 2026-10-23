@@ -186,6 +186,7 @@ function pagenest_product_diagnostics($root = null)
         'js' => 'navigation.js',
         'reading' => 'reading.js',
         'login' => 'login.css',
+        'login_js' => 'login.js',
         'content' => 'content.css',
         'content_js' => 'content.js',
         'appearance' => 'appearance.css',
@@ -261,14 +262,14 @@ function pagenest_product_page()
             esc_html__('Appearance settings imported.', 'pagenest') .
             '</p></div>';
     }
-    echo '<div class="pagenest-settings-overview"><div><h2>' .
-        esc_html__('Reading comes first', 'pagenest') .
+    echo '<section class="pagenest-settings-overview"><div class="pagenest-settings-section-heading"><h2>' .
+        esc_html__('Site appearance', 'pagenest') .
         '</h2><p>' .
         esc_html__(
             'Open the WordPress Customizer to preview and save settings. Installing the theme does not create articles, pages or media.',
             'pagenest',
         ) .
-        '</p>';
+        '</p></div><div class="pagenest-settings-section-links">';
     $link(
         'pagenest_appearance',
         __('Site appearance', 'pagenest'),
@@ -282,7 +283,9 @@ function pagenest_product_page()
             'pagenest',
         ),
     );
-    echo '</div><div class="pagenest-palette-preview" aria-label="' .
+    echo '</div></section><details class="pagenest-settings-details pagenest-settings-palette"><summary>' .
+        esc_html__('Current reading palette', 'pagenest') .
+        '</summary><div class="pagenest-settings-details-body"><div class="pagenest-palette-preview" aria-label="' .
         esc_html__('Current reading palette', 'pagenest') .
         '" style="';
     foreach (pagenest_appearance_variables() as $key => $value) {
@@ -302,15 +305,15 @@ function pagenest_product_page()
                 )
             ],
         ) .
-        '</small></div></div>';
-    echo '<div class="pagenest-settings-columns"><section class="pagenest-settings-group"><p class="pagenest-admin-eyebrow">01</p><h2>' .
+        '</small></div></div></details>';
+    echo '<div class="pagenest-settings-columns"><section class="pagenest-settings-group"><div class="pagenest-settings-section-heading"><h2>' .
         esc_html__('Compose the home page', 'pagenest') .
         '</h2><p class="pagenest-group-intro">' .
         esc_html__(
             'Guide readers from an introduction to your topics and latest writing.',
             'pagenest',
         ) .
-        '</p>';
+        '</p></div><div class="pagenest-settings-section-links">';
     foreach (
         [
             [
@@ -346,17 +349,17 @@ function pagenest_product_page()
     ) {
         $link(...$item);
     }
-    echo '</section><div><section class="pagenest-settings-group"><p class="pagenest-admin-eyebrow">02</p><h2>' .
+    echo '</div></section><section class="pagenest-settings-group"><div class="pagenest-settings-section-heading"><h2>' .
         esc_html__('Make reading comfortable', 'pagenest') .
-        '</h2>';
+        '</h2></div><div class="pagenest-settings-section-links">';
     $link(
         'pagenest_browsing',
         __('Lists and articles', 'pagenest'),
         __('List density, covers, updated dates and estimated reading time.', 'pagenest'),
     );
-    echo '</section><section class="pagenest-settings-group"><p class="pagenest-admin-eyebrow">03</p><h2>' .
+    echo '</div></section><section class="pagenest-settings-group"><div class="pagenest-settings-section-heading"><h2>' .
         esc_html__('Finish the site details', 'pagenest') .
-        '</h2>';
+        '</h2></div><div class="pagenest-settings-section-links">';
     foreach (
         [
             [
@@ -387,9 +390,9 @@ function pagenest_product_page()
     ) {
         $link(...$item);
     }
-    echo '</section></div></div><section class="pagenest-pattern-section"><h2>' .
+    echo '</div></section></div><details class="pagenest-settings-details pagenest-pattern-section"><summary>' .
         esc_html__('Editable block examples', 'pagenest') .
-        '</h2><p>' .
+        '</summary><div class="pagenest-settings-details-body"><p>' .
         esc_html__(
             'In the block editor, open Patterns → PageNest and choose a topic introduction, resource cards or article outline. Replace the placeholders; content is created only when you insert and save it.',
             'pagenest',
@@ -426,7 +429,7 @@ function pagenest_product_page()
         esc_html__('Summary and next steps', 'pagenest') .
         '</h3></div><figcaption>' .
         esc_html__('Article outline', 'pagenest') .
-        '</figcaption></figure></div></section>';
+        '</figcaption></figure></div></div></details>';
     echo '<details class="pagenest-settings-details"><summary>' .
         esc_html__('Transfer appearance settings', 'pagenest') .
         '<span>' .

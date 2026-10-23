@@ -67,6 +67,9 @@ jobs:
       - name: Run focused series directory engine matrix
         if: matrix.php == '8.2'
         run: npm run test:series-browser
+      - name: Run focused reader UX WebKit regressions
+        if: matrix.php == '8.2'
+        run: npm run test:reader-ux-webkit
       - name: Upload browser failure evidence
         if: failure()
         uses: actions/upload-artifact@v4
@@ -75,6 +78,7 @@ jobs:
           path: |
             test-results/
             .runtime/series-browser-results/
+            .runtime/reader-ux-webkit-results/
             playwright-report/
           include-hidden-files: true
           if-no-files-found: ignore

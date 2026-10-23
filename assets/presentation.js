@@ -18,7 +18,9 @@
     const mode = choice === 'default' ? cfg.defaultScheme : choice;
     root.dataset.pagenestColorScheme = mode;
     controls.forEach((control) => {
-      control.querySelector('select').value = choice;
+      control.querySelectorAll('[data-pagenest-color-mode]').forEach((input) => {
+        input.checked = input.value === choice;
+      });
     });
     document.dispatchEvent(
       new CustomEvent('pagenest-color-scheme-change', {
@@ -28,9 +30,17 @@
   };
   read();
   apply();
+  const fitPopover = (control) => {
+    if (!control.open) return;
+    const panel = control.querySelector(':scope > div');
+    const top = panel.getBoundingClientRect().top;
+    panel.style.maxHeight = `${Math.max(44, innerHeight - Math.max(0, top) - 16)}px`;
+  };
   controls.forEach((control) => {
     control.hidden = false;
-    control.querySelector('select').addEventListener('change', (event) => {
+    control.addEventListener('toggle', () => fitPopover(control));
+    control.addEventListener('change', (event) => {
+      if (!event.target.matches('[data-pagenest-color-mode]')) return;
       choice = ['light', 'dark', 'system'].includes(event.target.value)
         ? event.target.value
         : 'default';
@@ -53,6 +63,7 @@
       }
     });
   });
+  addEventListener('resize', () => controls.forEach(fitPopover));
   media.addEventListener('change', apply);
   addEventListener('storage', (event) => {
     if (event.key === key) {

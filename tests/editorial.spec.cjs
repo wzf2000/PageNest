@@ -70,7 +70,7 @@ test('native settings hub groups tasks and keeps advanced actions explicit', asy
     await expect(page.locator('.pagenest-settings-group')).toHaveCount(3);
     await expect(page.locator('.pagenest-pattern-previews figure')).toHaveCount(3);
     const details = page.locator('.pagenest-settings-details');
-    await expect(details).toHaveCount(2);
+    await expect(details).toHaveCount(4);
     for (const item of await details.all()) await expect(item).not.toHaveAttribute('open');
     await expect(page.locator('#pagenest-json')).toBeHidden();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
@@ -81,14 +81,20 @@ test('native settings hub groups tasks and keeps advanced actions explicit', asy
         path: path.join(previews, 'configuration-1440.png'),
         fullPage: true,
       });
-    await details.first().locator('summary').click();
+    await details
+      .filter({ has: page.locator('#pagenest-json') })
+      .locator('summary')
+      .click();
     await expect(page.locator('#pagenest-json')).toBeVisible();
     const imported = page
       .locator('form')
       .filter({ has: page.locator('[value="pagenest_appearance_import"]') });
     await expect(imported).toHaveAttribute('method', 'post');
     await expect(imported.locator('button')).toBeEnabled();
-    await details.nth(1).locator('summary').click();
+    await details
+      .filter({ has: page.locator('.widefat') })
+      .locator('summary')
+      .click();
     await expect(page.locator('.widefat')).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
       true,
@@ -130,7 +136,7 @@ test('editorial article actions honor the local dark palette', async ({ page }) 
     );
   const controls = page.locator('[data-pagenest-reader-preferences]');
   await controls.locator('summary').click();
-  await controls.locator('[data-reader-preference="palette"]').selectOption('dark');
+  await controls.locator('[data-reader-preference="palette"][value="dark"]').check();
   await expect(page.locator('.pagenest-article')).toHaveCSS('background-color', 'rgb(32, 40, 51)');
   await expect(page.locator('.pagenest-article-body')).toHaveCSS(
     'background-color',
