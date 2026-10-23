@@ -34,7 +34,7 @@
 .pagenest-reader-choices {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-columns: minmax(min-content, 1fr);
   gap: 4px;
 }
 .pagenest-reader-choice {

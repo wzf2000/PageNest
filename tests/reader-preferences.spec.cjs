@@ -314,6 +314,9 @@ test('larger option labels stay readable and compact in both languages on a narr
         const range = document.createRange();
         range.selectNodeContents(label);
         return {
+          label: label.textContent,
+          bounds: bounds.toJSON(),
+          rectangles: [...range.getClientRects()].map((rect) => rect.toJSON()),
           height: bounds.height,
           fits: [...range.getClientRects()].every(
             (rect) =>
@@ -325,7 +328,7 @@ test('larger option labels stay readable and compact in both languages on a narr
         };
       });
       expect(geometry.height).toBeGreaterThanOrEqual(44);
-      expect(geometry.fits).toBe(true);
+      expect(geometry.fits, JSON.stringify({ fixture, ...geometry })).toBe(true);
     }
     expect((await panel.boundingBox()).height).toBeLessThanOrEqual(normalHeight);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
