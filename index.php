@@ -33,10 +33,7 @@
     ): ?><section class="pagenest-search-page" aria-label="<?php echo esc_attr__(
     'Find content',
     'pagenest',
-); ?>"><?php
-get_search_form();
-pagenest_discovery_links();
-?></section><?php endif; ?>
+); ?>"><?php get_search_form(); ?></section><?php endif; ?>
     <div class="pagenest-list-grid">
         <div>
             <div class="pagenest-post-list"><?php if (have_posts() && !is_404()):

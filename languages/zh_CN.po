@@ -539,9 +539,6 @@ msgstr "私密"
 msgid "Problem and background"
 msgstr "问题与背景"
 
-msgid "Reading comes first"
-msgstr "让阅读成为核心"
-
 msgid "Reading navigation"
 msgstr "阅读导航"
 
@@ -907,3 +904,6 @@ msgstr "系列目录"
 
 msgid "Return to contents"
 msgstr "返回目录"
+
+msgid "More filters"
+msgstr "更多筛选"

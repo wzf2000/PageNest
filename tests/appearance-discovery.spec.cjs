@@ -144,6 +144,7 @@ test('native GET search preserves query and kind without JavaScript', async ({ b
   const form = page.locator('.pagenest-search-page form');
   await form.locator('[name="s"]').fill('中文 query');
   await form.locator('[name="pn_kind"]').selectOption('page');
+  await form.locator('.pagenest-search-advanced > summary').click();
   await form.locator('[name="pn_sort"]').selectOption('modified');
   await form.locator('[name="pn_series"]').fill('阅读方法');
   await form.locator('button[type="submit"]').click();
@@ -165,11 +166,15 @@ for (const width of [1440, 390, 320]) {
         document.documentElement.dataset.pagenestColorScheme = 'dark';
       });
       const form = page.locator('.pagenest-search-page form');
-      const check = async (target, columns) => {
+      const check = async (target) => {
+        const advanced = target.locator('.pagenest-search-advanced');
+        await expect(advanced).not.toHaveAttribute('open');
+        await advanced.locator('summary').click();
         const sizes = await target.evaluate((form) => {
-          const filters = form.querySelector('.pagenest-search-filters');
+          const filters = form.querySelector('.pagenest-search-advanced .pagenest-search-filters');
           return {
             columns: getComputedStyle(filters).gridTemplateColumns.split(' ').length,
+            expectedColumns: form.clientWidth > 420 ? 3 : 1,
             fields: [...filters.querySelectorAll('.pagenest-search-field')].map((field) => {
               const label = field.querySelector('label').getBoundingClientRect();
               const control = field.querySelector('input,select').getBoundingClientRect();
@@ -183,7 +188,7 @@ for (const width of [1440, 390, 320]) {
             }),
           };
         });
-        expect(sizes.columns).toBe(columns);
+        expect(sizes.columns).toBe(sizes.expectedColumns);
         for (const field of sizes.fields) {
           expect(field.top).toBeGreaterThanOrEqual(field.labelBottom);
           expect(field.height).toBe(44);
@@ -191,14 +196,14 @@ for (const width of [1440, 390, 320]) {
           expect(field.right).toBeLessThanOrEqual(width);
         }
       };
-      await check(form, width === 1440 ? (series ? 4 : 3) : 2);
+      await check(form);
       if (width !== 320 && series)
         await page.screenshot({
           path: `.runtime/ui-refinement-search-page-${width}.png`,
           fullPage: true,
         });
       await page.locator('.pagenest-header-search > summary').click();
-      await check(page.locator('.pagenest-search-popover form'), 2);
+      await check(page.locator('.pagenest-search-popover form'));
       if (width !== 320 && series)
         await page.screenshot({
           path: `.runtime/ui-refinement-search-popover-${width}.png`,
@@ -221,9 +226,28 @@ test('filter changes refresh suggestions with all selected fields', async ({ pag
   const form = page.locator('.pagenest-search-page form');
   await form.locator('[name=s]').fill('阅读');
   await form.locator('[name=pn_kind]').selectOption('post');
+  await form.locator('.pagenest-search-advanced > summary').click();
   await form.locator('[name=pn_sort]').selectOption('modified');
   await form.locator('[name=pn_series]').fill('阅读方法');
   await form.locator('[name=pn_series]').dispatchEvent('change');
   await expect.poll(() => params?.series).toBe('阅读方法');
   expect(params).toMatchObject({ q: '阅读', kind: 'post', sort: 'modified', category: '0' });
+});
+
+test('mobile results keep search compact and expose active native filters', async ({ browser }) => {
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const page = await context.newPage();
+  await page.goto('http://127.0.0.1:18779/search-results.html');
+  const form = page.locator('.pagenest-search-page form');
+  await expect(form.locator('.pagenest-search-advanced')).not.toHaveAttribute('open');
+  await expect(page.locator('.pagenest-entry .pagenest-excerpt')).toContainText(
+    'tensor shapes [B,T,D] and [a,b]',
+  );
+  expect((await page.locator('.pagenest-entry').first().boundingBox()).y).toBeLessThan(520);
+  await page.goto('http://127.0.0.1:18779/search-results-filtered.html');
+  await expect(form.locator('.pagenest-search-advanced')).toHaveAttribute('open');
+  await expect(form.locator('[name=pn_sort]')).toHaveValue('modified');
+  await expect(form.locator('[name=pn_sort]')).toBeVisible();
+  await expect(form).toHaveAttribute('method', 'get');
+  await context.close();
 });

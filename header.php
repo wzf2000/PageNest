@@ -34,10 +34,7 @@ if (isset($brand_parts[1])) { ?><span class="pagenest-brand-note"><?php echo esc
             ); ?></div>
             <details class="pagenest-header-search">
                 <summary><?php echo esc_html__('Search', 'pagenest'); ?></summary>
-                <div class="pagenest-search-popover"><?php
-                get_search_form();
-                pagenest_discovery_links();
-                ?></div>
+                <div class="pagenest-search-popover"><?php get_search_form(); ?></div>
             </details>
             <button class="pagenest-menu-toggle" type="button" aria-expanded="false"
                 aria-controls="pagenest-nav"><?php echo esc_html__(

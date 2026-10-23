@@ -78,25 +78,90 @@
   top: calc(100% + 8px);
   z-index: 1100;
   width: min(300px, calc(100vw - 32px));
+  max-height: 70dvh;
+  overflow-y: auto;
+  box-sizing: border-box;
   padding: 16px;
   border: 1px solid var(--pagenest-border);
   border-radius: 8px;
   background: var(--pagenest-surface);
   box-shadow: 0 8px 28px rgb(0 0 0 / 15%);
 }
-.pagenest-site-preferences label {
+.pagenest-appearance-group {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.pagenest-appearance-group legend {
+  padding: 0;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.pagenest-appearance-choices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+.pagenest-appearance-choice {
+  position: relative;
   display: grid;
   gap: 6px;
+  padding: 10px;
+  min-height: 44px;
+  text-align: center;
+  border: 1px solid var(--pagenest-border);
+  border-radius: 6px;
+  cursor: pointer;
 }
-.pagenest-site-preferences select {
-  font: inherit;
-  color: inherit;
-  background: var(--pagenest-surface);
+.pagenest-appearance-choice input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.pagenest-appearance-choice:has(input:checked) {
+  color: var(--pagenest-accent);
+  border-color: var(--pagenest-accent);
+  background: var(--pagenest-soft);
+  box-shadow: inset 0 0 0 1px var(--pagenest-accent);
+  font-weight: 600;
+}
+.pagenest-site-preferences summary:focus-visible,
+.pagenest-appearance-choice:has(input:focus-visible) {
+  outline: 2px solid var(--pagenest-focus);
+  outline-offset: 3px;
+}
+.pagenest-appearance-preview {
+  --preview-surface: var(--pagenest-surface);
+  --preview-line: var(--pagenest-border);
+  display: grid;
+  align-content: center;
+  gap: 5px;
+  height: 48px;
   border: 1px solid var(--pagenest-border);
   border-radius: 4px;
-  padding: 8px;
-  min-height: 44px;
-  width: 100%;
+  padding-inline: 20%;
+  background: var(--preview-surface);
+}
+.pagenest-appearance-preview i {
+  height: 3px;
+  background: var(--preview-line);
+}
+.pagenest-appearance-preview i:last-child {
+  width: 70%;
+}
+.pagenest-appearance-preview[data-preview='light'] {
+  --preview-surface: #fffefb;
+  --preview-line: #dce2dc;
+}
+.pagenest-appearance-preview[data-preview='dark'] {
+  --preview-surface: #202833;
+  --preview-line: #718094;
+}
+.pagenest-appearance-preview[data-preview='system'] {
+  --preview-surface: linear-gradient(90deg, #fffefb 50%, #202833 50%);
+  --preview-line: #a4afb5;
 }
 .pagenest-site-preferences p,
 .pagenest-site-preferences [role='status'] {

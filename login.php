@@ -22,6 +22,13 @@ add_action('login_enqueue_scripts', static function () {
         [],
         null,
     );
+    wp_enqueue_script(
+        'pagenest-login',
+        get_theme_file_uri('assets/' . $manifest['login_js']),
+        [],
+        null,
+        true,
+    );
     $image = get_theme_mod('pagenest_login_background', '');
     if ($image) {
         wp_add_inline_style(

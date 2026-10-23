@@ -37,7 +37,9 @@
       if (preferences[name] === 'default')
         delete article.dataset[`reader${name[0].toUpperCase()}${name.slice(1)}`];
       else article.dataset[`reader${name[0].toUpperCase()}${name.slice(1)}`] = preferences[name];
-      controls.querySelector(`[data-reader-preference="${name}"]`).value = preferences[name];
+      controls.querySelectorAll(`[data-reader-preference="${name}"]`).forEach((input) => {
+        input.checked = input.value === preferences[name];
+      });
     }
   };
   const save = (reset = false) => {

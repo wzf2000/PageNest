@@ -106,8 +106,29 @@ function pagenest_search_highlight(string $text): string
 function pagenest_search_result_details($post): string
 {
     $query = get_search_query(false);
-    $saved = $post->post_content ?: $post->post_excerpt;
-    $text = preg_match('/\[\/?[a-zA-Z][^\]]*\]/', $saved) ? '' : wp_strip_all_tags($saved);
+    $text = '';
+    foreach ([$post->post_excerpt ?? '', $post->post_content] as $saved) {
+        // Inspect saved text only. Shortcode output can contain private or dynamic data.
+        if (
+            preg_match(
+                '/\[\/?[a-zA-Z][^\]]*\]/',
+                preg_replace('/\[(?:[a-zA-Z][0-9]*\s*,\s*)+[a-zA-Z][0-9]*\s*\]/', '', $saved),
+            )
+        ) {
+            continue;
+        }
+        $saved = preg_replace('#<(script|style)\b[^>]*>.*?</\1\s*>#is', '', $saved);
+        $text = trim(
+            preg_replace(
+                '/\s+/u',
+                ' ',
+                html_entity_decode(wp_strip_all_tags($saved), ENT_QUOTES | ENT_HTML5, 'UTF-8'),
+            ),
+        );
+        if ($text !== '') {
+            break;
+        }
+    }
     $position = mb_stripos($text, $query);
     $start = $position === false ? 0 : max(0, $position - 50);
     $excerpt = ($start ? '…' : '') . mb_substr($text, $start, 180);

@@ -81,19 +81,35 @@ add_action('login_enqueue_scripts', static function () {
 add_action(
     'pagenest_header_actions',
     static function () {
+        static $instance = 0;
+        $instance++;
         echo '<details class="pagenest-site-preferences" data-pagenest-site-preferences hidden><summary>' .
             esc_html__('Appearance', 'pagenest') .
-            '</summary><div><label>' .
+            '</summary><div><fieldset class="pagenest-appearance-group"><legend>' .
             esc_html__('Site color mode', 'pagenest') .
-            '<select data-pagenest-color-mode><option value="default">' .
-            esc_html__('Site default', 'pagenest') .
-            '</option><option value="light">' .
-            esc_html__('Light', 'pagenest') .
-            '</option><option value="dark">' .
-            esc_html__('Dark', 'pagenest') .
-            '</option><option value="system">' .
-            esc_html__('Follow system', 'pagenest') .
-            '</option></select></label><p>' .
+            '</legend><div class="pagenest-appearance-choices">';
+        foreach (
+            [
+                'default' => __('Site default', 'pagenest'),
+                'light' => __('Light', 'pagenest'),
+                'dark' => __('Dark', 'pagenest'),
+                'system' => __('Follow system', 'pagenest'),
+            ]
+            as $value => $label
+        ) {
+            echo '<label class="pagenest-appearance-choice"><input type="radio" name="pagenest-color-mode-' .
+                $instance .
+                '" data-pagenest-color-mode value="' .
+                esc_attr($value) .
+                '"' .
+                ($value === 'default' ? ' checked' : '') .
+                '><span class="pagenest-appearance-preview" data-preview="' .
+                esc_attr($value) .
+                '" aria-hidden="true"><i></i><i></i><i></i></span><span>' .
+                esc_html($label) .
+                '</span></label>';
+        }
+        echo '</div></fieldset><p>' .
             esc_html__(
                 'Applies across this site in this browser. Article reading settings remain available separately.',
                 'pagenest',

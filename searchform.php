@@ -2,6 +2,10 @@
 $id = wp_unique_id('pagenest-search-');
 $endpoint = apply_filters('pagenest_search_endpoint', '');
 $series = apply_filters('pagenest_search_series', []);
+$advanced =
+    absint(pagenest_search_param('pn_category')) ||
+    pagenest_search_param('pn_sort') === 'modified' ||
+    pagenest_search_param('pn_series') !== '';
 ?>
 <form class="pagenest-search<?php echo $series
     ? ' pagenest-search-has-series'
@@ -23,10 +27,11 @@ $series = apply_filters('pagenest_search_series', []);
     'pagenest',
 ); ?></button></div>
     </div>
-    <div class="pagenest-search-filters">
-        <div class="pagenest-search-field"><label for="<?php echo esc_attr(
-            $id,
-        ); ?>-kind"><?php echo esc_html__(
+    <div class="pagenest-search-toolbar">
+        <div class="pagenest-search-filters">
+            <div class="pagenest-search-field"><label for="<?php echo esc_attr(
+                $id,
+            ); ?>-kind"><?php echo esc_html__(
     'Content type',
     'pagenest',
 ); ?></label><select id="<?php echo esc_attr($id); ?>-kind" name="pn_kind"><?php foreach (
@@ -36,41 +41,47 @@ $series = apply_filters('pagenest_search_series', []);
     pagenest_search_kind(),
     $value,
 ); ?>><?php echo esc_html($label); ?></option><?php endforeach; ?></select></div>
-        <div class="pagenest-search-field">
-            <label for="<?php echo esc_attr($id); ?>-category"><?php echo esc_html__(
+        </div>
+        <details class="pagenest-search-advanced" <?php if ($advanced): ?>open<?php endif; ?>>
+            <summary><?php echo esc_html__('More filters', 'pagenest'); ?></summary>
+            <div class="pagenest-search-filters">
+                <div class="pagenest-search-field">
+                    <label for="<?php echo esc_attr($id); ?>-category"><?php echo esc_html__(
     'Category',
     'pagenest',
 ); ?></label>
-            <select id="<?php echo esc_attr($id); ?>-category" name="pn_category">
-                <option value="0"><?php echo esc_html__(
-                    'All categories',
-                    'pagenest',
-                ); ?></option><?php foreach (
+                    <select id="<?php echo esc_attr($id); ?>-category" name="pn_category">
+                        <option value="0"><?php echo esc_html__(
+                            'All categories',
+                            'pagenest',
+                        ); ?></option><?php foreach (
     get_categories(['hide_empty' => true])
     as $category
 ): ?><option value="<?php echo esc_attr($category->term_id); ?>" <?php selected(
     pagenest_search_param('pn_category'),
     $category->term_id,
 ); ?>><?php echo esc_html($category->name); ?></option><?php endforeach; ?>
-            </select>
-        </div>
-        <div class="pagenest-search-field">
-            <label for="<?php echo esc_attr($id); ?>-sort"><?php echo esc_html__(
+                    </select>
+                </div>
+                <div class="pagenest-search-field">
+                    <label for="<?php echo esc_attr($id); ?>-sort"><?php echo esc_html__(
     'Sort',
     'pagenest',
 ); ?></label>
-            <select id="<?php echo esc_attr($id); ?>-sort" name="pn_sort">
-                <option value="relevance"><?php echo esc_html__(
-                    'Relevance',
-                    'pagenest',
-                ); ?></option>
-                <option value="modified" <?php selected(
-                    pagenest_search_param('pn_sort'),
-                    'modified',
-                ); ?>><?php echo esc_html__('Recently updated', 'pagenest'); ?></option>
-            </select>
-        </div>
-        <?php if ($series): ?><div class="pagenest-search-field"><label for="<?php echo esc_attr(
+                    <select id="<?php echo esc_attr($id); ?>-sort" name="pn_sort">
+                        <option value="relevance"><?php echo esc_html__(
+                            'Relevance',
+                            'pagenest',
+                        ); ?></option>
+                        <option value="modified" <?php selected(
+                            pagenest_search_param('pn_sort'),
+                            'modified',
+                        ); ?>><?php echo esc_html__('Recently updated', 'pagenest'); ?></option>
+                    </select>
+                </div>
+                <?php if (
+                    $series
+                ): ?><div class="pagenest-search-field"><label for="<?php echo esc_attr(
     $id,
 ); ?>-series"><?php echo esc_html__('Series', 'pagenest'); ?></label><input id="<?php echo esc_attr(
     $id,
@@ -84,6 +95,9 @@ $series = apply_filters('pagenest_search_series', []);
 ): ?><option value="<?php echo esc_attr(
     $value,
 ); ?>"><?php endforeach; ?></datalist></div><?php endif; ?>
+            </div>
+            <?php pagenest_discovery_links(); ?>
+        </details>
     </div>
     <p class="pagenest-search-status" role="status" aria-live="polite"></p>
     <ul class="pagenest-search-suggestions" aria-label="<?php echo esc_attr__(

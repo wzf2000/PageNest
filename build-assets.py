@@ -20,6 +20,7 @@ for key, ext, name in [
     ("js", "js", "navigation.js"),
     ("reading", "js", "reading.js"),
     ("login", "css", "login.css"),
+    ("login_js", "js", "login.js"),
     ("content", "css", "content.css"),
     ("content_js", "js", "content.js"),
 ]:

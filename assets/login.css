@@ -77,3 +77,38 @@ body.login.pagenest-login {
   outline: 2px solid #426354;
   outline-offset: 3px;
 }
+
+/* Email credentials and their submit control stay together before optional providers. */
+.pagenest-login #loginform .submit .button {
+  min-height: 44px;
+  min-width: 96px;
+}
+.pagenest-login #loginform .pagenest-social-login-options {
+  clear: both;
+  padding-top: 4px;
+}
+.pagenest-login #loginform .pagenest-social-divider {
+  margin-top: 20px;
+}
+.pagenest-login #loginform .pagenest-social-providers {
+  margin-bottom: 0;
+}
+@media (min-width: 360px) {
+  .pagenest-login #loginform .pagenest-social-providers {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .pagenest-login #loginform a.pagenest-social-provider {
+    grid-template-columns: 20px minmax(0, 1fr);
+    gap: 6px;
+    padding: 10px 6px;
+    font-size: 14px;
+  }
+  .pagenest-login #loginform .pagenest-social-provider::after {
+    display: none;
+  }
+}
+
+.pagenest-login #loginform .pagenest-social-provider > span {
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
