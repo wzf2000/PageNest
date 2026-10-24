@@ -8,11 +8,13 @@ require_once __DIR__ . '/product.php';
 require_once __DIR__ . '/design.php';
 require_once __DIR__ . '/reading.php';
 require_once __DIR__ . '/appearance.php';
+require_once __DIR__ . '/fonts.php';
 require_once __DIR__ . '/discovery.php';
 require_once __DIR__ . '/browsing.php';
 require_once __DIR__ . '/home-sections.php';
 require_once __DIR__ . '/reader-preferences.php';
 require_once __DIR__ . '/presentation.php';
+require_once __DIR__ . '/regions.php';
 add_action('after_setup_theme', static function () {
     load_theme_textdomain('pagenest', get_template_directory() . '/languages');
     add_theme_support('title-tag');
@@ -38,6 +40,7 @@ add_action('after_setup_theme', static function () {
     add_editor_style('assets/content.css');
     add_editor_style('assets/appearance.css');
     register_nav_menu('pagenest_primary', __('Site navigation', 'pagenest'));
+    register_nav_menu('pagenest_footer', __('Footer navigation', 'pagenest'));
 });
 add_filter('body_class', static function ($classes) {
     $classes[] = 'pagenest-site';

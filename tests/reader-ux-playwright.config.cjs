@@ -1,7 +1,7 @@
 const { defineConfig } = require('@playwright/test');
 const path = require('node:path');
 const base = require('../playwright.config.cjs');
-// Reuse the actual reader/admin regressions without multiplying the full browser suite.
+// Cover reader/admin regressions and the publishing controls in WebKit.
 module.exports = defineConfig({
   ...base,
   testDir: __dirname,
@@ -10,6 +10,12 @@ module.exports = defineConfig({
     'appearance-discovery.spec.cjs',
     'presentation.spec.cjs',
     'login-layout.spec.cjs',
+    'browsing.spec.cjs',
+    'editorial.spec.cjs',
+    'product.spec.cjs',
+    'publishing.spec.cjs',
+    'regions.spec.cjs',
+    'typography.spec.cjs',
   ],
   testIgnore: [],
   outputDir: '../.runtime/reader-ux-webkit-results',

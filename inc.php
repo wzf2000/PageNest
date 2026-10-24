@@ -95,9 +95,7 @@ function pagenest_card(int $id, string $context = 'list'): void
         !post_password_required($post) &&
         ($context === 'home' ||
             pagenest_browsing_bool(get_theme_mod('pagenest_list_covers', true)));
-    $compact =
-        $context === 'list' &&
-        pagenest_list_style(get_theme_mod('pagenest_list_style', 'standard')) === 'compact';
+    $compact = $context === 'list' && pagenest_listing_presentation()['layout'] === 'compact';
     ?>
 <article class="pagenest-entry <?php echo ($cover ? '' : 'pagenest-no-image') .
     ($compact ? ' pagenest-entry-compact' : ''); ?>">

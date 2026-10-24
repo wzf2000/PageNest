@@ -14,7 +14,11 @@
         'Skip to main content',
         'pagenest',
     ); ?></a>
-    <header class="pagenest-header" data-mbb-teaching-sticky-obstruction>
+    <header class="pagenest-header<?php echo pagenest_header_layout(
+        get_theme_mod('pagenest_header_layout', 'standard'),
+    ) === 'two-row'
+        ? ' pagenest-header-two-row'
+        : ''; ?>" data-mbb-teaching-sticky-obstruction>
         <div class="pagenest-nav-inner">
             <a class="pagenest-brand" href="<?php echo esc_url(home_url('/')); ?>"><?php
 $logo = (int) get_theme_mod('custom_logo');
@@ -65,3 +69,4 @@ if ($items) {
 ); ?></a></nav>
         </div>
     </header>
+    <?php pagenest_render_region('after_header'); ?>

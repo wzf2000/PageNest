@@ -214,3 +214,6 @@
 .pagenest-search-advanced:not([open]) > :not(summary) {
   display: none !important;
 }
+[dir='rtl'] .pagenest-search :is(label, p) {
+  unicode-bidi: plaintext;
+}

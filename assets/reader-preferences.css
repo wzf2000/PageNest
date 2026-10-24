@@ -246,7 +246,7 @@
   background: var(--pagenest-soft);
 }
 .pagenest-article[data-reader-palette] .pagenest-mobile-toc a[aria-current='location'] {
-  border-left-color: var(--pagenest-content-link);
+  border-inline-start-color: var(--pagenest-content-link);
 }
 .pagenest-article[data-reader-palette] .pagenest-mobile-toc summary {
   color: var(--pagenest-content-heading);
@@ -278,4 +278,7 @@
 }
 .pagenest-reader-footer:has(.pagenest-reader-status:not(:empty)) .pagenest-reader-hint {
   display: none;
+}
+[dir='rtl'] .pagenest-reader-preferences :is(p, legend, label) {
+  unicode-bidi: plaintext;
 }

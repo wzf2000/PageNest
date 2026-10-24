@@ -392,8 +392,6 @@ msgstr "可横向滚动的表格"
 msgid "Import and save appearance"
 msgstr "导入并保存视觉设置"
 
-msgid "In the block editor, open Patterns → PageNest and choose a topic introduction, resource cards or article outline. Replace the placeholders; content is created only when you insert and save it."
-msgstr "在区块编辑器的「区块样板 → PageNest」中选择专题介绍、资源卡片或文章提纲，再替换占位文案。只有手动插入并保存时才创建内容。"
 
 msgid "Interface available"
 msgstr "接口可用"
@@ -907,3 +905,254 @@ msgstr "返回目录"
 
 msgid "More filters"
 msgstr "更多筛选"
+
+msgid "%s · Layout"
+msgstr "%s · 布局"
+
+msgid "%s · Sidebar"
+msgstr "%s · 侧栏"
+
+msgid "Archives"
+msgstr "归档"
+
+msgid "Blog listing"
+msgstr "博客文章列表"
+
+msgid "Footer navigation"
+msgstr "页脚导航"
+
+msgid "Hide sidebar"
+msgstr "隐藏侧栏"
+
+msgid "Inherit (show sidebar)"
+msgstr "继承（显示侧栏）"
+
+
+msgid "Inherit list style"
+msgstr "继承列表样式"
+
+
+msgid "Search results"
+msgstr "搜索结果"
+
+msgid "Show sidebar"
+msgstr "显示侧栏"
+
+msgid "Three-column grid"
+msgstr "三列网格"
+
+msgid "Two-column grid"
+msgstr "两列网格"
+
+msgid "By default, listings inherit the list style and show the sidebar. Grids adapt to the available width and use one column on narrow screens."
+msgstr "未单独设置时沿用列表样式并显示侧栏；网格随可用宽度调整列数，窄屏单列。"
+
+msgid "1. Build the foundations"
+msgstr "1. 建立基础"
+
+msgid "2. Work through an example"
+msgstr "2. 实践一个示例"
+
+msgid "3. Review and continue"
+msgstr "3. 回顾与继续"
+
+msgid "A three-step reading path"
+msgstr "三个步骤的阅读路线"
+
+msgid "Continue with examples and further reading."
+msgstr "通过示例与延伸阅读继续探索。"
+
+msgid "Describe who this topic is for and what readers can learn. Replace the groups below with your own themes and add links in the editor."
+msgstr "说明本专题适合谁、读者能学到什么。将下方分组替换为自己的主题，并在编辑器添加链接。"
+
+msgid "Explain the suggested pace, exercises and how to choose the next step."
+msgstr "说明建议的阅读节奏、练习方式，以及如何选择下一步。"
+
+msgid "Foundations"
+msgstr "基础概念"
+
+msgid "Frequently asked questions"
+msgstr "常见问题"
+
+msgid "Group practical examples and further reading, then add your own links."
+msgstr "整理实践示例与延伸阅读，并添加自己的链接。"
+
+msgid "How should I use this guide?"
+msgstr "如何使用这份导览？"
+
+msgid "In the block editor, open Patterns → PageNest and choose an example below. Replace the placeholders; content is created only when you insert and save it."
+msgstr "在区块编辑器打开「区块样板 → PageNest」，选择下方示例。请替换占位内容；只有插入并保存时才会创建正文。"
+
+msgid "Inherit archive layout"
+msgstr "继承归档布局"
+
+msgid "Inherit archive sidebar"
+msgstr "继承归档侧栏"
+
+msgid "Introduce the essential concepts and link to a useful starting point."
+msgstr "介绍必要的基础概念，并链接到合适的入门内容。"
+
+msgid "List layout"
+msgstr "列表布局"
+
+msgid "Name a practical reading and suggest one task readers can try themselves."
+msgstr "填写一篇实践文章，并建议一个读者可以亲手尝试的任务。"
+
+msgid "Name the first reading and explain the concepts to understand before continuing."
+msgstr "填写第一篇阅读内容，并说明继续前需要理解的概念。"
+
+msgid "Only this category archive changes. Inherit uses the archive settings; child categories keep their own settings. Content and ordering are unchanged."
+msgstr "仅影响当前分类归档。继承时使用归档设置，子分类继续使用各自设置；内容与排序保持不变。"
+
+msgid "PageNest display"
+msgstr "PageNest 展示"
+
+msgid "Practice and exploration"
+msgstr "实践与探索"
+
+msgid "Questions before you begin"
+msgstr "开始前的常见问题"
+
+msgid "Reading steps"
+msgstr "分步阅读"
+
+msgid "Replace these steps with your own reading order. Add article links and any prerequisites using the editor."
+msgstr "将这些步骤替换为自己的阅读顺序，并在编辑器中添加文章链接与先修要求。"
+
+msgid "Replace this answer with the prerequisites and any helpful introductory reading."
+msgstr "将此答案替换为先修要求，以及有帮助的入门阅读。"
+
+msgid "Sidebar"
+msgstr "侧栏"
+
+msgid "Start exploring this topic"
+msgstr "开始探索这个专题"
+
+msgid "Start with the essential concepts."
+msgstr "从必要的基础概念开始。"
+
+msgid "Suggest how readers can check their understanding and choose the next reading."
+msgstr "建议读者如何检查理解程度，并选择下一篇阅读内容。"
+
+msgid "Topic guide"
+msgstr "专题导览"
+
+msgid "What should I know first?"
+msgstr "开始前需要了解什么？"
+
+msgid "%s · Show on"
+msgstr "%s · 显示范围"
+
+msgid "%s · Source page"
+msgstr "%s · 来源页面"
+
+msgid "After the header"
+msgstr "页眉之后"
+
+msgid "All public pages and listings"
+msgstr "全部公开页面与列表"
+
+msgid "Available"
+msgstr "可用"
+
+msgid "Before the footer"
+msgstr "页脚之前"
+
+msgid "Choose a public, password-free page and maintain its content in the block editor. Regions support static blocks and are visible to everyone on the selected page types."
+msgstr "选择公开、无密码的页面，在区块编辑器中维护内容。内容区支持静态区块，在所选页面类型中对所有访客可见。"
+
+msgid "Choose a published page without a password whose parent pages are also public."
+msgstr "请选择已发布、无密码的页面，其父级页面也必须公开且无密码。"
+
+msgid "Choose a source page or clear the selection."
+msgstr "请选择来源页面，或清空选择。"
+
+msgid "Choose a source page."
+msgstr "请选择来源页面。"
+
+msgid "Choose layouts and maintain public static regions with ordinary pages."
+msgstr "选择页眉页脚布局，并用普通页面维护公开静态内容区。"
+
+msgid "Custom HTML anchors are not supported in content regions. Remove the block anchors and HTML id attributes from the source page."
+msgstr "内容区不支持自定义 HTML 锚点。请移除来源页面的区块锚点和 HTML id 属性。"
+
+msgid "Data bindings are not supported in public content regions."
+msgstr "公开内容区不支持动态数据绑定。"
+
+msgid "Edit source page"
+msgstr "编辑来源页面"
+
+msgid "Footer layout"
+msgstr "页脚布局"
+
+msgid "Front page"
+msgstr "首页"
+
+msgid "Header layout"
+msgstr "页眉布局"
+
+msgid "Header, footer and public regions"
+msgstr "页眉、页脚与公开内容区"
+
+msgid "Manage source pages"
+msgstr "管理来源页面"
+
+msgid "Off"
+msgstr "关闭"
+
+msgid "Posts"
+msgstr "文章"
+
+msgid "Source unavailable"
+msgstr "来源不可用"
+
+msgid "Stacked footer"
+msgstr "纵向页脚"
+
+msgid "The source page has too many blocks. Use at most 200 blocks."
+msgstr "来源页面区块过多，最多支持 200 个区块。"
+
+msgid "The source page has too many nested blocks. Use at most 16 levels."
+msgstr "来源页面嵌套过深，最多支持 16 层区块。"
+
+msgid "The source page is too large. Keep its saved content within 64 KiB."
+msgstr "来源页面过大，请将已保存内容控制在 64 KiB 以内。"
+
+msgid "The source page or one of its parents is unavailable."
+msgstr "来源页面或其父级页面不可用。"
+
+msgid "Two-row header"
+msgstr "两行页眉"
+
+msgid "Use only static paragraphs, headings, lists, groups, columns, buttons, images, separators, spacers and supported Details blocks. HTML, shortcodes, reusable patterns and dynamic blocks are not supported."
+msgstr "请仅使用静态段落、标题、列表、分组、分栏、按钮、图片、分隔线、间隔及受支持的详细信息区块。不支持 HTML、短代码、同步样板和动态区块。"
+
+msgid "Body font"
+msgstr "正文字体"
+
+msgid "Choose an installed local Font Library family. Missing files fall back to system fonts. Install and manage fonts in WordPress; the theme never downloads fonts."
+msgstr "选择字体库中已安装的本地字体；文件失效时回退系统字体。请在 WordPress 安装与管理字体，主题不会下载字体。"
+
+msgid "Heading font"
+msgstr "标题字体"
+
+msgid "Manage installed fonts"
+msgstr "管理已安装字体"
+
+msgid "Next page"
+msgstr "下一页"
+
+msgid "Previous page"
+msgstr "上一页"
+
+msgid "System font stack"
+msgstr "系统字体栈"
+
+msgid "This WordPress version does not provide the native Font Library. System font stacks remain available."
+msgstr "当前 WordPress 版本不提供原生字体库，将继续使用系统字体栈。"
+
+msgid "This region layout is not supported. Use default groups, rows or stacks with alignment and wrapping, or grids with automatic columns or 1–12 columns. Custom widths, child positioning and responsive overrides are not supported."
+msgstr "此内容区不支持该布局。请使用默认分组、可对齐和换行的横排或堆叠，或采用自动列数或 1–12 列的网格。不支持自定义宽度、子项定位和响应式覆盖。"
+
+msgid "Child positioning is not supported in public content regions."
+msgstr "公开内容区不支持子项定位。"

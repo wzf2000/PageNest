@@ -44,6 +44,167 @@ function pagenest_list_style($value): string
 {
     return in_array($value, ['standard', 'compact'], true) ? $value : 'standard';
 }
+/** Only native listing contexts may override the existing global list style. */
+function pagenest_listing_context(): string
+{
+    if (is_404()) {
+        return '';
+    }
+    if (is_search()) {
+        return 'search';
+    }
+    if (is_home()) {
+        return 'blog';
+    }
+    return is_archive() ? 'archive' : '';
+}
+function pagenest_listing_layout($value): string
+{
+    return in_array($value, ['inherit', 'standard', 'compact', 'grid-2', 'grid-3'], true)
+        ? $value
+        : 'inherit';
+}
+function pagenest_listing_sidebar($value): string
+{
+    return in_array($value, ['inherit', 'show', 'hide'], true) ? $value : 'inherit';
+}
+function pagenest_listing_presentation(): array
+{
+    $context = pagenest_listing_context();
+    $layout = $context
+        ? pagenest_listing_layout(
+            get_theme_mod('pagenest_listing_' . $context . '_layout', 'inherit'),
+        )
+        : 'inherit';
+    $sidebar = $context
+        ? pagenest_listing_sidebar(
+            get_theme_mod('pagenest_listing_' . $context . '_sidebar', 'inherit'),
+        )
+        : 'inherit';
+    if ($context === 'archive' && is_category()) {
+        $category = pagenest_category_listing((int) get_queried_object_id());
+        if ($category['layout'] !== 'inherit') {
+            $layout = $category['layout'];
+        }
+        if ($category['sidebar'] !== 'inherit') {
+            $sidebar = $category['sidebar'];
+        }
+    }
+    return [
+        'layout' =>
+            $layout === 'inherit'
+                ? pagenest_list_style(get_theme_mod('pagenest_list_style', 'standard'))
+                : $layout,
+        'sidebar' => $sidebar !== 'hide',
+    ];
+}
+/** Object-level category overrides are intentionally excluded from visual JSON transfers. */
+function pagenest_category_listing(int $id): array
+{
+    $stored = get_term_meta($id, '_pagenest_listing', true);
+    $stored = is_array($stored) ? $stored : [];
+    return [
+        'layout' => pagenest_listing_layout($stored['layout'] ?? 'inherit'),
+        'sidebar' => pagenest_listing_sidebar($stored['sidebar'] ?? 'inherit'),
+    ];
+}
+function pagenest_category_listing_fields($term): void
+{
+    if ($term->taxonomy !== 'category' || !current_user_can('edit_term', $term->term_id)) {
+        return;
+    }
+    $value = pagenest_category_listing((int) $term->term_id);
+    echo '<tr class="form-field"><th scope="row">' .
+        esc_html__('PageNest display', 'pagenest') .
+        '</th><td>';
+    wp_nonce_field('pagenest-listing-' . $term->term_id, 'pagenest-listing-nonce');
+    foreach (
+        [
+            'layout' => [
+                __('List layout', 'pagenest'),
+                [
+                    'inherit' => __('Inherit archive layout', 'pagenest'),
+                    'standard' => __('Standard cards', 'pagenest'),
+                    'compact' => __('Compact list', 'pagenest'),
+                    'grid-2' => __('Two-column grid', 'pagenest'),
+                    'grid-3' => __('Three-column grid', 'pagenest'),
+                ],
+            ],
+            'sidebar' => [
+                __('Sidebar', 'pagenest'),
+                [
+                    'inherit' => __('Inherit archive sidebar', 'pagenest'),
+                    'show' => __('Show sidebar', 'pagenest'),
+                    'hide' => __('Hide sidebar', 'pagenest'),
+                ],
+            ],
+        ]
+        as $key => [$label, $choices]
+    ) {
+        echo '<p><label for="pagenest-listing-' .
+            esc_attr($key) .
+            '">' .
+            esc_html($label) .
+            '</label> <select id="pagenest-listing-' .
+            esc_attr($key) .
+            '" name="pagenest_listing[' .
+            esc_attr($key) .
+            ']">';
+        foreach ($choices as $choice => $title) {
+            echo '<option value="' .
+                esc_attr($choice) .
+                '" ' .
+                selected($value[$key], $choice, false) .
+                '>' .
+                esc_html($title) .
+                '</option>';
+        }
+        echo '</select></p>';
+    }
+    echo '<p class="description">' .
+        esc_html__(
+            'Only this category archive changes. Inherit uses the archive settings; child categories keep their own settings. Content and ordering are unchanged.',
+            'pagenest',
+        ) .
+        '</p></td></tr>';
+}
+function pagenest_save_category_listing($id): void
+{
+    $term = get_term($id, 'category');
+    if (
+        !$term ||
+        is_wp_error($term) ||
+        $term->taxonomy !== 'category' ||
+        !current_user_can('edit_term', $id) ||
+        !is_string($_POST['pagenest-listing-nonce'] ?? null) ||
+        !wp_verify_nonce(wp_unslash($_POST['pagenest-listing-nonce']), 'pagenest-listing-' . $id)
+    ) {
+        return;
+    }
+    $input = $_POST['pagenest_listing'] ?? null;
+    if (
+        !is_array($input) ||
+        !is_string($input['layout'] ?? null) ||
+        !is_string($input['sidebar'] ?? null)
+    ) {
+        return;
+    }
+    $layout = wp_unslash($input['layout']);
+    $sidebar = wp_unslash($input['sidebar']);
+    if (
+        pagenest_listing_layout($layout) !== $layout ||
+        pagenest_listing_sidebar($sidebar) !== $sidebar
+    ) {
+        return;
+    }
+    if ($layout === 'inherit' && $sidebar === 'inherit') {
+        delete_term_meta($id, '_pagenest_listing');
+    } else {
+        update_term_meta($id, '_pagenest_listing', ['layout' => $layout, 'sidebar' => $sidebar]);
+    }
+}
+add_action('category_edit_form_fields', 'pagenest_category_listing_fields');
+add_action('edited_category', 'pagenest_save_category_listing');
 function pagenest_home_order(): array
 {
     $modules = pagenest_home_modules();
@@ -303,6 +464,10 @@ add_action('customize_register', static function ($customizer): void {
     }
     $customizer->add_section('pagenest_browsing', [
         'title' => __('Lists and articles', 'pagenest'),
+        'description' => __(
+            'By default, listings inherit the list style and show the sidebar. Grids adapt to the available width and use one column on narrow screens.',
+            'pagenest',
+        ),
         'priority' => 31,
     ]);
     $register(
@@ -319,6 +484,47 @@ add_action('customize_register', static function ($customizer): void {
             ],
         ],
     );
+    foreach (
+        [
+            'blog' => __('Blog listing', 'pagenest'),
+            'archive' => __('Archives', 'pagenest'),
+            'search' => __('Search results', 'pagenest'),
+        ]
+        as $context => $label
+    ) {
+        $register(
+            'pagenest_listing_' . $context . '_layout',
+            sprintf(__('%s · Layout', 'pagenest'), $label),
+            'select',
+            'inherit',
+            'pagenest_listing_layout',
+            'pagenest_browsing',
+            [
+                'choices' => [
+                    'inherit' => __('Inherit list style', 'pagenest'),
+                    'standard' => __('Standard cards', 'pagenest'),
+                    'compact' => __('Compact list', 'pagenest'),
+                    'grid-2' => __('Two-column grid', 'pagenest'),
+                    'grid-3' => __('Three-column grid', 'pagenest'),
+                ],
+            ],
+        );
+        $register(
+            'pagenest_listing_' . $context . '_sidebar',
+            sprintf(__('%s · Sidebar', 'pagenest'), $label),
+            'select',
+            'inherit',
+            'pagenest_listing_sidebar',
+            'pagenest_browsing',
+            [
+                'choices' => [
+                    'inherit' => __('Inherit (show sidebar)', 'pagenest'),
+                    'show' => __('Show sidebar', 'pagenest'),
+                    'hide' => __('Hide sidebar', 'pagenest'),
+                ],
+            ],
+        );
+    }
     foreach (
         [
             'pagenest_list_covers' => [__('Show list covers', 'pagenest'), true],

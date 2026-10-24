@@ -194,7 +194,10 @@ function pagenest_appearance_css()
     foreach (pagenest_appearance_variables() as $key => $value) {
         $declarations[] = $key . ':' . $value;
     }
-    return ':root{' . implode(';', $declarations) . '}';
+    return ':root{' .
+        implode(';', $declarations) .
+        '}' .
+        (function_exists('pagenest_fonts_css') ? pagenest_fonts_css() : '');
 }
 
 function pagenest_register_appearance_customizer($wp_customize)

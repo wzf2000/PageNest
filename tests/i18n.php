@@ -71,6 +71,12 @@ i18n_check(
     pagenest_comment_count(1) === '1 条评论' && pagenest_comment_count(2) === '2 条评论',
     'Chinese plural form',
 );
+$fixture_locale = 'zh_TW';
+i18n_check(
+    pagenest_script_translations()['pagenest-reading']['expandAll'] === '展開全部' &&
+        pagenest_comment_count(2) === '2 則留言',
+    'Traditional Chinese MO and plural form',
+);
 $fixture_locale = 'fr_FR';
 i18n_check(
     pagenest_script_translations()['pagenest-reading']['expandAll'] === 'Expand all',

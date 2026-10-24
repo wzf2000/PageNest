@@ -48,7 +48,7 @@ def read_po(path):
     return {entry["msgid"]: entry for entry in entries}
 
 
-def header(language=""):
+def header(language="", plural_forms=""):
     return (
         "Project-Id-Version: PageNest\n"
         "PO-Revision-Date: 2026-10-13 00:00+0000\n"
@@ -58,7 +58,8 @@ def header(language=""):
         "Content-Type: text/plain; charset=UTF-8\n"
         "Content-Transfer-Encoding: 8bit\n"
         "X-Domain: pagenest\n"
-        + ("Language: " + language + "\nPlural-Forms: nplurals=1; plural=0;\n" if language else "")
+        + ("Language: " + language + "\n" if language else "")
+        + ("Plural-Forms: " + plural_forms + "\n" if plural_forms else "")
     )
 
 
@@ -89,12 +90,29 @@ def placeholders(value):
     return sorted(re.findall(r"%(?:[1-9][0-9]*\$)?[dsf]", value.replace("%%", "")))
 
 
+def plural_rules(entries):
+    metadata = entries.get("", {}).get("msgstr", "")
+    match = re.search(r"(?m)^Plural-Forms:\s*nplurals=([0-9]+);\s*plural=([^;]+);", metadata)
+    assert match, "PO header must declare Plural-Forms"
+    count = int(match[1])
+    assert 0 < count <= 20, "Invalid number of plural forms"
+    rule = gettext.c2py(match[2])
+    for number in [*range(201), 1000, 1000000]:
+        assert 0 <= rule(number) < count, "Plural formula returns an invalid index"
+    return count, rule
+
+
 def catalog(entries):
+    count, _ = plural_rules(entries)
     pairs = []
     for key, item in entries.items():
         if "msgid_plural" in item:
             key += "\0" + item["msgid_plural"]
-            value = item["msgstr[0]"]  # Bundled Simplified Chinese has one plural form.
+            expected = {f"msgstr[{index}]" for index in range(count)}
+            assert {
+                key for key in item if key.startswith("msgstr")
+            } == expected, "Missing or extra plural translations"
+            value = "\0".join(item[f"msgstr[{index}]"] for index in range(count))
         else:
             value = item["msgstr"]
         pairs.append((key.encode(), value.encode()))
@@ -120,36 +138,62 @@ def catalog(entries):
 def validate(messages, entries):
     expected = {item["id"] for item in messages}
     assert expected == set(entries) - {""}, "PO entries differ from current extracted messages"
+    count, rule = plural_rules(entries)
     for item in messages:
         entry = entries[item["id"]]
         assert entry.get("msgid_plural") == item["plural"], "Plural mismatch: " + item["id"]
-        translated = entry.get("msgstr[0]" if item["plural"] else "msgstr", "")
-        assert translated, "Missing translation: " + item["id"]
-        assert placeholders(translated) == placeholders(item["id"]), (
-            "Placeholder mismatch: " + item["id"]
+        forms = (
+            [entry.get(f"msgstr[{index}]", "") for index in range(count)]
+            if item["plural"]
+            else [entry.get("msgstr", "")]
         )
+        for translated in forms:
+            assert translated, "Missing translation: " + item["id"]
+            assert placeholders(translated) == placeholders(item["id"]), (
+                "Placeholder mismatch: " + item["id"]
+            )
         if item["plural"]:
             assert placeholders(item["plural"]) == placeholders(item["id"])
     compiled = catalog(entries)
     reader = gettext.GNUTranslations(io.BytesIO(compiled))
     for item in messages:
-        actual = (
-            reader.ngettext(item["id"], item["plural"], 2)
-            if item["plural"]
-            else reader.gettext(item["id"])
-        )
-        expected_translation = entries[item["id"]]["msgstr[0]" if item["plural"] else "msgstr"]
-        assert actual == expected_translation, "MO lookup mismatch"
+        if item["plural"]:
+            for number in [0, 1, 2, 3, 5, 11, 100, 1000]:
+                assert (
+                    reader.ngettext(item["id"], item["plural"], number)
+                    == entries[item["id"]][f"msgstr[{rule(number)}]"]
+                ), "MO plural lookup mismatch"
+        else:
+            assert reader.gettext(item["id"]) == entries[item["id"]]["msgstr"], "MO lookup mismatch"
     return compiled
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true")
+    parser.add_argument(
+        "--locale",
+        action="append",
+        help="Compile/check only this locale (repeatable); by default, discover every bundled PO",
+    )
     args = parser.parse_args()
     messages = extract()
-    entries = read_po(LANGUAGES / "zh_CN.po")
-    files = {"pagenest.pot": pot(messages), "zh_CN.mo": validate(messages, entries)}
+    paths = (
+        [LANGUAGES / (locale + ".po") for locale in args.locale]
+        if args.locale
+        else sorted(LANGUAGES.glob("*.po"))
+    )
+    assert paths, "No locale catalogs found"
+    files = {"pagenest.pot": pot(messages)}
+    for path in paths:
+        assert path.parent == LANGUAGES and re.fullmatch(
+            r"[a-z]{2,3}(?:_[A-Za-z0-9]+)*", path.stem
+        ), "Invalid locale name"
+        entries = read_po(path)
+        assert re.search(
+            r"(?m)^Language:\s*" + re.escape(path.stem) + r"\s*$", entries[""]["msgstr"]
+        ), "PO language header differs from filename"
+        files[path.stem + ".mo"] = validate(messages, entries)
     for name, data in files.items():
         path = LANGUAGES / name
         if args.check:
@@ -157,7 +201,7 @@ def main():
         else:
             path.write_bytes(data)
     print(
-        f"Native gettext: {len(messages)} messages; Chinese coverage, plurals, placeholders and MO verified"
+        f"Native gettext: {len(messages)} messages; {len(paths)} locale catalogs, plurals, placeholders and MO verified"
     )
 
 

@@ -1,0 +1,39 @@
+/* Scope to PageNest native sections and controls. Never restyle the WP shell. */
+.pagenest-customizer-section > .accordion-section-title {
+  border-inline-start: 3px solid #426354;
+}
+.pagenest-customizer-content {
+  background: #f7f6f2;
+}
+.pagenest-customizer-content .customize-section-description {
+  color: #69736b;
+  line-height: 1.7;
+  padding-block: 14px;
+}
+.pagenest-customizer-control {
+  padding-block: 10px;
+  border-bottom: 1px solid #e1e5df;
+}
+.pagenest-customizer-control .customize-control-title {
+  color: #293630;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+.pagenest-customizer-control .description {
+  font-style: normal;
+  line-height: 1.7;
+  color: #69736b;
+}
+.pagenest-customizer-control
+  :is(input[type='text'], input[type='number'], input[type='url'], textarea, select) {
+  background: #fffefb;
+  border-color: #b8c5bc;
+  border-radius: 4px;
+  min-height: 36px;
+}
+.pagenest-customizer-control[data-pagenest-control-group] {
+  margin-bottom: 0;
+}
+[dir='rtl'] [id^='customize-control-pagenest_'] .description {
+  unicode-bidi: plaintext;
+}

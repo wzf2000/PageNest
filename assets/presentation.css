@@ -332,3 +332,6 @@ body.login.pagenest-login :is(.message, .notice, .success, #login_error) a:focus
   outline: 2px solid var(--pagenest-focus, #426354);
   outline-offset: 3px;
 }
+[dir='rtl'] .pagenest-site-preferences :is(p, legend, label) {
+  unicode-bidi: plaintext;
+}

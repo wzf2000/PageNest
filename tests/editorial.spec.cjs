@@ -68,7 +68,7 @@ test('native settings hub groups tasks and keeps advanced actions explicit', asy
     await page.setViewportSize({ width, height: 1000 });
     await page.goto('/product.html');
     await expect(page.locator('.pagenest-settings-group')).toHaveCount(3);
-    await expect(page.locator('.pagenest-pattern-previews figure')).toHaveCount(3);
+    await expect(page.locator('.pagenest-pattern-previews figure')).toHaveCount(6);
     const details = page.locator('.pagenest-settings-details');
     await expect(details).toHaveCount(4);
     for (const item of await details.all()) await expect(item).not.toHaveAttribute('open');

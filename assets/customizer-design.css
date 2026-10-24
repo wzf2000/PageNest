@@ -1,6 +1,6 @@
 /* Scope to PageNest native sections and controls. Never restyle the WP shell. */
 .pagenest-customizer-section > .accordion-section-title {
-  border-left: 3px solid #426354;
+  border-inline-start: 3px solid #426354;
 }
 .pagenest-customizer-content {
   background: #f7f6f2;
@@ -33,4 +33,7 @@
 }
 .pagenest-customizer-control[data-pagenest-control-group] {
   margin-bottom: 0;
+}
+[dir='rtl'] [id^='customize-control-pagenest_'] .description {
+  unicode-bidi: plaintext;
 }

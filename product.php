@@ -18,6 +18,19 @@ function pagenest_product_schema()
             'choices' => array_keys(pagenest_layout_choices($context)),
         ];
     }
+    $schema['pagenest_header_layout'] = ['type' => 'enum', 'choices' => ['standard', 'two-row']];
+    $schema['pagenest_footer_layout'] = ['type' => 'enum', 'choices' => ['standard', 'stacked']];
+    $schema['pagenest_list_style'] = ['type' => 'enum', 'choices' => ['standard', 'compact']];
+    foreach (['blog', 'archive', 'search'] as $context) {
+        $schema['pagenest_listing_' . $context . '_layout'] = [
+            'type' => 'enum',
+            'choices' => ['inherit', 'standard', 'compact', 'grid-2', 'grid-3'],
+        ];
+        $schema['pagenest_listing_' . $context . '_sidebar'] = [
+            'type' => 'enum',
+            'choices' => ['inherit', 'show', 'hide'],
+        ];
+    }
     return $schema;
 }
 
@@ -233,6 +246,12 @@ function pagenest_product_diagnostics($root = null)
     return $assets;
 }
 
+function pagenest_product_supports_details(): bool
+{
+    return class_exists('WP_Block_Type_Registry') &&
+        WP_Block_Type_Registry::get_instance()->is_registered('core/details');
+}
+
 function pagenest_product_page()
 {
     if (!current_user_can('edit_theme_options')) {
@@ -283,6 +302,13 @@ function pagenest_product_page()
             'pagenest',
         ),
     );
+    if (function_exists('pagenest_font_library_url') && ($font_url = pagenest_font_library_url())) {
+        echo '<p><a href="' .
+            esc_url($font_url) .
+            '">' .
+            esc_html__('Manage installed fonts', 'pagenest') .
+            '</a></p>';
+    }
     echo '</div></section><details class="pagenest-settings-details pagenest-settings-palette"><summary>' .
         esc_html__('Current reading palette', 'pagenest') .
         '</summary><div class="pagenest-settings-details-body"><div class="pagenest-palette-preview" aria-label="' .
@@ -360,6 +386,12 @@ function pagenest_product_page()
     echo '</div></section><section class="pagenest-settings-group"><div class="pagenest-settings-section-heading"><h2>' .
         esc_html__('Finish the site details', 'pagenest') .
         '</h2></div><div class="pagenest-settings-section-links">';
+    $link(
+        'pagenest_regions',
+        __('Header, footer and public regions', 'pagenest'),
+        __('Choose layouts and maintain public static regions with ordinary pages.', 'pagenest'),
+    );
+    pagenest_region_admin_status();
     foreach (
         [
             [
@@ -394,7 +426,7 @@ function pagenest_product_page()
         esc_html__('Editable block examples', 'pagenest') .
         '</summary><div class="pagenest-settings-details-body"><p>' .
         esc_html__(
-            'In the block editor, open Patterns → PageNest and choose a topic introduction, resource cards or article outline. Replace the placeholders; content is created only when you insert and save it.',
+            'In the block editor, open Patterns → PageNest and choose an example below. Replace the placeholders; content is created only when you insert and save it.',
             'pagenest',
         ) .
         '</p><div class="pagenest-pattern-previews">';
@@ -429,7 +461,47 @@ function pagenest_product_page()
         esc_html__('Summary and next steps', 'pagenest') .
         '</h3></div><figcaption>' .
         esc_html__('Article outline', 'pagenest') .
-        '</figcaption></figure></div></div></details>';
+        '</figcaption></figure>';
+    echo '<figure><div class="pagenest-pattern-illustration pagenest-pattern-resources"><div><h3>' .
+        esc_html__('Foundations', 'pagenest') .
+        '</h3><p>' .
+        esc_html__('Start with the essential concepts.', 'pagenest') .
+        '</p></div><div><h3>' .
+        esc_html__('Practice and exploration', 'pagenest') .
+        '</h3><p>' .
+        esc_html__('Continue with examples and further reading.', 'pagenest') .
+        '</p></div></div><figcaption>' .
+        esc_html__('Topic guide', 'pagenest') .
+        '</figcaption></figure>';
+    echo '<figure><div class="pagenest-pattern-illustration pagenest-pattern-outline"><h3>' .
+        esc_html__('1. Build the foundations', 'pagenest') .
+        '</h3><h3>' .
+        esc_html__('2. Work through an example', 'pagenest') .
+        '</h3><h3>' .
+        esc_html__('3. Review and continue', 'pagenest') .
+        '</h3></div><figcaption>' .
+        esc_html__('Reading steps', 'pagenest') .
+        '</figcaption></figure>';
+    if (pagenest_product_supports_details()) {
+        echo '<figure><div class="pagenest-pattern-illustration"><details><summary>' .
+            esc_html__('What should I know first?', 'pagenest') .
+            '</summary><p>' .
+            esc_html__(
+                'Replace this answer with the prerequisites and any helpful introductory reading.',
+                'pagenest',
+            ) .
+            '</p></details><details><summary>' .
+            esc_html__('How should I use this guide?', 'pagenest') .
+            '</summary><p>' .
+            esc_html__(
+                'Explain the suggested pace, exercises and how to choose the next step.',
+                'pagenest',
+            ) .
+            '</p></details></div><figcaption>' .
+            esc_html__('Frequently asked questions', 'pagenest') .
+            '</figcaption></figure>';
+    }
+    echo '</div></div></details>';
     echo '<details class="pagenest-settings-details"><summary>' .
         esc_html__('Transfer appearance settings', 'pagenest') .
         '<span>' .
@@ -577,6 +649,89 @@ function pagenest_product_patterns()
             ),
         ],
     ];
+    $native_heading = static fn($text) => '<!-- wp:heading --><h2 class="wp-block-heading">' .
+        esc_html($text) .
+        '</h2><!-- /wp:heading -->';
+    $patterns['topic-groups'] = [
+        __('Topic guide', 'pagenest'),
+        $native_heading(__('Start exploring this topic', 'pagenest')) .
+        $paragraph(
+            __(
+                'Describe who this topic is for and what readers can learn. Replace the groups below with your own themes and add links in the editor.',
+                'pagenest',
+            ),
+        ) .
+        '<!-- wp:columns --><div class="wp-block-columns"><!-- wp:column --><div class="wp-block-column">' .
+        $native_heading(__('Foundations', 'pagenest')) .
+        $paragraph(
+            __('Introduce the essential concepts and link to a useful starting point.', 'pagenest'),
+        ) .
+        '</div><!-- /wp:column --><!-- wp:column --><div class="wp-block-column">' .
+        $native_heading(__('Practice and exploration', 'pagenest')) .
+        $paragraph(
+            __(
+                'Group practical examples and further reading, then add your own links.',
+                'pagenest',
+            ),
+        ) .
+        '</div><!-- /wp:column --></div><!-- /wp:columns -->',
+    ];
+    $patterns['reading-steps'] = [
+        __('Reading steps', 'pagenest'),
+        $native_heading(__('A three-step reading path', 'pagenest')) .
+        $paragraph(
+            __(
+                'Replace these steps with your own reading order. Add article links and any prerequisites using the editor.',
+                'pagenest',
+            ),
+        ) .
+        $native_heading(__('1. Build the foundations', 'pagenest')) .
+        $paragraph(
+            __(
+                'Name the first reading and explain the concepts to understand before continuing.',
+                'pagenest',
+            ),
+        ) .
+        $native_heading(__('2. Work through an example', 'pagenest')) .
+        $paragraph(
+            __(
+                'Name a practical reading and suggest one task readers can try themselves.',
+                'pagenest',
+            ),
+        ) .
+        $native_heading(__('3. Review and continue', 'pagenest')) .
+        $paragraph(
+            __(
+                'Suggest how readers can check their understanding and choose the next reading.',
+                'pagenest',
+            ),
+        ),
+    ];
+    if (pagenest_product_supports_details()) {
+        $patterns['faq'] = [
+            __('Frequently asked questions', 'pagenest'),
+            $native_heading(__('Questions before you begin', 'pagenest')) .
+            '<!-- wp:details --><details class="wp-block-details"><summary>' .
+            esc_html(__('What should I know first?', 'pagenest')) .
+            '</summary>' .
+            $paragraph(
+                __(
+                    'Replace this answer with the prerequisites and any helpful introductory reading.',
+                    'pagenest',
+                ),
+            ) .
+            '</details><!-- /wp:details --><!-- wp:details --><details class="wp-block-details"><summary>' .
+            esc_html(__('How should I use this guide?', 'pagenest')) .
+            '</summary>' .
+            $paragraph(
+                __(
+                    'Explain the suggested pace, exercises and how to choose the next step.',
+                    'pagenest',
+                ),
+            ) .
+            '</details><!-- /wp:details -->',
+        ];
+    }
     foreach ($patterns as $name => [$title, $content]) {
         register_block_pattern('pagenest/' . $name, [
             'title' => $title,

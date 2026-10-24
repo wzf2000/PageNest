@@ -4,7 +4,7 @@
 
 两个仓库分别运行 push、pull request 和可复用的 CI。浏览器 verify job 固定使用 Ubuntu 24.04、Node.js 24.15.0、Python 3.12 和 Playwright 1.55.1；PHP 8.0 和 8.2 分别检查最低支持版本与兼容版本。格式检查遵循 MarkBridge 的 Prettier、PHP 插件、Markdown 中英文间距和 Black 规则，Python 文件逐个检查以避免多进程启动。生成的哈希资源只校验，不直接格式化；CI 在构建前校验，避免构建掩盖已提交资源漂移。
 
-`npm run test:reader-ux-webkit` 复用阅读偏好、全站外观、搜索和手机登录测试，只增加 WebKit 引擎；手机登录包含键盘顺序、无 JavaScript 回退与中英文标签宽度。
+`npm run test:reader-ux-webkit` 复用阅读偏好、全站外观、搜索、手机登录、列表展示、配置中心、条件内容区及字体／RTL 测试，使用 WebKit 引擎；手机登录包含键盘顺序、无 JavaScript 回退与中英文标签宽度。
 CI 在 PHP 8.2 的 Ubuntu 24.04 任务执行该门禁，失败时上传 `.runtime/reader-ux-webkit-results/` 的 trace。
 
 PHP 测试使用内存中的 WordPress 替身，浏览器测试覆盖桌面与手机宽度，并禁止外部网络请求。它们验证公共功能和实际前端资源，不能代替完整 WordPress 安装上的插件组合验收。测试依赖、fixture、格式工具与 node_modules 不进入安装 ZIP。

@@ -7,7 +7,7 @@
   max-width: 1180px;
   color: var(--pn-ink);
   margin-top: 20px;
-  padding-right: 20px;
+  padding-inline-end: 20px;
 }
 .pagenest-settings * {
   box-sizing: border-box;
@@ -95,7 +95,7 @@
 .pagenest-palette-swatches {
   display: flex;
   position: absolute;
-  right: 24px;
+  inset-inline-end: 24px;
   top: 24px;
   gap: 5px;
 }
@@ -216,8 +216,8 @@
   font-size: 16px;
 }
 .pagenest-pattern-resources > div + div {
-  padding-left: 12px;
-  border-left: 1px solid var(--pn-line);
+  padding-inline-start: 12px;
+  border-inline-start: 1px solid var(--pn-line);
 }
 .pagenest-pattern-outline h3 {
   font-size: 16px;
@@ -239,7 +239,7 @@
   display: inline;
   font-size: 12px;
   font-weight: 400;
-  margin-left: 18px;
+  margin-inline-start: 18px;
   color: var(--pn-muted);
 }
 .pagenest-settings-details-body {
@@ -286,7 +286,7 @@
 }
 @media (max-width: 900px) {
   .pagenest-settings {
-    padding-right: 10px;
+    padding-inline-end: 10px;
   }
   .pagenest-settings-overview {
     gap: 24px;
@@ -329,4 +329,11 @@
 }
 .pagenest-settings-section-links .pagenest-config-link:last-child {
   border-bottom: 0;
+}
+[dir='rtl'] .pagenest-settings :is(p, .description, .pagenest-group-intro) {
+  unicode-bidi: plaintext;
+}
+[dir='rtl'] .pagenest-settings .pagenest-config-link small,
+[dir='rtl'] .pagenest-settings .pagenest-config-link > span:first-child > span {
+  unicode-bidi: plaintext;
 }
