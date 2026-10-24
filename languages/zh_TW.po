@@ -1,0 +1,1155 @@
+msgid ""
+msgstr "Project-Id-Version: PageNest\nPO-Revision-Date: 2026-10-13 00:00+0000\nLast-Translator: PageNest Contributors\nLanguage-Team: PageNest Contributors\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Domain: pagenest\nLanguage: zh_TW\nPlural-Forms: nplurals=1; plural=0;\n"
+
+msgid "%1$s · Slot %2$d"
+msgstr "%1$s · 位置 %2$d"
+
+msgid "%s comment"
+msgid_plural "%s comments"
+msgstr[0] "%s 則留言"
+
+msgid "%s public article, ordered by publication date."
+msgid_plural "%s public articles, ordered by publication date."
+msgstr[0] "共 %s 篇公開文章，按發佈時間排列。"
+
+msgid "%s view"
+msgid_plural "%s views"
+msgstr[0] "%s 次瀏覽"
+
+msgid "%s · Order"
+msgstr "%s · 順序"
+
+msgid "A configurable reading theme with topic navigation, author profiles, responsive layouts and extension slots for notes and site tools."
+msgstr "讓知識與思考安放於頁間。獨立閱讀佈景主題，提供專題導覽、作者展示和行動裝置版面配置，提供擴充介面接入筆記與網站工具；首頁可從“外觀 → PageNest”進入自訂器調整。"
+
+msgid "A home for knowledge and ideas"
+msgstr "讓知識與思考安放於頁間"
+
+msgid "A place for thoughtful reading"
+msgstr "為思考留一頁"
+
+msgid "A setting value is outside the allowed range."
+msgstr "設定值不符合允許範圍。"
+
+msgid "About"
+msgstr "關於"
+
+msgid "About %s minute to read"
+msgid_plural "About %s minutes to read"
+msgstr[0] "約 %s 分鐘閱讀"
+
+msgid "About link URL"
+msgstr "關於連結地址"
+
+msgid "About link label"
+msgstr "關於連結名稱"
+
+msgid "Adjacent articles"
+msgstr "相鄰文章"
+
+msgid "Advanced · saved visual values only"
+msgstr "進階設定 · 僅遷移已儲存的視覺值"
+
+msgid "All articles →"
+msgstr "全部文章 →"
+
+msgid "All content"
+msgstr "全部內容"
+
+msgid "Appearance settings imported."
+msgstr "視覺設定已匯入。"
+
+msgid "Applied to this page; browser storage is unavailable."
+msgstr "已應用；瀏覽器不允許儲存，僅本頁生效。"
+
+msgid "Archive"
+msgstr "彙整"
+
+msgid "Archive and about links"
+msgstr "彙整與關於連結"
+
+msgid "Archive link URL"
+msgstr "彙整連結地址"
+
+msgid "Archive link label"
+msgstr "彙整連結名稱"
+
+msgid "Arrange and enable modules using existing public articles and pages."
+msgstr "調整模組順序與開關，引用現有公開文章和頁面。"
+
+msgid "Article archive"
+msgstr "文章彙整"
+
+msgid "Article body"
+msgstr "正文"
+
+msgid "Article font size (px)"
+msgstr "正文字級（px）"
+
+msgid "Article line height"
+msgstr "正文行高"
+
+msgid "Article list pagination"
+msgstr "文章清單分頁"
+
+msgid "Article navigation"
+msgstr "文章導覽"
+
+msgid "Article outline"
+msgstr "文章提綱"
+
+msgid "Article pagination"
+msgstr "正文分頁"
+
+msgid "Article width"
+msgstr "正文寬度"
+
+msgid "Articles"
+msgstr "文章"
+
+msgid "Articles and notes"
+msgstr "文章與筆記"
+
+msgid "Asset hash verified"
+msgstr "雜湊驗證通過"
+
+msgid "Asset missing or hash mismatch"
+msgstr "資源缺失或雜湊不匹配"
+
+msgid "Asset: %s"
+msgstr "資源：%s"
+
+msgid "Author"
+msgstr "作者"
+
+msgid "Author %d · Avatar"
+msgstr "作者 %d · 頭像"
+
+msgid "Author %d · Name"
+msgstr "作者 %d · 姓名"
+
+msgid "Author introduction"
+msgstr "作者介紹"
+
+msgid "Authors"
+msgstr "作者們"
+
+msgid "Back to home"
+msgstr "返回首頁"
+
+msgid "Background"
+msgstr "背景"
+
+msgid "Background and notice. Authentication is handled by WordPress and optional plugins."
+msgstr "背景與提示語；認證由 WordPress 和可選外掛負責。"
+
+msgid "Background image"
+msgstr "背景圖片"
+
+msgid "Base font size (px)"
+msgstr "全站基礎字級（px）"
+
+msgid "Browse articles"
+msgstr "瀏覽文章"
+
+msgid "Browse categories"
+msgstr "瀏覽分類"
+
+msgid "Browse related content →"
+msgstr "瀏覽相關內容 →"
+
+msgid "By total views"
+msgstr "按累計瀏覽量"
+
+msgid "Cancel reply"
+msgstr "取消回覆"
+
+msgid "Card corner radius (px)"
+msgstr "卡片圓角（px）"
+
+msgid "Check versions, asset files and local interfaces only, without network requests or repairs. An available interface does not mean its module is enabled."
+msgstr "僅檢查版本、資源檔案及本地介面可用性；不執行網路請求或修復。介面存在不表示模組已啟用。"
+
+msgid "Choose a public, unprotected page as a series, topic or tool entry. Its title and manual excerpt are used without copying content."
+msgstr "選擇公開無密碼頁面作為系列、專題或工具入口；使用頁面標題與手寫摘要，不復制內容。"
+
+msgid "Choose the authors to display and edit their introduction."
+msgstr "選擇要展示的網站作者並調整介紹。"
+
+msgid "Choose your own media; clear it for a text-focused introduction."
+msgstr "選擇自己的圖片；清空後顯示以文字為主的介紹。"
+
+msgid "Clear type. A quieter page."
+msgstr "清晰的文字，安靜的頁面。"
+
+msgid "Collapse all"
+msgstr "收起全部"
+
+msgid "Color palette"
+msgstr "協調配色"
+
+msgid "Comment"
+msgstr "留言內容"
+
+msgid "Comment pagination"
+msgstr "留言分頁"
+
+msgid "Commenting as %s"
+msgstr "以 %s 的身分發言"
+
+msgid "Comments (%s)"
+msgstr "留言（%s）"
+
+msgid "Community"
+msgstr "交流區"
+
+msgid "Community and more"
+msgstr "交流與更多"
+
+msgid "Community archive label"
+msgstr "交流區彙整名稱"
+
+msgid "Community description"
+msgstr "交流區說明"
+
+msgid "Community link URL"
+msgstr "交流連結地址"
+
+msgid "Community link label"
+msgstr "交流連結名稱"
+
+msgid "Compact"
+msgstr "緊密"
+
+msgid "Compact list"
+msgstr "緊密清單"
+
+msgid "Companion comments interface"
+msgstr "Companion 留言介面"
+
+msgid "Companion content interface"
+msgstr "Companion 內容介面"
+
+msgid "Companion search interface"
+msgstr "Companion 搜尋介面"
+
+msgid "Companion tools interface"
+msgstr "Companion 工具介面"
+
+msgid "Compose the home page"
+msgstr "編排首頁"
+
+msgid "Configure home topic cards, descriptions and status labels."
+msgstr "設定首頁專題卡片、簡介與狀態。"
+
+msgid "Contains the current reading position"
+msgstr "包含當前閱讀位置"
+
+msgid "Content guide"
+msgstr "內容導覽"
+
+msgid "Content type"
+msgstr "內容類型"
+
+msgid "Continuously updated"
+msgstr "持續整理"
+
+msgid "Copyright owner"
+msgstr "版權署名"
+
+msgid "Current palette:"
+msgstr "當前視覺配色："
+
+msgid "Current reading palette"
+msgstr "當前閱讀配色"
+
+msgid "Customize the home background, topics and authors. Preview your changes before saving."
+msgstr "調整首頁背景、專題與作者展示。儲存前可在右側預覽。"
+
+msgid "Dark"
+msgstr "暗色"
+
+msgid "Default"
+msgstr "預設"
+
+msgid "Describe the problem, assumptions and background readers will need."
+msgstr "描述問題、前提與讀者需要的背景。"
+
+msgid "Describe this resource and add your own link using the editor."
+msgstr "填寫資源說明，並使用編輯器新增自己的連結。"
+
+msgid "Describe your method and add your own examples."
+msgstr "寫下方法，並加入自己的範例。"
+
+msgid "Description (optional)"
+msgstr "簡介（可選）"
+
+msgid "Different interests, shared stories.\nMeet the authors sharing their experiences here."
+msgstr "不同的興趣，共同的記錄。\n認識在這裡分享故事與經驗的作者。"
+
+msgid "Discussion and comments"
+msgstr "交流與留言"
+
+msgid "Download appearance JSON"
+msgstr "下載視覺設定 JSON"
+
+msgid "Edit"
+msgstr "編輯"
+
+msgid "Edit article"
+msgstr "編輯文章"
+
+msgid "Edit the home page introduction; leave empty to hide."
+msgstr "編輯首頁文案；留空可隱藏。"
+
+msgid "Editable block examples"
+msgstr "可編輯區塊範例"
+
+msgid "Enter a topic title"
+msgstr "填寫專題標題"
+
+msgid "Enter the ID after post= in the edit URL to select older content; 0 hides this slot. Only public, unprotected content of the correct type is eligible."
+msgstr "也可填寫編輯頁面地址中 post= 後的 ID，以選擇更早的內容；0 表示不展示。僅公開無密碼且類型正確的內容有效。"
+
+msgid "Expand all"
+msgstr "展開全部"
+
+msgid "Expand or collapse: %s"
+msgstr "展開或收起：%s"
+
+msgid "Explore by topic"
+msgstr "按主題探索"
+
+msgid "Explore topics"
+msgstr "探索專題"
+
+msgid "Explore →"
+msgstr "前往瀏覽 →"
+
+msgid "Export only saved palettes, colors and dimensions. Articles, media IDs, links, accounts and plugin settings are excluded. Import replaces only the listed values; omitted settings and empty values retain their meaning."
+msgstr "僅匯出已儲存的配色、顏色和尺寸。不會包含文章、媒體 ID、連結、帳號或外掛設定。匯入只替換檔案列出的值；遺漏設定和空白值保留原有含義。"
+
+msgid "F Y"
+msgstr "Y年n月"
+
+msgid "F j, Y"
+msgstr "Y年n月j日"
+
+msgid "Featured articles"
+msgstr "精選文章"
+
+msgid "Find content"
+msgstr "查詢內容"
+
+msgid "Finish the site details"
+msgstr "完善網站細節"
+
+msgid "Font size"
+msgstr "字級"
+
+msgid "Footer information"
+msgstr "頁尾資訊"
+
+msgid "Footer tagline"
+msgstr "頁尾標語"
+
+msgid "Forest"
+msgstr "森林"
+
+msgid "Full archive →"
+msgstr "完整彙整 →"
+
+msgid "Guide readers from an introduction to your topics and latest writing."
+msgstr "從簡短介紹開始，引導讀者走向專題與最新文章。"
+
+msgid "Hidden"
+msgstr "不展示"
+
+msgid "Home"
+msgstr "首頁"
+
+msgid "Home authors"
+msgstr "首頁作者"
+
+msgid "Home background"
+msgstr "首頁背景"
+
+msgid "Home eyebrow"
+msgstr "首頁首題"
+
+msgid "Home introduction"
+msgstr "首頁介紹"
+
+msgid "Home modules"
+msgstr "首頁模組"
+
+msgid "Home topics"
+msgstr "首頁專題"
+
+msgid "Horizontally scrollable table"
+msgstr "可橫向捲動的表格"
+
+msgid "Import and save appearance"
+msgstr "匯入並儲存視覺設定"
+
+msgid "Interface available"
+msgstr "介面可用"
+
+msgid "Interface unavailable"
+msgstr "介面不可用"
+
+msgid "Introduce the topic, intended audience and suggested reading order. Replace this text with your own content."
+msgstr "在這裡介紹專題目標、適合讀者和學習順序。替換為你自己的內容。"
+
+msgid "Invalid appearance settings file."
+msgstr "無效的視覺設定檔案。"
+
+msgid "Join the discussion →"
+msgstr "參與討論 →"
+
+msgid "Keep a copy"
+msgstr "儲存一份副本"
+
+msgid "Latest articles"
+msgstr "最新文章"
+
+msgid "Leave empty to hide the text or link. Links need both a label and a URL."
+msgstr "留空可隱藏對應文案或連結；連結名稱和地址均需填寫。"
+
+msgid "Leave empty to hide. Introductions support line breaks."
+msgstr "留空可隱藏；介紹支援換行。"
+
+msgid "Link and button color"
+msgstr "連結與按鈕顏色"
+
+msgid "Links"
+msgstr "連結"
+
+msgid "List density, covers, updated dates and estimated reading time."
+msgstr "清單密度、封面、更新日期與估算閱讀時長。"
+
+msgid "List style"
+msgstr "清單樣式"
+
+msgid "Lists and articles"
+msgstr "清單與文章展示"
+
+msgid "Local read-only diagnostics"
+msgstr "本地唯讀診斷"
+
+msgid "Log in"
+msgstr "登入"
+
+msgid "Log in to reply"
+msgstr "登入後回覆"
+
+msgid "Login and registration"
+msgstr "登入與註冊"
+
+msgid "Make reading comfortable"
+msgstr "讓閱讀更舒適"
+
+msgid "Maximum site width (px)"
+msgstr "全站最大寬度（px）"
+
+msgid "Menu"
+msgstr "選單"
+
+msgid "Method and examples"
+msgstr "方法與範例"
+
+msgid "Modules and content order"
+msgstr "模組與內容編排"
+
+msgid "More content"
+msgstr "更多內容"
+
+msgid "My account"
+msgstr "我的帳號"
+
+msgid "Name"
+msgstr "名稱"
+
+msgid "New comments are closed for this article."
+msgstr "這篇文章已關閉新留言。"
+
+msgid "Next article"
+msgstr "下一篇"
+
+msgid "Next page →"
+msgstr "下一頁 →"
+
+msgid "No content found"
+msgstr "暫時沒有找到內容"
+
+msgid "No public articles yet."
+msgstr "還沒有公開文章。"
+
+msgid "No suggestions found. Try another keyword or submit your search."
+msgstr "沒有匹配建議，試試其他關鍵字或提交完整搜尋。"
+
+msgid "Notice"
+msgstr "提示語"
+
+msgid "Open Companion settings"
+msgstr "開啟 Companion 設定"
+
+msgid "Open the WordPress Customizer to preview and save settings. Installing the theme does not create articles, pages or media."
+msgstr "從這裡進入原生自訂器預覽並儲存設定。安裝佈景主題不會建立文章、頁面或媒體。"
+
+msgid "Page not found"
+msgstr "沒有找到這個頁面"
+
+msgid "PageNest design"
+msgstr "PageNest 外觀設計"
+
+msgid "PageNest home page"
+msgstr "棲頁首頁設定"
+
+msgid "Pages"
+msgstr "頁面"
+
+msgid "Palettes, colors and reading dimensions shared with the editor preview."
+msgstr "協調配色、顏色與閱讀尺寸；與編輯器預覽共用。"
+
+msgid "Paste appearance JSON"
+msgstr "貼上視覺設定 JSON"
+
+msgid "Popular articles"
+msgstr "熱門文章"
+
+msgid "Post a comment"
+msgstr "發表留言"
+
+msgid "Powered by WordPress"
+msgstr "由 WordPress 支援"
+
+msgid "Previous article"
+msgstr "上一篇"
+
+msgid "Primary navigation"
+msgstr "主導覽"
+
+msgid "Private"
+msgstr "私密"
+
+msgid "Problem and background"
+msgstr "問題與背景"
+
+msgid "Reading navigation"
+msgstr "閱讀導覽"
+
+msgid "Reading palette"
+msgstr "閱讀配色"
+
+msgid "Reading preferences are saved only in this browser."
+msgstr "僅在此瀏覽器儲存閱讀偏好。"
+
+msgid "Reading preferences saved."
+msgstr "閱讀偏好已儲存。"
+
+msgid "Reading settings"
+msgstr "閱讀設定"
+
+msgid "Recent entries"
+msgstr "最新記錄"
+
+msgid "Recently updated"
+msgstr "最近更新"
+
+msgid "Recommended reading"
+msgstr "推薦閱讀"
+
+msgid "Record ideas and discoveries.\nOrganize your thoughts and share your explorations here."
+msgstr "記錄想法與發現。\n在這裡整理思路，分享探索的過程。"
+
+msgid "Register with email"
+msgstr "使用電子郵件註冊"
+
+msgid "Registration number (optional)"
+msgstr "備案號（可選）"
+
+msgid "Related reading"
+msgstr "相關閱讀"
+
+msgid "Reply"
+msgstr "回覆"
+
+msgid "Reply to %s"
+msgstr "回覆 %s"
+
+msgid "Resource cards"
+msgstr "資源卡片"
+
+msgid "Resource one"
+msgstr "資源一"
+
+msgid "Resource two"
+msgstr "資源二"
+
+msgid "Restore defaults"
+msgstr "恢復預設"
+
+msgid "Room for your next idea"
+msgstr "為下一次思考留出空間"
+
+msgid "Search"
+msgstr "搜尋"
+
+msgid "Search suggestions"
+msgstr "搜尋建議"
+
+msgid "Search this site"
+msgstr "搜尋本站內容"
+
+msgid "Search: %s"
+msgstr "搜尋：%s"
+
+msgid "Searching…"
+msgstr "正在查詢…"
+
+msgid "Set archive and about links."
+msgstr "設定彙整與關於入口。"
+
+msgid "Set the community description and links."
+msgstr "設定交流說明與連結。"
+
+msgid "Settings could not be saved. Please try again."
+msgstr "設定儲存失敗，請重試。"
+
+msgid "Shape your site, one detail at a time."
+msgstr "從閱讀開始，逐步完善網站外觀。"
+
+msgid "Share colors and reading dimensions across the site and editor preview. Leave custom colors empty to use the selected palette."
+msgstr "統一全站與正文預覽的顏色和閱讀尺寸。自訂顏色留空時使用所選配色。"
+
+msgid "Share your thoughts and suggestions in the article comments."
+msgstr "歡迎在文章留言區交流想法與建議。"
+
+msgid "Share your thoughts or describe a problem…"
+msgstr "分享你的想法，或描述遇到的問題…"
+
+msgid "Shared stories"
+msgstr "共同記錄"
+
+msgid "Show %s"
+msgstr "顯示 %s"
+
+msgid "Show article cover"
+msgstr "顯示文章大封面"
+
+msgid "Show estimated reading time"
+msgstr "顯示估算閱讀時長"
+
+msgid "Show list covers"
+msgstr "顯示清單封面"
+
+msgid "Show updated date"
+msgstr "顯示更新日期"
+
+msgid "Shown above login, registration and password reset forms; leave empty to hide."
+msgstr "顯示在登入、註冊和找回密碼表單上方；留空即可隱藏。"
+
+msgid "Site appearance"
+msgstr "全站視覺設定"
+
+msgid "Site background"
+msgstr "全站背景"
+
+msgid "Site defaults restored."
+msgstr "已恢復網站預設。"
+
+msgid "Site defaults restored; browser storage is unavailable."
+msgstr "已恢復網站預設；瀏覽器不允許儲存。"
+
+msgid "Site navigation"
+msgstr "全站主導覽"
+
+msgid "Skip to main content"
+msgstr "跳到主要內容"
+
+msgid "Slot %d · Content ID (optional)"
+msgstr "位置 %d · 內容 ID（可選）"
+
+msgid "Spacing scale"
+msgstr "間距比例"
+
+msgid "Standard cards"
+msgstr "標準卡片"
+
+msgid "Start with a topic that interests you"
+msgstr "從感興趣的專題開始"
+
+msgid "Start with the reading appearance, arrange your home page, then finish the site details. Preview changes before publishing."
+msgstr "先調整閱讀外觀，再編排首頁，最後完善網站細節。發佈前請檢視預覽。"
+
+msgid "Status (optional)"
+msgstr "狀態說明（可選）"
+
+msgid "Submit the form from the settings page."
+msgstr "請透過設定頁面提交表單。"
+
+msgid "Suggestions are unavailable. Press Enter to continue searching."
+msgstr "暫時無法獲取建議，可按Enter繼續搜尋。"
+
+msgid "Suggestions: %s. Submit your search for all results."
+msgstr "找到 %s 條建議，可提交搜尋檢視完整結果。"
+
+msgid "Summarize the conclusions, limitations and suggested further reading."
+msgstr "整理結論、限制與後續閱讀方向。"
+
+msgid "Summary and next steps"
+msgstr "總結與下一步"
+
+msgid "System font"
+msgstr "系統字型"
+
+msgid "Table of contents"
+msgstr "本文目錄"
+
+msgid "Tagline, copyright owner and optional registration number."
+msgstr "標語、版權署名和可選備案號。"
+
+msgid "Text color"
+msgstr "正文顏色"
+
+msgid "The 100 most recently updated public, unprotected articles, plus current selections."
+msgstr "最近更新的 100 篇公開無密碼文章及現有選擇。"
+
+msgid "The file contains unsupported settings."
+msgstr "檔案包含不支援的設定。"
+
+msgid "The settings file is too large or invalid."
+msgstr "設定檔案過大或格式無效。"
+
+msgid "The site introduction is always shown. Lower order numbers appear first; ties keep the default order. Disabling a module hides it while preserving settings and content."
+msgstr "網站介紹始終保留。模組順序數值越小越靠前；相同時使用預設順序。停用僅隱藏展示，保留設定和內容。"
+
+msgid "Theme settings"
+msgstr "棲頁設定"
+
+msgid "This article requires a password."
+msgstr "這篇文章需要密碼才能閱讀。"
+
+msgid "Title, keywords…"
+msgstr "標題、關鍵字…"
+
+msgid "Topic %1$d · %2$s"
+msgstr "專題 %1$d · %2$s"
+
+msgid "Topic introduction"
+msgstr "專題介紹"
+
+msgid "Topics"
+msgstr "專題"
+
+msgid "Topics are being organized. Browse the latest articles for now."
+msgstr "專題正在整理，先瀏覽最新文章吧。"
+
+msgid "Transfer appearance settings"
+msgstr "遷移視覺設定"
+
+msgid "Try another keyword or return to the home page to keep browsing."
+msgstr "試試其他關鍵字，或者返回首頁繼續瀏覽。"
+
+msgid "Up to seven authors. Clear a name to hide its entry without changing the site account."
+msgstr "最多七位；清空姓名即可隱藏該項，不影響網站帳號。"
+
+msgid "Up to six topics. Leave a name or link empty to hide the entry."
+msgstr "最多六項；名稱或連結留空時不顯示該項。"
+
+msgid "Updated on "
+msgstr "更新於 "
+
+msgid "Upload image"
+msgstr "上傳圖片"
+
+msgid "Versions, interfaces and asset integrity"
+msgstr "版本、介面與資源完整性"
+
+msgid "Warm paper"
+msgstr "暖紙"
+
+msgid "Welcome. You can register with your email address. Contact the site administrator if you need help."
+msgstr "歡迎登入。你可以使用電子郵件註冊；如需幫助，請聯絡本站管理員。"
+
+msgid "Wide"
+msgstr "舒展"
+
+msgid "Write and share"
+msgstr "記錄與分享"
+
+msgid "Write · Share · Explore"
+msgstr "記錄 · 分享 · 探索"
+
+msgid "You do not have permission to manage theme settings."
+msgstr "你沒有權限管理佈景主題設定。"
+
+msgid "Your comment is awaiting moderation."
+msgstr "你的留言正在等待稽核。"
+
+msgid "← Previous page"
+msgstr "← 上一頁"
+
+msgid "Welcome. Contact the site administrator if you need help."
+msgstr "歡迎登入。如需幫助，請聯絡本站管理員。"
+
+msgid "All categories"
+msgstr "全部分類"
+
+msgid "Category"
+msgstr "分類"
+
+msgid "Relevance"
+msgstr "相關度"
+
+msgid "Series"
+msgstr "系列"
+
+msgid "Sort"
+msgstr "排序"
+
+msgid "Subscribe via RSS"
+msgstr "透過 RSS 訂閱"
+
+msgid "Appearance"
+msgstr "外觀"
+
+msgid "Appearance preference saved in this browser."
+msgstr "外觀偏好已儲存在此瀏覽器。"
+
+msgid "Applies across this site in this browser. Article reading settings remain available separately."
+msgstr "應用於此瀏覽器中的全站頁面，文章閱讀設定仍可單獨調整。"
+
+msgid "Article layout"
+msgstr "文章版面配置"
+
+msgid "Automatic"
+msgstr "自動識別"
+
+msgid "Compact tool"
+msgstr "精簡工具"
+
+msgid "Default site color mode"
+msgstr "全站預設明暗模式"
+
+msgid "Focused reading"
+msgstr "專注閱讀"
+
+msgid "Follow system"
+msgstr "跟隨系統"
+
+msgid "Layout affects presentation only and never enables a tool or changes access. Invalid combinations use the standard layout."
+msgstr "版面配置僅影響展示，不會啟用工具或改變訪問權限。不適用的組合使用標準版面配置。"
+
+msgid "Layout preset"
+msgstr "版面配置預設"
+
+msgid "Light"
+msgstr "淺色"
+
+msgid "Page layouts"
+msgstr "頁面版面配置"
+
+msgid "Page purpose"
+msgstr "頁面用途"
+
+msgid "PageNest layout"
+msgstr "PageNest 版面配置"
+
+msgid "Presets change presentation only. Existing content, tool permissions and reading controls are preserved."
+msgstr "預設僅改變展示，保留已有正文、工具權限與閱讀控制項。"
+
+msgid "Site color mode"
+msgstr "全站明暗模式"
+
+msgid "Site default"
+msgstr "網站預設"
+
+msgid "Standard"
+msgstr "標準"
+
+msgid "Tool page layout"
+msgstr "工具頁面版面配置"
+
+msgid "Tool workspace"
+msgstr "工具工作區"
+
+msgid "Topic or information page"
+msgstr "專題或資訊頁面"
+
+msgid "Topic overview"
+msgstr "專題概覽"
+
+msgid "Topic page layout"
+msgstr "專題頁面版面配置"
+
+msgid "Use site layout default"
+msgstr "使用網站版面配置預設值"
+
+msgid "Wide article"
+msgstr "寬版文章"
+
+msgid "Wide page"
+msgstr "寬版頁面"
+
+msgid "Subscribe to this category via RSS"
+msgstr "透過 RSS 訂閱此分類"
+
+msgid "Series contents"
+msgstr "系列目錄"
+
+msgid "Return to contents"
+msgstr "返回目錄"
+
+msgid "More filters"
+msgstr "更多篩選"
+
+msgid "%s · Layout"
+msgstr "%s · 版面配置"
+
+msgid "%s · Sidebar"
+msgstr "%s · 側欄"
+
+msgid "Archives"
+msgstr "彙整"
+
+msgid "Blog listing"
+msgstr "部落格文章清單"
+
+msgid "Footer navigation"
+msgstr "頁尾導覽"
+
+msgid "Hide sidebar"
+msgstr "隱藏側欄"
+
+msgid "Inherit (show sidebar)"
+msgstr "繼承（顯示側欄）"
+
+msgid "Inherit list style"
+msgstr "繼承清單樣式"
+
+msgid "Search results"
+msgstr "搜尋結果"
+
+msgid "Show sidebar"
+msgstr "顯示側欄"
+
+msgid "Three-column grid"
+msgstr "三列網格"
+
+msgid "Two-column grid"
+msgstr "兩列網格"
+
+msgid "By default, listings inherit the list style and show the sidebar. Grids adapt to the available width and use one column on narrow screens."
+msgstr "未單獨設定時沿用清單樣式並顯示側欄；網格隨可用寬度調整列數，窄屏單列。"
+
+msgid "1. Build the foundations"
+msgstr "1. 建立基礎"
+
+msgid "2. Work through an example"
+msgstr "2. 實作一個範例"
+
+msgid "3. Review and continue"
+msgstr "3. 回顧與繼續"
+
+msgid "A three-step reading path"
+msgstr "三個步驟的閱讀路線"
+
+msgid "Continue with examples and further reading."
+msgstr "透過範例與延伸閱讀繼續探索。"
+
+msgid "Describe who this topic is for and what readers can learn. Replace the groups below with your own themes and add links in the editor."
+msgstr "說明這個專題適合哪些讀者，以及可以學到什麼。將下方分組替換為自己的主題，並在編輯器加入連結。"
+
+msgid "Explain the suggested pace, exercises and how to choose the next step."
+msgstr "說明建議的閱讀節奏、練習方式，以及如何選擇下一步。"
+
+msgid "Foundations"
+msgstr "基礎概念"
+
+msgid "Frequently asked questions"
+msgstr "常見問題"
+
+msgid "Group practical examples and further reading, then add your own links."
+msgstr "整理實作範例與延伸閱讀，並新增自己的連結。"
+
+msgid "How should I use this guide?"
+msgstr "如何使用這份導覽？"
+
+msgid "In the block editor, open Patterns → PageNest and choose an example below. Replace the placeholders; content is created only when you insert and save it."
+msgstr "在區塊編輯器開啟「區塊版型 → PageNest」，選擇下方範例。請替換佔位內容；只有插入並儲存時才會建立正文。"
+
+msgid "Inherit archive layout"
+msgstr "繼承彙整版面配置"
+
+msgid "Inherit archive sidebar"
+msgstr "繼承彙整側欄"
+
+msgid "Introduce the essential concepts and link to a useful starting point."
+msgstr "介紹必要的基礎概念，並連結到合適的入門內容。"
+
+msgid "List layout"
+msgstr "清單版面配置"
+
+msgid "Name a practical reading and suggest one task readers can try themselves."
+msgstr "填寫一篇實作文章，並建議一個讀者可以親手嘗試的任務。"
+
+msgid "Name the first reading and explain the concepts to understand before continuing."
+msgstr "填寫第一篇閱讀內容，並說明繼續前需要理解的概念。"
+
+msgid "Only this category archive changes. Inherit uses the archive settings; child categories keep their own settings. Content and ordering are unchanged."
+msgstr "僅影響當前分類彙整。繼承時使用彙整設定，子分類繼續使用各自設定；內容與排序保持不變。"
+
+msgid "PageNest display"
+msgstr "PageNest 展示"
+
+msgid "Practice and exploration"
+msgstr "實作與探索"
+
+msgid "Questions before you begin"
+msgstr "開始前的常見問題"
+
+msgid "Reading steps"
+msgstr "分步閱讀"
+
+msgid "Replace these steps with your own reading order. Add article links and any prerequisites using the editor."
+msgstr "將這些步驟替換為自己的閱讀順序，並在編輯器中新增文章連結與先修要求。"
+
+msgid "Replace this answer with the prerequisites and any helpful introductory reading."
+msgstr "將此答案替換為先修要求，以及有幫助的入門閱讀。"
+
+msgid "Sidebar"
+msgstr "側欄"
+
+msgid "Start exploring this topic"
+msgstr "開始探索這個專題"
+
+msgid "Start with the essential concepts."
+msgstr "從必要的基礎概念開始。"
+
+msgid "Suggest how readers can check their understanding and choose the next reading."
+msgstr "建議讀者如何檢查理解程度，並選擇下一篇閱讀內容。"
+
+msgid "Topic guide"
+msgstr "專題導覽"
+
+msgid "What should I know first?"
+msgstr "開始前需要了解什麼？"
+
+msgid "%s · Show on"
+msgstr "%s · 顯示範圍"
+
+msgid "%s · Source page"
+msgstr "%s · 來源頁面"
+
+msgid "After the header"
+msgstr "頁首之後"
+
+msgid "All public pages and listings"
+msgstr "全部公開頁面與清單"
+
+msgid "Available"
+msgstr "可用"
+
+msgid "Before the footer"
+msgstr "頁尾之前"
+
+msgid "Choose a public, password-free page and maintain its content in the block editor. Regions support static blocks and are visible to everyone on the selected page types."
+msgstr "選擇公開、無密碼的頁面，在區塊編輯器中維護內容。內容區支援靜態區塊，在所選頁面類型中對所有訪客可見。"
+
+msgid "Choose a published page without a password whose parent pages are also public."
+msgstr "請選擇已發佈、無密碼的頁面，其父級頁面也必須公開且無密碼。"
+
+msgid "Choose a source page or clear the selection."
+msgstr "請選擇來源頁面，或清空選擇。"
+
+msgid "Choose a source page."
+msgstr "請選擇來源頁面。"
+
+msgid "Choose layouts and maintain public static regions with ordinary pages."
+msgstr "選擇頁首頁尾版面配置，並用普通頁面維護公開靜態內容區。"
+
+msgid "Custom HTML anchors are not supported in content regions. Remove the block anchors and HTML id attributes from the source page."
+msgstr "內容區不支援自訂 HTML 錨點。請移除來源頁面的區塊錨點及 HTML id 屬性。"
+
+msgid "Data bindings are not supported in public content regions."
+msgstr "公開內容區不支援動態資料繫結。"
+
+msgid "Edit source page"
+msgstr "編輯來源頁面"
+
+msgid "Footer layout"
+msgstr "頁尾版面配置"
+
+msgid "Front page"
+msgstr "首頁"
+
+msgid "Header layout"
+msgstr "頁首版面配置"
+
+msgid "Header, footer and public regions"
+msgstr "頁首、頁尾與公開內容區"
+
+msgid "Manage source pages"
+msgstr "管理來源頁面"
+
+msgid "Off"
+msgstr "關閉"
+
+msgid "Posts"
+msgstr "文章"
+
+msgid "Source unavailable"
+msgstr "來源不可用"
+
+msgid "Stacked footer"
+msgstr "縱向頁尾"
+
+msgid "The source page has too many blocks. Use at most 200 blocks."
+msgstr "來源頁面區塊過多，最多支援 200 個區塊。"
+
+msgid "The source page has too many nested blocks. Use at most 16 levels."
+msgstr "來源頁面巢狀過深，最多支援 16 層區塊。"
+
+msgid "The source page is too large. Keep its saved content within 64 KiB."
+msgstr "來源頁面過大，請將已儲存內容控制在 64 KiB 以內。"
+
+msgid "The source page or one of its parents is unavailable."
+msgstr "來源頁面或其父級頁面不可用。"
+
+msgid "Two-row header"
+msgstr "兩行頁首"
+
+msgid "Use only static paragraphs, headings, lists, groups, columns, buttons, images, separators, spacers and supported Details blocks. HTML, shortcodes, reusable patterns and dynamic blocks are not supported."
+msgstr "請僅使用靜態段落、標題、清單、分組、分欄、按鈕、圖片、分隔線、間隔及受支援的詳細資訊區塊。不支援 HTML、短程式碼、同步版型和動態區塊。"
+
+msgid "Body font"
+msgstr "正文字型"
+
+msgid "Choose an installed local Font Library family. Missing files fall back to system fonts. Install and manage fonts in WordPress; the theme never downloads fonts."
+msgstr "選擇字型庫中已安裝的本地字型；檔案無法使用時會改用系統字型。請在 WordPress 安裝及管理字型，佈景主題不會下載字型。"
+
+msgid "Heading font"
+msgstr "標題字型"
+
+msgid "Manage installed fonts"
+msgstr "管理已安裝字型"
+
+msgid "Next page"
+msgstr "下一頁"
+
+msgid "Previous page"
+msgstr "上一頁"
+
+msgid "System font stack"
+msgstr "系統預設字型"
+
+msgid "This WordPress version does not provide the native Font Library. System font stacks remain available."
+msgstr "目前的 WordPress 版本不提供原生字型庫，將繼續使用系統預設字型。"
+
+msgid "This region layout is not supported. Use default groups, rows or stacks with alignment and wrapping, or grids with automatic columns or 1–12 columns. Custom widths, child positioning and responsive overrides are not supported."
+msgstr "此內容區不支援該版面配置。請使用預設群組、可對齊和換行的橫列或堆疊，或採用自動欄數或 1–12 欄的網格。不支援自訂寬度、子項定位和響應式覆寫。"
+
+msgid "Child positioning is not supported in public content regions."
+msgstr "公開內容區不支援子項定位。"

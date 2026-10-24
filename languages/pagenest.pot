@@ -2,7 +2,7 @@
 msgid ""
 msgstr "Project-Id-Version: PageNest\nPO-Revision-Date: 2026-10-13 00:00+0000\nLast-Translator: PageNest Contributors\nLanguage-Team: PageNest Contributors\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nX-Domain: pagenest\n"
 
-#: browsing.php:269
+#: browsing.php:430
 #, php-format
 msgid "%1$s · Slot %2$d"
 msgstr ""
@@ -28,9 +28,41 @@ msgid_plural "%s views"
 msgstr[0] ""
 msgstr[1] ""
 
-#: browsing.php:237
+#: browsing.php:497
+#, php-format
+msgid "%s · Layout"
+msgstr ""
+
+#: browsing.php:398
 #, php-format
 msgid "%s · Order"
+msgstr ""
+
+#: regions.php:462
+#, php-format
+msgid "%s · Show on"
+msgstr ""
+
+#: browsing.php:514
+#, php-format
+msgid "%s · Sidebar"
+msgstr ""
+
+#: regions.php:452
+#, php-format
+msgid "%s · Source page"
+msgstr ""
+
+#: product.php:477 product.php:688
+msgid "1. Build the foundations"
+msgstr ""
+
+#: product.php:479 product.php:695
+msgid "2. Work through an example"
+msgstr ""
+
+#: product.php:481 product.php:702
+msgid "3. Review and continue"
 msgstr ""
 
 #: style.css
@@ -41,19 +73,23 @@ msgstr ""
 msgid "A home for knowledge and ideas"
 msgstr ""
 
-#: product.php:254
+#: product.php:273
 msgid "A place for thoughtful reading"
 msgstr ""
 
-#: product.php:50 product.php:58 product.php:69 product.php:84
+#: product.php:63 product.php:71 product.php:82 product.php:97
 msgid "A setting value is outside the allowed range."
+msgstr ""
+
+#: product.php:681
+msgid "A three-step reading path"
 msgstr ""
 
 #: inc.php:33
 msgid "About"
 msgstr ""
 
-#: browsing.php:137
+#: browsing.php:298
 #, php-format
 msgid "About %s minute to read"
 msgid_plural "About %s minutes to read"
@@ -72,11 +108,15 @@ msgstr ""
 msgid "Adjacent articles"
 msgstr ""
 
-#: product.php:436
+#: product.php:508
 msgid "Advanced · saved visual values only"
 msgstr ""
 
-#: browsing.php:167
+#: regions.php:357 regions.php:438
+msgid "After the header"
+msgstr ""
+
+#: browsing.php:328
 msgid "All articles →"
 msgstr ""
 
@@ -88,6 +128,10 @@ msgstr ""
 msgid "All content"
 msgstr ""
 
+#: regions.php:466
+msgid "All public pages and listings"
+msgstr ""
+
 #: presentation.php:87
 msgid "Appearance"
 msgstr ""
@@ -96,7 +140,7 @@ msgstr ""
 msgid "Appearance preference saved in this browser."
 msgstr ""
 
-#: product.php:262
+#: product.php:281
 msgid "Appearance settings imported."
 msgstr ""
 
@@ -112,7 +156,7 @@ msgstr ""
 msgid "Archive"
 msgstr ""
 
-#: customizer.php:17 product.php:367
+#: customizer.php:17 product.php:399
 msgid "Archive and about links"
 msgstr ""
 
@@ -124,7 +168,11 @@ msgstr ""
 msgid "Archive link label"
 msgstr ""
 
-#: product.php:322
+#: browsing.php:490 regions.php:469
+msgid "Archives"
+msgstr ""
+
+#: product.php:348
 msgid "Arrange and enable modules using existing public articles and pages."
 msgstr ""
 
@@ -148,7 +196,7 @@ msgstr ""
 msgid "Article line height"
 msgstr ""
 
-#: index.php:56
+#: index.php:67
 msgid "Article list pagination"
 msgstr ""
 
@@ -156,7 +204,7 @@ msgstr ""
 msgid "Article navigation"
 msgstr ""
 
-#: product.php:431 product.php:561
+#: product.php:463 product.php:633
 msgid "Article outline"
 msgstr ""
 
@@ -168,23 +216,23 @@ msgstr ""
 msgid "Article width"
 msgstr ""
 
-#: discovery.php:8 header.php:56
+#: discovery.php:8 header.php:60
 msgid "Articles"
 msgstr ""
 
-#: index.php:8 singular.php:19
+#: index.php:11 singular.php:19
 msgid "Articles and notes"
 msgstr ""
 
-#: product.php:489
+#: product.php:561
 msgid "Asset hash verified"
 msgstr ""
 
-#: product.php:490
+#: product.php:562
 msgid "Asset missing or hash mismatch"
 msgstr ""
 
-#: product.php:488
+#: product.php:560
 #, php-format
 msgid "Asset: %s"
 msgstr ""
@@ -215,7 +263,11 @@ msgstr ""
 msgid "Automatic"
 msgstr ""
 
-#: index.php:50
+#: regions.php:376
+msgid "Available"
+msgstr ""
+
+#: index.php:61
 msgid "Back to home"
 msgstr ""
 
@@ -223,7 +275,7 @@ msgstr ""
 msgid "Background"
 msgstr ""
 
-#: product.php:383
+#: product.php:415
 msgid "Background and notice. Authentication is handled by WordPress and optional plugins."
 msgstr ""
 
@@ -233,6 +285,18 @@ msgstr ""
 
 #: appearance.php:81
 msgid "Base font size (px)"
+msgstr ""
+
+#: regions.php:358 regions.php:439
+msgid "Before the footer"
+msgstr ""
+
+#: browsing.php:489 regions.php:468
+msgid "Blog listing"
+msgstr ""
+
+#: fonts.php:250
+msgid "Body font"
 msgstr ""
 
 #: front-page.php:16
@@ -245,6 +309,10 @@ msgstr ""
 
 #: home-sections.php:37
 msgid "Browse related content →"
+msgstr ""
+
+#: browsing.php:467
+msgid "By default, listings inherit the list style and show the sidebar. Grids adapt to the available width and use one column on narrow screens."
 msgstr ""
 
 #: reading.php:106
@@ -263,23 +331,51 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
-#: product.php:462
+#: product.php:534
 msgid "Check versions, asset files and local interfaces only, without network requests or repairs. An available interface does not mean its module is enabled."
 msgstr ""
 
-#: browsing.php:285
+#: regions.php:252
+msgid "Child positioning is not supported in public content regions."
+msgstr ""
+
+#: regions.php:404
+msgid "Choose a public, password-free page and maintain its content in the block editor. Regions support static blocks and are visible to everyone on the selected page types."
+msgstr ""
+
+#: browsing.php:446
 msgid "Choose a public, unprotected page as a series, topic or tool entry. Its title and manual excerpt are used without copying content."
 msgstr ""
 
-#: product.php:345
+#: regions.php:40
+msgid "Choose a published page without a password whose parent pages are also public."
+msgstr ""
+
+#: regions.php:291
+msgid "Choose a source page or clear the selection."
+msgstr ""
+
+#: regions.php:378
+msgid "Choose a source page."
+msgstr ""
+
+#: fonts.php:241
+msgid "Choose an installed local Font Library family. Missing files fall back to system fonts. Install and manage fonts in WordPress; the theme never downloads fonts."
+msgstr ""
+
+#: product.php:392
+msgid "Choose layouts and maintain public static regions with ordinary pages."
+msgstr ""
+
+#: product.php:371
 msgid "Choose the authors to display and edit their introduction."
 msgstr ""
 
-#: customizer.php:191 product.php:335
+#: customizer.php:191 product.php:361
 msgid "Choose your own media; clear it for a text-focused introduction."
 msgstr ""
 
-#: product.php:297
+#: product.php:323
 msgid "Clear type. A quieter page."
 msgstr ""
 
@@ -287,7 +383,7 @@ msgstr ""
 msgid "Collapse all"
 msgstr ""
 
-#: appearance.php:217
+#: appearance.php:220
 msgid "Color palette"
 msgstr ""
 
@@ -309,7 +405,7 @@ msgstr ""
 msgid "Comments (%s)"
 msgstr ""
 
-#: customizer.php:21 product.php:377
+#: customizer.php:21 product.php:409
 msgid "Community"
 msgstr ""
 
@@ -337,7 +433,7 @@ msgstr ""
 msgid "Compact"
 msgstr ""
 
-#: browsing.php:318
+#: browsing.php:128 browsing.php:483 browsing.php:506
 msgid "Compact list"
 msgstr ""
 
@@ -345,27 +441,27 @@ msgstr ""
 msgid "Compact tool"
 msgstr ""
 
-#: product.php:476
+#: product.php:548
 msgid "Companion comments interface"
 msgstr ""
 
-#: product.php:477
+#: product.php:549
 msgid "Companion content interface"
 msgstr ""
 
-#: product.php:479
+#: product.php:551
 msgid "Companion search interface"
 msgstr ""
 
-#: product.php:478
+#: product.php:550
 msgid "Companion tools interface"
 msgstr ""
 
-#: product.php:310
+#: product.php:336
 msgid "Compose the home page"
 msgstr ""
 
-#: product.php:340
+#: product.php:366
 msgid "Configure home topic cards, descriptions and status labels."
 msgstr ""
 
@@ -373,7 +469,7 @@ msgstr ""
 msgid "Contains the current reading position"
 msgstr ""
 
-#: browsing.php:158 browsing.php:25
+#: browsing.php:25 browsing.php:319
 msgid "Content guide"
 msgstr ""
 
@@ -381,7 +477,11 @@ msgstr ""
 msgid "Content type"
 msgstr ""
 
-#: browsing.php:156
+#: product.php:472
+msgid "Continue with examples and further reading."
+msgstr ""
+
+#: browsing.php:317
 msgid "Continuously updated"
 msgstr ""
 
@@ -389,12 +489,16 @@ msgstr ""
 msgid "Copyright owner"
 msgstr ""
 
-#: product.php:299
+#: product.php:325
 msgid "Current palette:"
 msgstr ""
 
-#: product.php:287 product.php:289
+#: product.php:313 product.php:315
 msgid "Current reading palette"
+msgstr ""
+
+#: regions.php:237
+msgid "Custom HTML anchors are not supported in content regions. Remove the block anchors and HTML id attributes from the source page."
 msgstr ""
 
 #: customizer.php:145
@@ -405,6 +509,10 @@ msgstr ""
 msgid "Dark"
 msgstr ""
 
+#: regions.php:246
+msgid "Data bindings are not supported in public content regions."
+msgstr ""
+
 #: appearance.php:71 reader-preferences.php:16 reader-preferences.php:21 reader-preferences.php:29
 msgid "Default"
 msgstr ""
@@ -413,15 +521,19 @@ msgstr ""
 msgid "Default site color mode"
 msgstr ""
 
-#: product.php:564
+#: product.php:636
 msgid "Describe the problem, assumptions and background readers will need."
 msgstr ""
 
-#: product.php:416 product.php:420 product.php:551 product.php:556
+#: product.php:448 product.php:452 product.php:623 product.php:628
 msgid "Describe this resource and add your own link using the editor."
 msgstr ""
 
-#: product.php:570
+#: product.php:659
+msgid "Describe who this topic is for and what readers can learn. Replace the groups below with your own themes and add links in the editor."
+msgstr ""
+
+#: product.php:642
 msgid "Describe your method and add your own examples."
 msgstr ""
 
@@ -437,7 +549,7 @@ msgstr ""
 msgid "Discussion and comments"
 msgstr ""
 
-#: product.php:448
+#: product.php:520
 msgid "Download appearance JSON"
 msgstr ""
 
@@ -449,19 +561,23 @@ msgstr ""
 msgid "Edit article"
 msgstr ""
 
-#: product.php:330
+#: regions.php:388
+msgid "Edit source page"
+msgstr ""
+
+#: product.php:356
 msgid "Edit the home page introduction; leave empty to hide."
 msgstr ""
 
-#: product.php:394
+#: product.php:426
 msgid "Editable block examples"
 msgstr ""
 
-#: product.php:404 product.php:537
+#: product.php:436 product.php:609
 msgid "Enter a topic title"
 msgstr ""
 
-#: browsing.php:295
+#: browsing.php:456
 msgid "Enter the ID after post= in the edit URL to select older content; 0 hides this slot. Only public, unprotected content of the correct type is eligible."
 msgstr ""
 
@@ -474,7 +590,11 @@ msgstr ""
 msgid "Expand or collapse: %s"
 msgstr ""
 
-#: browsing.php:158
+#: product.php:496 product.php:727
+msgid "Explain the suggested pace, exercises and how to choose the next step."
+msgstr ""
+
+#: browsing.php:319
 msgid "Explore by topic"
 msgstr ""
 
@@ -482,11 +602,11 @@ msgstr ""
 msgid "Explore topics"
 msgstr ""
 
-#: browsing.php:181
+#: browsing.php:342
 msgid "Explore →"
 msgstr ""
 
-#: product.php:438
+#: product.php:510
 msgid "Export only saved palettes, colors and dimensions. Articles, media IDs, links, accounts and plugin settings are excluded. Import replaces only the listed values; omitted settings and empty values retain their meaning."
 msgstr ""
 
@@ -494,19 +614,19 @@ msgstr ""
 msgid "F Y"
 msgstr ""
 
-#: browsing.php:123 inc.php:167 inc.php:189 reading.php:233
+#: browsing.php:284 inc.php:165 inc.php:187 reading.php:233
 msgid "F j, Y"
 msgstr ""
 
-#: browsing.php:15 browsing.php:157
+#: browsing.php:15 browsing.php:318
 msgid "Featured articles"
 msgstr ""
 
-#: index.php:33
+#: index.php:36
 msgid "Find content"
 msgstr ""
 
-#: product.php:361
+#: product.php:387
 msgid "Finish the site details"
 msgstr ""
 
@@ -522,8 +642,16 @@ msgstr ""
 msgid "Font size"
 msgstr ""
 
-#: customizer.php:13 product.php:372
+#: customizer.php:13 product.php:404
 msgid "Footer information"
+msgstr ""
+
+#: regions.php:411
+msgid "Footer layout"
+msgstr ""
+
+#: footer.php:18 functions.php:43
+msgid "Footer navigation"
 msgstr ""
 
 #: customizer.php:28
@@ -534,27 +662,59 @@ msgstr ""
 msgid "Forest"
 msgstr ""
 
+#: product.php:466 product.php:665
+msgid "Foundations"
+msgstr ""
+
+#: product.php:501 product.php:712
+msgid "Frequently asked questions"
+msgstr ""
+
+#: regions.php:467
+msgid "Front page"
+msgstr ""
+
 #: inc.php:31
 msgid "Full archive →"
 msgstr ""
 
-#: product.php:312
+#: product.php:672
+msgid "Group practical examples and further reading, then add your own links."
+msgstr ""
+
+#: product.php:338
 msgid "Guide readers from an introduction to your topics and latest writing."
 msgstr ""
 
-#: browsing.php:246
+#: regions.php:411
+msgid "Header layout"
+msgstr ""
+
+#: product.php:391 regions.php:402
+msgid "Header, footer and public regions"
+msgstr ""
+
+#: fonts.php:250
+msgid "Heading font"
+msgstr ""
+
+#: browsing.php:407
 msgid "Hidden"
 msgstr ""
 
-#: header.php:53
+#: browsing.php:138 browsing.php:523
+msgid "Hide sidebar"
+msgstr ""
+
+#: header.php:57
 msgid "Home"
 msgstr ""
 
-#: customizer.php:235 product.php:344
+#: customizer.php:235 product.php:370
 msgid "Home authors"
 msgstr ""
 
-#: customizer.php:180 product.php:334
+#: customizer.php:180 product.php:360
 msgid "Home background"
 msgstr ""
 
@@ -562,15 +722,15 @@ msgstr ""
 msgid "Home eyebrow"
 msgstr ""
 
-#: customizer.php:152 customizer.php:158 product.php:329
+#: customizer.php:152 customizer.php:158 product.php:355
 msgid "Home introduction"
 msgstr ""
 
-#: product.php:321
+#: product.php:347
 msgid "Home modules"
 msgstr ""
 
-#: customizer.php:200 product.php:339
+#: customizer.php:200 product.php:365
 msgid "Home topics"
 msgstr ""
 
@@ -578,27 +738,51 @@ msgstr ""
 msgid "Horizontally scrollable table"
 msgstr ""
 
-#: product.php:456
+#: product.php:494 product.php:724
+msgid "How should I use this guide?"
+msgstr ""
+
+#: product.php:528
 msgid "Import and save appearance"
 msgstr ""
 
-#: product.php:396
-msgid "In the block editor, open Patterns → PageNest and choose a topic introduction, resource cards or article outline. Replace the placeholders; content is created only when you insert and save it."
+#: product.php:428
+msgid "In the block editor, open Patterns → PageNest and choose an example below. Replace the placeholders; content is created only when you insert and save it."
 msgstr ""
 
-#: product.php:484
+#: browsing.php:521
+msgid "Inherit (show sidebar)"
+msgstr ""
+
+#: browsing.php:126
+msgid "Inherit archive layout"
+msgstr ""
+
+#: browsing.php:136
+msgid "Inherit archive sidebar"
+msgstr ""
+
+#: browsing.php:504
+msgid "Inherit list style"
+msgstr ""
+
+#: product.php:556
 msgid "Interface available"
 msgstr ""
 
-#: product.php:485
+#: product.php:557
 msgid "Interface unavailable"
 msgstr ""
 
-#: product.php:406 product.php:539
+#: product.php:667
+msgid "Introduce the essential concepts and link to a useful starting point."
+msgstr ""
+
+#: product.php:438 product.php:611
 msgid "Introduce the topic, intended audience and suggested reading order. Replace this text with your own content."
 msgstr ""
 
-#: product.php:134 product.php:34
+#: product.php:147 product.php:47
 msgid "Invalid appearance settings file."
 msgstr ""
 
@@ -606,11 +790,11 @@ msgstr ""
 msgid "Join the discussion →"
 msgstr ""
 
-#: product.php:445
+#: product.php:517
 msgid "Keep a copy"
 msgstr ""
 
-#: browsing.php:155 browsing.php:9
+#: browsing.php:316 browsing.php:9
 msgid "Latest articles"
 msgstr ""
 
@@ -634,7 +818,7 @@ msgstr ""
 msgid "Light"
 msgstr ""
 
-#: appearance.php:226
+#: appearance.php:229
 msgid "Link and button color"
 msgstr ""
 
@@ -642,23 +826,27 @@ msgstr ""
 msgid "Links"
 msgstr ""
 
-#: product.php:358
+#: product.php:384
 msgid "List density, covers, updated dates and estimated reading time."
 msgstr ""
 
-#: browsing.php:310
+#: browsing.php:124
+msgid "List layout"
+msgstr ""
+
+#: browsing.php:475
 msgid "List style"
 msgstr ""
 
-#: browsing.php:305 product.php:357
+#: browsing.php:466 product.php:383
 msgid "Lists and articles"
 msgstr ""
 
-#: product.php:458
+#: product.php:530
 msgid "Local read-only diagnostics"
 msgstr ""
 
-#: header.php:64
+#: header.php:68
 msgid "Log in"
 msgstr ""
 
@@ -666,27 +854,35 @@ msgstr ""
 msgid "Log in to reply"
 msgstr ""
 
-#: customizer.php:115 product.php:382
+#: customizer.php:115 product.php:414
 msgid "Login and registration"
 msgstr ""
 
-#: product.php:353
+#: product.php:379
 msgid "Make reading comfortable"
+msgstr ""
+
+#: fonts.php:275 product.php:309
+msgid "Manage installed fonts"
+msgstr ""
+
+#: regions.php:397
+msgid "Manage source pages"
 msgstr ""
 
 #: appearance.php:121
 msgid "Maximum site width (px)"
 msgstr ""
 
-#: header.php:40
+#: header.php:44
 msgid "Menu"
 msgstr ""
 
-#: product.php:427 product.php:569
+#: product.php:459 product.php:641
 msgid "Method and examples"
 msgstr ""
 
-#: browsing.php:200
+#: browsing.php:361
 msgid "Modules and content order"
 msgstr ""
 
@@ -698,12 +894,20 @@ msgstr ""
 msgid "More filters"
 msgstr ""
 
-#: header.php:64
+#: header.php:68
 msgid "My account"
 msgstr ""
 
 #: customizer.php:210
 msgid "Name"
+msgstr ""
+
+#: product.php:697
+msgid "Name a practical reading and suggest one task readers can try themselves."
+msgstr ""
+
+#: product.php:690
+msgid "Name the first reading and explain the concepts to understand before continuing."
 msgstr ""
 
 #: comments.php:64
@@ -714,15 +918,19 @@ msgstr ""
 msgid "Next article"
 msgstr ""
 
-#: comments.php:28 index.php:61
+#: index.php:75
+msgid "Next page"
+msgstr ""
+
+#: comments.php:28
 msgid "Next page →"
 msgstr ""
 
-#: index.php:46
+#: index.php:57
 msgid "No content found"
 msgstr ""
 
-#: browsing.php:185
+#: browsing.php:346
 msgid "No public articles yet."
 msgstr ""
 
@@ -734,19 +942,27 @@ msgstr ""
 msgid "Notice"
 msgstr ""
 
-#: product.php:504
+#: regions.php:365 regions.php:465
+msgid "Off"
+msgstr ""
+
+#: browsing.php:165
+msgid "Only this category archive changes. Inherit uses the archive settings; child categories keep their own settings. Content and ordering are unchanged."
+msgstr ""
+
+#: product.php:576
 msgid "Open Companion settings"
 msgstr ""
 
-#: product.php:268
+#: product.php:287
 msgid "Open the WordPress Customizer to preview and save settings. Installing the theme does not create articles, pages or media."
 msgstr ""
 
-#: presentation.php:167 product.php:280
+#: presentation.php:167 product.php:299
 msgid "Page layouts"
 msgstr ""
 
-#: index.php:6
+#: index.php:9
 msgid "Page not found"
 msgstr ""
 
@@ -758,6 +974,10 @@ msgstr ""
 msgid "PageNest design"
 msgstr ""
 
+#: browsing.php:118
+msgid "PageNest display"
+msgstr ""
+
 #: customizer.php:144
 msgid "PageNest home page"
 msgstr ""
@@ -766,15 +986,15 @@ msgstr ""
 msgid "PageNest layout"
 msgstr ""
 
-#: discovery.php:9
+#: discovery.php:9 regions.php:471
 msgid "Pages"
 msgstr ""
 
-#: product.php:276
+#: product.php:295
 msgid "Palettes, colors and reading dimensions shared with the editor preview."
 msgstr ""
 
-#: product.php:454
+#: product.php:526
 msgid "Paste appearance JSON"
 msgstr ""
 
@@ -786,11 +1006,19 @@ msgstr ""
 msgid "Post a comment"
 msgstr ""
 
-#: footer.php:21
+#: regions.php:470
+msgid "Posts"
+msgstr ""
+
+#: footer.php:39
 msgid "Powered by WordPress"
 msgstr ""
 
-#: presentation.php:168 product.php:281
+#: product.php:470 product.php:670
+msgid "Practice and exploration"
+msgstr ""
+
+#: presentation.php:168 product.php:300
 msgid "Presets change presentation only. Existing content, tool permissions and reading controls are preserved."
 msgstr ""
 
@@ -798,16 +1026,24 @@ msgstr ""
 msgid "Previous article"
 msgstr ""
 
-#: header.php:44
+#: index.php:73
+msgid "Previous page"
+msgstr ""
+
+#: header.php:48
 msgid "Primary navigation"
 msgstr ""
 
-#: inc.php:112 singular.php:21 singular.php:28
+#: inc.php:110 singular.php:21 singular.php:28
 msgid "Private"
 msgstr ""
 
-#: product.php:425 product.php:562
+#: product.php:457 product.php:634
 msgid "Problem and background"
+msgstr ""
+
+#: product.php:713
+msgid "Questions before you begin"
 msgstr ""
 
 #: reading.php:50
@@ -830,15 +1066,19 @@ msgstr ""
 msgid "Reading settings"
 msgstr ""
 
-#: browsing.php:155
+#: product.php:483 product.php:680
+msgid "Reading steps"
+msgstr ""
+
+#: browsing.php:316
 msgid "Recent entries"
 msgstr ""
 
-#: browsing.php:156 browsing.php:20 searchform.php:79
+#: browsing.php:20 browsing.php:317 searchform.php:79
 msgid "Recently updated"
 msgstr ""
 
-#: browsing.php:157
+#: browsing.php:318
 msgid "Recommended reading"
 msgstr ""
 
@@ -862,6 +1102,14 @@ msgstr ""
 msgid "Relevance"
 msgstr ""
 
+#: product.php:683
+msgid "Replace these steps with your own reading order. Add article links and any prerequisites using the editor."
+msgstr ""
+
+#: product.php:489 product.php:718
+msgid "Replace this answer with the prerequisites and any helpful introductory reading."
+msgstr ""
+
 #: comments.php:23 reading.php:255
 msgid "Reply"
 msgstr ""
@@ -871,15 +1119,15 @@ msgstr ""
 msgid "Reply to %s"
 msgstr ""
 
-#: product.php:422 product.php:546
+#: product.php:454 product.php:618
 msgid "Resource cards"
 msgstr ""
 
-#: product.php:414 product.php:549
+#: product.php:446 product.php:621
 msgid "Resource one"
 msgstr ""
 
-#: product.php:418 product.php:554
+#: product.php:450 product.php:626
 msgid "Resource two"
 msgstr ""
 
@@ -891,12 +1139,16 @@ msgstr ""
 msgid "Return to contents"
 msgstr ""
 
-#: product.php:295
+#: product.php:321
 msgid "Room for your next idea"
 msgstr ""
 
-#: header.php:36 searchform.php:25
+#: header.php:40 searchform.php:25
 msgid "Search"
+msgstr ""
+
+#: browsing.php:491
+msgid "Search results"
 msgstr ""
 
 #: searchform.php:103
@@ -907,7 +1159,7 @@ msgstr ""
 msgid "Search this site"
 msgstr ""
 
-#: index.php:10
+#: index.php:13
 #, php-format
 msgid "Search: %s"
 msgstr ""
@@ -924,23 +1176,23 @@ msgstr ""
 msgid "Series contents"
 msgstr ""
 
-#: product.php:368
+#: product.php:400
 msgid "Set archive and about links."
 msgstr ""
 
-#: product.php:378
+#: product.php:410
 msgid "Set the community description and links."
 msgstr ""
 
-#: product.php:147
+#: product.php:160
 msgid "Settings could not be saved. Please try again."
 msgstr ""
 
-#: product.php:258
+#: product.php:277
 msgid "Shape your site, one detail at a time."
 msgstr ""
 
-#: appearance.php:204
+#: appearance.php:207
 msgid "Share colors and reading dimensions across the site and editor preview. Leave custom colors empty to use the selected palette."
 msgstr ""
 
@@ -956,24 +1208,28 @@ msgstr ""
 msgid "Shared stories"
 msgstr ""
 
-#: browsing.php:229
+#: browsing.php:390
 #, php-format
 msgid "Show %s"
 msgstr ""
 
-#: browsing.php:325
+#: browsing.php:531
 msgid "Show article cover"
 msgstr ""
 
-#: browsing.php:327
+#: browsing.php:533
 msgid "Show estimated reading time"
 msgstr ""
 
-#: browsing.php:324
+#: browsing.php:530
 msgid "Show list covers"
 msgstr ""
 
-#: browsing.php:326
+#: browsing.php:137 browsing.php:522
+msgid "Show sidebar"
+msgstr ""
+
+#: browsing.php:532
 msgid "Show updated date"
 msgstr ""
 
@@ -981,11 +1237,15 @@ msgstr ""
 msgid "Shown above login, registration and password reset forms; leave empty to hide."
 msgstr ""
 
-#: appearance.php:203 product.php:266 product.php:275
+#: browsing.php:134
+msgid "Sidebar"
+msgstr ""
+
+#: appearance.php:206 product.php:285 product.php:294
 msgid "Site appearance"
 msgstr ""
 
-#: appearance.php:224
+#: appearance.php:227
 msgid "Site background"
 msgstr ""
 
@@ -1005,7 +1265,7 @@ msgstr ""
 msgid "Site defaults restored; browser storage is unavailable."
 msgstr ""
 
-#: functions.php:40
+#: functions.php:42
 msgid "Site navigation"
 msgstr ""
 
@@ -1013,7 +1273,7 @@ msgstr ""
 msgid "Skip to main content"
 msgstr ""
 
-#: browsing.php:294
+#: browsing.php:455
 #, php-format
 msgid "Slot %d · Content ID (optional)"
 msgstr ""
@@ -1022,20 +1282,36 @@ msgstr ""
 msgid "Sort"
 msgstr ""
 
+#: regions.php:370
+msgid "Source unavailable"
+msgstr ""
+
 #: appearance.php:105
 msgid "Spacing scale"
 msgstr ""
 
-#: presentation.php:10
+#: regions.php:432
+msgid "Stacked footer"
+msgstr ""
+
+#: presentation.php:10 regions.php:427 regions.php:431
 msgid "Standard"
 msgstr ""
 
-#: browsing.php:317
+#: browsing.php:127 browsing.php:482 browsing.php:505
 msgid "Standard cards"
+msgstr ""
+
+#: product.php:657
+msgid "Start exploring this topic"
 msgstr ""
 
 #: home-sections.php:10
 msgid "Start with a topic that interests you"
+msgstr ""
+
+#: product.php:468
+msgid "Start with the essential concepts."
 msgstr ""
 
 #: design.php:50
@@ -1046,16 +1322,20 @@ msgstr ""
 msgid "Status (optional)"
 msgstr ""
 
-#: product.php:114
+#: product.php:127
 msgid "Submit the form from the settings page."
 msgstr ""
 
-#: index.php:24
+#: index.php:27
 msgid "Subscribe to this category via RSS"
 msgstr ""
 
-#: footer.php:25
+#: footer.php:43
 msgid "Subscribe via RSS"
+msgstr ""
+
+#: product.php:704
+msgid "Suggest how readers can check their understanding and choose the next reading."
 msgstr ""
 
 #: i18n.php:34
@@ -1067,11 +1347,11 @@ msgstr ""
 msgid "Suggestions: %s. Submit your search for all results."
 msgstr ""
 
-#: product.php:573
+#: product.php:645
 msgid "Summarize the conclusions, limitations and suggested further reading."
 msgstr ""
 
-#: product.php:429 product.php:571
+#: product.php:461 product.php:643
 msgid "Summary and next steps"
 msgstr ""
 
@@ -1079,40 +1359,72 @@ msgstr ""
 msgid "System font"
 msgstr ""
 
+#: fonts.php:217
+msgid "System font stack"
+msgstr ""
+
 #: reading.php:58 reading.php:59
 msgid "Table of contents"
 msgstr ""
 
-#: product.php:373
+#: product.php:405
 msgid "Tagline, copyright owner and optional registration number."
 msgstr ""
 
-#: appearance.php:225
+#: appearance.php:228
 msgid "Text color"
 msgstr ""
 
-#: browsing.php:281
+#: browsing.php:442
 msgid "The 100 most recently updated public, unprotected articles, plus current selections."
 msgstr ""
 
-#: product.php:42
+#: product.php:55
 msgid "The file contains unsupported settings."
 msgstr ""
 
-#: product.php:124
+#: product.php:137
 msgid "The settings file is too large or invalid."
 msgstr ""
 
-#: browsing.php:202
+#: browsing.php:363
 msgid "The site introduction is always shown. Lower order numbers appear first; ties keep the default order. Disabling a module hides it while preserving settings and content."
 msgstr ""
 
-#: product.php:256
+#: regions.php:208
+msgid "The source page has too many blocks. Use at most 200 blocks."
+msgstr ""
+
+#: regions.php:184
+msgid "The source page has too many nested blocks. Use at most 16 levels."
+msgstr ""
+
+#: regions.php:279
+msgid "The source page is too large. Keep its saved content within 64 KiB."
+msgstr ""
+
+#: regions.php:54
+msgid "The source page or one of its parents is unavailable."
+msgstr ""
+
+#: product.php:275
 msgid "Theme settings"
 msgstr ""
 
-#: inc.php:139
+#: fonts.php:245
+msgid "This WordPress version does not provide the native Font Library. System font stacks remain available."
+msgstr ""
+
+#: inc.php:137
 msgid "This article requires a password."
+msgstr ""
+
+#: regions.php:84
+msgid "This region layout is not supported. Use default groups, rows or stacks with alignment and wrapping, or grids with automatic columns or 1–12 columns. Custom widths, child positioning and responsive overrides are not supported."
+msgstr ""
+
+#: browsing.php:130 browsing.php:508
+msgid "Three-column grid"
 msgstr ""
 
 #: searchform.php:22
@@ -1132,7 +1444,11 @@ msgstr ""
 msgid "Topic %1$d · %2$s"
 msgstr ""
 
-#: product.php:402 product.php:411 product.php:536
+#: product.php:474 product.php:656
+msgid "Topic guide"
+msgstr ""
+
+#: product.php:434 product.php:443 product.php:608
 msgid "Topic introduction"
 msgstr ""
 
@@ -1156,12 +1472,20 @@ msgstr ""
 msgid "Topics are being organized. Browse the latest articles for now."
 msgstr ""
 
-#: product.php:434
+#: product.php:506
 msgid "Transfer appearance settings"
 msgstr ""
 
-#: index.php:47
+#: index.php:58
 msgid "Try another keyword or return to the home page to keep browsing."
+msgstr ""
+
+#: browsing.php:129 browsing.php:507
+msgid "Two-column grid"
+msgstr ""
+
+#: regions.php:428
+msgid "Two-row header"
 msgstr ""
 
 #: customizer.php:236
@@ -1172,7 +1496,7 @@ msgstr ""
 msgid "Up to six topics. Leave a name or link empty to hide the entry."
 msgstr ""
 
-#: browsing.php:119
+#: browsing.php:280
 msgid "Updated on "
 msgstr ""
 
@@ -1180,11 +1504,15 @@ msgstr ""
 msgid "Upload image"
 msgstr ""
 
+#: regions.php:222
+msgid "Use only static paragraphs, headings, lists, groups, columns, buttons, images, separators, spacers and supported Details blocks. HTML, shortcodes, reusable patterns and dynamic blocks are not supported."
+msgstr ""
+
 #: presentation.php:239
 msgid "Use site layout default"
 msgstr ""
 
-#: product.php:460
+#: product.php:532
 msgid "Versions, interfaces and asset integrity"
 msgstr ""
 
@@ -1200,6 +1528,10 @@ msgstr ""
 msgid "Welcome. You can register with your email address. Contact the site administrator if you need help."
 msgstr ""
 
+#: product.php:487 product.php:715
+msgid "What should I know first?"
+msgstr ""
+
 #: reader-preferences.php:23
 msgid "Wide"
 msgstr ""
@@ -1212,7 +1544,7 @@ msgstr ""
 msgid "Wide page"
 msgstr ""
 
-#: index.php:4
+#: index.php:7
 msgid "Write and share"
 msgstr ""
 
@@ -1220,7 +1552,7 @@ msgstr ""
 msgid "Write · Share · Explore"
 msgstr ""
 
-#: product.php:109 product.php:239
+#: product.php:122 product.php:258
 msgid "You do not have permission to manage theme settings."
 msgstr ""
 
@@ -1228,6 +1560,6 @@ msgstr ""
 msgid "Your comment is awaiting moderation."
 msgstr ""
 
-#: comments.php:27 index.php:60
+#: comments.php:27
 msgid "← Previous page"
 msgstr ""

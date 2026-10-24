@@ -18,13 +18,21 @@
   --mbb-border-radius: calc(var(--pagenest-radius, 12px) * 8 / 12);
   --mbb-focus-color: var(--pagenest-content-link, #426354);
   --mbb-teaching-sticky-background: var(--pagenest-surface, #fff);
-  font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
-    'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif !important;
+  font-family: var(
+    --pagenest-reading-font,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'PingFang SC',
+    'Hiragino Sans GB',
+    'Microsoft YaHei',
+    'Noto Sans CJK SC',
+    sans-serif
+  ) !important;
   font-size: var(--pagenest-reading-size, 17px) !important;
   line-height: var(--pagenest-reading-line-height, 1.9) !important;
   color: var(--pagenest-text, #293630) !important;
-  text-align: left !important;
+  text-align: start !important;
   overflow-wrap: anywhere;
   letter-spacing: 0.01em;
   background: var(--pagenest-surface, #fff);
@@ -37,7 +45,7 @@
 }
 :is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
   :is(h1, h2, h3, h4, h5, h6) {
-  font-family: inherit !important;
+  font-family: var(--pagenest-heading-font, inherit) !important;
   font-weight: 650 !important;
   line-height: 1.45 !important;
   color: var(--pagenest-content-heading, #23352c) !important;
@@ -77,7 +85,7 @@
 }
 :is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container)
   :is(ul, ol) {
-  padding-left: 1.7em;
+  padding-inline-start: 1.7em;
   margin: 0 0 1.3em;
 }
 :is(.pagenest-article-body, .editor-styles-wrapper, .editormd .editormd-preview-container) li {
@@ -89,7 +97,7 @@
   margin: 1.5em 0;
   padding: 0.55em 1em;
   border: 0;
-  border-left: 3px solid var(--pagenest-quote-border, #93a58f);
+  border-inline-start: 3px solid var(--pagenest-quote-border, #93a58f);
   background: var(--pagenest-quote-background, #f2f3ed);
   color: var(--pagenest-text);
   font-size: inherit;
@@ -132,7 +140,7 @@
   padding: 13px 17px !important;
   border: 0 !important;
   border-bottom: 1px solid var(--pagenest-border) !important;
-  text-align: left;
+  text-align: start;
   vertical-align: top !important;
   color: var(--pagenest-text) !important;
   white-space: normal !important;
@@ -268,4 +276,21 @@
 .editor-styles-wrapper .wp-block-table {
   max-width: 100%;
   overflow-x: auto;
+}
+
+/* Code and mathematical notation retain their LTR order inside RTL prose and editor previews. */
+:is(
+    .pagenest-article-body,
+    .editor-styles-wrapper,
+    .editormd .editormd-preview-container,
+    .pagenest-region
+  )
+  :is(pre, code, .MathJax, .MathJax_Display, mjx-container, .katex, .katex-display) {
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: start;
+}
+[dir='rtl'] :is(.pagenest-article-body, .editor-styles-wrapper) blockquote {
+  border-radius: calc(var(--pagenest-radius, 12px) * 6 / 12) 0 0
+    calc(var(--pagenest-radius, 12px) * 6 / 12);
 }

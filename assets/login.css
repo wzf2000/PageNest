@@ -112,3 +112,11 @@ body.login.pagenest-login {
   word-break: keep-all;
   overflow-wrap: normal;
 }
+
+.pagenest-login :is(input[type='email'], input[type='url'], input[type='number']) {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+[dir='rtl'] .pagenest-login-notice p {
+  unicode-bidi: plaintext;
+}

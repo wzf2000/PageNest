@@ -1,0 +1,281 @@
+.pagenest-reader-preferences[hidden] {
+  display: none !important;
+}
+.pagenest-reader-preferences {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--pagenest-border, #e1e5df);
+  border-radius: var(--pagenest-radius, 12px);
+  background: var(--pagenest-surface, #fff);
+  color: var(--pagenest-text, #293630);
+  font-size: 14px;
+}
+.pagenest-reader-preferences summary {
+  padding: 12px;
+  cursor: pointer;
+  min-height: 44px;
+  box-sizing: border-box;
+}
+.pagenest-reader-options {
+  padding: 0 12px 12px;
+  display: grid;
+  gap: 8px;
+}
+.pagenest-reader-group {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+.pagenest-reader-group legend {
+  padding: 0;
+  margin-bottom: 4px;
+}
+.pagenest-reader-choices {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(min-content, 1fr);
+  gap: 4px;
+}
+.pagenest-reader-choice {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  min-height: 44px;
+  padding: 4px 2px;
+  box-sizing: border-box;
+  border: 1px solid var(--pagenest-border);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: center;
+}
+.pagenest-reader-choice input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.pagenest-reader-choice:has(input:checked) {
+  color: var(--pagenest-accent);
+  border-color: var(--pagenest-accent);
+  background: var(--pagenest-soft);
+  box-shadow: inset 0 0 0 1px var(--pagenest-accent);
+  font-weight: 600;
+}
+.pagenest-reader-preferences summary:focus-visible,
+.pagenest-reader-options button:focus-visible,
+.pagenest-reader-choice:has(input:focus-visible) {
+  outline: 2px solid var(--pagenest-focus, #426354);
+  outline-offset: 2px;
+}
+.pagenest-reader-options button {
+  font: inherit;
+  min-height: 44px;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--pagenest-border);
+  border-radius: 6px;
+  color: inherit;
+  background: var(--pagenest-surface);
+  cursor: pointer;
+}
+.pagenest-palette-preview {
+  width: 100%;
+  max-width: 54px;
+  height: 20px;
+  border-radius: 3px;
+  margin: 0 0 3px;
+  background: var(--pagenest-surface);
+  color: var(--pagenest-border);
+  display: grid;
+  place-items: center;
+}
+.pagenest-palette-preview::after {
+  content: '';
+  width: 60%;
+  height: 3px;
+  background: currentColor;
+  box-shadow:
+    0 -6px currentColor,
+    0 6px currentColor;
+}
+.pagenest-palette-preview[data-preview='paper'] {
+  background: #faf3e5;
+  color: #d9cbb4;
+}
+.pagenest-palette-preview[data-preview='dark'] {
+  background: #202833;
+  color: #718094;
+}
+.pagenest-reader-options p,
+.pagenest-reader-status {
+  margin: 0;
+  font-size: 13px;
+}
+.pagenest-reader-status:empty {
+  display: none;
+}
+.pagenest-article[data-reader-size='18'] {
+  --pagenest-reading-size: 18px;
+}
+.pagenest-article[data-reader-size='20'] {
+  --pagenest-reading-size: 20px;
+}
+.pagenest-article[data-reader-size='22'] {
+  --pagenest-reading-size: 22px;
+}
+/* Keep the grid independent of comments or a companion panel's intrinsic width. */
+.pagenest-article[data-reader-width] .pagenest-article-body {
+  box-sizing: border-box;
+  width: 100%;
+  margin-inline: auto;
+}
+.pagenest-article[data-reader-width='compact'] .pagenest-article-body {
+  max-width: 680px;
+}
+.pagenest-article[data-reader-width='wide'] .pagenest-article-body {
+  padding-inline: clamp(18px, 2vw, 24px);
+}
+.pagenest-article[data-reader-palette='paper'] {
+  --pagenest-surface: #faf3e5;
+  --pagenest-text: #493d30;
+  --pagenest-heading: #3e3023;
+  --pagenest-muted: #75634e;
+  --pagenest-accent: #775325;
+  --pagenest-accent-hover: #563b18;
+  --pagenest-content-heading: #3e3023;
+  --pagenest-content-link: #775325;
+  --pagenest-content-link-hover: #563b18;
+  --pagenest-soft: #f0e5d1;
+  --pagenest-border: #d9cbb4;
+  --pagenest-code-background: #f0e5d1;
+  --pagenest-code-text: #563c28;
+  --pagenest-quote-background: #f0e5d1;
+  --pagenest-quote-border: #9b8058;
+}
+.pagenest-article[data-reader-palette='dark'] {
+  color-scheme: dark;
+  --pagenest-surface: #202833;
+  --pagenest-text: #dce3ec;
+  --pagenest-heading: #f1f5fa;
+  --pagenest-muted: #b1bdcc;
+  --pagenest-accent: #a5cdf8;
+  --pagenest-accent-hover: #d0e5ff;
+  --pagenest-content-heading: #f1f5fa;
+  --pagenest-content-link: #a5cdf8;
+  --pagenest-content-link-hover: #d0e5ff;
+  --pagenest-soft: #2c3745;
+  --pagenest-border: #4b5b70;
+  --pagenest-code-background: #2c3745;
+  --pagenest-code-text: #cee1f7;
+  --pagenest-quote-background: #2c3745;
+  --pagenest-quote-border: #87a8ce;
+}
+.pagenest-article[data-reader-palette] {
+  color: var(--pagenest-text);
+  border-color: var(--pagenest-border);
+}
+.pagenest-article[data-reader-palette]
+  :is(.pagenest-article-header h1, .pagenest-author-name, .pagenest-author a) {
+  color: var(--pagenest-content-heading) !important;
+}
+.pagenest-article[data-reader-palette] .pagenest-article-body :is(th, td, blockquote) {
+  color: var(--pagenest-text) !important;
+}
+.pagenest-article[data-reader-palette] .pagenest-article-body :is(table, th, td, h2, hr) {
+  border-color: var(--pagenest-border) !important;
+}
+.pagenest-article[data-reader-palette] .pagenest-article-body tbody tr:nth-child(even),
+.pagenest-article[data-reader-palette] .pagenest-article-body tbody tr:hover {
+  background: var(--pagenest-soft) !important;
+}
+.pagenest-article[data-reader-palette] .pagenest-article-body pre:not(.wp-block-mbb-math) {
+  background: var(--pagenest-code-background) !important;
+  color: var(--pagenest-code-text) !important;
+}
+.pagenest-article[data-reader-palette] .pagenest-article-body pre :is(code, .token) {
+  color: inherit !important;
+  background: transparent !important;
+  text-shadow: none !important;
+}
+@media (max-width: 1023px) {
+  .pagenest-article-column > .pagenest-reader-preferences {
+    margin-bottom: 16px;
+  }
+}
+
+.pagenest-article[data-reader-palette]
+  :is(.pagenest-author time, .pagenest-entry-labels, .pagenest-article-footer) {
+  color: var(--pagenest-muted);
+}
+.pagenest-article[data-reader-palette] .pagenest-badge {
+  color: var(--pagenest-text);
+}
+.pagenest-article[data-reader-palette] .pagenest-article-footer {
+  background: var(--pagenest-soft);
+  border-color: var(--pagenest-border);
+}
+.pagenest-article[data-reader-palette] .pagenest-author {
+  border-color: var(--pagenest-border);
+}
+.pagenest-article[data-reader-palette] .pagenest-article-body :not(pre) > code {
+  background: var(--pagenest-code-background);
+}
+/* Preserve the optional hint's deliberate concealment in every palette. */
+.pagenest-article[data-reader-palette] .pagenest-article-body .pagenest-exercise-hint {
+  color: var(--pagenest-surface) !important;
+  background: var(--pagenest-surface) !important;
+}
+@media (max-width: 767px) {
+  .pagenest-article[data-reader-width='compact'] .pagenest-article-body {
+    padding-inline: 26px;
+  }
+  .pagenest-article[data-reader-width='wide'] .pagenest-article-body {
+    padding-inline: 16px;
+  }
+}
+/* The mobile directory moves into the article and shares its reading palette. */
+.pagenest-article[data-reader-palette] .pagenest-mobile-toc :is(a, button) {
+  color: var(--pagenest-content-link) !important;
+}
+.pagenest-article[data-reader-palette]
+  .pagenest-mobile-toc
+  :is(a:hover, button:hover, .pagenest-toc-contains-current) {
+  background: var(--pagenest-soft);
+}
+.pagenest-article[data-reader-palette] .pagenest-mobile-toc a[aria-current='location'] {
+  border-inline-start-color: var(--pagenest-content-link);
+}
+.pagenest-article[data-reader-palette] .pagenest-mobile-toc summary {
+  color: var(--pagenest-content-heading);
+}
+.pagenest-article[data-reader-palette] .pagenest-mobile-toc {
+  border-color: var(--pagenest-border);
+}
+
+.pagenest-reader-preferences summary,
+.pagenest-reader-group {
+  line-height: 20px;
+}
+.pagenest-reader-choice {
+  line-height: 18px;
+}
+.pagenest-reader-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pagenest-reader-footer button {
+  flex: none;
+  width: auto;
+  padding-inline: 12px;
+}
+.pagenest-reader-footer p {
+  line-height: 18px;
+  color: var(--pagenest-muted);
+}
+.pagenest-reader-footer:has(.pagenest-reader-status:not(:empty)) .pagenest-reader-hint {
+  display: none;
+}

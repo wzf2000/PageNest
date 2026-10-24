@@ -1,4 +1,7 @@
-<?php get_header(); ?>
+<?php
+get_header();
+$listing = pagenest_listing_presentation();
+?>
 <main id="pagenest-main" class="pagenest-main" tabindex="-1">
     <header class="pagenest-list-header">
         <p class="pagenest-eyebrow"><?php echo esc_html__('Write and share', 'pagenest'); ?></p>
@@ -34,15 +37,23 @@
     'Find content',
     'pagenest',
 ); ?>"><?php get_search_form(); ?></section><?php endif; ?>
-    <div class="pagenest-list-grid">
+    <div class="pagenest-list-grid<?php echo $listing['sidebar']
+        ? ''
+        : ' pagenest-list-no-sidebar'; ?>">
         <div>
-            <div class="pagenest-post-list"><?php if (have_posts() && !is_404()):
-                while (have_posts()):
-                    the_post();
-                    pagenest_card(get_the_ID());
-                endwhile;
-            else:
-                 ?><section class="pagenest-empty">
+            <div class="pagenest-post-list<?php echo in_array(
+                $listing['layout'],
+                ['grid-2', 'grid-3'],
+                true,
+            )
+                ? ' pagenest-list-' . esc_attr($listing['layout'])
+                : ''; ?>"><?php if (have_posts() && !is_404()):
+    while (have_posts()):
+        the_post();
+        pagenest_card(get_the_ID());
+    endwhile;
+else:
+     ?><section class="pagenest-empty">
                     <h2><?php echo esc_html__('No content found', 'pagenest'); ?></h2>
                     <p><?php echo esc_html__(
                         'Try another keyword or return to the home page to keep browsing.',
@@ -52,15 +63,21 @@
     'pagenest',
 ); ?></a>
                 </section><?php
-            endif; ?></div>
+endif; ?></div>
             <nav class="pagenest-pagination" aria-label="<?php echo esc_attr__(
                 'Article list pagination',
                 'pagenest',
             ); ?>"><?php echo paginate_links([
-    'prev_text' => __('← Previous page', 'pagenest'),
-    'next_text' => __('Next page →', 'pagenest'),
+    'prev_text' =>
+        '<span class="pagenest-direction-icon" aria-hidden="true">←</span> ' .
+        __('Previous page', 'pagenest'),
+    'next_text' =>
+        __('Next page', 'pagenest') .
+        ' <span class="pagenest-direction-icon" aria-hidden="true">→</span>',
 ]); ?></nav>
-        </div><?php pagenest_side(); ?>
+        </div><?php if ($listing['sidebar']) {
+            pagenest_side();
+        } ?>
     </div>
 </main>
 <?php get_footer(); ?>

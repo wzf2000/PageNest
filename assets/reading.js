@@ -282,14 +282,14 @@
     return Math.max(adminBottom, headerBottom, 0) + 16;
   }
   const rail = document.querySelector('.pagenest-reading-rail');
-  if (rail) {
+  if (rail || document.querySelector('.pagenest-header-two-row')) {
     let queued = false;
     const size = () => {
       queued = false;
       const top = getReadingTop();
       document.documentElement.style.setProperty('--pagenest-reading-top', `${top}px`);
       document.documentElement.style.setProperty('--pagenest-anchor-top', `${top + 8}px`);
-      rail.classList.toggle('pagenest-reading-short', innerHeight - top < 380);
+      rail?.classList.toggle('pagenest-reading-short', innerHeight - top < 380);
       document.dispatchEvent(new Event('pagenest-reading-layout'));
     };
     const schedule = () => {

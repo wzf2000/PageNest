@@ -1,0 +1,119 @@
+body.login.pagenest-login {
+  background: #f7f6f2 var(--pagenest-login-image, none) center top/cover fixed no-repeat;
+  min-height: 100vh;
+}
+.pagenest-login #login {
+  width: min(360px, calc(100% - 24px));
+  padding: 4vh 0 32px;
+}
+.pagenest-login #loginform,
+.pagenest-login #registerform,
+.pagenest-login #lostpasswordform {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgb(35 53 44 / 8%);
+}
+.pagenest-login-notice {
+  margin: 0 0 18px;
+  padding: 16px 18px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 10px;
+  color: #293630;
+  font-size: 13px;
+  line-height: 1.8;
+  box-shadow: none;
+}
+.pagenest-login-notice p {
+  margin: 0 0 10px;
+}
+.pagenest-login-notice p:last-child {
+  margin-bottom: 0;
+}
+.pagenest-login-notice a {
+  color: #426354;
+  text-decoration: underline;
+}
+.pagenest-login #nav,
+.pagenest-login #backtoblog {
+  background: rgba(255, 255, 255, 0.94);
+  margin: 12px 0 0;
+  padding: 10px 14px;
+  border-radius: 8px;
+}
+.pagenest-login .language-switcher {
+  background: rgba(255, 255, 255, 0.94);
+  padding: 12px;
+  border-radius: 8px;
+  width: max-content;
+  max-width: calc(100% - 32px);
+  margin: 0 auto 24px;
+  box-sizing: border-box;
+}
+@media (max-width: 360px) {
+  .pagenest-login #login {
+    width: calc(100% - 12px);
+  }
+  .pagenest-login #loginform,
+  .pagenest-login #registerform,
+  .pagenest-login #lostpasswordform {
+    padding: 16px 2px;
+  }
+  .pagenest-login .language-switcher {
+    padding: 8px;
+  }
+}
+
+.pagenest-login .button-primary {
+  background: #426354;
+  border-color: #426354;
+  box-shadow: none;
+}
+.pagenest-login .button-primary:hover {
+  background: #2b493a;
+  border-color: #2b493a;
+}
+.pagenest-login :is(input, button):focus-visible {
+  outline: 2px solid #426354;
+  outline-offset: 3px;
+}
+
+/* Email credentials and their submit control stay together before optional providers. */
+.pagenest-login #loginform .submit .button {
+  min-height: 44px;
+  min-width: 96px;
+}
+.pagenest-login #loginform .pagenest-social-login-options {
+  clear: both;
+  padding-top: 4px;
+}
+.pagenest-login #loginform .pagenest-social-divider {
+  margin-top: 20px;
+}
+.pagenest-login #loginform .pagenest-social-providers {
+  margin-bottom: 0;
+}
+@media (min-width: 360px) {
+  .pagenest-login #loginform .pagenest-social-providers {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .pagenest-login #loginform a.pagenest-social-provider {
+    grid-template-columns: 20px minmax(0, 1fr);
+    gap: 6px;
+    padding: 10px 6px;
+    font-size: 14px;
+  }
+  .pagenest-login #loginform .pagenest-social-provider::after {
+    display: none;
+  }
+}
+
+.pagenest-login #loginform .pagenest-social-provider > span {
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.pagenest-login :is(input[type='email'], input[type='url'], input[type='number']) {
+  direction: ltr;
+  unicode-bidi: isolate;
+}

@@ -71,3 +71,77 @@
   align-items: center;
   min-height: 44px;
 }
+
+/* Listing-only presets use the content column, including when a sidebar is present. */
+.pagenest-site .pagenest-list-no-sidebar {
+  grid-template-columns: minmax(0, 1fr);
+}
+.pagenest-list-grid > div:has(> .pagenest-list-grid-2, > .pagenest-list-grid-3) {
+  container-type: inline-size;
+}
+.pagenest-site :is(.pagenest-list-grid-2, .pagenest-list-grid-3) {
+  grid-template-columns: minmax(0, 1fr);
+}
+.pagenest-site :is(.pagenest-list-grid-2, .pagenest-list-grid-3) > .pagenest-entry {
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+}
+.pagenest-site :is(.pagenest-list-grid-2, .pagenest-list-grid-3) .pagenest-entry-image {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
+}
+.pagenest-site :is(.pagenest-list-grid-2, .pagenest-list-grid-3) .pagenest-entry-image img {
+  height: 100%;
+  max-height: none;
+}
+@container (min-width: 620px) {
+  .pagenest-site :is(.pagenest-list-grid-2, .pagenest-list-grid-3) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@container (min-width: 960px) {
+  .pagenest-site .pagenest-list-grid-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.pagenest-footer-nav {
+  max-width: 100%;
+}
+.pagenest-footer-menu,
+.pagenest-footer-menu .sub-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.pagenest-footer-menu li {
+  min-width: 0;
+  max-width: 100%;
+}
+.pagenest-footer-menu .sub-menu {
+  margin-block-start: 6px;
+  padding-inline-start: 12px;
+  border-inline-start: 1px solid var(--pagenest-border);
+}
+.pagenest-footer-menu a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .pagenest-footer-with-menu {
+    display: grid;
+    grid-template-columns: minmax(140px, 1fr) minmax(0, 2fr) auto;
+    align-items: start;
+  }
+  .pagenest-footer-with-menu > div {
+    min-width: 0;
+  }
+}

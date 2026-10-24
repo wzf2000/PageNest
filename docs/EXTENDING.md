@@ -54,11 +54,17 @@
 
 `reader-preferences.php` 在现有 `pagenest_reading_actions` 输出独立控件。脚本只移动自有节点，局部 data 属性和 CSS 变量不改变目录、正文锚点或评论槽协议。`pagenest-reader-preferences-v1` 本地存储只接受版本 1 与字号／宽度／配色白名单，无服务端同步；插件不可将其当作授权、身份或业务设置。
 
+原生博客、归档和搜索列表由 `pagenest_listing_presentation()` 解析。`pagenest_listing_{blog|archive|search}_layout` 仅接受 `inherit/standard/compact/grid-2/grid-3`，默认与非法值均为 `inherit`，继承 `pagenest_list_style`；`pagenest_listing_{blog|archive|search}_sidebar` 仅接受 `inherit/show/hide`，默认与非法值均为 `inherit`，保留原来的侧栏。仅在原生对应上下文应用，404 与静态页面不读取这些覆盖。设置及全局列表样式加入版本 1 视觉 JSON 白名单；导入非法值整包拒绝，遗漏值保留。菜单位置、内容与用户数据不在白名单内。
+
+分类专属覆盖保存在 term meta `_pagenest_listing`，值为 `['layout' => 'inherit|standard|compact|grid-2|grid-3', 'sidebar' => 'inherit|show|hide']`。`category_edit_form_fields` 展示原生编辑字段，`edited_category` 保存时核对目标 taxonomy、`edit_term` 能力与绑定 term ID 的 nonce；缺字段或非法值不写入，双继承删除本项 meta。布局和侧栏分别按「当前分类显式值 → 全局 archive 值 → 旧列表样式／默认侧栏」解析。仅当前 `is_category()` 的 queried ID 生效，不遍历父分类，不影响 tag 或其他 term meta；不注册 REST 写入、不加入全站视觉 JSON。
+
+`pagenest_footer` 是独立原生菜单位置；分配后替换页脚两个快捷链接，`wp_nav_menu` 禁用自动页面回退并保留全部深度。未分配继续使用原快捷链接。菜单使用原生链接与列表，不要求脚本或额外 walker，主导航位置不变。
+
 ## 配置中心与样板（1.2）
 
-`product.php` 注册原生 Appearance 配置页及 `pagenest` 区块样板分类。样板名称为 `pagenest/topic-introduction`、`pagenest/resource-cards` 和 `pagenest/article-outline`，只使用 core 区块；不绑定站点内容 ID。子主题或插件可通过 WordPress 原生样板 API 增加自己的样板。
+`product.php` 注册原生 Appearance 配置页及 `pagenest` 区块样板分类。保留 `pagenest/topic-introduction`、`pagenest/resource-cards` 和 `pagenest/article-outline`，追加 `pagenest/topic-groups`、`pagenest/reading-steps`、`pagenest/faq`。所有样板只使用静态可编辑 core 区块，不绑定站点内容 ID、资源或查询。新标题使用 `wp-block-heading`，FAQ 使用 `core/details`，需要 WordPress 6.3+ 且区块已注册，能力不可用时只略过 FAQ 样板和预览；不改写已经保存的正文。专题页沿用既有 `_pagenest_layout` 的 topic context 和 standard/overview/wide 预设，不增加平行设置。子主题或插件可通过 WordPress 原生样板 API 增加自己的样板。
 
-视觉迁移格式固定为 `{"format":"pagenest-appearance","version":1,"settings":{}}`。白名单由 `pagenest_product_schema()` 从现有视觉定义派生，只含配色、background/text/accent 和六项数值。导入先完整校验，再单次更新当前 stylesheet 的 theme mods option；保留所有未知既有 theme mods，不运行重置或迁移。纯 JSON 校验和写入函数只用于已鉴权后台处理器，不是公开 API；扩展不得跳过权限与 nonce 检查。
+视觉迁移格式固定为 `{"format":"pagenest-appearance","version":1,"settings":{}}`。白名单由 `pagenest_product_schema()` 从现有视觉定义派生，包含配色、background/text/accent、六项数值、全站明暗与既有文章／专题／工具布局，以及全局列表样式和下述列表展示枚举。导入先完整校验，再单次更新当前 stylesheet 的 theme mods option；保留所有未知既有 theme mods，不运行重置或迁移。纯 JSON 校验和写入函数只用于已鉴权后台处理器，不是公开 API；扩展不得跳过权限与 nonce 检查。
 
 资源诊断仅检查包内固定清单键，不接受请求提供的路径；要求哈希文件存在、文件名哈希匹配并与相应资源源文件一致。失败显示诊断状态，不自动修改资源。Companion 接口只通过 `function_exists()` 探测，不读取其私有配置。
 
@@ -68,7 +74,25 @@
 
 界面使用英文 gettext 原文与 `pagenest` 文本域，`after_setup_theme` 加载 `languages/`，现有站长文案与正文不经过 gettext。小型浏览器脚本通过 `wp_localize_script` 接收翻译，不新增运行依赖。新增 PHP 文案用字面量 `__`／转义变体；计数用 `_n`，可变内容使用完整句子和编号占位符。主题 JSON 名称、归档模板名及主题描述也进入提取清单。
 
-`npm run i18n` 提取 POT 并编译 `zh_CN.po` 为确定性 MO；`npm run i18n:check` 检查覆盖率、复数、占位符和已提交产物，已接入 `npm test`。修改 PHP 后需重新提取引用行号；新增原文需先在 PO 中补齐翻译。工具仅依赖 PHP 与 Python 标准库，不要求站点安装翻译插件。其他语言可使用标准 gettext 工具和 WordPress 语言包位置。
+`npm run i18n` 提取 POT 并按各 PO 头声明的语言与复数规则编译为确定性 MO；`npm run i18n:check` 自动发现 `languages/*.po`，检查覆盖率、全部复数形式、占位符和已提交产物，已接入 `npm test`。可用 `python3 tools/i18n.py --locale fr_FR` 编译／检查单个外部 locale；同一命令加 `--check` 只检查。PO 需完整声明匹配文件名的 Language 与有效 Plural-Forms，并提供全部 `msgstr[n]`。修改 PHP 后需重新提取引用行号；新增原文需在每个随包 PO 中补齐翻译。工具仅依赖 PHP 与 Python 标准库，不要求站点安装翻译插件。其他语言可使用标准 gettext 工具和 WordPress 语言包位置。
+
+## 原生字体库与方向
+
+`fonts.php` 只读取已发布的 `wp_font_family`／`wp_font_face`，`pagenest_font_body` 与 `pagenest_font_heading` 保存当前站点的 family ID，默认 `0`，不进入视觉 JSON。`pagenest_font_family($id)` 返回有效本地字形及展示名称；每个 face 必须拥有当前 `wp_get_font_dir()` 真实目录下的可读字体文件，URL 与网站同源，拒绝越界、缺失、远程来源和 CSS 描述符注入。支持 TTF／OTF／WOFF／WOFF2 并检查文件签名，最多读取每族 100 个 face，每个 face 最多 8 个来源。族名使用安全内部别名，字重、样式和 unicode-range 经白名单校验。
+
+`pagenest_fonts_css()` 仅序列化当前选择的字形并去重，以 `font-display:swap` 输出且保留系统后备栈；不注入下载、预载入或后台 UI 字体。视觉变量经原有 appearance/editor 流程进入前台与正文画布；`--pagenest-body-font`、`--pagenest-reading-font`、`--pagenest-heading-font` 只在有效选择时输出。代码与数学沿用各自字体。缺少字体库能力、记录撤回或文件失效均回退，不迁移字体对象。
+
+方向由原生语言属性决定；主题自己的布局采用 inline-start/end 逻辑属性，方向图标单独镜像。代码和数学仅在局部保留 `direction:ltr; unicode-bidi:isolate`，主题自有设置说明使用 `unicode-bidi:plaintext` 处理英文回退标点，不强制正文或第三方组件方向。随包 `zh_CN`／`zh_TW` 为主题 UI 翻译；外部 locale 可用 WordPress 原生 MO 加载流程，复数公式由各目录声明。主题不提供文章翻译关系、语言切换路由或翻译服务。
+
+## 公开内容区与页眉页脚组合
+
+`regions.php` 管理 `pagenest_header_layout`（`standard/two-row`）、`pagenest_footer_layout`（`standard/stacked`）以及 `pagenest_region_{after_header|before_footer}_{source|scope}`。布局默认 `standard` 并进入视觉 JSON；来源默认 `0`，scope 默认 `off`，仅接受 `off/all/front/blog/archive/posts/pages`，对象 ID 和显示条件不进入视觉 JSON。设置位于现有 PageNest 面板的 `pagenest_regions` 节，来源采用原生 `dropdown-pages` 和 `validate_callback`，不注册 CPT、REST 或正文写入入口。
+
+`pagenest_region_source($id)` 校验来源页面、公开无密码的祖先链（最多 32 层并检测环），在解析前限制 65536 字节。解析结果递归限制 200 节点、16 层，只允许 `core/paragraph/heading/list/list-item/group/columns/column/buttons/button/image/separator/spacer`，当前支持时允许 `core/details`。非空自由 HTML、其他区块、任意层数据绑定、自定义 anchor／HTML id 属性一律返回 `WP_Error`。成功后将 Group／Buttons 的白名单布局属性转换为区域专用 `data-pagenest-*` 标记，再执行 `serialize_blocks` 与 `wp_kses_post`，不调用 `the_content`、`do_blocks`、`render_block`、短代码或渲染钩子。字面方括号文本保留。布局支持默认／constrained 分组、flex 横排／堆叠的原生对齐与 wrap／nowrap、默认自动网格及 1–12 个固定列；600px 以下网格改为单列，nowrap 横排在自身内横向滚动。自定义宽度、网格子项定位、响应式属性及未支持字段返回 `region_layout` 错误，不静默改变保存的布局。区域标题使用所选标题字体，无选择时继续继承正文。
+
+`pagenest_region_content($slot)` 按公开请求及白名单页面类型决定输出，每次重新核对权限无关的公开状态；不展示当前来源自身，不按角色决定内容。`pagenest_render_region($slot)` 仅为非空结果输出容器，模板直接放在 header 之后和 footer 之前。管理员配置中心列出已启用内容区状态，编辑链接另核对 `edit_post`。没有内容缓存、TTL 或数据库迁移。
+
+两行页眉沿用原 DOM 顺序与 `pagenest_header_actions` 钩子，仅桌面改为两行；内容区不进入 sticky。`reading.js` 使用 header 实际矩形与 ResizeObserver，文章阅读栏和无阅读栏的两行页眉页面均更新锚点偏移；无脚本的两行页眉不固定，避免长菜单遮挡正文锚点。区域的分栏、按钮、图片使用局部样式和已有语义 token，不依赖动态区块样式生成。
 
 ## Site presentation contract
 

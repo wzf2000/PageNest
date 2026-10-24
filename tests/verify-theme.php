@@ -24,7 +24,8 @@ class WP_Post
         $post_status,
         $post_title,
         $post_password = '',
-        $post_author = 1;
+        $post_author = 1,
+        $post_parent = 0;
     public $post_excerpt = '',
         $post_content = '';
     public function __construct($id, $status = 'publish', $type = 'post')
@@ -246,6 +247,16 @@ function wp_get_post_categories($id)
 function get_posts($args)
 {
     global $posts, $meta;
+    if (in_array($args['post_type'] ?? '', ['wp_font_family', 'wp_font_face'], true)) {
+        return array_values(
+            array_filter(
+                $posts,
+                static fn($post) => $post->post_type === $args['post_type'] &&
+                    ($args['post_type'] !== 'wp_font_face' ||
+                        (int) $post->post_parent === (int) $args['post_parent']),
+            ),
+        );
+    }
     if (($args['numberposts'] ?? 0) === 100) {
         return array_values($posts);
     }
@@ -315,8 +326,11 @@ function get_post_status()
 {
     return get_post(get_the_ID())->post_status;
 }
-function is_singular($type)
+function is_singular($type = null)
 {
+    if ($type === null) {
+        return $GLOBALS['fixture_region_singular'] ?? false;
+    }
     return get_post(get_the_ID())->post_type === $type;
 }
 function get_page_template_slug()
@@ -403,7 +417,12 @@ function get_adjacent_post(...$args)
 function language_attributes()
 {
     global $fixture_locale;
-    echo $fixture_locale === 'zh_CN' ? 'lang="zh-CN"' : 'lang="en-US"';
+    echo match ($fixture_locale) {
+        'zh_CN' => 'lang="zh-CN"',
+        'zh_TW' => 'lang="zh-TW"',
+        'ar' => 'lang="ar" dir="rtl"',
+        default => 'lang="en-US"',
+    };
 }
 function body_class()
 {
@@ -474,11 +493,31 @@ function is_search()
 }
 function is_404()
 {
-    return false;
+    return $GLOBALS['fixture_404'] ?? false;
+}
+function is_archive()
+{
+    return $GLOBALS['fixture_archive'] ?? false;
+}
+function has_nav_menu($location)
+{
+    return $location === 'pagenest_footer' && ($GLOBALS['fixture_footer_menu'] ?? false);
+}
+function wp_nav_menu($args)
+{
+    check(
+        'footer native menu no fallback and full depth',
+        $args['fallback_cb'] === false &&
+            $args['depth'] === 0 &&
+            $args['theme_location'] === 'pagenest_footer',
+    );
+    echo '<nav class="pagenest-footer-nav" aria-label="Footer navigation"><ul class="pagenest-footer-menu"><li><a href="/policy">' .
+        str_repeat('完整的页脚长标题与隐私说明', 5) .
+        '</a><ul class="sub-menu"><li><a href="/help">帮助</a><ul class="sub-menu"><li><a href="/deep">深层链接</a></li></ul></li></ul></li><li><a href="/contact">联系</a></li></ul></nav>';
 }
 function is_home()
 {
-    return !is_search();
+    return !is_search() && !is_archive() && !is_404();
 }
 function paginate_links($args = [])
 {
@@ -583,9 +622,11 @@ require THEME . '/i18n.php';
 require THEME . '/inc.php';
 require THEME . '/reading.php';
 require THEME . '/appearance.php';
+require THEME . '/fonts.php';
 require THEME . '/presentation.php';
 require THEME . '/discovery.php';
 require THEME . '/browsing.php';
+require THEME . '/regions.php';
 require THEME . '/home-sections.php';
 require THEME . '/reader-preferences.php';
 require THEME . '/customizer.php';
@@ -840,6 +881,7 @@ foreach (
 }
 $_GET = [];
 require __DIR__ . '/browsing-fixtures.php';
+require __DIR__ . '/publishing-fixtures.php';
 $fixture_locale = 'en_US';
 $mods = [];
 $current = 1001;
@@ -936,6 +978,9 @@ check(
     str_contains($rendered['article-series.html'], 'data-pagenest-series-directory'),
 );
 unset($filters['pagenest_series_directory']);
+
+require __DIR__ . '/region-fixtures.php';
+require __DIR__ . '/typography-fixtures.php';
 
 $out = THEME . '/.runtime/frontend';
 if (!is_dir($out)) {

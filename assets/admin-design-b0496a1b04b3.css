@@ -1,0 +1,335 @@
+/* Native WordPress configuration hub: styles never escape this theme's wrapper. */
+.pagenest-settings {
+  --pn-ink: #293630;
+  --pn-muted: #69736b;
+  --pn-line: #e1e5df;
+  --pn-accent: #426354;
+  max-width: 1180px;
+  color: var(--pn-ink);
+  margin-top: 20px;
+  padding-inline-end: 20px;
+}
+.pagenest-settings * {
+  box-sizing: border-box;
+}
+.pagenest-settings :is(p, li) {
+  font-size: 14px;
+  line-height: 1.75;
+}
+.pagenest-settings a {
+  color: var(--pn-accent);
+  text-decoration: none;
+}
+.pagenest-settings a:hover {
+  color: #2b493a;
+}
+.pagenest-settings :is(a, summary, button, textarea):focus-visible {
+  outline: 2px solid var(--pn-accent);
+  outline-offset: 3px;
+}
+.pagenest-settings-header {
+  padding: 6px 0 18px;
+  border-bottom: 1px solid var(--pn-line);
+}
+.pagenest-settings .pagenest-admin-eyebrow {
+  color: var(--pn-accent);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  margin: 0 0 10px;
+}
+.pagenest-settings-header h1 {
+  color: var(--pn-ink);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.25;
+  padding: 0;
+}
+.pagenest-settings-header > p:last-child {
+  color: var(--pn-muted);
+  margin: 8px 0 0;
+}
+.pagenest-settings h2 {
+  font-size: 21px;
+  line-height: 1.4;
+  font-weight: 600;
+  color: var(--pn-ink);
+  margin: 0 0 14px;
+}
+.pagenest-settings h3 {
+  color: var(--pn-ink);
+  line-height: 1.5;
+}
+.pagenest-settings-overview {
+  display: grid;
+  grid-template-columns: minmax(0, 0.65fr) minmax(0, 1.35fr);
+  gap: 32px;
+  padding-block: 24px;
+  align-items: start;
+}
+.pagenest-settings-overview > div:first-child > p {
+  max-width: 58ch;
+  color: var(--pn-muted);
+}
+.pagenest-palette-preview {
+  position: relative;
+  padding: 24px;
+  background: var(--pagenest-surface);
+  color: var(--pagenest-text);
+  border: 1px solid var(--pagenest-border);
+  border-radius: 8px;
+}
+.pagenest-settings .pagenest-palette-preview h3 {
+  font:
+    500 25px/1.35 Georgia,
+    'Songti SC',
+    SimSun,
+    serif;
+  margin: 16px 0 8px;
+  color: var(--pagenest-heading);
+}
+.pagenest-palette-preview p:not(.pagenest-admin-eyebrow),
+.pagenest-palette-preview small {
+  color: var(--pagenest-muted);
+}
+.pagenest-palette-swatches {
+  display: flex;
+  position: absolute;
+  inset-inline-end: 24px;
+  top: 24px;
+  gap: 5px;
+}
+.pagenest-palette-swatches span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--pagenest-accent);
+}
+.pagenest-palette-swatches span:nth-child(2) {
+  background: var(--pagenest-text);
+}
+.pagenest-palette-swatches span:nth-child(3) {
+  background: var(--pagenest-background);
+  border: 1px solid var(--pagenest-border);
+}
+.pagenest-settings-columns {
+  border-top: 1px solid var(--pn-line);
+}
+.pagenest-settings-group {
+  display: grid;
+  grid-template-columns: minmax(0, 0.65fr) minmax(0, 1.35fr);
+  gap: 32px;
+  padding: 24px 0;
+}
+.pagenest-settings-group + .pagenest-settings-group {
+  border-top: 1px solid var(--pn-line);
+}
+.pagenest-group-intro {
+  color: var(--pn-muted);
+  margin: 0;
+}
+.pagenest-config-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--pn-line);
+}
+.pagenest-config-link > span:first-child {
+  min-width: 0;
+}
+.pagenest-config-link strong {
+  font-size: 14px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 3px;
+}
+.pagenest-config-link > span:first-child > span {
+  display: block;
+  color: var(--pn-muted);
+  font-size: 13px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.pagenest-config-link > span:last-child {
+  flex: none;
+  font-size: 20px;
+}
+.pagenest-config-link:hover strong {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.pagenest-pattern-section {
+  border-top: 1px solid var(--pn-line);
+}
+.pagenest-pattern-section > p {
+  color: var(--pn-muted);
+  max-width: 85ch;
+}
+.pagenest-pattern-previews {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 22px;
+}
+.pagenest-pattern-previews figure {
+  margin: 0;
+  min-width: 0;
+}
+.pagenest-pattern-illustration {
+  min-height: 190px;
+  padding: 20px;
+  background: #fffefb;
+  border: 1px solid var(--pn-line);
+  border-radius: 6px;
+}
+.pagenest-pattern-illustration h3 {
+  font:
+    500 19px/1.5 Georgia,
+    'Songti SC',
+    SimSun,
+    serif;
+  margin: 12px 0;
+}
+.pagenest-pattern-illustration p {
+  color: var(--pn-muted);
+  font-size: 11px;
+  line-height: 1.6;
+  margin: 0;
+}
+.pagenest-pattern-illustration small {
+  color: var(--pn-accent);
+  font-size: 10px;
+}
+.pagenest-pattern-previews figcaption {
+  font-size: 12px;
+  font-weight: 500;
+  padding-top: 10px;
+}
+.pagenest-pattern-resources {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.pagenest-pattern-resources h3 {
+  font-size: 16px;
+}
+.pagenest-pattern-resources > div + div {
+  padding-inline-start: 12px;
+  border-inline-start: 1px solid var(--pn-line);
+}
+.pagenest-pattern-outline h3 {
+  font-size: 16px;
+  border-bottom: 1px solid var(--pn-line);
+  padding-bottom: 12px;
+}
+.pagenest-settings-details {
+  border-top: 1px solid var(--pn-line);
+}
+.pagenest-settings-details summary {
+  display: list-item;
+  cursor: pointer;
+  padding: 14px 0;
+  min-height: 44px;
+  font-size: 15px;
+  font-weight: 600;
+}
+.pagenest-settings-details summary > span {
+  display: inline;
+  font-size: 12px;
+  font-weight: 400;
+  margin-inline-start: 18px;
+  color: var(--pn-muted);
+}
+.pagenest-settings-details-body {
+  padding: 0 0 30px;
+}
+.pagenest-settings-details-body > p {
+  color: var(--pn-muted);
+  max-width: 90ch;
+  margin-top: 0;
+}
+.pagenest-transfer-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: 32px;
+}
+.pagenest-settings .button-primary {
+  background: var(--pn-accent);
+  border-color: var(--pn-accent);
+}
+.pagenest-settings .button-primary:hover {
+  background: #2b493a;
+  border-color: #2b493a;
+}
+.pagenest-settings .button-secondary {
+  color: var(--pn-accent);
+  border-color: #b8c5bc;
+}
+.pagenest-settings textarea {
+  width: 100%;
+  max-width: 100%;
+  border-color: #b8c5bc;
+  background: #fffefb;
+}
+.pagenest-settings .widefat {
+  box-shadow: none;
+  border-color: var(--pn-line);
+}
+.pagenest-settings .widefat :is(th, td) {
+  padding: 12px;
+  overflow-wrap: anywhere;
+}
+.pagenest-settings .widefat th {
+  width: 45%;
+}
+@media (max-width: 900px) {
+  .pagenest-settings {
+    padding-inline-end: 10px;
+  }
+  .pagenest-settings-overview {
+    gap: 24px;
+  }
+  .pagenest-settings-columns {
+    gap: 24px;
+  }
+  .pagenest-pattern-previews {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .pagenest-pattern-illustration {
+    min-height: 0;
+  }
+}
+@media (max-width: 600px) {
+  .pagenest-settings-overview,
+  .pagenest-settings-columns,
+  .pagenest-settings-group,
+  .pagenest-transfer-columns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .pagenest-settings-columns {
+    gap: 0;
+  }
+  .pagenest-settings-group {
+    padding-block: 20px;
+    gap: 12px;
+  }
+  .pagenest-settings-details summary > span {
+    display: block;
+    margin: 8px 0 0;
+  }
+  .pagenest-settings-header h1 {
+    font-size: 28px;
+  }
+}
+
+.pagenest-settings-palette .pagenest-palette-preview {
+  max-width: 520px;
+}
+.pagenest-settings-section-links .pagenest-config-link:last-child {
+  border-bottom: 0;
+}
+[dir='rtl'] .pagenest-settings :is(p, .description, .pagenest-group-intro) {
+  unicode-bidi: plaintext;
+}

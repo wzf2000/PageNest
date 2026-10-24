@@ -17,6 +17,8 @@ $mods = [
     'pagenest_appearance_background' => '',
     'pagenest_hero_attachment' => 4321,
     'foreign_mod' => ['keep' => true],
+    'pagenest_font_body' => 7,
+    'pagenest_font_heading' => 9,
     'pagenest_footer_tagline' => '',
 ];
 $writes = 0;
@@ -133,6 +135,18 @@ function get_bloginfo($key)
 {
     return '6.0';
 }
+$details_supported = true;
+class WP_Block_Type_Registry
+{
+    public static function get_instance()
+    {
+        return new self();
+    }
+    public function is_registered($name)
+    {
+        return $name === 'core/details' && $GLOBALS['details_supported'];
+    }
+}
 function register_block_pattern_category($key, $args)
 {
     product_check($key === 'pagenest', 'pattern category');
@@ -161,6 +175,27 @@ function product_rejected($callback, $expected)
 require __DIR__ . '/../appearance.php';
 require __DIR__ . '/../presentation.php';
 require __DIR__ . '/../product.php';
+require __DIR__ . '/../regions.php';
+foreach (['blog', 'archive', 'search'] as $context) {
+    foreach (
+        [
+            'layout' => ['inherit', 'standard', 'compact', 'grid-2', 'grid-3'],
+            'sidebar' => ['inherit', 'show', 'hide'],
+        ]
+        as $kind => $choices
+    ) {
+        foreach ($choices as $choice) {
+            product_check(
+                pagenest_product_validate([
+                    'format' => 'pagenest-appearance',
+                    'version' => 1,
+                    'settings' => ['pagenest_listing_' . $context . '_' . $kind => $choice],
+                ]) === ['pagenest_listing_' . $context . '_' . $kind => $choice],
+                'listing enum JSON accepted',
+            );
+        }
+    }
+}
 $before = $mods;
 $export = pagenest_product_export();
 product_check(
@@ -185,12 +220,27 @@ $payload = [
     'version' => 1,
     'settings' => [
         'pagenest_appearance_preset' => 'forest',
+        'pagenest_listing_blog_layout' => 'grid-3',
+        'pagenest_header_layout' => 'two-row',
+        'pagenest_footer_layout' => 'stacked',
+        'pagenest_listing_archive_sidebar' => 'hide',
         'pagenest_appearance_background' => '',
     ],
 ];
 foreach (
     [
         ['unknown' => true],
+        ['pagenest_listing_blog_layout' => 'grid-4'],
+        ['pagenest_listing_search_sidebar' => false],
+        ['pagenest_listing_archive_layout' => []],
+        ['pagenest_font_body' => 7],
+        ['pagenest_font_heading' => 9],
+        ['pagenest_header_layout' => 'invalid'],
+        ['pagenest_footer_layout' => 'invalid'],
+        ['pagenest_region_after_header_source' => 12],
+        ['pagenest_region_before_footer_scope' => 'all'],
+        ['nav_menu_locations' => ['pagenest_footer' => 3]],
+        ['pagenest_footer_link_label' => 'Private'],
         ['pagenest_hero_attachment' => 42],
         ['pagenest_appearance_font-size' => 999],
         ['pagenest_appearance_font-size' => '17'],
@@ -230,6 +280,16 @@ product_check(
     'omitted and unknown mods remain, blanks preserved',
 );
 product_check(
+    $mods['pagenest_listing_blog_layout'] === 'grid-3' &&
+        $mods['pagenest_listing_archive_sidebar'] === 'hide',
+    'listing values saved with visual import',
+);
+$listing_export = pagenest_product_export();
+product_check(
+    ((array) $listing_export['settings'])['pagenest_listing_blog_layout'] === 'grid-3',
+    'listing values exported',
+);
+product_check(
     pagenest_product_import_json('{"format":"pagenest-appearance","version":1,"settings":{}}') ===
         true && $writes === 1,
     'empty import no write',
@@ -248,14 +308,59 @@ product_check(
 );
 $saveFails = false;
 pagenest_product_patterns();
-product_check(count($patterns) === 3, 'three editable patterns');
+product_check(count($patterns) === 6, 'six editable patterns');
 foreach ($patterns as $pattern) {
     product_check(
         str_contains($pattern['content'], '<!-- wp:heading -->') &&
-            !preg_match('/https?:|"id"|<img|anchor|wp:pagenest/', $pattern['content']),
+            !preg_match(
+                '/https?:|"id"|<img|anchor|wp:pagenest|wp:query|shortcode/',
+                $pattern['content'],
+            ),
         'portable core blocks, no identifiers or remote assets',
     );
 }
+foreach (['topic-groups', 'reading-steps', 'faq'] as $name) {
+    $content = $patterns['pagenest/' . $name]['content'];
+    product_check(
+        str_contains($content, '<h2 class="wp-block-heading">'),
+        'new heading markup matches native serialization',
+    );
+    preg_match_all('/<!-- wp:([a-z-]+)/', $content, $blocks);
+    product_check(
+        !array_diff($blocks[1], ['heading', 'paragraph', 'columns', 'column', 'details']),
+        'new patterns use only static editable core blocks',
+    );
+}
+product_check(
+    substr_count($patterns['pagenest/faq']['content'], '<!-- wp:details -->') === 2,
+    'FAQ has native editable details',
+);
+product_check(
+    substr_count($patterns['pagenest/reading-steps']['content'], '<!-- wp:heading -->') === 4,
+    'reading path contains three steps after introduction',
+);
+product_check(
+    !isset(pagenest_product_schema()['_pagenest_listing']),
+    'object overrides excluded from visual JSON',
+);
+$details_supported = false;
+$patterns = [];
+pagenest_product_patterns();
+product_check(
+    count($patterns) === 5 && !isset($patterns['pagenest/faq']),
+    'missing details capability omits only FAQ pattern',
+);
+ob_start();
+pagenest_product_page();
+$without_details = ob_get_clean();
+product_check(
+    substr_count($without_details, '<figcaption>') === 5 &&
+        !str_contains($without_details, '<details><summary>'),
+    'missing details capability omits FAQ preview',
+);
+$details_supported = true;
+$patterns = [];
+pagenest_product_patterns();
 product_check(!in_array(false, pagenest_product_diagnostics(), true), 'manifest hashes valid');
 $temp = sys_get_temp_dir() . '/pagenest-product-' . getmypid();
 mkdir($temp . '/assets', 0700, true);
