@@ -172,8 +172,9 @@
   color: var(--pagenest-heading) !important;
 }
 .pagenest-site .pagenest-entry h2 {
-  font-size: calc(23px * var(--pagenest-font-scale));
-  margin: 8px 0 10px;
+  font-size: calc(22px * var(--pagenest-font-scale));
+  line-height: 1.45;
+  margin: 6px 0 10px;
 }
 .pagenest-entry-labels,
 .pagenest-excerpt {
@@ -199,7 +200,7 @@
   max-height: 210px;
 }
 .pagenest-home-posts .pagenest-entry-body {
-  padding: 20px 0 0;
+  padding: 14px 0 0;
 }
 .pagenest-home-posts .pagenest-no-image .pagenest-entry-body {
   padding-top: 0;

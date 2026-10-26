@@ -81,40 +81,13 @@ add_action('login_enqueue_scripts', static function () {
 add_action(
     'pagenest_header_actions',
     static function () {
-        static $instance = 0;
-        $instance++;
-        echo '<details class="pagenest-site-preferences" data-pagenest-site-preferences hidden><summary>' .
-            esc_html__('Appearance', 'pagenest') .
-            '</summary><div><fieldset class="pagenest-appearance-group"><legend>' .
-            esc_html__('Site color mode', 'pagenest') .
-            '</legend><div class="pagenest-appearance-choices">';
-        foreach (
-            [
-                'default' => __('Site default', 'pagenest'),
-                'light' => __('Light', 'pagenest'),
-                'dark' => __('Dark', 'pagenest'),
-                'system' => __('Follow system', 'pagenest'),
-            ]
-            as $value => $label
-        ) {
-            echo '<label class="pagenest-appearance-choice"><input type="radio" name="pagenest-color-mode-' .
-                $instance .
-                '" data-pagenest-color-mode value="' .
-                esc_attr($value) .
-                '"' .
-                ($value === 'default' ? ' checked' : '') .
-                '><span class="pagenest-appearance-preview" data-preview="' .
-                esc_attr($value) .
-                '" aria-hidden="true"><i></i><i></i><i></i></span><span>' .
-                esc_html($label) .
-                '</span></label>';
-        }
-        echo '</div></fieldset><p>' .
-            esc_html__(
-                'Applies across this site in this browser. Article reading settings remain available separately.',
-                'pagenest',
-            ) .
-            '</p><span role="status" aria-live="polite"></span></div></details>';
+        echo '<div class="pagenest-appearance-controls"><button type="button" class="pagenest-cycle-mode" data-pagenest-cycle-mode hidden aria-label="' .
+            esc_attr__('Appearance', 'pagenest') .
+            '">' .
+            pagenest_ui_icon('sun') .
+            pagenest_ui_icon('moon') .
+            pagenest_ui_icon('monitor') .
+            '</button><span class="screen-reader-text" role="status" aria-live="polite"></span></div>';
     },
     30,
 );
@@ -141,6 +114,13 @@ add_action(
             ),
             'saved' => __('Appearance preference saved in this browser.', 'pagenest'),
             'unsaved' => __('Applied to this page; browser storage is unavailable.', 'pagenest'),
+            'appearance' => __('Appearance', 'pagenest'),
+            'switchTo' => __('Switch to %s', 'pagenest'),
+            'modes' => [
+                'light' => __('Light', 'pagenest'),
+                'dark' => __('Dark', 'pagenest'),
+                'system' => __('Follow system', 'pagenest'),
+            ],
         ]);
     },
     30,

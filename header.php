@@ -32,14 +32,6 @@ if (isset($brand_parts[1])) { ?><span class="pagenest-brand-note"><?php echo esc
     ' · ' . $brand_parts[1],
 ); ?></span><?php }
 ?></span></a>
-            <div class="pagenest-header-actions" data-pagenest-header-actions><?php do_action(
-                'pagenest_header_actions',
-                get_queried_object_id(),
-            ); ?></div>
-            <details class="pagenest-header-search">
-                <summary><?php echo esc_html__('Search', 'pagenest'); ?></summary>
-                <div class="pagenest-search-popover"><?php get_search_form(); ?></div>
-            </details>
             <button class="pagenest-menu-toggle" type="button" aria-expanded="false"
                 aria-controls="pagenest-nav"><?php echo esc_html__(
                     'Menu',
@@ -62,11 +54,50 @@ if ($items) {
     'pagenest',
 ); ?></a><?php
 }
-?><a class="pagenest-account" href="<?php echo esc_url(
-    is_user_logged_in() ? admin_url() : wp_login_url(),
-); ?>"><?php echo esc_html(
-    is_user_logged_in() ? __('My account', 'pagenest') : __('Log in', 'pagenest'),
-); ?></a></nav>
+?>
+                <?php
+                $account_label = is_user_logged_in()
+                    ? __('My account', 'pagenest')
+                    : __('Log in', 'pagenest');
+                $account_url = is_user_logged_in() ? admin_url() : wp_login_url();
+                ob_start();
+                do_action('pagenest_account_actions', get_queried_object_id());
+                $account_actions = trim(ob_get_clean());
+                if ($account_actions !== '') { ?>
+                <details class="pagenest-account-menu pagenest-dropdown">
+                    <summary><?php echo esc_html__('My space', 'pagenest'); ?></summary>
+                    <div class="pagenest-dropdown-links"><a class="pagenest-account" href="<?php echo esc_url(
+                        $account_url,
+                    ); ?>"><?php echo esc_html(
+    $account_label,
+); ?></a><?php echo $account_actions; ?></div>
+                </details>
+                <?php } else { ?>
+                <a class="pagenest-account pagenest-account-direct" href="<?php echo esc_url(
+                    $account_url,
+                ); ?>" aria-label="<?php echo esc_attr($account_label); ?>"><?php echo esc_html(
+    $account_label,
+); ?></a>
+                <?php }
+                ?>
+            </nav>
+            <details class="pagenest-header-search">
+                <summary aria-label="<?php echo esc_attr__(
+                    'Search',
+                    'pagenest',
+                ); ?>"><?php echo pagenest_ui_icon(
+    'search',
+); ?><span class="screen-reader-text"><?php echo esc_html__(
+    'Search',
+    'pagenest',
+); ?></span></summary>
+                <div class="pagenest-search-popover"><?php get_search_form(); ?></div>
+            </details>
+            <div class="pagenest-header-actions" data-pagenest-header-actions><?php do_action(
+                'pagenest_header_actions',
+                get_queried_object_id(),
+            ); ?></div>
+
         </div>
     </header>
     <?php pagenest_render_region('after_header'); ?>

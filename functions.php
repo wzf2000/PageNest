@@ -37,6 +37,7 @@ add_action('after_setup_theme', static function () {
     ]);
     add_theme_support('pagenest-independent-layout');
     add_theme_support('pagenest-reading-slots');
+    add_theme_support('pagenest-account-actions');
     add_editor_style('assets/content.css');
     add_editor_style('assets/appearance.css');
     register_nav_menu('pagenest_primary', __('Site navigation', 'pagenest'));

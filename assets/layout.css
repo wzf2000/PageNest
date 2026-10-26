@@ -169,7 +169,7 @@ body.pagenest-site {
 .pagenest-menu-toggle {
   display: none;
 }
-.pagenest-account {
+.pagenest-account-direct {
   font-size: calc(13px * var(--pagenest-font-scale, 1)) !important;
 }
 .pagenest-list-header {

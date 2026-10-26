@@ -28,6 +28,9 @@ for (const width of [1440, 390]) {
             await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
           ).toBe(true);
           if (layout.startsWith('grid')) {
+            const image = await cards.first().locator('.pagenest-entry-image').boundingBox();
+            const titleBox = await cards.first().locator('h2').boundingBox();
+            expect(titleBox.y - (image.y + image.height)).toBeCloseTo(16, 0);
             const columns = await page
               .locator('.pagenest-post-list')
               .evaluate((node) => getComputedStyle(node).gridTemplateColumns.split(' ').length);

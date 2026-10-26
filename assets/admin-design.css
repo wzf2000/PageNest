@@ -302,6 +302,12 @@
   }
 }
 @media (max-width: 600px) {
+  .pagenest-settings-overview {
+    row-gap: 12px;
+  }
+  .pagenest-settings-overview > div:first-child > p {
+    margin-block: 0;
+  }
   .pagenest-settings-overview,
   .pagenest-settings-columns,
   .pagenest-settings-group,

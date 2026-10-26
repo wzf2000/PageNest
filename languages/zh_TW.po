@@ -818,9 +818,6 @@ msgstr "外觀"
 msgid "Appearance preference saved in this browser."
 msgstr "外觀偏好已儲存在此瀏覽器。"
 
-msgid "Applies across this site in this browser. Article reading settings remain available separately."
-msgstr "應用於此瀏覽器中的全站頁面，文章閱讀設定仍可單獨調整。"
-
 msgid "Article layout"
 msgstr "文章版面配置"
 
@@ -859,12 +856,6 @@ msgstr "PageNest 版面配置"
 
 msgid "Presets change presentation only. Existing content, tool permissions and reading controls are preserved."
 msgstr "預設僅改變展示，保留已有正文、工具權限與閱讀控制項。"
-
-msgid "Site color mode"
-msgstr "全站明暗模式"
-
-msgid "Site default"
-msgstr "網站預設"
 
 msgid "Standard"
 msgstr "標準"
@@ -1153,3 +1144,9 @@ msgstr "此內容區不支援該版面配置。請使用預設群組、可對齊
 
 msgid "Child positioning is not supported in public content regions."
 msgstr "公開內容區不支援子項定位。"
+
+msgid "My space"
+msgstr "我的"
+
+msgid "Switch to %s"
+msgstr "切換為%s"

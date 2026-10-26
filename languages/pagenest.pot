@@ -132,11 +132,11 @@ msgstr ""
 msgid "All public pages and listings"
 msgstr ""
 
-#: presentation.php:87
+#: presentation.php:117 presentation.php:85
 msgid "Appearance"
 msgstr ""
 
-#: presentation.php:142
+#: presentation.php:115
 msgid "Appearance preference saved in this browser."
 msgstr ""
 
@@ -144,12 +144,8 @@ msgstr ""
 msgid "Appearance settings imported."
 msgstr ""
 
-#: i18n.php:46 presentation.php:143
+#: i18n.php:46 presentation.php:116
 msgid "Applied to this page; browser storage is unavailable."
-msgstr ""
-
-#: presentation.php:113
-msgid "Applies across this site in this browser. Article reading settings remain available separately."
 msgstr ""
 
 #: inc.php:30
@@ -188,7 +184,7 @@ msgstr ""
 msgid "Article font size (px)"
 msgstr ""
 
-#: presentation.php:176
+#: presentation.php:156
 msgid "Article layout"
 msgstr ""
 
@@ -216,7 +212,7 @@ msgstr ""
 msgid "Article width"
 msgstr ""
 
-#: discovery.php:8 header.php:60
+#: discovery.php:8 header.php:52
 msgid "Articles"
 msgstr ""
 
@@ -259,7 +255,7 @@ msgstr ""
 msgid "Authors"
 msgstr ""
 
-#: presentation.php:220
+#: presentation.php:200
 msgid "Automatic"
 msgstr ""
 
@@ -505,7 +501,7 @@ msgstr ""
 msgid "Customize the home background, topics and authors. Preview your changes before saving."
 msgstr ""
 
-#: presentation.php:162 presentation.php:95 reader-preferences.php:31
+#: presentation.php:121 presentation.php:142 reader-preferences.php:31
 msgid "Dark"
 msgstr ""
 
@@ -517,7 +513,7 @@ msgstr ""
 msgid "Default"
 msgstr ""
 
-#: presentation.php:158
+#: presentation.php:138
 msgid "Default site color mode"
 msgstr ""
 
@@ -634,7 +630,7 @@ msgstr ""
 msgid "Focused reading"
 msgstr ""
 
-#: presentation.php:163 presentation.php:96
+#: presentation.php:122 presentation.php:143
 msgid "Follow system"
 msgstr ""
 
@@ -650,7 +646,7 @@ msgstr ""
 msgid "Footer layout"
 msgstr ""
 
-#: footer.php:18 functions.php:43
+#: footer.php:18 functions.php:44
 msgid "Footer navigation"
 msgstr ""
 
@@ -706,7 +702,7 @@ msgstr ""
 msgid "Hide sidebar"
 msgstr ""
 
-#: header.php:57
+#: header.php:49
 msgid "Home"
 msgstr ""
 
@@ -798,11 +794,11 @@ msgstr ""
 msgid "Latest articles"
 msgstr ""
 
-#: presentation.php:256
+#: presentation.php:236
 msgid "Layout affects presentation only and never enables a tool or changes access. Invalid combinations use the standard layout."
 msgstr ""
 
-#: presentation.php:237
+#: presentation.php:217
 msgid "Layout preset"
 msgstr ""
 
@@ -814,7 +810,7 @@ msgstr ""
 msgid "Leave empty to hide. Introductions support line breaks."
 msgstr ""
 
-#: presentation.php:161 presentation.php:94
+#: presentation.php:120 presentation.php:141
 msgid "Light"
 msgstr ""
 
@@ -846,7 +842,7 @@ msgstr ""
 msgid "Local read-only diagnostics"
 msgstr ""
 
-#: header.php:68
+#: header.php:61
 msgid "Log in"
 msgstr ""
 
@@ -874,7 +870,7 @@ msgstr ""
 msgid "Maximum site width (px)"
 msgstr ""
 
-#: header.php:44
+#: header.php:36
 msgid "Menu"
 msgstr ""
 
@@ -894,8 +890,12 @@ msgstr ""
 msgid "More filters"
 msgstr ""
 
-#: header.php:68
+#: header.php:60
 msgid "My account"
+msgstr ""
+
+#: header.php:68
+msgid "My space"
 msgstr ""
 
 #: customizer.php:210
@@ -958,7 +958,7 @@ msgstr ""
 msgid "Open the WordPress Customizer to preview and save settings. Installing the theme does not create articles, pages or media."
 msgstr ""
 
-#: presentation.php:167 product.php:299
+#: presentation.php:147 product.php:299
 msgid "Page layouts"
 msgstr ""
 
@@ -966,7 +966,7 @@ msgstr ""
 msgid "Page not found"
 msgstr ""
 
-#: presentation.php:216
+#: presentation.php:196
 msgid "Page purpose"
 msgstr ""
 
@@ -982,7 +982,7 @@ msgstr ""
 msgid "PageNest home page"
 msgstr ""
 
-#: presentation.php:205
+#: presentation.php:185
 msgid "PageNest layout"
 msgstr ""
 
@@ -1018,7 +1018,7 @@ msgstr ""
 msgid "Practice and exploration"
 msgstr ""
 
-#: presentation.php:168 product.php:300
+#: presentation.php:148 product.php:300
 msgid "Presets change presentation only. Existing content, tool permissions and reading controls are preserved."
 msgstr ""
 
@@ -1030,7 +1030,7 @@ msgstr ""
 msgid "Previous page"
 msgstr ""
 
-#: header.php:48
+#: header.php:40
 msgid "Primary navigation"
 msgstr ""
 
@@ -1143,7 +1143,7 @@ msgstr ""
 msgid "Room for your next idea"
 msgstr ""
 
-#: header.php:40 searchform.php:25
+#: header.php:85 header.php:90 searchform.php:25
 msgid "Search"
 msgstr ""
 
@@ -1249,14 +1249,6 @@ msgstr ""
 msgid "Site background"
 msgstr ""
 
-#: presentation.php:89
-msgid "Site color mode"
-msgstr ""
-
-#: presentation.php:93
-msgid "Site default"
-msgstr ""
-
 #: i18n.php:40
 msgid "Site defaults restored."
 msgstr ""
@@ -1265,7 +1257,7 @@ msgstr ""
 msgid "Site defaults restored; browser storage is unavailable."
 msgstr ""
 
-#: functions.php:42
+#: functions.php:43
 msgid "Site navigation"
 msgstr ""
 
@@ -1355,6 +1347,11 @@ msgstr ""
 msgid "Summary and next steps"
 msgstr ""
 
+#: presentation.php:118
+#, php-format
+msgid "Switch to %s"
+msgstr ""
+
 #: theme.json
 msgid "System font"
 msgstr ""
@@ -1431,11 +1428,11 @@ msgstr ""
 msgid "Title, keywords…"
 msgstr ""
 
-#: presentation.php:178
+#: presentation.php:158
 msgid "Tool page layout"
 msgstr ""
 
-#: presentation.php:18 presentation.php:222
+#: presentation.php:18 presentation.php:202
 msgid "Tool workspace"
 msgstr ""
 
@@ -1452,7 +1449,7 @@ msgstr ""
 msgid "Topic introduction"
 msgstr ""
 
-#: presentation.php:221
+#: presentation.php:201
 msgid "Topic or information page"
 msgstr ""
 
@@ -1460,7 +1457,7 @@ msgstr ""
 msgid "Topic overview"
 msgstr ""
 
-#: presentation.php:177
+#: presentation.php:157
 msgid "Topic page layout"
 msgstr ""
 
@@ -1508,7 +1505,7 @@ msgstr ""
 msgid "Use only static paragraphs, headings, lists, groups, columns, buttons, images, separators, spacers and supported Details blocks. HTML, shortcodes, reusable patterns and dynamic blocks are not supported."
 msgstr ""
 
-#: presentation.php:239
+#: presentation.php:219
 msgid "Use site layout default"
 msgstr ""
 

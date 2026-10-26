@@ -96,6 +96,18 @@
   height: 100%;
   max-height: none;
 }
+.pagenest-site :is(.pagenest-list-grid-2, .pagenest-list-grid-3) .pagenest-entry-body {
+  padding: 0;
+}
+.pagenest-site
+  :is(.pagenest-list-grid-2, .pagenest-list-grid-3)
+  .pagenest-entry-image
+  + .pagenest-entry-body {
+  padding-block-start: 16px;
+}
+.pagenest-site :is(.pagenest-list-grid-2, .pagenest-list-grid-3) .pagenest-entry h2 {
+  margin-block-start: 0;
+}
 @container (min-width: 620px) {
   .pagenest-site :is(.pagenest-list-grid-2, .pagenest-list-grid-3) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
