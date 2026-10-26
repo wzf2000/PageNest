@@ -1,0 +1,397 @@
+/* The existing palette remains the light source of truth. Dark mode changes semantic tokens. */
+:root[data-pagenest-color-scheme='light'] {
+  color-scheme: light;
+}
+:root[data-pagenest-color-scheme='dark'] {
+  color-scheme: dark;
+  --pagenest-background: #171e26;
+  --pagenest-surface: #202833;
+  --pagenest-text: #dce3ec;
+  --pagenest-heading: #f1f5fa;
+  --pagenest-content-heading: #f1f5fa;
+  --pagenest-muted: #b1bdcc;
+  --pagenest-accent: #a5cdf8;
+  --pagenest-accent-hover: #d0e5ff;
+  --pagenest-content-link: #a5cdf8;
+  --pagenest-content-link-hover: #d0e5ff;
+  --pagenest-focus: #a5cdf8;
+  --pagenest-border: #465363;
+  --pagenest-soft: #2c3745;
+  --pagenest-code-background: #19212b;
+  --pagenest-code-text: #d7e5f4;
+  --pagenest-quote-background: #273341;
+  --pagenest-quote-border: #7791ad;
+  --pagenest-on-accent: #142130;
+  --pagenest-hero-overlay: linear-gradient(
+    90deg,
+    rgb(32 40 51 / 98%),
+    rgb(32 40 51 / 93%) 36%,
+    rgb(32 40 51 / 30%)
+  );
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-pagenest-color-scheme='system'] {
+    color-scheme: dark;
+    --pagenest-background: #171e26;
+    --pagenest-surface: #202833;
+    --pagenest-text: #dce3ec;
+    --pagenest-heading: #f1f5fa;
+    --pagenest-content-heading: #f1f5fa;
+    --pagenest-muted: #b1bdcc;
+    --pagenest-accent: #a5cdf8;
+    --pagenest-accent-hover: #d0e5ff;
+    --pagenest-content-link: #a5cdf8;
+    --pagenest-content-link-hover: #d0e5ff;
+    --pagenest-focus: #a5cdf8;
+    --pagenest-border: #465363;
+    --pagenest-soft: #2c3745;
+    --pagenest-code-background: #19212b;
+    --pagenest-code-text: #d7e5f4;
+    --pagenest-quote-background: #273341;
+    --pagenest-quote-border: #7791ad;
+    --pagenest-on-accent: #142130;
+    --pagenest-hero-overlay: linear-gradient(
+      90deg,
+      rgb(32 40 51 / 98%),
+      rgb(32 40 51 / 93%) 36%,
+      rgb(32 40 51 / 30%)
+    );
+  }
+}
+.pagenest-site .pagenest-hero {
+  background-image:
+    var(
+      --pagenest-hero-overlay,
+      linear-gradient(
+        90deg,
+        rgba(239, 245, 251, 0.97) 0%,
+        rgba(239, 245, 251, 0.93) 36%,
+        rgba(239, 245, 251, 0.18) 100%
+      )
+    ),
+    var(--pagenest-hero-image, none);
+}
+.pagenest-site .pagenest-article-footer {
+  background: var(--pagenest-soft, #f8fafc);
+}
+.pagenest-search button,
+.pagenest-pagination .current,
+.pagenest-comment-submit {
+  color: var(--pagenest-on-accent, #fff);
+}
+.pagenest-site .pagenest-comments input.pagenest-comment-submit:not(:disabled),
+.pagenest-site .pagenest-button {
+  color: var(--pagenest-on-accent, #fff) !important;
+}
+.pagenest-feed {
+  margin: 0;
+  align-self: center;
+  font-size: 13px;
+}
+@media (min-width: 1024px) {
+  .pagenest-context-article.pagenest-layout-focused .pagenest-main {
+    max-width: 1120px;
+  }
+  .pagenest-context-article.pagenest-layout-focused .pagenest-reading-rail > .pagenest-widget {
+    display: none;
+  }
+  .pagenest-context-article.pagenest-layout-wide .pagenest-main,
+  .pagenest-context-topic.pagenest-layout-wide .pagenest-main {
+    max-width: 1440px;
+  }
+  .pagenest-context-topic.pagenest-layout-wide .pagenest-page-column {
+    max-width: none;
+  }
+  .pagenest-context-topic.pagenest-layout-overview .pagenest-page-column {
+    max-width: none;
+  }
+  .pagenest-context-topic.pagenest-layout-overview .pagenest-article-header {
+    border-bottom: 1px solid var(--pagenest-border);
+  }
+  .pagenest-context-topic.pagenest-layout-overview .pagenest-article-body {
+    padding-block: 24px;
+  }
+  .pagenest-context-topic.pagenest-layout-overview .pn-guide {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+  .pagenest-context-tool.pagenest-layout-workspace .pagenest-main {
+    max-width: 1500px;
+  }
+  .pagenest-context-tool.pagenest-layout-workspace .pagenest-page-column {
+    max-width: none;
+  }
+  .pagenest-context-tool.pagenest-layout-workspace .pagenest-article-body {
+    padding: 20px;
+  }
+  .pagenest-context-tool.pagenest-layout-workspace .pagenest-article-header {
+    padding: 20px;
+  }
+  .pagenest-context-tool.pagenest-layout-focused .pagenest-main {
+    max-width: 1000px;
+  }
+}
+@media (max-width: 767px) {
+  .pagenest-site .pagenest-hero {
+    background-image:
+      var(
+        --pagenest-hero-overlay,
+        linear-gradient(90deg, rgba(239, 245, 251, 0.97), rgba(239, 245, 251, 0.72))
+      ),
+      var(--pagenest-hero-image, none);
+  }
+}
+/* Login follows the same site setting and browser preference without changing WordPress admin. */
+body.login.pagenest-login {
+  background-color: var(--pagenest-background, #f7f6f2);
+  color: var(--pagenest-text, #293630);
+}
+.pagenest-login
+  :is(
+    #loginform,
+    #registerform,
+    #lostpasswordform,
+    .pagenest-login-notice,
+    #nav,
+    #backtoblog,
+    .language-switcher
+  ) {
+  background: var(--pagenest-surface, #fffefb);
+  color: var(--pagenest-text, #293630);
+  border-color: var(--pagenest-border, #e1e5df);
+}
+.pagenest-login :is(#nav, #backtoblog, .pagenest-login-notice) a {
+  color: var(--pagenest-accent, #426354);
+}
+
+/* Keep the brand and menu together when reading extensions add header actions. */
+@media (max-width: 767px) {
+  .pagenest-site .pagenest-nav-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 4px 8px;
+    padding-block: 8px;
+  }
+  .pagenest-site .pagenest-brand {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+  }
+  .pagenest-site .pagenest-menu-toggle {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .pagenest-site .pagenest-header-actions {
+    grid-column: 1;
+    grid-row: 2;
+    margin: 0;
+    min-width: 0;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .pagenest-site .pagenest-header-search {
+    grid-column: 2;
+    grid-row: 2;
+    margin: 0;
+  }
+}
+
+/* Native WordPress messages must follow the login surface, including error pages. */
+body.login.pagenest-login :is(.message, .notice, .success, #login_error) {
+  background: var(--pagenest-surface, #fffefb);
+  color: var(--pagenest-text, #293630);
+}
+body.login.pagenest-login :is(.message, .notice, .success, #login_error) a {
+  color: var(--pagenest-accent, #426354);
+}
+body.login.pagenest-login :is(.message, .notice, .success, #login_error) a:hover {
+  color: var(--pagenest-accent-hover, #2b493a);
+}
+body.login.pagenest-login :is(.message, .notice, .success, #login_error) a:focus-visible {
+  outline: 2px solid var(--pagenest-focus, #426354);
+  outline-offset: 3px;
+}
+/* The header follows its DOM order: navigation, search, notifications and appearance. */
+.pagenest-ui-icon,
+.pagenest-header-actions .pn-header-notifications svg {
+  width: 20px;
+  height: 20px;
+  flex: none;
+}
+.pagenest-header .screen-reader-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+.pagenest-site .pagenest-header-search > summary::before {
+  content: none;
+}
+.pagenest-site .pagenest-header-search,
+.pagenest-site .pagenest-header-actions {
+  margin-inline-start: 0;
+}
+.pagenest-site #pagenest-nav {
+  margin-inline-start: auto;
+}
+.pagenest-site .pagenest-header-actions {
+  gap: 4px;
+}
+.pagenest-appearance-controls {
+  display: flex;
+  align-items: center;
+}
+.pagenest-site .pagenest-cycle-mode,
+.pagenest-site .pagenest-header-actions .pn-header-notifications,
+.pagenest-site .pagenest-header-search > summary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--pagenest-muted);
+  cursor: pointer;
+}
+.pagenest-site .pagenest-cycle-mode:hover,
+.pagenest-site .pagenest-header-actions .pn-header-notifications:hover,
+.pagenest-site .pagenest-header-search > summary:hover {
+  color: var(--pagenest-accent);
+  background: var(--pagenest-soft);
+}
+.pagenest-cycle-mode svg {
+  display: none;
+}
+.pagenest-cycle-mode[data-mode='light'] [data-icon='sun'],
+.pagenest-cycle-mode[data-mode='dark'] [data-icon='moon'],
+.pagenest-cycle-mode[data-mode='system'] [data-icon='monitor'] {
+  display: block;
+}
+.pagenest-cycle-mode:focus-visible,
+.pagenest-account-menu > summary:focus-visible {
+  outline: 2px solid var(--pagenest-focus);
+  outline-offset: 3px;
+}
+.pagenest-site .pagenest-cycle-mode[hidden],
+.pagenest-site .pagenest-header-actions .pn-header-notifications[hidden],
+.pagenest-site .pagenest-account-menu [data-pn-open-reading][hidden] {
+  display: none !important;
+}
+.pagenest-site .pagenest-account-menu > summary,
+.pagenest-site .pagenest-account-direct {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px;
+  color: var(--pagenest-muted);
+  cursor: pointer;
+  list-style: none;
+}
+.pagenest-account-menu > div {
+  min-width: 180px;
+}
+.pagenest-site .pagenest-account-menu > .pagenest-dropdown-links {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  min-width: 0;
+  max-width: calc(100vw - 32px);
+  inset-inline-end: 0;
+  padding: 6px;
+  gap: 0;
+}
+.pagenest-site .pagenest-account-menu > .pagenest-dropdown-links > :is(a, button) {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  font-family: var(--pagenest-body-font, system-ui, sans-serif);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: var(--pagenest-text);
+  text-align: start;
+  align-items: center;
+  justify-content: flex-start;
+}
+.pagenest-site .pagenest-account-menu [data-pn-open-reading] {
+  display: block;
+  width: 100%;
+  text-align: start;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--pagenest-text);
+}
+@media (max-width: 1023px) {
+  .pagenest-site .pagenest-nav-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 4px 8px;
+  }
+  .pagenest-site .pagenest-brand {
+    grid-column: 1 / 3;
+    grid-row: 1;
+  }
+  .pagenest-site .pagenest-menu-toggle {
+    grid-column: 3;
+    grid-row: 1;
+  }
+  .pagenest-site #pagenest-nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin: 0;
+  }
+  .pagenest-site .pagenest-header-search {
+    grid-column: 1;
+    grid-row: 3;
+    justify-self: end;
+  }
+  .pagenest-site .pagenest-header-actions {
+    grid-column: 2 / -1;
+    grid-row: 3;
+    flex-wrap: nowrap;
+  }
+  .pagenest-site .pagenest-header-search .pagenest-search-popover {
+    inset-inline: 16px;
+    top: 100%;
+  }
+  .pagenest-site .pagenest-account-menu > div {
+    position: static;
+  }
+  .pagenest-site .pagenest-account-menu > .pagenest-dropdown-links {
+    width: 100%;
+    max-width: none;
+    box-shadow: none;
+  }
+}
+@media (min-width: 1024px) {
+  .pagenest-site .pagenest-header-two-row .pagenest-brand {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+  .pagenest-site .pagenest-header-two-row #pagenest-nav {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .pagenest-site .pagenest-header-two-row .pagenest-header-search {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .pagenest-site .pagenest-header-two-row .pagenest-header-actions {
+    grid-column: 3;
+    grid-row: 2;
+  }
+}

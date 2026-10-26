@@ -194,8 +194,9 @@ function get_theme_mod($key, $default = false)
 }
 function get_option($key)
 {
-    global $legacy_mods, $posts_page_id;
+    global $legacy_mods, $posts_page_id, $fixture_reading;
     return match ($key) {
+        'pagenest_companion_reading' => !empty($fixture_reading) ? '1' : '0',
         'page_for_posts' => $posts_page_id,
         'stylesheet' => 'pagenest',
         default => null,
@@ -439,7 +440,7 @@ function wp_get_nav_menu_items(...$args)
 }
 function is_user_logged_in()
 {
-    return false;
+    return !empty($GLOBALS['fixture_logged_in']);
 }
 function wp_login_url()
 {

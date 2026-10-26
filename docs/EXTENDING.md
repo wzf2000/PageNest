@@ -30,7 +30,7 @@
 `pagenest-integration-ready` 事件后，按 DOM 顺序将它们放在顶栏菜单按钮前。
 属性值由扩展自行定义，事件无需 detail，可反复触发。
 现有 `.pagenest-notes-slot` 和 `pagenest-reading-layout` 事件供阅读扩展复用；主题不读取笔记数据。
-主题提供 `pagenest_header_actions`、`pagenest_reading_actions` 动作及 `[data-pagenest-header-actions]`、`[data-pagenest-reading-panel]` DOM 位置。扩展可直接注册入口；没有配套插件时布局和目录正常工作。正文、表格滚动和题目提示分别使用 `pagenest-article-body`、`pagenest-table-scroll`、`pagenest-exercise-hint`；旧标识映射由配套插件的外部配置负责。
+主题提供 `pagenest_header_actions`、`pagenest_reading_actions` 动作及 `[data-pagenest-header-actions]`、`[data-pagenest-reading-panel]` DOM 位置。账号菜单另提供 `pagenest_account_actions` 动作与 `pagenest-account-actions` 主题特性；扩展确认该特性后可将个人入口放入账号菜单，在旧主题继续使用原页眉动作。账号菜单保留原登录或后台链接；没有额外入口时显示直接链接。扩展可直接注册入口；没有配套插件时布局和目录正常工作。正文、表格滚动和题目提示分别使用 `pagenest-article-body`、`pagenest-table-scroll`、`pagenest-exercise-hint`；旧标识映射由配套插件的外部配置负责。
 
 `pagenest-reading-layout` 在阅读侧栏初始化与尺寸更新后于 document 上派发，无需 detail。扩展可监听它重新计算自己的布局；`.pagenest-notes-slot` 是默认隐藏的接入槽，扩展自行负责数据、权限和显示状态。
 
@@ -100,7 +100,9 @@
 `data-pagenest-color-scheme`; semantic `--pagenest-*` colors include `--pagenest-on-accent` for text on
 accent backgrounds. CSS handles system media changes; `pagenest-color-scheme-change` also reports
 `{mode,effective}` for optional consumers. The browser override uses `pagenest-site-appearance-v1`
-and is independent of paragraph records and article reader preferences. No account data is stored.
+and is independent of paragraph records and article reader preferences. No account data is stored. The single header button cycles light → dark → system; its accessible
+name announces the current mode and next action. Without a saved override, the site default applies.
+A click saves the selected mode without rewriting other existing browser preferences.
 
 `pagenest_layout_article`, `pagenest_layout_topic`, and `pagenest_layout_tool` default to `standard`.
 Per-object `_pagenest_layout` metadata can override the display context/preset through an authorized
