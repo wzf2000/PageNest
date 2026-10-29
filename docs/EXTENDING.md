@@ -52,13 +52,29 @@
 
 `pagenest_card($id, $context = 'list')` 可传 `home` 保留首页卡片布局；列表预设为 `pagenest_list_style`，其余布尔项为 `pagenest_list_covers`、`pagenest_article_cover`、`pagenest_show_updated`、`pagenest_show_reading_time`。这些选项仅影响展示，不修改原文章／附件关系。
 
-`reader-preferences.php` 在现有 `pagenest_reading_actions` 输出独立控件。脚本只移动自有节点，局部 data 属性和 CSS 变量不改变目录、正文锚点或评论槽协议。`pagenest-reader-preferences-v1` 本地存储只接受版本 1 与字号／宽度／配色白名单，无服务端同步；插件不可将其当作授权、身份或业务设置。
+`reader-preferences.php` 在现有 `pagenest_reading_actions` 输出独立控件。脚本只移动自有节点，局部 data 属性和 CSS 变量不改变目录、正文锚点或评论槽协议。`pagenest-reader-preferences-v1` 本地存储只接受版本 1 与字号／宽度／配色白名单，主题自身无服务端同步；插件不可将其当作授权、身份或业务设置。
 
 原生博客、归档和搜索列表由 `pagenest_listing_presentation()` 解析。`pagenest_listing_{blog|archive|search}_layout` 仅接受 `inherit/standard/compact/grid-2/grid-3`，默认与非法值均为 `inherit`，继承 `pagenest_list_style`；`pagenest_listing_{blog|archive|search}_sidebar` 仅接受 `inherit/show/hide`，默认与非法值均为 `inherit`，保留原来的侧栏。仅在原生对应上下文应用，404 与静态页面不读取这些覆盖。设置及全局列表样式加入版本 1 视觉 JSON 白名单；导入非法值整包拒绝，遗漏值保留。菜单位置、内容与用户数据不在白名单内。
 
 分类专属覆盖保存在 term meta `_pagenest_listing`，值为 `['layout' => 'inherit|standard|compact|grid-2|grid-3', 'sidebar' => 'inherit|show|hide']`。`category_edit_form_fields` 展示原生编辑字段，`edited_category` 保存时核对目标 taxonomy、`edit_term` 能力与绑定 term ID 的 nonce；缺字段或非法值不写入，双继承删除本项 meta。布局和侧栏分别按「当前分类显式值 → 全局 archive 值 → 旧列表样式／默认侧栏」解析。仅当前 `is_category()` 的 queried ID 生效，不遍历父分类，不影响 tag 或其他 term meta；不注册 REST 写入、不加入全站视觉 JSON。
 
 `pagenest_footer` 是独立原生菜单位置；分配后替换页脚两个快捷链接，`wp_nav_menu` 禁用自动页面回退并保留全部深度。未分配继续使用原快捷链接。菜单使用原生链接与列表，不要求脚本或额外 walker，主导航位置不变。
+
+### 阅读偏好事件协议（1.8）
+
+1.8.0 起提供以下版本 1 协议。主题无网络请求，账号身份、授权、远程存储与撤回由扩展负责。所有事件在 `document` 上派发，事件名以 `pagenest-reader-preferences-` 开头。
+
+| 事件      | 用途与 `detail`                                                                                                    |
+| --------- | ------------------------------------------------------------------------------------------------------------------ |
+| `request` | 扩展握手：`{version:1,requestId?}`；主题即使已完成初始化也会返回 `ready`                                           |
+| `ready`   | 主题可用：`{version:1,source,changed:[],preferences,requestId}`                                                    |
+| `change`  | 读者操作：`{version:1,source:'user',changed,preferences,requestId:''}`；`changed` 只列实际改动字段，恢复默认列三项 |
+| `apply`   | 扩展应用：`{version:1,source,changed,preferences,requestId}`；`source` 为 `remote` 或 `local`                      |
+| `applied` | 应用完成：沿用版本、来源、改动字段与请求编号，并返回实际显示的 `preferences`                                       |
+
+`requestId` 为最长 100 字符的字符串。`changed` 是不重复、最多三项的白名单：`size`（`default/18/20/22`）、`width`（`default/compact/wide`）、`palette`（`default/paper/dark`）。`apply` 的 `source:remote` 用 `changed` 指定的有效字段建立本页覆盖，其余使用本机值；每次应用替换上一份远程覆盖。`source:local` 清除覆盖，扩展可传空 `changed` 与空 `preferences`。
+
+远程应用仅更新显示，不写 `pagenest-reader-preferences-v1`，也不派发用户 `change`。远程覆盖期间用户改动一项时，只改写本机这一项，保留本机其他字段；`change.preferences` 是当前显示值，扩展只能上传 `changed` 指定字段，不能把整份显示值当成本机改动。扩展负责在隐藏、离开页面或认证失效时应用 `source:local`，并校验自己的响应代数，防止迟到结果恢复旧覆盖。`ready/request` 握手避免双方脚本加载顺序造成漏接。
 
 ## 配置中心与样板（1.2）
 

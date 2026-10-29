@@ -537,6 +537,10 @@ msgstr ""
 msgid "Description (optional)"
 msgstr ""
 
+#: reader-preferences.php:66
+msgid "Device reading preferences are kept in this browser."
+msgstr ""
+
 #: inc.php:19
 msgid "Different interests, shared stories.\nMeet the authors sharing their experiences here."
 msgstr ""
@@ -1052,10 +1056,6 @@ msgstr ""
 
 #: reader-preferences.php:27
 msgid "Reading palette"
-msgstr ""
-
-#: reader-preferences.php:66
-msgid "Reading preferences are saved only in this browser."
 msgstr ""
 
 #: i18n.php:41

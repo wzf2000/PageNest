@@ -63,7 +63,7 @@ function pagenest_reader_preferences_controls()
     echo '<div class="pagenest-reader-footer"><button type="button" data-reader-reset>' .
         esc_html__('Restore defaults', 'pagenest') .
         '</button><p><span class="pagenest-reader-hint">' .
-        esc_html__('Reading preferences are saved only in this browser.', 'pagenest') .
+        esc_html__('Device reading preferences are kept in this browser.', 'pagenest') .
         '</span><span class="pagenest-reader-status" role="status" aria-live="polite"></span></p></div></div></details>';
 }
 add_action('pagenest_reading_actions', 'pagenest_reader_preferences_controls', 20);

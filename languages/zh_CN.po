@@ -543,8 +543,8 @@ msgstr "阅读导航"
 msgid "Reading palette"
 msgstr "阅读配色"
 
-msgid "Reading preferences are saved only in this browser."
-msgstr "仅在此浏览器保存阅读偏好。"
+msgid "Device reading preferences are kept in this browser."
+msgstr "本机阅读设置保存在此浏览器中。"
 
 msgid "Reading preferences saved."
 msgstr "阅读偏好已保存。"

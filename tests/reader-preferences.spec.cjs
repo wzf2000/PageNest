@@ -336,3 +336,85 @@ test('larger option labels stay readable and compact in both languages on a narr
     );
   }
 });
+test('versioned preference protocol keeps remote overrides out of local storage and never emits remote user changes', async ({
+  page,
+}) => {
+  await page.addInitScript(() =>
+    localStorage.setItem(
+      'pagenest-reader-preferences-v1',
+      JSON.stringify({
+        version: 1,
+        preferences: { size: '18', width: 'compact', palette: 'paper' },
+      }),
+    ),
+  );
+  await open(page);
+  await page.evaluate(() => {
+    window.preferenceEvents = [];
+    for (const kind of ['ready', 'change', 'applied'])
+      document.addEventListener('pagenest-reader-preferences-' + kind, (event) =>
+        window.preferenceEvents.push({ kind, ...event.detail }),
+      );
+    document.dispatchEvent(
+      new CustomEvent('pagenest-reader-preferences-request', {
+        detail: { version: 1, requestId: 'handshake' },
+      }),
+    );
+    document.dispatchEvent(
+      new CustomEvent('pagenest-reader-preferences-apply', {
+        detail: {
+          version: 1,
+          source: 'remote',
+          changed: ['size', 'width', 'palette'],
+          preferences: { size: '20', width: 'wide', palette: 'dark' },
+          requestId: 'remote',
+        },
+      }),
+    );
+  });
+  await expect(page.locator(article)).toHaveAttribute('data-reader-width', 'wide');
+  expect(
+    await page.evaluate(
+      () => JSON.parse(localStorage.getItem('pagenest-reader-preferences-v1')).preferences,
+    ),
+  ).toEqual({ size: '18', width: 'compact', palette: 'paper' });
+  expect(
+    await page.evaluate(
+      () => window.preferenceEvents.filter((event) => event.kind === 'change').length,
+    ),
+  ).toBe(0);
+  await select(page, 'size', '22');
+  expect(
+    await page.evaluate(
+      () => JSON.parse(localStorage.getItem('pagenest-reader-preferences-v1')).preferences,
+    ),
+  ).toEqual({ size: '22', width: 'compact', palette: 'paper' });
+  const changes = await page.evaluate(() =>
+    window.preferenceEvents.filter((event) => event.kind === 'change'),
+  );
+  expect(changes).toHaveLength(1);
+  expect(changes[0]).toMatchObject({
+    version: 1,
+    source: 'user',
+    changed: ['size'],
+    preferences: { size: '22', width: 'wide', palette: 'dark' },
+  });
+  await page.evaluate(() =>
+    document.dispatchEvent(
+      new CustomEvent('pagenest-reader-preferences-apply', {
+        detail: { version: 1, source: 'local', changed: [], preferences: {}, requestId: 'restore' },
+      }),
+    ),
+  );
+  await expect(page.locator(article)).toHaveAttribute('data-reader-size', '22');
+  await expect(page.locator(article)).toHaveAttribute('data-reader-width', 'compact');
+  await expect(page.locator(article)).toHaveAttribute('data-reader-palette', 'paper');
+  expect(
+    await page.evaluate(
+      () => window.preferenceEvents.filter((event) => event.kind === 'change').length,
+    ),
+  ).toBe(1);
+  expect(
+    await page.evaluate(() => window.preferenceEvents.find((event) => event.kind === 'ready')),
+  ).toMatchObject({ version: 1, requestId: 'handshake' });
+});

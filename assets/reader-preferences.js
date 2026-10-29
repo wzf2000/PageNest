@@ -31,14 +31,24 @@
   } catch {
     // Storage can be denied; the controls still work for the current page.
   }
+  let remote = null;
+  const displayed = () => ({ ...preferences, ...(remote || {}) });
+  const emit = (kind, source, changed = [], requestId = '') => {
+    document.dispatchEvent(
+      new CustomEvent('pagenest-reader-preferences-' + kind, {
+        detail: { version: 1, source, changed: [...changed], preferences: displayed(), requestId },
+      }),
+    );
+  };
   const status = controls.querySelector('[role="status"]');
   const apply = () => {
+    const shown = displayed();
     for (const name of Object.keys(choices)) {
-      if (preferences[name] === 'default')
+      if (shown[name] === 'default')
         delete article.dataset[`reader${name[0].toUpperCase()}${name.slice(1)}`];
-      else article.dataset[`reader${name[0].toUpperCase()}${name.slice(1)}`] = preferences[name];
+      else article.dataset[`reader${name[0].toUpperCase()}${name.slice(1)}`] = shown[name];
       controls.querySelectorAll(`[data-reader-preference="${name}"]`).forEach((input) => {
-        input.checked = input.value === preferences[name];
+        input.checked = input.value === shown[name];
       });
     }
   };
@@ -55,13 +65,55 @@
     const name = event.target.dataset.readerPreference;
     if (!Object.hasOwn(choices, name) || !choices[name].includes(event.target.value)) return;
     preferences[name] = event.target.value;
+    if (remote) remote[name] = event.target.value;
     apply();
     save();
+    emit('change', 'user', [name]);
   });
   controls.querySelector('[data-reader-reset]').addEventListener('click', () => {
     preferences = defaults();
+    remote = null;
     apply();
     save(true);
+    emit('change', 'user', Object.keys(choices));
+  });
+  document.addEventListener('pagenest-reader-preferences-request', (event) => {
+    if (
+      event.detail?.version === 1 &&
+      (event.detail.requestId === undefined ||
+        (typeof event.detail.requestId === 'string' && event.detail.requestId.length <= 100))
+    )
+      emit('ready', remote ? 'remote' : 'local', [], event.detail.requestId || '');
+  });
+  document.addEventListener('pagenest-reader-preferences-apply', (event) => {
+    const value = event.detail;
+    if (
+      !value ||
+      value.version !== 1 ||
+      !['remote', 'local'].includes(value.source) ||
+      !Array.isArray(value.changed) ||
+      value.changed.length > 3 ||
+      new Set(value.changed).size !== value.changed.length ||
+      value.changed.some((name) => !Object.hasOwn(choices, name)) ||
+      typeof value.requestId !== 'string' ||
+      value.requestId.length > 100
+    )
+      return;
+    if (value.source === 'local') remote = null;
+    else {
+      if (
+        !value.preferences ||
+        typeof value.preferences !== 'object' ||
+        value.changed.some(
+          (name) =>
+            !Object.hasOwn(choices, name) || !choices[name].includes(value.preferences[name]),
+        )
+      )
+        return;
+      remote = Object.fromEntries(value.changed.map((name) => [name, value.preferences[name]]));
+    }
+    apply();
+    emit('applied', value.source, value.changed, value.requestId);
   });
   // Move only our controls; extension panels and article anchors retain their nodes.
   const home = controls.parentElement;
@@ -76,4 +128,5 @@
   apply();
   place();
   controls.hidden = false;
+  emit('ready', 'local');
 })();
