@@ -542,8 +542,8 @@ msgstr "閱讀導覽"
 msgid "Reading palette"
 msgstr "閱讀配色"
 
-msgid "Reading preferences are saved only in this browser."
-msgstr "僅在此瀏覽器儲存閱讀偏好。"
+msgid "Device reading preferences are kept in this browser."
+msgstr "本機閱讀設定儲存在此瀏覽器中。"
 
 msgid "Reading preferences saved."
 msgstr "閱讀偏好已儲存。"

@@ -10,7 +10,7 @@ return [
     'presentation_css' => 'presentation-b4049e4aeb23.css',
     'presentation_js' => 'presentation-20dc6c044370.js',
     'reader_preferences_css' => 'reader-preferences-21775ba3d14d.css',
-    'reader_preferences_js' => 'reader-preferences-1fe101f68b3e.js',
+    'reader_preferences_js' => 'reader-preferences-4326fe1a325e.js',
     'discovery_css' => 'discovery-e3b7b65cda6d.css',
     'discovery_js' => 'discovery-dc8e3af3470c.js',
     'js' => 'navigation-9ca7de42e791.js',
