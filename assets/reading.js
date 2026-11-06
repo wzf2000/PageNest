@@ -199,9 +199,11 @@
           toc.classList.remove('pagenest-mobile-toc');
           toc.open = true;
         }
+        document.dispatchEvent(new Event('pagenest-toc-placed'));
       };
       place();
       mq.addEventListener('change', place);
+      document.addEventListener('pagenest-toc-place-request', place);
       let queued = false;
       const update = () => {
         queued = false;

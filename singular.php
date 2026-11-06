@@ -69,11 +69,12 @@
                 <?php if (
                     $article &&
                     !post_password_required()
-                ): ?><footer class="pagenest-article-footer"><a href="#comments"><?php echo esc_html(
-    pagenest_comment_count(get_comments_number()),
-); ?></a><?php
+                ): ?><footer class="pagenest-article-footer"><a class="pagenest-article-comment-action" href="#comments"><?php
+echo pagenest_ui_icon('comments');
+echo esc_html(pagenest_comment_count(get_comments_number()));
+?></a><?php
 if (function_exists('the_views')) {
-    echo '<span>';
+    echo '<span class="pagenest-article-views">' . pagenest_ui_icon('views');
     the_views();
     echo '</span>';
 }

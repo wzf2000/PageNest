@@ -121,6 +121,7 @@
   home.insertBefore(marker, controls);
   const mobile = matchMedia('(max-width: 1023px)');
   const place = () => {
+    if (controls.closest('dialog')) return;
     if (mobile.matches) article.before(controls);
     else marker.after(controls);
   };

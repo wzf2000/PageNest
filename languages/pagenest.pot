@@ -104,7 +104,7 @@ msgstr ""
 msgid "About link label"
 msgstr ""
 
-#: singular.php:87
+#: singular.php:88
 msgid "Adjacent articles"
 msgstr ""
 
@@ -375,6 +375,10 @@ msgstr ""
 msgid "Clear type. A quieter page."
 msgstr ""
 
+#: reading-tools.php:36 reading-tools.php:56
+msgid "Close"
+msgstr ""
+
 #: i18n.php:23
 msgid "Collapse all"
 msgstr ""
@@ -473,6 +477,10 @@ msgstr ""
 msgid "Content type"
 msgstr ""
 
+#: reading-tools.php:51
+msgid "Contents"
+msgstr ""
+
 #: product.php:472
 msgid "Continue with examples and further reading."
 msgstr ""
@@ -545,6 +553,10 @@ msgstr ""
 msgid "Different interests, shared stories.\nMeet the authors sharing their experiences here."
 msgstr ""
 
+#: reading-tools.php:52
+msgid "Discussion"
+msgstr ""
+
 #: comments.php:10
 msgid "Discussion and comments"
 msgstr ""
@@ -557,7 +569,7 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: singular.php:81
+#: singular.php:82
 msgid "Edit article"
 msgstr ""
 
@@ -650,7 +662,7 @@ msgstr ""
 msgid "Footer layout"
 msgstr ""
 
-#: footer.php:18 functions.php:44
+#: footer.php:18 functions.php:46
 msgid "Footer navigation"
 msgstr ""
 
@@ -898,7 +910,7 @@ msgstr ""
 msgid "My account"
 msgstr ""
 
-#: header.php:68
+#: header.php:73 reading-tools.php:35
 msgid "My space"
 msgstr ""
 
@@ -918,7 +930,7 @@ msgstr ""
 msgid "New comments are closed for this article."
 msgstr ""
 
-#: singular.php:91
+#: singular.php:92
 msgid "Next article"
 msgstr ""
 
@@ -1026,7 +1038,7 @@ msgstr ""
 msgid "Presets change presentation only. Existing content, tool permissions and reading controls are preserved."
 msgstr ""
 
-#: singular.php:91
+#: singular.php:92
 msgid "Previous article"
 msgstr ""
 
@@ -1050,6 +1062,10 @@ msgstr ""
 msgid "Questions before you begin"
 msgstr ""
 
+#: reading-tools.php:53
+msgid "Reading and more"
+msgstr ""
+
 #: reading.php:50
 msgid "Reading navigation"
 msgstr ""
@@ -1062,7 +1078,7 @@ msgstr ""
 msgid "Reading preferences saved."
 msgstr ""
 
-#: reader-preferences.php:36
+#: reader-preferences.php:36 reading-tools.php:54
 msgid "Reading settings"
 msgstr ""
 
@@ -1143,7 +1159,7 @@ msgstr ""
 msgid "Room for your next idea"
 msgstr ""
 
-#: header.php:85 header.php:90 searchform.php:25
+#: header.php:90 header.php:95 searchform.php:25
 msgid "Search"
 msgstr ""
 
@@ -1192,6 +1208,10 @@ msgstr ""
 msgid "Shape your site, one detail at a time."
 msgstr ""
 
+#: reading-tools.php:55
+msgid "Share article"
+msgstr ""
+
 #: appearance.php:207
 msgid "Share colors and reading dimensions across the site and editor preview. Leave custom colors empty to use the selected palette."
 msgstr ""
@@ -1223,6 +1243,10 @@ msgstr ""
 
 #: browsing.php:530
 msgid "Show list covers"
+msgstr ""
+
+#: reading-tools.php:37
+msgid "Show navigation"
 msgstr ""
 
 #: browsing.php:137 browsing.php:522
@@ -1257,8 +1281,12 @@ msgstr ""
 msgid "Site defaults restored; browser storage is unavailable."
 msgstr ""
 
-#: functions.php:43
+#: functions.php:45
 msgid "Site navigation"
+msgstr ""
+
+#: reading-tools.php:38
+msgid "Site tools"
 msgstr ""
 
 #: header.php:13

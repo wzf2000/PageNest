@@ -1153,3 +1153,24 @@ msgstr "我的"
 
 msgid "Switch to %s"
 msgstr "切换为%s"
+
+msgid "Close"
+msgstr "关闭"
+
+msgid "Show navigation"
+msgstr "显示导航"
+
+msgid "Contents"
+msgstr "目录"
+
+msgid "Discussion"
+msgstr "讨论"
+
+msgid "Reading and more"
+msgstr "阅读与更多"
+
+msgid "Share article"
+msgstr "分享文章"
+
+msgid "Site tools"
+msgstr "网站工具"
