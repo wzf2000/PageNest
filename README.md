@@ -10,7 +10,7 @@
 
 <p align="center"><a href="#开始使用">开始使用</a> · <a href="docs/SHOWCASE.md">效果与设计</a> · <a href="docs/index.md">文档</a> · <a href="docs/USAGE.md">安装指南</a> · <a href="CHANGELOG.md">更新记录</a></p>
 
-> 文档随源码维护，当前源码版本为 **1.8.0**；本版更新见 [更新记录](CHANGELOG.md)。安装包与发行状态以仓库 **Releases** 为准。
+> 文档随源码维护，当前源码版本为 **1.8.1**；本版更新见 [更新记录](CHANGELOG.md)。安装包与发行状态以仓库 **Releases** 为准。
 
 Companion 提供统一系列目录关系，阅读侧栏显示明确的目录入口；已有章节顶部返回入口时保留其位置。
 

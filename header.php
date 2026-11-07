@@ -33,10 +33,10 @@ if (isset($brand_parts[1])) { ?><span class="pagenest-brand-note"><?php echo esc
 ); ?></span><?php }
 ?></span></a>
             <button class="pagenest-menu-toggle" type="button" aria-expanded="false"
-                aria-controls="pagenest-nav"><?php echo esc_html__(
+                aria-controls="pagenest-nav"><span class="pagenest-menu-label"><?php echo esc_html__(
                     'Menu',
                     'pagenest',
-                ); ?> <span aria-hidden="true">☰</span></button>
+                ); ?></span><?php echo pagenest_ui_icon('menu'); ?></button>
             <nav id="pagenest-nav" aria-label="<?php echo esc_attr__(
                 'Primary navigation',
                 'pagenest',
@@ -59,11 +59,16 @@ if ($items) {
                 $account_label = is_user_logged_in()
                     ? __('My account', 'pagenest')
                     : __('Log in', 'pagenest');
-                $account_url = is_user_logged_in() ? admin_url() : wp_login_url();
+                $return_url = function_exists('pagenest_social_frontend_return')
+                    ? pagenest_social_frontend_return()
+                    : (is_singular()
+                        ? get_permalink()
+                        : home_url('/'));
+                $account_url = is_user_logged_in() ? admin_url() : wp_login_url($return_url);
                 ob_start();
                 do_action('pagenest_account_actions', get_queried_object_id());
                 $account_actions = trim(ob_get_clean());
-                if ($account_actions !== '') { ?>
+                if (!is_admin_bar_showing() && $account_actions !== '') { ?>
                 <details class="pagenest-account-menu pagenest-dropdown">
                     <summary><?php echo esc_html__('My space', 'pagenest'); ?></summary>
                     <div class="pagenest-dropdown-links"><a class="pagenest-account" href="<?php echo esc_url(
@@ -72,7 +77,7 @@ if ($items) {
     $account_label,
 ); ?></a><?php echo $account_actions; ?></div>
                 </details>
-                <?php } else { ?>
+                <?php } elseif (!is_admin_bar_showing()) { ?>
                 <a class="pagenest-account pagenest-account-direct" href="<?php echo esc_url(
                     $account_url,
                 ); ?>" aria-label="<?php echo esc_attr($account_label); ?>"><?php echo esc_html(

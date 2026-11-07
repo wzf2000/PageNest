@@ -1,0 +1,253 @@
+/* Reading actions share native dialogs; the article never becomes a fixed canvas. */
+html.pagenest-overlay-open,
+html.pagenest-overlay-open body {
+  overflow: hidden !important;
+}
+html.pagenest-overlay-open {
+  scroll-behavior: auto !important;
+}
+.pagenest-reading-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pagenest-reading-tool {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 8px 12px;
+  margin: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--pagenest-accent);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+.pagenest-reading-tool svg {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.pagenest-reading-tool:hover {
+  background: var(--pagenest-soft);
+}
+.pagenest-reading-dialog {
+  box-sizing: border-box;
+  width: min(520px, calc(100vw - 32px));
+  max-width: none;
+  max-height: min(80dvh, 760px);
+  padding: 0;
+  border: 1px solid var(--pagenest-border);
+  border-radius: var(--pagenest-radius, 12px);
+  background: var(--pagenest-surface);
+  color: var(--pagenest-text);
+  box-shadow: 0 12px 48px #0002;
+  overscroll-behavior: contain;
+}
+.pagenest-reading-dialog:not([open]) {
+  display: none;
+}
+.pagenest-reading-dialog::backdrop {
+  background: rgb(25 35 45 / 22%);
+}
+.pagenest-reading-dialog-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--pagenest-border);
+}
+.pagenest-reading-dialog-head h2 {
+  margin: 0;
+  font: 600 18px/1.5 var(--pagenest-body-font, sans-serif);
+}
+.pagenest-reading-dialog-head button {
+  min-width: 44px;
+  padding: 8px;
+}
+.pagenest-reading-dialog-head button span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.pagenest-reading-dialog-body {
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+.pagenest-reading-dialog .pagenest-reader-preferences {
+  border: 0;
+  background: transparent;
+}
+.pagenest-reading-dialog .pagenest-reader-preferences > summary,
+.pagenest-reading-dialog .pagenest-mobile-toc > summary {
+  display: none;
+}
+.pagenest-reading-dialog .pagenest-reader-options {
+  padding: 0;
+  gap: 20px;
+}
+.pagenest-reading-dialog .pagenest-mobile-toc {
+  display: block;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+.pagenest-reading-dialog .pagenest-mobile-toc nav {
+  max-height: none;
+  overflow: visible;
+}
+.pagenest-reading-dialog .pagenest-social-share {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.pagenest-reading-dialog .pagenest-social-share > span:first-child {
+  display: none;
+}
+.pagenest-reading-dialog .pn-reading-article {
+  display: grid;
+  margin: 0;
+  gap: 8px;
+}
+.pagenest-reading-dialog [data-pn-save-later] {
+  min-height: 44px;
+  padding: 10px 12px;
+  text-align: start;
+  border: 1px solid var(--pagenest-border);
+  border-radius: 6px;
+  background: var(--pagenest-soft);
+  color: var(--pagenest-text);
+  font: inherit;
+}
+.pagenest-reading-dialog [data-pn-later-status] {
+  font-size: 13px;
+  color: var(--pagenest-muted);
+}
+.pagenest-reading-dialog [data-pn-later-status]:empty {
+  display: none;
+}
+@media (max-width: 767px) {
+  .pagenest-has-reading-tools {
+    padding-bottom: calc(56px + env(safe-area-inset-bottom));
+  }
+  .pagenest-reading-tools {
+    position: fixed;
+    z-index: 1001;
+    inset-inline: 0;
+    bottom: 0;
+    padding: 4px 12px calc(4px + env(safe-area-inset-bottom));
+    gap: 4px;
+    background: var(--pagenest-surface);
+    border-top: 1px solid var(--pagenest-border);
+    box-shadow: 0 -2px 10px #00000004;
+  }
+  .pagenest-reading-tools > * {
+    flex: 1;
+    padding-inline: 6px;
+    margin: 0;
+    white-space: nowrap;
+  }
+  .pagenest-reading-tools > * + * {
+    border-inline-start: 1px solid var(--pagenest-border);
+    border-radius: 0;
+  }
+  .pagenest-reading-dialog {
+    width: 100%;
+    max-height: 85dvh;
+    margin: auto 0 0;
+    border-radius: 16px 16px 0 0;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .pagenest-reading-dialog-body {
+    padding: 18px 20px 24px;
+  }
+}
+/* Counts remain in the existing footer; presentation does not fetch or invent numbers. */
+.pagenest-site .pagenest-article-footer {
+  align-items: center;
+  gap: 8px 16px;
+  padding-block: 20px;
+  border-top: 1px solid var(--pagenest-border);
+}
+.pagenest-site .pagenest-article-footer > :is(a, span, button) {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+  margin: 0;
+  padding: 6px 8px;
+  font: inherit;
+  font-size: 14px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--pagenest-muted);
+}
+.pagenest-site .pagenest-article-footer svg {
+  width: 19px;
+  height: 19px;
+  flex: none;
+}
+.pagenest-site .pagenest-article-footer .pagenest-like {
+  color: var(--pagenest-accent);
+}
+.pagenest-site .pagenest-article-footer .pagenest-like[aria-pressed='true'] {
+  background: var(--pagenest-soft);
+}
+.pagenest-site .pagenest-adjacent {
+  margin-block: 24px;
+  gap: 16px;
+}
+.pagenest-site .pagenest-adjacent a {
+  padding: 16px 20px;
+  min-width: 0;
+}
+.pagenest-site .pagenest-adjacent a span {
+  display: block;
+  overflow-wrap: anywhere;
+  line-height: 1.65;
+}
+@media (max-width: 767px) {
+  .pagenest-site .pagenest-adjacent {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-block: 20px;
+  }
+  .pagenest-site .pagenest-adjacent a {
+    padding: 14px 18px;
+  }
+}
+
+.pagenest-reading-actions:empty,
+.pagenest-reading-tool[hidden] {
+  display: none;
+}
+@media (max-width: 767px) {
+  .pagenest-site .pagenest-main:has(.pagenest-reading-grid) {
+    padding-inline: 0;
+    padding-top: 14px;
+  }
+  .pagenest-site .pagenest-reading-grid .pagenest-article {
+    border-inline: 0;
+    border-radius: 0;
+  }
+  .pagenest-site .pagenest-reading-grid .pagenest-adjacent,
+  .pagenest-site .pagenest-reading-grid .pagenest-comments {
+    margin-inline: 20px;
+  }
+}

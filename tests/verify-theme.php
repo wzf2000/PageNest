@@ -442,7 +442,11 @@ function is_user_logged_in()
 {
     return !empty($GLOBALS['fixture_logged_in']);
 }
-function wp_login_url()
+function is_admin_bar_showing()
+{
+    return false;
+}
+function wp_login_url($return = '')
 {
     return home_url('/login');
 }

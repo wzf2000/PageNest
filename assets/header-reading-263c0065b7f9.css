@@ -1,0 +1,335 @@
+/* Compact navigation and the existing WordPress toolbar share the theme's palette. */
+.pagenest-header-icon {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--pagenest-accent);
+  cursor: pointer;
+}
+.pagenest-header-icon svg {
+  width: 22px;
+  height: 22px;
+}
+.pagenest-header-icon[hidden] {
+  display: none;
+}
+.pagenest-header-recall {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline-end: 8px;
+  z-index: 1002;
+  background: var(--pagenest-surface);
+  border: 1px solid var(--pagenest-border);
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 2px 6px #0001;
+}
+.pagenest-site #wpadminbar {
+  background: var(--pagenest-soft);
+  color: var(--pagenest-text);
+  border-bottom: 1px solid var(--pagenest-border);
+}
+.pagenest-site #wpadminbar :is(.ab-item, .ab-icon:before, .ab-label) {
+  color: var(--pagenest-text);
+}
+.pagenest-site #wpadminbar :is(.ab-sub-wrapper, .ab-submenu) {
+  background: var(--pagenest-surface);
+}
+.pagenest-site #wpadminbar :is(.ab-submenu a, .ab-submenu .ab-item) {
+  color: var(--pagenest-text);
+}
+.pagenest-site #wpadminbar .pagenest-toolbar-reading button {
+  font: inherit;
+  color: var(--pagenest-accent);
+  border: 0;
+  background: transparent;
+  padding: 8px 0;
+  min-height: 44px;
+  cursor: pointer;
+}
+.pagenest-site #wpadminbar #wp-admin-bar-pagenest-account-reading > .ab-item {
+  height: auto;
+}
+@media (max-width: 767px) {
+  .pagenest-site .pagenest-nav-inner {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0;
+    min-height: 56px;
+    padding: 0 10px;
+  }
+  .pagenest-site .pagenest-brand {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+    gap: 6px;
+    font-size: 15px;
+    overflow: hidden;
+  }
+  .pagenest-site .pagenest-brand:has(.pagenest-logo) > span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .pagenest-site .pagenest-logo {
+    width: 32px;
+    height: 32px;
+  }
+  .pagenest-site .pagenest-menu-toggle {
+    order: 5;
+    width: 44px;
+    padding: 10px;
+    background: transparent;
+    color: var(--pagenest-accent);
+    border-radius: 6px;
+  }
+  .pagenest-site .pagenest-menu-toggle .pagenest-menu-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .pagenest-menu-toggle svg {
+    display: block;
+    width: 22px;
+    height: 22px;
+  }
+  .pagenest-site .pagenest-header-actions {
+    flex: none;
+    gap: 0;
+    margin: 0;
+  }
+  .pagenest-site .pagenest-header-actions > * {
+    margin: 0;
+  }
+  .pagenest-site .pagenest-header-actions :is(button, summary),
+  .pagenest-site .pagenest-header-search > summary {
+    box-sizing: border-box;
+    display: grid;
+    place-items: center;
+    min-width: 44px;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+  }
+  .pagenest-site .pagenest-header-search {
+    margin: 0;
+  }
+  .pagenest-site .pagenest-header-actions .pagenest-paragraph-open {
+    display: none;
+  }
+  .pagenest-site .pagenest-header {
+    transition: transform 0.18s ease;
+  }
+  .pagenest-site .pagenest-header-away {
+    transform: translateY(-110%);
+    pointer-events: none;
+  }
+  .pagenest-site .pagenest-header-away:focus-within {
+    transform: none;
+    pointer-events: auto;
+  }
+  html.pagenest-toolbar-contained {
+    margin-top: 0 !important;
+  }
+  .pagenest-toolbar-contained .pagenest-site.admin-bar .pagenest-header {
+    top: 0;
+  }
+  .pagenest-toolbar-dialog #wpadminbar {
+    position: static !important;
+    width: 100%;
+    height: auto;
+    padding: 8px 16px 20px;
+    box-sizing: border-box;
+    background: var(--pagenest-surface);
+    font: inherit;
+  }
+  .pagenest-toolbar-dialog #wpadminbar #wp-toolbar {
+    display: block;
+    height: auto;
+  }
+  .pagenest-toolbar-dialog
+    #wpadminbar
+    :is(#wp-admin-bar-root-default, #wp-admin-bar-top-secondary) {
+    display: block;
+    float: none !important;
+    margin: 0;
+  }
+  .pagenest-toolbar-dialog #wpadminbar :is(.ab-top-menu > li, .ab-submenu > li) {
+    display: block;
+    float: none;
+  }
+  .pagenest-toolbar-dialog #wpadminbar .ab-sub-wrapper {
+    position: static;
+    display: block;
+    min-width: 0;
+    max-width: 100%;
+    box-shadow: none;
+  }
+  .pagenest-toolbar-dialog #wpadminbar .ab-item {
+    height: auto;
+    min-height: 44px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 6px 10px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .pagenest-toolbar-dialog #wpadminbar .ab-submenu {
+    padding: 0 0 8px 12px;
+  }
+  .pagenest-toolbar-dialog #wpadminbar #wp-admin-bar-user-info {
+    margin: 0;
+  }
+  .pagenest-toolbar-dialog #wpadminbar .avatar {
+    position: static;
+    width: 24px;
+    height: 24px;
+    margin-inline-end: 8px;
+  }
+  .pagenest-toolbar-dialog #wpadminbar .ab-icon {
+    position: static;
+    margin: 0 6px 0 0;
+    width: 24px;
+    height: 24px;
+  }
+  .pagenest-toolbar-dialog #wpadminbar .ab-icon:before {
+    position: static;
+    font-size: 22px;
+  }
+  .pagenest-toolbar-dialog #wpadminbar .ab-submenu .ab-item {
+    color: var(--pagenest-muted);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pagenest-site .pagenest-header {
+    transition: none;
+  }
+}
+
+.pagenest-header-recall > span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.pagenest-reading-dialog .pagenest-header-recall {
+  position: static;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: none;
+  border: 0;
+  font: inherit;
+}
+.pagenest-reading-dialog .pagenest-header-recall[hidden] {
+  display: none;
+}
+.pagenest-reading-dialog .pagenest-header-recall > span {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip-path: none;
+}
+
+@media (max-width: 767px) {
+  .pagenest-toolbar-dialog #wpadminbar #wp-toolbar {
+    display: flex;
+    flex-direction: column;
+  }
+  .pagenest-toolbar-dialog #wpadminbar #wp-admin-bar-top-secondary {
+    order: -1;
+    width: 100%;
+  }
+  .pagenest-toolbar-dialog #wpadminbar :is(.ab-item, .ab-icon, .ab-label, .display-name, .username),
+  .pagenest-toolbar-dialog #wpadminbar .ab-icon::before {
+    color: var(--pagenest-text) !important;
+    text-shadow: none;
+  }
+  .pagenest-toolbar-dialog #wpadminbar :is(.ab-item, .ab-label) {
+    width: auto !important;
+    max-width: none;
+    white-space: normal;
+    font: inherit;
+    line-height: 1.5;
+  }
+  .pagenest-toolbar-dialog #wpadminbar .ab-label {
+    display: inline !important;
+  }
+  .pagenest-toolbar-dialog #wp-admin-bar-my-account > .ab-item {
+    display: none;
+  }
+  .pagenest-toolbar-dialog #wpadminbar #wp-admin-bar-user-actions {
+    margin: 0;
+    padding: 0;
+  }
+  .pagenest-toolbar-dialog #wpadminbar #wp-admin-bar-user-info > .ab-item {
+    display: flex !important;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    padding-block: 10px;
+  }
+  .pagenest-toolbar-dialog #wpadminbar #wp-admin-bar-user-info span {
+    display: block;
+    position: static;
+    float: none;
+    margin: 0;
+    height: auto;
+    line-height: 1.5 !important;
+  }
+  .pagenest-toolbar-dialog #wpadminbar #wp-admin-bar-user-info .username {
+    color: var(--pagenest-muted) !important;
+    font-size: 12px;
+  }
+  .pagenest-toolbar-dialog #wpadminbar .pagenest-toolbar-site-tools {
+    align-self: stretch;
+    width: 100%;
+    margin-top: 12px;
+    border-top: 1px solid var(--pagenest-border);
+  }
+  .pagenest-toolbar-dialog #wpadminbar .pagenest-toolbar-site-tools > summary {
+    min-height: 44px;
+    padding: 10px;
+    box-sizing: border-box;
+    color: var(--pagenest-accent);
+    text-align: start;
+    font: inherit;
+    cursor: pointer;
+  }
+}
+
+.pagenest-site #wpadminbar :is(.ab-item, .ab-label, .display-name),
+.pagenest-site #wpadminbar .ab-icon::before,
+.pagenest-site #wpadminbar .ab-item::before {
+  color: var(--pagenest-text) !important;
+}
+@media (max-width: 767px) {
+  .pagenest-toolbar-dialog
+    #wpadminbar
+    #wp-admin-bar-my-account.with-avatar
+    #wp-admin-bar-user-actions
+    > li {
+    margin-inline: 0;
+  }
+}
+
+.pagenest-site #wpadminbar .ab-top-menu > li:is(:hover, .hover) > .ab-item,
+.pagenest-site #wpadminbar .ab-submenu .ab-item:is(:hover, :focus) {
+  background: var(--pagenest-border);
+  color: var(--pagenest-text) !important;
+}
