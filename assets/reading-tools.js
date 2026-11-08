@@ -114,7 +114,16 @@
       contents.body.addEventListener(
         'click',
         (e) => {
-          if (e.target.closest('a[href]')) overlays.close(contents.dialog);
+          if (
+            !e.defaultPrevented &&
+            e.button === 0 &&
+            !e.metaKey &&
+            !e.ctrlKey &&
+            !e.shiftKey &&
+            !e.altKey &&
+            e.target.closest('a[href]')
+          )
+            overlays.close(contents.dialog);
         },
         true,
       );

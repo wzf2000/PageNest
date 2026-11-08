@@ -174,9 +174,33 @@
       addEventListener('hashchange', revealHash);
       toc.addEventListener('click', (event) => {
         const link = event.target.closest('a[href^="#"]');
-        if (!link) return;
+        if (
+          !link ||
+          event.defaultPrevented ||
+          event.button !== 0 ||
+          event.metaKey ||
+          event.ctrlKey ||
+          event.shiftKey ||
+          event.altKey
+        )
+          return;
         try {
-          revealTeachingTarget(document.getElementById(decodeURIComponent(link.hash.slice(1))));
+          const target = document.getElementById(decodeURIComponent(link.hash.slice(1)));
+          revealTeachingTarget(target);
+          if (event.detail === 0 && target) {
+            // The modal restores its opener on close. Keyboard navigation should
+            // continue at the requested text, after the link's native hash action.
+            requestAnimationFrame(() => {
+              if (!target.isConnected || !target.getClientRects().length) return;
+              if (!target.hasAttribute('tabindex')) {
+                target.setAttribute('tabindex', '-1');
+                target.addEventListener('blur', () => target.removeAttribute('tabindex'), {
+                  once: true,
+                });
+              }
+              target.focus({ preventScroll: true });
+            });
+          }
         } catch {
           // Malformed fragment links remain subject to normal browser handling.
         }
@@ -205,12 +229,17 @@
       mq.addEventListener('change', place);
       document.addEventListener('pagenest-toc-place-request', place);
       let queued = false;
+      let lastVisible = null;
+      const visibleHeading = (heading) =>
+        heading.getClientRects().length > 0 &&
+        (heading.checkVisibility
+          ? heading.checkVisibility()
+          : !heading.closest('details:not([open])'));
       const update = () => {
         queued = false;
-        let active = headings.findIndex((h) => h.getClientRects().length > 0);
-        if (active < 0) active = 0;
+        let active = headings.findIndex(visibleHeading);
         headings.forEach((h, i) => {
-          if (h.getClientRects().length && h.getBoundingClientRect().top <= getReadingTop() + 120)
+          if (visibleHeading(h) && h.getBoundingClientRect().top <= getReadingTop() + 120)
             active = i;
         });
         links.forEach((a, i) => {
@@ -221,6 +250,10 @@
           entry.row.classList.remove('pagenest-toc-contains-current');
           entry.toggle?.removeAttribute('title');
         });
+        if (active < 0) {
+          lastVisible = null;
+          return;
+        }
         let visible = entries[active];
         for (let parent = visible.parent; parent; parent = parent.parent) {
           if (parent.children.hidden) visible = parent;
@@ -229,6 +262,25 @@
           visible.row.classList.add('pagenest-toc-contains-current');
           visible.toggle.title = l10n.currentPosition;
         }
+        const rail = toc.closest('.pagenest-reading-rail');
+        if (
+          visible !== lastVisible &&
+          rail &&
+          !mq.matches &&
+          !rail.classList.contains('pagenest-panel-active') &&
+          !rail.contains(document.activeElement) &&
+          !rail.matches(':hover') &&
+          getComputedStyle(rail).overflowY === 'auto'
+        ) {
+          const bounds = rail.getBoundingClientRect();
+          const row = visible.row.getBoundingClientRect();
+          // Scroll this rail only, never the article or a reader's focused control.
+          if (row.height > bounds.height || row.top < bounds.top)
+            rail.scrollTop += Math.floor(row.top - bounds.top) - 8;
+          else if (row.bottom > bounds.bottom)
+            rail.scrollTop += Math.ceil(row.bottom - bounds.bottom) + 8;
+        }
+        lastVisible = visible;
       };
       addEventListener(
         'scroll',
@@ -260,6 +312,9 @@
   });
   if (location.hash) {
     const reveal = () => {
+      // Loading images may finish after the reader has already changed a stage
+      // or closed a disclosure. Honor that explicit view as on hashchange.
+      if (window.MarkBridgeTeaching?.hasCurrentHistoryView?.()) return;
       let id;
       try {
         id = decodeURIComponent(location.hash.slice(1));
